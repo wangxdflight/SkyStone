@@ -28,6 +28,7 @@
  */
 
 package org.firstinspires.ftc.teamcode;
+import android.util.Log;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -120,8 +121,9 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                       telemetry.addData("# Object Detected", updatedRecognitions.size());
+                      Log.i("FTC11212", "# Object Detected "+updatedRecognitions.size());
 
-                      // step through the list of recognitions and display boundary info.
+                        // step through the list of recognitions and display boundary info.
                       int i = 0;
                       for (Recognition recognition : updatedRecognitions) {
                         telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
