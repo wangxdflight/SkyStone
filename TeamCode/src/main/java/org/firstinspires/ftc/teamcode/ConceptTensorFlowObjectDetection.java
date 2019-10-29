@@ -52,15 +52,15 @@ import java.util.List;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@TeleOp(name = "Concept: TensorFlow Object Detection_wx", group = "Concept")
+@TeleOp(name = "Concept: TensorFlow Object Detection", group = "Concept")
 //@Disabled
 public class ConceptTensorFlowObjectDetection extends LinearOpMode {
-    //private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
-    //private static final String LABEL_FIRST_ELEMENT = "Stone";
-    //private static final String LABEL_SECOND_ELEMENT = "Skystone";
-    private static final String TFOD_MODEL_ASSET = "ftc_quantized.tflite";
-    private static final String LABEL_FIRST_ELEMENT = "Skystone";
-    private static final String LABEL_SECOND_ELEMENT = "Stone";
+    private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
+    private static final String LABEL_FIRST_ELEMENT = "Stone";
+    private static final String LABEL_SECOND_ELEMENT = "Skystone";
+    //private static final String TFOD_MODEL_ASSET = "ftc_quantized.tflite";
+    //private static final String LABEL_FIRST_ELEMENT = "Skystone";
+    //private static final String LABEL_SECOND_ELEMENT = "Stone";
     /*
      * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
      * 'parameters.vuforiaLicenseKey' is initialized is for illustration only, and will not function.
