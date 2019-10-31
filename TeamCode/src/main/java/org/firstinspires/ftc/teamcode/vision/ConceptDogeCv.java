@@ -24,11 +24,11 @@ package org.firstinspires.ftc.teamcode;
 import com.disnodeteam.dogecv.detectors.skystone.SkystoneDetector;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
+import com.acmerobotics.dashboard.config.Config;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
-
+import com.qualcomm.robotcore.util.RobotLog;
 import java.util.Locale;
 import android.util.Log;
 /*
@@ -37,7 +37,7 @@ import android.util.Log;
  * Original Work Copright(c) 2019 OpenFTC Team
  * Derived Work Copyright(c) 2019 DogeDevs
  */
-
+@Config
 @TeleOp(name = "Concept: ConceptDogeCV", group = "Concept")
 public class ConceptDogeCv extends LinearOpMode {
     private OpenCvCamera phoneCam;

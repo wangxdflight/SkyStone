@@ -22,6 +22,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -41,8 +42,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
-import android.util.Log;
-
+import com.qualcomm.robotcore.util.RobotLog;
+import com.acmerobotics.dashboard.config.Config;
+@Config
 @TeleOp(name = "Concept: ConceptEasyOpenCV", group = "Concept")
 public class ConceptOpenCV extends LinearOpMode
 {
@@ -107,7 +109,7 @@ public class ConceptOpenCV extends LinearOpMode
             telemetry.addData("Overhead time ms", phoneCam.getOverheadTimeMs());
             telemetry.addData("Theoretical max FPS", phoneCam.getCurrentPipelineMaxFps());
             telemetry.update();
-            Log.i("FTC11212", "Frame Count " + phoneCam.getFrameCount());
+            RobotLog.i("Frame Count " + phoneCam.getFrameCount());
                     /*
              * NOTE: stopping the stream from the camera early (before the end of the OpMode
              * when it will be automatically stopped for you) *IS* supported. The "if" statement
