@@ -30,7 +30,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.Locale;
-
+import android.util.Log;
 /*
  * Thanks to EasyOpenCV for the great API (and most of the example)
  *
