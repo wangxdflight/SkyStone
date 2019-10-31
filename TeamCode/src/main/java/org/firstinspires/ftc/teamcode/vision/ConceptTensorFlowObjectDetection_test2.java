@@ -28,7 +28,7 @@
  */
 
 package org.firstinspires.ftc.teamcode;
-import android.util.Log;
+
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -41,7 +41,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
-
+import com.qualcomm.robotcore.util.RobotLog;
 /**
  * This 2019-2020 OpMode illustrates the basics of using the TensorFlow Object Detection API to
  * determine the position of the Skystone game elements.
@@ -58,7 +58,7 @@ public class ConceptTensorFlowObjectDetection_test2 extends LinearOpMode {
     //private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
     //private static final String LABEL_FIRST_ELEMENT = "Stone";
     //private static final String LABEL_SECOND_ELEMENT = "Skystone";
-    private static final String TFOD_MODEL_ASSET = "ftc_quantized.tflite";
+    private static final String TFOD_MODEL_ASSET = "ftc_quantized_1030.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Skystone";
     private static final String LABEL_SECOND_ELEMENT = "Stone";
     /*
@@ -121,7 +121,7 @@ public class ConceptTensorFlowObjectDetection_test2 extends LinearOpMode {
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                       telemetry.addData("# Object Detected", updatedRecognitions.size());
-                      Log.i("FTC11212", "# Object Detected "+updatedRecognitions.size());
+                      RobotLog.i("# Object Detected "+updatedRecognitions.size());
 
                         // step through the list of recognitions and display boundary info.
                       int i = 0;
