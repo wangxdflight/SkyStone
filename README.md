@@ -1,20 +1,11 @@
-# Road Runner Quickstart
+# This is for experiments mainly; in sync with Skystone main repo, roadrunner repo, and openCV repos.
 
-An example FTC project using [Road Runner](https://github.com/acmerobotics/road-runner). **Note:** Road Runner is in alpha and many of its APIs are incubating.
+THe purpose is to test sample code quickly and evaluate them.
 
 ## Acknowledgements
 
-The quickstart uses the fantastic [RevExtensions2 library](https://github.com/OpenFTC/RevExtensions2) to take advantage of REV Expansion Hub bulk reads (thanks @FROGbots-4634!).
+It is based on many seperate FTC repos, including roadrunner, open FTC and different code samples from internet.
 
-## Installation
-
-For more detailed instructions on getting Road Runner setup in your own project, see the [Road Runner README](https://github.com/acmerobotics/road-runner#core).
-
-1. Download or clone this repo with `git clone https://github.com/acmerobotics/road-runner-quickstart`.
-
-1. Open the project in Android Studio and build `TeamCode` like any other `ftc_app` project.
-
-1. If you have trouble with multidex, enable proguard by changing `useProguard` to `true` in `build.common.gradle`.
 
 ## Documentation
 
