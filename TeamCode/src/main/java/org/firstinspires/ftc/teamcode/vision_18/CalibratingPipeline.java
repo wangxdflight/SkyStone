@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import com.qualcomm.robotcore.util.RobotLog;
 
 import static org.opencv.core.CvType.CV_8UC1;
 import static org.opencv.core.CvType.CV_8UC3;
@@ -38,6 +39,7 @@ public class CalibratingPipeline extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat rgba) {//}, Mat gray) {
+        RobotLog.i("processFrame: "+rgba.total());
         if (captureFlag) {
             rgbaCapture = rgba.clone();
             captureFlag = false;

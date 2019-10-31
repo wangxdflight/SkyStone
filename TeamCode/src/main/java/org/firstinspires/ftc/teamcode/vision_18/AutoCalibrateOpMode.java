@@ -44,11 +44,11 @@ public class AutoCalibrateOpMode extends LinearOpMode {
         //calibratingPipeline.enable();
 
         phoneCam.setPipeline(calibratingPipeline);
-
+        RobotLog.i(AppUtil.FIRST_FOLDER + "/mask.png");
         Mat mask = Imgcodecs.imread(AppUtil.FIRST_FOLDER + "/mask.png");
 
-        calibratingPipeline.setMask(mask);
-
+        //calibratingPipeline.setMask(mask);
+        phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
         msStuckDetectLoop = 60000;
 
         waitForStart();
