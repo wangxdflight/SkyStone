@@ -331,11 +331,11 @@ public class ConceptOpenCV extends LinearOpMode
 
 
         if (vumarkLeftBoundary < (2 * input.width() / 7))
-            RobotLog.d("DIR: ", "left");
+            RobotLog.i("DIR: ", "left");
         else if (vumarkLeftBoundary > ( 5 * input.width() / 7))
-            RobotLog.d("DIR: ", "right");
+            RobotLog.i("DIR: ", "right");
         else
-            RobotLog.d("DIR: ", "center");
+            RobotLog.i("DIR: ", "center");
 
             return input;
         }

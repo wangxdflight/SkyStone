@@ -31,6 +31,8 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import com.qualcomm.robotcore.util.RobotLog;
 import java.util.Locale;
 import android.util.Log;
+import android.hardware.Camera;
+
 /*
  * Thanks to EasyOpenCV for the great API (and most of the example)
  *
@@ -56,6 +58,9 @@ public class ConceptDogeCv extends LinearOpMode {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
 
+
+        Camera.Parameters parameters = phoneCam.camera.getParameters();
+        RobotLog.i("camera focal length:  "+parameters.getFocalLength());
         // OR...  Do Not Activate the Camera Monitor View
         //phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK);
 

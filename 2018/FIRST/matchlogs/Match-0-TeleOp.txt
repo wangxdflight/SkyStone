@@ -1,0 +1,1735 @@
+--------- beginning of main
+04-20 06:29:48.840  4522  4522 W SELinux : SELinux: seapp_context_lookup: seinfo=default, level=s0:c512,c768, pkgname=com.qualcomm.ftcrobotcontroller 
+04-20 06:29:48.880  4522  4522 D TimaKeyStoreProvider: TimaSignature is unavailable
+04-20 06:29:48.880  4522  4522 D ActivityThread: Added TimaKeyStore provider
+04-20 06:29:49.200  4522  4522 W linker  : /data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm/libsupportjni.so: is missing DT_SONAME will use basename as a replacement: "libsupportjni.so"
+04-20 06:29:49.510  4522  4645 E StudioProfiler: Studio Profilers encountered an unexpected error. Consider reporting a bug, including logcat output below.
+04-20 06:29:49.510  4522  4645 E StudioProfiler: See also: https://developer.android.com/studio/report-bugs.html#studio-bugs
+04-20 06:29:49.510  4522  4645 E StudioProfiler: 
+04-20 06:29:49.510  4522  4645 E StudioProfiler: Failed to capture application
+04-20 06:29:49.550  4522  4522 V AppUtil : initializing: getExternalStorageDirectory()=/storage/emulated/0
+04-20 06:29:49.560  4522  4645 V StudioProfiler: Acquiring Application for Events
+04-20 06:29:49.590  4522  4652 V RobotCore: saving logcat to /storage/emulated/0/robotControllerLog.txt
+04-20 06:29:49.590  4522  4652 V RobotCore: logging command line: exec logcat -f /storage/emulated/0/robotControllerLog.txt -r4096 -n4 -v threadtime UsbRequestJNI:S UsbRequest:S art:W ThreadPool:W System:W ExtendedExtractor:W OMXClient:W MediaPlayer:W dalvikvm:W  *:V
+04-20 06:29:49.620  4522  4522 V ServiceStarter: attempting to start service MediaTransferProtocolMonitorService
+04-20 06:29:49.640  4522  4522 V ServiceStarter: started service MediaTransferProtocolMonitorService
+04-20 06:29:49.640  4522  4522 V ServiceStarter: attempting to start service OnBotJavaService
+04-20 06:29:49.650  4522  4522 V ServiceStarter: started service OnBotJavaService
+04-20 06:29:49.650  4522  4522 V RunOnBoot: onReceive() action=android.intent.action.BOOT_COMPLETED
+04-20 06:29:49.660  4522  4522 V FtcRobotControllerWatchdogService: shouldAutoLauchRobotController() result=false
+04-20 06:29:49.660  4522  4522 V RunOnBoot: shouldAutoLauchRobotController() result=false
+04-20 06:29:49.660  4522  4522 V RunOnBoot: noteDragonboardPresenceAndExitIfNoRC()
+04-20 06:29:49.660  4522  4522 V AppUtil : exitApplication(0)
+04-20 06:29:49.670  4522  4522 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+04-20 06:29:50.710  4871  4871 W SELinux : SELinux: seapp_context_lookup: seinfo=default, level=s0:c512,c768, pkgname=com.qualcomm.ftcrobotcontroller 
+04-20 06:29:50.750  4871  4871 D TimaKeyStoreProvider: TimaSignature is unavailable
+04-20 06:29:50.750  4871  4871 D ActivityThread: Added TimaKeyStore provider
+04-20 06:29:51.030  4871  4871 W linker  : /data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm/libsupportjni.so: is missing DT_SONAME will use basename as a replacement: "libsupportjni.so"
+04-20 06:29:51.910  4871  5104 E StudioProfiler: Studio Profilers encountered an unexpected error. Consider reporting a bug, including logcat output below.
+04-20 06:29:51.910  4871  5104 E StudioProfiler: See also: https://developer.android.com/studio/report-bugs.html#studio-bugs
+04-20 06:29:51.910  4871  5104 E StudioProfiler: 
+04-20 06:29:51.910  4871  5104 E StudioProfiler: Failed to capture application
+04-20 06:29:51.960  4871  5104 V StudioProfiler: Acquiring Application for Events
+04-20 06:29:52.000  4871  4871 V AppUtil : initializing: getExternalStorageDirectory()=/storage/emulated/0
+04-20 06:29:52.050  4871  4871 V ServiceStarter: attempting to start service MediaTransferProtocolMonitorService
+04-20 06:29:52.050  4871  5111 V RobotCore: saving logcat to /storage/emulated/0/robotControllerLog.txt
+04-20 06:29:52.050  4871  5111 V RobotCore: logging command line: exec logcat -f /storage/emulated/0/robotControllerLog.txt -r4096 -n4 -v threadtime UsbRequestJNI:S UsbRequest:S art:W ThreadPool:W System:W ExtendedExtractor:W OMXClient:W MediaPlayer:W dalvikvm:W  *:V
+04-20 06:29:52.140  4871  4871 V ServiceStarter: started service MediaTransferProtocolMonitorService
+04-20 06:29:52.150  4871  4871 V ServiceStarter: attempting to start service OnBotJavaService
+04-20 06:29:52.170  4871  4871 V ServiceStarter: started service OnBotJavaService
+04-20 06:29:52.180  4871  4871 V OnBotJavaService: onCreate()
+04-20 06:29:52.180  4871  4871 V OnBotJavaService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaService } flags=0x2 startId=1
+04-20 06:29:52.180  4871  4871 V OnBotJava: OnBotJavaManager::static
+04-20 06:29:52.200  4871  4871 W System.err: stat failed: ENOENT (No such file or directory) : java/android.jar
+04-20 06:29:52.490  4871  5111 I RobotCore: Done running ps
+04-20 06:29:52.590  4871  4871 W System.err: stat failed: ENOENT (No such file or directory) : java/onbotjava-classes.jar
+04-20 06:29:52.980  4871  4871 V OnBotJava: ctor()...
+04-20 06:29:53.010  4871  4871 V OnBotJava: ...ctor()
+04-20 06:29:53.020  4871  4871 V MTPMonitorService: onCreate()
+04-20 06:29:53.020  4871  4871 V MTPMonitorService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.robotcore.internal.files.MediaTransferProtocolMonitorService } flags=0x2 startId=1
+04-20 06:29:53.020  4871  4871 V MTPMonitor: observing: /storage/emulated/0
+04-20 06:29:53.110  4871  4871 W FileObserverManager: upgrading mask: path=/storage/emulated/0/FIRST/java/control old=0x00000ffc new=0x00004ffc: might possibly miss event
+04-20 06:29:53.670  4871  4871 V MTPMonitorService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.robotcore.internal.files.MediaTransferProtocolMonitorService } flags=0x0 startId=2
+04-20 06:29:53.710  4871  4871 V MTPMonitor: observing: /storage/emulated/0
+04-20 06:29:53.760  4871  4871 W FileObserverManager: upgrading mask: path=/storage/emulated/0/FIRST/java/control old=0x00000ffc new=0x00004ffc: might possibly miss event
+04-20 06:29:53.820  4871  4871 V OnBotJavaService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaService } flags=0x0 startId=2
+04-20 06:29:53.820  4871  4871 V OnBotJava: ctor()...
+04-20 06:29:53.820  4871  4871 W FileObserverManager: upgrading mask: path=/storage/emulated/0/FIRST/java/control/buildRequest.txt old=0x00000ffc new=0x00000ffe: might possibly miss event
+04-20 06:29:53.820  4871  4871 V OnBotJava: ...ctor()
+04-20 06:30:29.280  4871  4871 V MTPMonitorService: onConfigurationChanged()
+04-20 06:30:29.280  4871  4871 V OnBotJavaService: onConfigurationChanged()
+--------- beginning of system
+04-20 06:30:29.340  4871  4871 W ResourcesManager: getTopLevelResources: /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:30:29.360  4871  4871 W ResourcesManager: getTopLevelResources: /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:30:29.400  4871  4871 V AppUtil : rootActivity=FtcRobotControllerActivity
+04-20 06:30:33.570  4871  4871 V RCActivity: onCreate()
+04-20 06:30:33.580  4871  4871 V RCActivity: rootActivity is of class FtcRobotControllerActivity
+04-20 06:30:33.600  4871  7774 V CallbackLooper: thread=595
+04-20 06:30:33.600  4871  4871 V NetDiscover_wifiDirectAgent: doStart()...
+04-20 06:30:33.600  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifiP2pEnabled=true
+04-20 06:30:33.600  4871  7774 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=UNKNOWN
+04-20 06:30:33.600  4871  7774 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: UNKNOWN/IDLE, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:30:33.600  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: false isGroupOwner: false groupOwnerAddress: null
+04-20 06:30:33.600  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: null, isGO: false, GO: null, interface: null, frequency: 0, networkId: 0
+04-20 06:30:33.620  4871  4871 V NetDiscover_wifiDirectAgent: ...doStart()
+04-20 06:30:33.620  4871  4871 V NetDiscover_name: doStart()...
+04-20 06:30:33.620  4871  4871 V NetDiscover_name: ...doStart()
+04-20 06:30:33.620  4871  7774 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=3 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:30:33.620  4871  7774 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:30:33.620  4871  7774 V NetDiscover_name: wifiDirectName=[Phone] 11212-C-RC
+04-20 06:30:33.620  4871  7774 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:30:33.620  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifi direct remembered groups cleared
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: ----- all preferences -----
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_app_version' value=unavailable
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_network_protocol_version' value=unavailable
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_has_speaker' value=true
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_pairing_kind' value=WIFIDIRECT
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_has_independent_phone_battery' value=true
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_app_theme' value=red
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_wifip2p_remote_channel_change_works' value=true
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_network_connection_info' value=unavailable
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_hardware_config_filename' value={"isDirty":false,"location":"LOCAL_STORAGE","name":"rover_ruckus","resourceId":0}
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_device_name' value=[Phone] 11212-C-RC
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_device_name_old' value=[Phone] 11212-C-RC
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_build_time' value=unavailable
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_device_name_tracking' value=WIFIDIRECT
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_sound_on_off' value=true
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_lib_version' value=unavailable
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: name='pref_rc_connected' value=true
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: doStart()...
+04-20 06:30:33.620  4871  4871 V NetDiscover_prefremrc: ...doStart()
+04-20 06:30:33.630  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifiState=ENABLED
+04-20 06:30:33.660  4871  4871 I WebViewFactory: Loading com.google.android.webview version 71.0.3578.99 (code 357809900)
+04-20 06:30:33.740  4871  4871 W ResourcesManager: getTopLevelResources: /data/app/com.google.android.webview-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:30:33.800  4871  4871 I cr_LibraryLoader: Time to load native libraries: 1 ms (timestamps 1904-1905)
+04-20 06:30:33.880  4871  4871 I chromium: [INFO:library_loader_hooks.cc(36)] Chromium logging enabled: level = 0, default verbosity = 0
+04-20 06:30:33.880  4871  4871 I cr_LibraryLoader: Expected native library version number "71.0.3578.99", actual native library version number "71.0.3578.99"
+04-20 06:30:33.880  4871  7793 W ResourcesManager: getTopLevelResources: /data/app/com.google.android.webview-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:30:33.940  4871  4871 I cr_BrowserStartup: Initializing chromium process, singleProcess=true
+04-20 06:30:34.100  4871  4871 D SecWifiDisplayUtil: Metadata value : none
+04-20 06:30:34.170  4871  4871 D ConnectivityManager: requestNetwork; getAppId(CallingUid) : 10198, CallingPid : 4871
+04-20 06:30:34.380  4871  4871 V OnBotJava: getCurrentOutputJarDir() unavailable
+04-20 06:30:34.380  4871  4871 V OnBotJava: getCurrentOutputJarDir() unavailable
+04-20 06:30:34.390  4871  4871 W ClassManager: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:30:34.390  4871  4871 E ClassManager: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:30:34.390  4871  4871 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:30:34.400  4871  4871 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:30:34.400  4871  4871 E ClassManager: 	... 18 more
+04-20 06:30:34.400  4871  4871 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:30:34.410  4871  4871 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:30:34.410  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:30:34.410  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:30:34.410  4871  4871 E ClassManager: 		... 20 more
+04-20 06:30:34.410  4871  4871 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			... 22 more
+04-20 06:30:34.410  4871  4871 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:30:34.410  4871  4871 E ClassManager: 			... 21 more
+04-20 06:30:34.410  4871  4871 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:30:34.410  4871  4871 W ClassManager: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:30:34.410  4871  4871 E ClassManager: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:30:34.410  4871  4871 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:30:34.410  4871  4871 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:30:34.420  4871  4871 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:30:34.420  4871  4871 E ClassManager: 	... 18 more
+04-20 06:30:34.420  4871  4871 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:30:34.420  4871  4871 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:30:34.420  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:30:34.420  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:30:34.420  4871  4871 E ClassManager: 		... 20 more
+04-20 06:30:34.420  4871  4871 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:30:34.420  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			... 22 more
+04-20 06:30:34.430  4871  4871 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:30:34.430  4871  4871 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:30:34.430  4871  4871 E ClassManager: 			... 21 more
+04-20 06:30:34.430  4871  4871 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:30:34.480  4871  4871 W ClassManager: com.opencsv.bean.FieldMapByPosition$1$1 java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:30:34.480  4871  4871 E ClassManager: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:30:34.480  4871  4871 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:30:34.480  4871  4871 E ClassManager: 	... 18 more
+04-20 06:30:34.480  4871  4871 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.opencsv.bean.FieldMapByPosition$1$1" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:30:34.480  4871  4871 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:30:34.490  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:30:34.490  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:30:34.490  4871  4871 E ClassManager: 		... 20 more
+04-20 06:30:34.490  4871  4871 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			... 22 more
+04-20 06:30:34.490  4871  4871 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:30:34.490  4871  4871 E ClassManager: 			... 21 more
+04-20 06:30:34.490  4871  4871 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:30:34.900  4871  4871 W ClassManager: kotlin.streams.jdk8.StreamsKt$asStream$1 java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:30:34.900  4871  4871 E ClassManager: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:30:34.900  4871  4871 E ClassManager: Caused by: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:30:34.900  4871  4871 E ClassManager: 	... 18 more
+04-20 06:30:34.900  4871  4871 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "kotlin.streams.jdk8.StreamsKt$asStream$1" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:30:34.900  4871  4871 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:30:34.900  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:30:34.910  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:30:34.910  4871  4871 E ClassManager: 		... 20 more
+04-20 06:30:34.910  4871  4871 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			... 22 more
+04-20 06:30:34.910  4871  4871 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:30:34.910  4871  4871 E ClassManager: 			... 21 more
+04-20 06:30:34.910  4871  4871 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:30:41.950  4871  4871 V UpdateUI: Network: inactive, disconnected
+04-20 06:30:41.960  4871  4871 V ServiceStarter: attempting to start service FtcRobotControllerWatchdogService
+04-20 06:30:41.960  4871  4871 V ServiceStarter: started service FtcRobotControllerWatchdogService
+04-20 06:30:41.970  4871  4871 V RobotCore: BuildConfig: versionCode=31 versionName=4.3 module=com.qualcomm.ftcrobotcontroller
+04-20 06:30:41.970  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.robotcore
+04-20 06:30:41.970  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.hardware
+04-20 06:30:41.970  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.ftccommon
+04-20 06:30:41.970  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.google.blocks
+04-20 06:30:41.970  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=org.firstinspires.inspection
+04-20 06:30:41.970  4871  4871 I RCActivity: 410c serial number: 6f6bcdd8
+04-20 06:30:41.970  4871  4871 I RobotCore: Android Device: maker=samsung model=SAMSUNG-SM-G900A sdk=23
+04-20 06:30:41.970  4871  4871 V RCActivity: onStart()
+04-20 06:30:41.980  4871  4871 V RCActivity: onResume()
+04-20 06:30:41.980  4871  4871 D ViewRootImpl: #1 mView = com.android.internal.policy.PhoneWindow$DecorView{fcf6a86 I.E...... R.....ID 0,0-0,0}
+04-20 06:30:41.980  4871  4871 D SecWifiDisplayUtil: Metadata value : none
+04-20 06:30:41.990  4871  8135 D OpenGLRenderer: Use EGL_SWAP_BEHAVIOR_PRESERVED: true
+04-20 06:30:42.000  4871  4871 D ConnectivityManager: requestNetwork; getAppId(CallingUid) : 10198, CallingPid : 4871
+04-20 06:30:42.010  4871  4871 V RCActivity: onPause()
+04-20 06:30:42.010  4871  4871 V RCActivity: ACTION_USB_DEVICE_ATTACHED: /dev/bus/usb/001/003
+04-20 06:30:42.020  4871  4871 V RCActivity: onResume()
+04-20 06:30:42.020  4871  4871 V RCActivity: onPause()
+04-20 06:30:42.020  4871  4871 V RCActivity: ACTION_USB_DEVICE_ATTACHED: /dev/bus/usb/001/005
+04-20 06:30:42.020  4871  4871 V RCActivity: onResume()
+04-20 06:30:42.020  4871  4871 V ActivityThread: updateVisibility : ActivityRecord{c27a912 token=android.os.BinderProxy@eebaf61 {com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity}} show : true
+04-20 06:30:42.030  4871  4871 V FtcRobotControllerWatchdogService: onCreate()
+04-20 06:30:42.030  4871  4871 V FtcRobotControllerWatchdogService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.ftccommon.internal.FtcRobotControllerWatchdogService } flags=0x0 startId=1
+04-20 06:30:42.030  4871  4871 V FtcRobotControllerWatchdogService: shouldAutoLauchRobotController() result=false
+04-20 06:30:42.030  4871  4871 V FTCService: onCreate()
+04-20 06:30:42.030  4871  4871 V FTCService: onBind()
+04-20 06:30:42.030  4871  4871 V WebServer: creating NanoHTTPD(8080)
+04-20 06:30:42.040  4871  4871 V RobotCore: Getting network assistant of type: WIFIDIRECT
+04-20 06:30:42.040  4871  4871 V WifiDirect: There are 1 Wifi Direct Assistant Clients (+)
+04-20 06:30:42.040  4871  4871 V WifiDirect: Enabling Wifi Direct Assistant
+04-20 06:30:42.040  4871  4871 V WifiDirectInviteMonitor: startMonitoring()
+04-20 06:30:42.040  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifiP2pEnabled=true
+04-20 06:30:42.040  4871  7774 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=UNKNOWN
+04-20 06:30:42.040  4871  7774 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: UNKNOWN/IDLE, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:30:42.040  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: false isGroupOwner: false groupOwnerAddress: null
+04-20 06:30:42.040  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: null, isGO: false, GO: null, interface: null, frequency: 0, networkId: 0
+04-20 06:30:42.040  4871  7774 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=3 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:30:42.040  4871  7774 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:30:42.040  4871  7774 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:30:42.040  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifi direct remembered groups cleared
+04-20 06:30:42.040  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifiState=ENABLED
+04-20 06:30:42.090  4871  8135 I Adreno-EGL: <qeglDrvAPI_eglInitialize:379>: EGL 1.4 QUALCOMM build:  (Ia10634f51b)
+04-20 06:30:42.090  4871  8135 I Adreno-EGL: OpenGL ES Shader Compiler Version: E031.29.00.00
+04-20 06:30:42.090  4871  8135 I Adreno-EGL: Build Date: 01/28/16 Thu
+04-20 06:30:42.090  4871  8135 I Adreno-EGL: Local Branch: ss
+04-20 06:30:42.090  4871  8135 I Adreno-EGL: Remote Branch: 
+04-20 06:30:42.090  4871  8135 I Adreno-EGL: Local Patches: 
+04-20 06:30:42.090  4871  8135 I Adreno-EGL: Reconstruct Branch: 
+04-20 06:30:42.100  4871  8135 D libEGL  : eglInitialize EGLDisplay = 0x9a8727c4
+04-20 06:30:42.100  4871  8135 I OpenGLRenderer: Initialized EGL, version 1.4
+04-20 06:30:42.170  4871  4871 D WifiDirect: broadcast: state - enabled: true
+04-20 06:30:42.170  4871  4871 D WifiDirect: broadcast: connection changed: connectStatus=NOT_CONNECTED networkInfo.state=UNKNOWN
+04-20 06:30:42.180  4871  4871 D WifiDirect: broadcast: this device changed
+04-20 06:30:42.180  4871  4871 V WifiDirect: device information: [Phone] 11212-C-RC fe:db:b3:75:a8:79
+04-20 06:30:42.180  4871  8139 E File    : fail readDirectory() errno=2
+04-20 06:30:42.180  4871  8139 W cr_CrashFileManager: /data/user/0/com.qualcomm.ftcrobotcontroller/cache/WebView/Crash Reports does not exist or is not a directory
+04-20 06:30:42.180  4871  4871 V FTCService: RCActivity.controllerService=bound
+04-20 06:30:42.180  4871  4871 V UpdateUI: Network: unknown, disconnected
+04-20 06:30:42.180  4871  4871 V RobotCore: Robot Status: stopped
+04-20 06:30:42.190  4871  8140 V RobotCore: thread: 'RobotSetupRunnable.run()' starting...
+04-20 06:30:42.190  4871  8140 V FTCService: Processing robot setup
+04-20 06:30:42.190  4871  8140 V RobotCore: Robot Status: stopped, scanning for USB devices
+04-20 06:30:42.270  4871  4871 D ViewRootImpl: MSG_RESIZED_REPORT: ci=Rect(0, 0 - 0, 0) vi=Rect(0, 0 - 0, 0) or=2
+04-20 06:30:42.290  4871  4871 I FTCService: onNetworkConnectionEvent: GROUP_CREATED
+04-20 06:30:42.290  4871  4871 D WifiDirect: created group
+04-20 06:30:42.290  4871  4871 W RobotCore: Wifi Direct failure while trying to discover peers - reason: BUSY
+04-20 06:30:42.290  4871  4871 I FTCService: onNetworkConnectionEvent: ERROR
+04-20 06:30:42.290  4871  4871 E FTCService: Network Connection Error: BUSY
+04-20 06:30:42.290  4871  4871 V UpdateUI: Network: error, disconnected
+04-20 06:30:42.330  4871  4871 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@eebaf61 time:100438
+04-20 06:30:42.340  4871  4871 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@eebaf61 time:100440
+04-20 06:30:42.490  4871  7774 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=0 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:30:42.490  4871  7774 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:30:42.490  4871  7774 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:30:42.490  4871  4871 D WifiDirect: broadcast: this device changed
+04-20 06:30:42.490  4871  4871 V WifiDirect: device information: [Phone] 11212-C-RC fe:db:b3:75:a8:79
+04-20 06:30:42.500  4871  7774 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=CONNECTED
+04-20 06:30:42.500  4871  7774 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: CONNECTED/CONNECTED, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:30:42.500  4871  4871 D WifiDirect: broadcast: connection changed: connectStatus=NOT_CONNECTED networkInfo.state=CONNECTED
+04-20 06:30:42.500  4871  4871 V WifiDirect: writing pref name=pref_wifip2p_groupowner_connectedto value=[Phone] 11212-C-RC
+04-20 06:30:42.500  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: true isGroupOwner: true groupOwnerAddress: /192.168.49.1
+04-20 06:30:42.500  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: DIRECT-41-11212-C-RC, isGO: true, GO: Device: [Phone] 11212-C-RC, deviceAddress: fe:db:b3:75:a8:79, primary type: 10-0050F204-5, secondary type: null, wps: 0, grpcapab: 0, devcapab: 0, status: 3, wfdInfo: null, groupownerAddress: null, GOdeviceName: null, interfaceAddress: , SConnectInfo : null, contactInfoHash : null, ssDevInfo : 0, iconIdx : 0, interface: p2p-wlan0-0, frequency: 2437, networkId: -1
+04-20 06:30:42.510  4871  4871 V NetDiscover_prefremrc: onSharedPreferenceChanged(name=pref_wifip2p_groupowner_connectedto, value=[Phone] 11212-C-RC)
+04-20 06:30:42.510  4871  4871 D WifiDirect: group owners address: /192.168.49.1
+04-20 06:30:42.510  4871  4871 D WifiDirect: group formed, this device is the group owner (GO)
+04-20 06:30:42.510  4871  4871 I FTCService: onNetworkConnectionEvent: CONNECTED_AS_GROUP_OWNER
+04-20 06:30:42.510  4871  4871 I FTCService: Wifi Direct - connected as group owner
+04-20 06:30:42.510  4871  4871 V UpdateUI: Network: enabled, disconnected
+04-20 06:30:42.520  4871  4871 V WifiDirect: connection information available
+04-20 06:30:42.520  4871  4871 V WifiDirect: connection information - groupOwnerName = [Phone] 11212-C-RC
+04-20 06:30:42.520  4871  4871 V WifiDirect: connection information - groupOwnerMacAddress = fe:db:b3:75:a8:79
+04-20 06:30:42.520  4871  4871 V WifiDirect: connection information - groupInterface = p2p-wlan0-0
+04-20 06:30:42.520  4871  4871 V WifiDirect: connection information - groupNetworkName = DIRECT-41-11212-C-RC
+04-20 06:30:42.520  4871  4871 I FTCService: onNetworkConnectionEvent: CONNECTION_INFO_AVAILABLE
+04-20 06:30:42.520  4871  4871 I FTCService: Network Connection Passphrase: BKVHiFEv
+04-20 06:30:42.540  4871  4871 V WebServer: starting port=8080
+04-20 06:30:42.550  4871  4871 V RobotCore: Getting network assistant of type: WIFIDIRECT
+04-20 06:30:42.550  4871  4871 V WifiDirect: There are 2 Wifi Direct Assistant Clients (+)
+04-20 06:30:42.560  4871  4871 V WebServer: started port=8080
+04-20 06:30:42.560  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifiP2pEnabled=true
+04-20 06:30:42.560  4871  4871 V UpdateUI: Network: active, disconnected
+04-20 06:30:42.560  4871  7774 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=CONNECTED
+04-20 06:30:42.560  4871  7774 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: CONNECTED/CONNECTED, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:30:42.560  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: true isGroupOwner: true groupOwnerAddress: /192.168.49.1
+04-20 06:30:42.560  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: DIRECT-41-11212-C-RC, isGO: true, GO: Device: [Phone] 11212-C-RC, deviceAddress: fe:db:b3:75:a8:79, primary type: 10-0050F204-5, secondary type: null, wps: 0, grpcapab: 0, devcapab: 0, status: 3, wfdInfo: null, groupownerAddress: null, GOdeviceName: null, interfaceAddress: , SConnectInfo : null, contactInfoHash : null, ssDevInfo : 0, iconIdx : 0, interface: p2p-wlan0-0, frequency: 2437, networkId: -1
+04-20 06:30:42.560  4871  7774 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=0 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:30:42.560  4871  7774 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:30:42.560  4871  7774 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:30:42.560  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifi direct remembered groups cleared
+04-20 06:30:42.560  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifiState=ENABLED
+04-20 06:30:42.570  4871  4871 E libEGL  : validate_display:255 error 3008 (EGL_BAD_DISPLAY)
+04-20 06:30:42.570  4871  4871 D libEGL  : eglInitialize EGLDisplay = 0xbeeca34c
+04-20 06:30:47.190  4871  8140 V RobotCore: EventLoopManager state is NOT_STARTED
+04-20 06:30:47.190  4871  8140 V RobotCore: Robot Status: stopped, waiting for Wifi to enable
+04-20 06:30:47.190  4871  8140 I RobotCore: state = 3
+04-20 06:30:47.190  4871  8140 V RobotCore: Robot Status: stopped, waiting for Wifi Direct to enable
+04-20 06:30:47.190  4871  8140 V FTCService: Waiting for a connection to a wifi service
+04-20 06:30:47.190  4871  8140 V RobotCore: Robot Status: stopped, waiting for network to become active
+04-20 06:30:47.190  4871  8140 V WebServer: Asked an already running WebServer to start
+04-20 06:30:47.190  4871  8140 V RobotCore: Robot Status: stopped, starting robot
+04-20 06:30:47.190  4871  8140 V Robocol : EventLoopManager.start()
+04-20 06:30:47.190  4871  8140 V RobotCore: Getting network assistant of type: WIFIDIRECT
+04-20 06:30:47.190  4871  8140 V Robocol : Spoofing a Network Connection event...
+04-20 06:30:47.190  4871  8140 I EventLoopManager: onNetworkConnectionEvent: CONNECTION_INFO_AVAILABLE
+04-20 06:30:47.190  4871  8140 I Robocol : Received network connection event
+04-20 06:30:47.190  4871  8140 I NetworkConnectionHandler: Handling new network connection infomation, connected: true setup needed: true
+04-20 06:30:47.190  4871  8140 V RobotCore: EventLoopManager state is STOPPED
+04-20 06:30:47.190  4871  8198 V RobotCore: thread: 'SetupRunnable.run()' starting...
+04-20 06:30:47.190  4871  8140 V Robocol : eventLoop=FtcEventLoop
+04-20 06:30:47.190  4871  8140 V RobotCore: EventLoopManager state is INIT
+04-20 06:30:47.190  4871  8140 V RobotCore: Robot Status: initializing, starting robot
+04-20 06:30:47.190  4871  8140 I FtcEventLoop: ======= INIT START =======
+04-20 06:30:47.200  4871  8140 V OpmodeRegistration: registered {DefaultOpMode} as {$Stop$Robot$}
+04-20 06:30:47.200  4871  8140 V FileBasedLock: locked /storage/emulated/0/FIRST/blocks/projectslock/lock.dat
+04-20 06:30:47.200  4871  8140 V FileBasedLock: unlocking /storage/emulated/0/FIRST/blocks/projectslock/lock.dat
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {SplineTestOpMode} as {SplineTestOpMode}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {ServoTestOpMode} as {Servo Tester}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {DriveVelocityPIDTuner} as {DriveVelocityPIDTuner}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {CoordinateTest} as {Corrdinate Testing}
+04-20 06:30:47.210  4871  4871 D WifiDirect: cannot create group, does group already exist?
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {TurnTestOpMode} as {TurnTestOpMode}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {ArmTest} as {Arm Test}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {TrajectoryViewerOpMode} as {Trajectory Viewer}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {DistanceSensorTest} as {Distance Test?}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {TelemetryOpmode} as {TeleOp}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {StraightTestOpMode} as {StraightTestOpMode}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {DriveFFTuningOpMode} as {DriveFFTuningOpMode}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {SelectParameters} as {Select Parameters}
+04-20 06:30:47.210  4871  8140 V OpmodeRegistration: registered {ResetArmEncoders} as {Reset arm encoders}
+04-20 06:30:47.220  4871  8140 V OpmodeRegistration: registered {JointControllerTest} as {Joint controller test}
+04-20 06:30:47.220  4871  8140 V OpmodeRegistration: registered {Autonomous} as {Main Autonomous}
+04-20 06:30:47.220  4871  8140 V OpmodeRegistration: registered {Vuforia_Test} as {Vuforia_Test}
+04-20 06:30:47.220  4871  8140 V OpmodeRegistration: registered {AutoScoreConcept} as {auto score test}
+04-20 06:30:47.220  4871  8140 V OpmodeRegistration: registered {FollowerPIDTuner} as {FollowerPIDTuner}
+04-20 06:30:47.220  4871  8140 V OpmodeRegistration: registered {NewTrackWidthCalibrationOpMode} as {NewTrackWidthCalibrationOpMode}
+04-20 06:30:47.220  4871  8140 V OpmodeRegistration: registered {AutoCalibrateOpMode} as {AutoCalibrate}
+04-20 06:30:47.250  4871  8198 D Robocol : RobocolDatagramSocket listening addr=/192.168.49.1:20884 cbRec=65520 cbSend=163840 msRecTO=300
+04-20 06:30:47.250  4871  8198 V Robocol : RecvLoopRunnable created
+04-20 06:30:47.250  4871  8198 V PeerDiscovery: Starting peer discovery remote: /192.168.49.1 local: /192.168.49.1
+04-20 06:30:47.250  4871  8198 V PeerDiscovery: No need for peer discovery, we are the peer discovery device
+04-20 06:30:47.250  4871  8202 V RobotCore: thread: 'RecvLoopRunnable.run()' starting...
+04-20 06:30:47.250  4871  8198 V RobotCore: Setup complete
+04-20 06:30:47.250  4871  8198 V RobotCore: thread: ...terminating 'SetupRunnable.run()'
+04-20 06:30:47.280  4871  8140 V HardwareFactory: createHardwareMap()
+04-20 06:30:47.280  4871  8140 V WifiDirectInviteMonitor: clearUILynxModule()
+04-20 06:30:47.290  4871  8140 V RobotCore: Creating Webcam [3F2DF43F]
+04-20 06:30:47.290  4871  8140 V CameraManager: construct(hash=0x0190f2b8|inst#=0)
+04-20 06:30:47.350  4871  8140 D Uvc     : [jni.cpp:72] JNI_OnLoad()...
+04-20 06:30:47.350  4871  8140 D Uvc     : [JniEnv.h:32] ScopedJniEnv::onJniLoad()...
+04-20 06:30:47.350  4871  8140 D Uvc     : [JniEnv.h:32] ...ScopedJniEnv::onJniLoad()
+04-20 06:30:47.350  4871  8140 D Uvc     : [jni.cpp:72] ...JNI_OnLoad()
+04-20 06:30:47.350  4871  8140 I AppUtil : found usbFileSystemRoot: /dev/bus/usb
+04-20 06:30:47.360  4871  8140 I CameraManager: found USB file system root: /dev/bus/usb
+04-20 06:30:47.360  4871  8140 D libusb  : [ 0.000144] [00001fcc] libusb: debug [op_init] sysfs(/sys/bus/usb/devices) available
+04-20 06:30:47.360  4871  8140 D libusb  : [ 0.000191] [00001fcc] libusb: debug [op_init] sysfs can relate devices
+04-20 06:30:47.360  4871  8140 D libusb  : [ 0.000208] [00001fcc] libusb: debug [op_init] sysfs has complete descriptors
+04-20 06:30:47.360  4871  8140 D libusb  : [ 0.000220] [00001fcc] libusb: debug [op_init] sysfs has serial numbers
+04-20 06:30:47.360  4871  8140 V UvcContext: construct(pointer=0xae00ac30|inst#=0)
+04-20 06:30:47.360  4871  8140 D libusb  : [ 0.004288] [00001fcc] libusb: debug [op_init] sysfs(/sys/bus/usb/devices) available
+04-20 06:30:47.360  4871  8140 D libusb  : [ 0.004308] [00001fcc] libusb: debug [op_init] sysfs can relate devices
+04-20 06:30:47.360  4871  8140 D libusb  : [ 0.004322] [00001fcc] libusb: debug [op_init] sysfs has complete descriptors
+04-20 06:30:47.360  4871  8140 D libusb  : [ 0.004335] [00001fcc] libusb: debug [op_init] sysfs has serial numbers
+04-20 06:30:47.370  4871  8140 V UvcContext: construct(pointer=0xae00ac90|inst#=1)
+04-20 06:30:47.370  4871  8140 V RobotCore: Creating REV Robotics USB Expansion Hub Portal [DQ2FYPMN]
+04-20 06:30:47.370  4871  8140 V LynxUsb : creating new [DQ2FYPMN]: 0x02c253f6
+04-20 06:30:47.380  4871  8140 V FtDevice: initialize(vid=0x0403 pid=0x6015 bcdDevice=0x1000)
+04-20 06:30:47.390  4871  8140 V MonitoredUsbDeviceConnection: closing UsbDeviceConnection(DQ2FYPMN)
+04-20 06:30:47.390  4871  8140 D UsbDeviceConnectionJNI: close
+04-20 06:30:47.390  4871  8140 V MonitoredUsbDeviceConnection: closing UsbDeviceConnection(DQ2FYPMN)
+04-20 06:30:47.390  4871  8140 D UsbDeviceConnectionJNI: close
+04-20 06:30:47.390  4871  8140 V FtDeviceManager: createDeviceInfoList(): 1 USB devices
+04-20 06:30:47.390  4871  8140 V FtDevice: vv********************DQ2FYPMN opening********************vv 0x0f302ccd
+04-20 06:30:47.390  4871  8140 V FtDevice: ^^********************DQ2FYPMN opened ********************^^
+04-20 06:30:47.390  4871  8140 V FtDevice: resetting DQ2FYPMN
+04-20 06:30:47.400  4871  8140 V LynxUsb : armDevice() serial=DQ2FYPMN...
+04-20 06:30:47.400  4871  8140 V LynxModule: resetDevice() serial=DQ2FYPMN
+04-20 06:30:47.560  4871  8202 E Robocol : exception SocketTimeoutException(null): no packet received [libcore.io.IoBridge.maybeThrowAfterRecvfrom(IoBridge.java:594)]
+04-20 06:30:47.750  4871  8140 V LynxUsb : ...done armDevice()
+04-20 06:30:47.760  4871  8140 V LynxUsb : 0x019fc8c9 on 0x02c253f6: new delegate to [DQ2FYPMN]
+04-20 06:30:47.760  4871  8140 V RobotCore: Creating Lynx Module - mod=1 parent=true
+04-20 06:30:47.760  4871  8211 V RobotCore: thread: 'lynx incoming datagrams' starting...
+04-20 06:30:47.770  4871  8140 V RobotCore: Creating Lynx Module - mod=2 parent=false
+04-20 06:30:47.770  4871  8140 V LynxUsb : addConfiguredModule() module#=1
+04-20 06:30:47.770  4871  8140 V LynxModule: pingAndQueryKnownInterfaces mod=1
+04-20 06:30:47.780  4871  8211 V LynxUsb : synchronization gained: serial=DQ2FYPMN
+04-20 06:30:47.810  4871  8140 V LynxModule: mod#=1 queryInterface(DEKA)=54 commands starting at 4096
+04-20 06:30:47.820  4871  8140 V LynxModule: sending LynxFtdiResetControlCommand(true) wasInterrupted=false
+04-20 06:30:47.830  4871  8212 V LynxModule: received status: LynxGetModuleStatusResponse(status=0x02 alerts=0x00: Reset)
+04-20 06:30:47.830  4871  8140 V LynxModule: sendLEDPatternSteps(): #steps=4
+04-20 06:30:47.850  4871  8140 V LynxUsb : addConfiguredModule() module#=2
+04-20 06:30:47.850  4871  8140 V LynxModule: pingAndQueryKnownInterfaces mod=2
+04-20 06:30:47.860  4871  8140 V LynxModule: mod#=2 queryInterface(DEKA)=49 commands starting at 4096
+04-20 06:30:47.870  4871  8140 V LynxModule: mod#=2 intf=DEKA: expected 54 commands; found 49
+04-20 06:30:47.880  4871  8140 V LynxModule: sendLEDPatternSteps(): #steps=6
+04-20 06:30:47.880  4871  8213 V LynxModule: received status: LynxGetModuleStatusResponse(status=0x02 alerts=0x00: Reset)
+04-20 06:30:47.900  4871  8140 V LynxMotor: initializeHardware() mod#=1
+04-20 06:30:47.950  4871  8140 V RobotCore: DcMotorImpl(type=NeveRest60Gearmotor)
+04-20 06:30:47.950  4871  8140 V RobotCore: DcMotorImpl(type=NeveRest60Gearmotor)
+04-20 06:30:47.950  4871  8140 V RobotCore: DcMotorImpl(type=NeveRest60Gearmotor)
+04-20 06:30:47.950  4871  8140 V RobotCore: DcMotorImpl(type=NeveRest60Gearmotor)
+04-20 06:30:47.950  4871  8140 V LynxServoController: initializeHardware() mod#=1
+04-20 06:30:47.990  4871  8140 V LynxVoltageSensor: initializeHardware() mod#=1
+04-20 06:30:47.990  4871  8140 V LynxPwmOutputController: initializeHardware() mod#=1
+04-20 06:30:48.000  4871  8140 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.000  4871  8140 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.000  4871  8140 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.010  4871  8140 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.010  4871  8140 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.020  4871  8140 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.020  4871  8140 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.020  4871  8140 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.020  4871  8140 V LynxAnalogInputController: initializeHardware() mod#=1
+04-20 06:30:48.020  4871  8140 V LynxDigitalChannelController: initializeHardware() mod#=1
+04-20 06:30:48.050  4871  8140 V RobotCore: Creating user sensor Adafruit IMU - on Lynx module=1 bus=1
+04-20 06:30:48.050  4871  8140 V RobotCore: Creating I2cDeviceSynch (Lynx) - mod=1 bus=1
+04-20 06:30:48.050  4871  8140 I RobotCore: LynxFirmwareVersionManager: LynxI2cDeviceSynchV2
+04-20 06:30:48.050  4871  8140 V LynxI2cDeviceSynch: initializeHardware() mod#=1
+04-20 06:30:48.060  4871  8140 V RobotCore: Creating user sensor Adafruit IMU - on Lynx module=1 bus=0
+04-20 06:30:48.060  4871  8140 V RobotCore: Creating I2cDeviceSynch (Lynx) - mod=1 bus=0
+04-20 06:30:48.060  4871  8140 I RobotCore: LynxFirmwareVersionManager: LynxI2cDeviceSynchV2
+04-20 06:30:48.060  4871  8140 V LynxI2cDeviceSynch: initializeHardware() mod#=1
+04-20 06:30:48.060  4871  8140 V LynxMotor: initializeHardware() mod#=2
+04-20 06:30:48.130  4871  8140 V RobotCore: DcMotorImpl(type=NeveRest40Gearmotor)
+04-20 06:30:48.130  4871  8140 V RobotCore: DcMotorImpl(type=NeveRest40Gearmotor)
+04-20 06:30:48.130  4871  8140 V RobotCore: DcMotorImpl(type=NeveRest40Gearmotor)
+04-20 06:30:48.130  4871  8140 V RobotCore: DcMotorImpl(type=NeveRest40Gearmotor)
+04-20 06:30:48.130  4871  8140 V LynxServoController: initializeHardware() mod#=2
+04-20 06:30:48.170  4871  8140 V LynxVoltageSensor: initializeHardware() mod#=2
+04-20 06:30:48.170  4871  8140 V LynxPwmOutputController: initializeHardware() mod#=2
+04-20 06:30:48.180  4871  8140 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.190  4871  8140 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.190  4871  8140 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.200  4871  8140 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.210  4871  8140 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.210  4871  8140 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.220  4871  8140 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.220  4871  8140 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:30:48.220  4871  8140 V LynxAnalogInputController: initializeHardware() mod#=2
+04-20 06:30:48.220  4871  8140 V LynxDigitalChannelController: initializeHardware() mod#=2
+04-20 06:30:48.250  4871  8140 I RobotCore: ========= Device Information ===================================================
+04-20 06:30:48.250  4871  8140 I RobotCore: Type                                               Name                           Connection
+04-20 06:30:48.250  4871  8140 I RobotCore: Continuous Rotation Servo                          intake                         USB DQ2FYPMN; module 1; port 3
+04-20 06:30:48.250  4871  8140 I RobotCore: Motor                                              frontLeft                      USB DQ2FYPMN; module 2; port 2
+04-20 06:30:48.250  4871  8140 I RobotCore: Servo                                              pawServo                       USB DQ2FYPMN; module 2; port 1
+04-20 06:30:48.250  4871  8140 I RobotCore: Expansion Hub DC Motor Controller                  Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:30:48.250  4871  8140 I RobotCore: Expansion Hub Servo Controller                     Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:30:48.250  4871  8140 I RobotCore: Expansion Hub Voltage Sensor                       Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:30:48.250  4871  8140 I RobotCore: Expansion Hub Pwm Controller                       Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub Analog Input Controller              Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub Digital Channel Controller           Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub (HW: 20, Maj: 1, Min: 8, Eng: 2)     Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:30:48.260  4871  8140 I RobotCore: Motor                                              backLeft                       USB DQ2FYPMN; module 2; port 3
+04-20 06:30:48.260  4871  8140 I RobotCore: Servo                                              backServo                      USB DQ2FYPMN; module 2; port 0
+04-20 06:30:48.260  4871  8140 I RobotCore: Servo                                              doorServo                      USB DQ2FYPMN; module 1; port 2
+04-20 06:30:48.260  4871  8140 I RobotCore: Servo                                              sorterPivot                    USB DQ2FYPMN; module 2; port 3
+04-20 06:30:48.260  4871  8140 I RobotCore: Motor                                              backRight                      USB DQ2FYPMN; module 2; port 1
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub DC Motor Controller                  Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub Servo Controller                     Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub Voltage Sensor                       Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub Pwm Controller                       Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub Analog Input Controller              Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:30:48.260  4871  8140 I RobotCore: Expansion Hub Digital Channel Controller           Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:30:48.270  4871  8140 I RobotCore: Expansion Hub (HW: 20, Maj: 1, Min: 7, Eng: 2)     Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:30:48.270  4871  8140 I RobotCore: Motor                                              intakeJoint                    USB DQ2FYPMN; module 1; port 1
+04-20 06:30:48.270  4871  8140 I RobotCore: Adafruit IMU                                       imu                            USB DQ2FYPMN; module 1; bus 0; addr7=0x00
+04-20 06:30:48.270  4871  8140 I RobotCore: Logitech HD Pro Webcam C920                        Webcam 1                       USB (3F2DF43F)
+04-20 06:30:48.270  4871  8140 I RobotCore: Servo                                              samplingServo                  USB DQ2FYPMN; module 2; port 2
+04-20 06:30:48.270  4871  8140 I RobotCore: Motor                                              frontRight                     USB DQ2FYPMN; module 2; port 0
+04-20 06:30:48.270  4871  8140 I RobotCore: Motor                                              secondJoint                    USB DQ2FYPMN; module 1; port 3
+04-20 06:30:48.280  4871  8140 I RobotCore: Adafruit IMU                                       jointImu                       USB DQ2FYPMN; module 1; bus 1; addr7=0x00
+04-20 06:30:48.280  4871  8140 I RobotCore: Motor                                              linearSlider                   USB DQ2FYPMN; module 1; port 2
+04-20 06:30:48.280  4871  8140 I RobotCore: Motor                                              firstJoint                     USB DQ2FYPMN; module 1; port 0
+04-20 06:30:48.280  4871  8140 I RobotCore: REV Robotics USB Expansion Hub Portal              Expansion Hub Portal 1         USB DQ2FYPMN
+04-20 06:30:48.280  4871  8140 I FtcEventLoop: ======= INIT FINISH =======
+04-20 06:30:48.280  4871  8140 V RobotCore: EventLoopManager state is RUNNING
+04-20 06:30:48.290  4871  8140 V MediaPlayer-JNI: native_setup
+04-20 06:30:48.290  4871  8140 E ExtMediaPlayer-JNI: env->IsInstanceOf fails
+04-20 06:30:48.290  4871  8140 E MediaPlayer-JNI: JNIMediaPlayerFactory: bIsQCMediaPlayerPresent 0
+04-20 06:30:48.290  4871  8140 E ExtMediaPlayer-JNI: env->IsInstanceOf fails
+04-20 06:30:48.290  4871  8140 E MediaPlayer-JNI: JNIMediaPlayerFactory: bIsQCMediaPlayerPresent 0
+04-20 06:30:48.320  4871  8140 V MediaPlayer-JNI: setParameter: key 1400
+04-20 06:30:48.320  4871  8140 V MediaPlayer-JNI: setAudioStreamType: 3
+04-20 06:30:48.320  4871  8140 V MediaPlayer-JNI: set_session_id(): 31
+04-20 06:30:48.330  4871  8140 V RobotCore: Robot Status: running, starting robot
+04-20 06:30:48.330  4871  8140 V RobotCore: Robot Status: running
+04-20 06:30:48.330  4871  8140 V RobotCore: thread: ...terminating 'RobotSetupRunnable.run()'
+04-20 06:30:48.330  4871  8223 V MediaPlayer-JNI: reset
+04-20 06:30:48.340  4871  8223 V MediaPlayer-JNI: setDataSourceFD: fd 95
+04-20 06:30:48.340  4871  8224 V RobotCore: thread: 'opmode loop()' starting...
+04-20 06:30:48.340  4871  8224 D RobotCore: system telemetry: key=$System$None$ msg=""
+04-20 06:30:48.440  4871  4885 W MediaPlayer: info/warning (10973, 0)
+04-20 06:30:48.450  4871  8223 V MediaPlayer-JNI: getDuration: 1019 (msec)
+04-20 06:30:48.450  4871  8223 V SoundInfo: construct(0x0ef3c449)
+04-20 06:30:48.510  4871  7774 D SoundPlayer: onLoadComplete(samp=1|ms=1019, samp=1)=0
+04-20 06:30:48.510  4871  8223 W AudioTrack: AUDIO_OUTPUT_FLAG_FAST denied by client; transfer 4, track 8000 Hz, output 48000 Hz
+04-20 06:30:48.530  4871  8223 D SoundPlayer: playing volume=1.000000 samp=1|ms=1019
+04-20 06:30:48.840  4871  8224 V FtcEventLoop: processedRecentlyAttachedUsbDevices(): 3F2DF43F not in hwmap; ignoring
+04-20 06:30:48.850  4871  8224 V FtcEventLoop: processedRecentlyAttachedUsbDevices(): DQ2FYPMN not in hwmap; ignoring
+04-20 06:30:48.860  4871  8224 I RobotCore: Attempting to switch to op mode $Stop$Robot$
+04-20 06:31:40.430  4871  4879 V UvcContext: finalize(pointer=0xae00ac30|inst#=0)
+04-20 06:31:40.430  4871  4879 V UvcContext: destroy(pointer=0xae00ac30|inst#=0)
+04-20 06:31:40.430  4871  4879 D Uvc     : [init.cpp:131] calling libusb_exit()
+04-20 06:32:19.720  4871  4871 D ViewRootImpl: ViewPostImeInputStage processPointer 0
+04-20 06:32:23.570  4871  4871 D ViewRootImpl: ViewPostImeInputStage processPointer 1
+04-20 06:32:26.380  4871  7774 V NetDiscover_wifiDirectAgent_bcast: peers found: count=1
+04-20 06:32:26.380  4871  7774 V NetDiscover_wifiDirectAgent_bcast:     peer: d2:5b:a8:31:5e:25 11212-A-DS
+04-20 06:32:26.380  4871  4871 D WifiDirect: broadcast: peers changed
+04-20 06:32:26.600  4871  4871 V WifiDirect: peers found: 1
+04-20 06:32:26.600  4871  4871 V WifiDirect:     peer: d2:5b:a8:31:5e:25 11212-A-DS
+04-20 06:32:26.600  4871  4871 I EventLoopManager: onNetworkConnectionEvent: PEERS_AVAILABLE
+04-20 06:32:35.790  4871  4871 D ViewRootImpl: ViewPostImeInputStage processKey 0
+04-20 06:32:35.800  4871  4871 D ViewRootImpl: ViewPostImeInputStage processKey 1
+04-20 06:32:35.820  4871  4871 D AbsListView: Get MotionRecognitionManager
+04-20 06:32:35.830  4871  4871 E MotionRecognitionManager: mSContextService = android.hardware.scontext.ISContextService$Stub$Proxy@de48c03
+04-20 06:32:35.830  4871  4871 E MotionRecognitionManager: motionService = com.samsung.android.motion.IMotionRecognitionService$Stub$Proxy@a4ab780
+04-20 06:32:35.830  4871  4871 E MotionRecognitionManager: motionService = com.samsung.android.motion.IMotionRecognitionService$Stub$Proxy@a4ab780
+04-20 06:32:35.850  4871  4871 D ViewRootImpl: #1 mView = com.android.internal.policy.PhoneWindow$DecorView{2b951b9 V.E...... ......I. 0,0-0,0}
+04-20 06:32:35.990  4871  4871 D ViewRootImpl: MSG_RESIZED_REPORT: ci=Rect(0, 0 - 0, 0) vi=Rect(0, 0 - 0, 0) or=2
+04-20 06:32:46.310  4871  4871 D ViewRootImpl: ViewPostImeInputStage processPointer 0
+04-20 06:32:46.320  4871  4871 D ViewRootImpl: #3 mView = null
+04-20 06:32:46.340  4871  4871 E ViewRootImpl: sendUserActionEvent() mView == null
+04-20 06:32:57.570  4871  4871 V RCActivity: onPause()
+04-20 06:32:57.710  4871  4871 V MTPMonitorService: onConfigurationChanged()
+04-20 06:32:57.710  4871  4871 V OnBotJavaService: onConfigurationChanged()
+04-20 06:32:57.720  4871  4871 D ViewRootImpl: MSG_RESIZED_REPORT: ci=Rect(0, 0 - 0, 0) vi=Rect(0, 0 - 0, 0) or=1
+04-20 06:32:57.990  4871  4871 V RCActivity: onStop()
+04-20 06:32:57.990  4871  4871 V ActivityThread: updateVisibility : ActivityRecord{c27a912 token=android.os.BinderProxy@eebaf61 {com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity}} show : false
+04-20 06:32:58.030  4871  4871 V MTPMonitorService: onTrimMemory()
+04-20 06:32:58.030  4871  4871 V OnBotJavaService: onTrimMemory()
+04-20 06:33:03.170  4871  4871 V AppUtil : rootActivity=FtcRobotControllerActivity destroyed
+04-20 06:33:03.170  4871  4871 V RCActivity: onDestroy()
+04-20 06:33:03.170  4871  4871 V Robocol : EventLoopManager.shutdown()
+04-20 06:33:03.170  4871  8224 V RobotCore: EventLoopRunnable interrupted
+04-20 06:33:03.170  4871  8224 V RobotCore: EventLoopManager state is STOPPED
+04-20 06:33:03.170  4871  8224 V RobotCore: Robot Status: stopped
+04-20 06:33:03.170  4871  8224 I FtcEventLoop: ======= TEARDOWN =======
+04-20 06:33:03.180  4871  8224 V LynxUsb : 0x019fc8c9 on 0x02c253f6: releasing delegate to [DQ2FYPMN]
+04-20 06:33:03.180  4871  8224 V LynxModule: close(#1)
+04-20 06:33:03.180  4871  8224 V LynxModule: sending LynxFtdiResetControlCommand(false) wasInterrupted=true
+04-20 06:33:03.180  4871  8224 V LynxModule: close(#2)
+04-20 06:33:03.180  4871  8224 V LynxUsb : disarmDevice() serial=DQ2FYPMN...
+04-20 06:33:03.180  4871  8224 V LynxUsb : shutting down incoming datagrams
+04-20 06:33:03.180  4871  8211 V RobotCore: thread: ...terminating 'lynx incoming datagrams'
+04-20 06:33:03.280  4871  8224 V RobotUsbDeviceFtdi: closing DQ2FYPMN
+04-20 06:33:03.280  4871  8224 V FtDevice: vv********************DQ2FYPMN closing********************vv 0x0f302ccd
+04-20 06:33:03.280  4871  8224 V FtDevice: DQ2FYPMN stopping thread readBufferManager
+04-20 06:33:03.280  4871  8206 V FtDevice: DQ2FYPMN thread readBufferManager is stopped
+04-20 06:33:03.280  4871  8224 V FtDevice: DQ2FYPMN stopping thread bulkPacketInWorker
+04-20 06:33:03.290  4871  8205 V FtDevice: DQ2FYPMN thread bulkPacketInWorker is stopped
+04-20 06:33:03.290  4871  8224 V MonitoredUsbDeviceConnection: closing UsbDeviceConnection(DQ2FYPMN)
+04-20 06:33:03.290  4871  8224 D UsbDeviceConnectionJNI: close
+04-20 06:33:03.290  4871  8224 V FtDevice: ^^********************DQ2FYPMN closed ********************^^
+04-20 06:33:03.290  4871  8224 V LynxUsb : ...done disarmDevice()
+04-20 06:33:03.300  4871  8224 I FtcEventLoop: ======= TEARDOWN COMPLETE =======
+04-20 06:33:03.300  4871  8224 V RobotCore: thread: ...terminating 'opmode loop()'
+04-20 06:33:03.300  4871  8224 V EventLoopManager: switching to idleEventLoop
+04-20 06:33:03.300  4871  8224 I FtcEventLoopIdle: ------- idle init --------
+04-20 06:33:03.300  4871  8224 V RobotCore: thread: 'opmode loop()' starting...
+04-20 06:33:05.670  4871  4871 E RobotCore: thread id=631 tid=8224 name="opmode loop()" 
+04-20 06:33:05.670  4871  4871 E RobotCore:     at java.lang.Thread.sleep(Native Method)
+04-20 06:33:05.670  4871  4871 E RobotCore:     at java.lang.Thread.sleep(Thread.java:1031)
+04-20 06:33:05.670  4871  4871 E RobotCore:     at java.lang.Thread.sleep(Thread.java:985)
+04-20 06:33:05.670  4871  4871 E RobotCore:     at com.qualcomm.robotcore.eventloop.EventLoopManager$EventLoopRunnable$1.run(EventLoopManager.java:260)
+04-20 06:33:05.680  4871  4871 E RobotCore:     at com.qualcomm.robotcore.util.ThreadPool.logThreadLifeCycle(ThreadPool.java:737)
+04-20 06:33:05.680  4871  4871 E RobotCore:     at com.qualcomm.robotcore.eventloop.EventLoopManager$EventLoopRunnable.run(EventLoopManager.java:239)
+04-20 06:33:05.680  4871  4871 E RobotCore:     at com.qualcomm.robotcore.eventloop.EventLoopManager$1.run(EventLoopManager.java:582)
+04-20 06:33:05.680  4871  4871 E RobotCore:     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1113)
+04-20 06:33:05.680  4871  4871 E RobotCore:     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:588)
+04-20 06:33:05.680  4871  4871 E RobotCore:     at com.qualcomm.robotcore.util.ThreadPool$ThreadFactoryImpl$1.run(ThreadPool.java:793)
+04-20 06:33:05.680  4871  4871 E RobotCore:     at java.lang.Thread.run(Thread.java:818)
+04-20 06:33:05.680  4871  8224 V RobotCore: EventLoopRunnable interrupted
+04-20 06:33:05.680  4871  8224 V RobotCore: EventLoopManager state is STOPPED
+04-20 06:33:05.680  4871  8224 I FtcEventLoopIdle: ------- idle teardown ----
+04-20 06:33:05.680  4871  8224 V RobotCore: thread: ...terminating 'opmode loop()'
+04-20 06:33:05.680  4871  4871 V RobotCore: EventLoopManager state is STOPPED
+04-20 06:33:05.680  4871  4871 V NetDiscover_prefremrc: doStop()...
+04-20 06:33:05.680  4871  4871 V NetDiscover_prefremrc: ...doStop()
+04-20 06:33:05.680  4871  4871 V NetDiscover_name: doStop()...
+04-20 06:33:05.680  4871  4871 V NetDiscover_name: ...doStop()
+04-20 06:33:05.680  4871  4871 V ServiceStarter: attempting to stop service FtcRobotControllerWatchdogService
+04-20 06:33:06.190  4871  4871 V RobotCore: Waiting for the logcat process to die.
+04-20 06:33:06.190  4871  5111 I RobotCore: Done running exec logcat -f /storage/emulated/0/robotControllerLog.txt -r4096 -n4 -v threadtime UsbRequestJNI:S UsbRequest:S art:W ThreadPool:W System:W ExtendedExtractor:W OMXClient:W MediaPlayer:W dalvikvm:W  *:V
+04-20 06:33:06.190  4871  5111 E RobotCore: java.io.IOException: read failed: EBADF (Bad file descriptor)
+04-20 06:33:06.190  4871  5111 E RobotCore: 	at libcore.io.IoBridge.read(IoBridge.java:478)
+04-20 06:33:06.190  4871  5111 E RobotCore: 	at java.io.FileInputStream.read(FileInputStream.java:177)
+04-20 06:33:06.190  4871  5111 E RobotCore: 	at java.io.InputStream.read(InputStream.java:162)
+04-20 06:33:06.190  4871  5111 E RobotCore: 	at com.qualcomm.robotcore.util.RunShellCommand.runCommand(RunShellCommand.java:103)
+04-20 06:33:06.190  4871  5111 E RobotCore: 	at com.qualcomm.robotcore.util.RunShellCommand.run(RunShellCommand.java:71)
+04-20 06:33:06.190  4871  5111 E RobotCore: 	at com.qualcomm.robotcore.util.RobotLog$LoggingThread.run(RobotLog.java:72)
+04-20 06:33:06.190  4871  5111 E RobotCore: 	at com.qualcomm.robotcore.util.RobotLog$1.run(RobotLog.java:576)
+04-20 06:33:06.200  4871  5111 E RobotCore: Caused by: android.system.ErrnoException: read failed: EBADF (Bad file descriptor)
+04-20 06:33:06.200  4871  5111 E RobotCore: 	at libcore.io.Posix.readBytes(Native Method)
+04-20 06:33:06.200  4871  5111 E RobotCore: 	at libcore.io.Posix.read(Posix.java:169)
+04-20 06:33:06.200  4871  5111 E RobotCore: 	at libcore.io.BlockGuardOs.read(BlockGuardOs.java:230)
+04-20 06:33:06.200  4871  5111 E RobotCore: 	at libcore.io.IoBridge.read(IoBridge.java:468)
+04-20 06:33:06.200  4871  5111 E RobotCore: 	... 6 more
+04-20 06:33:06.210  4871  4871 D ViewRootImpl: #3 mView = null
+04-20 06:33:06.220  4871  4871 V OnBotJavaService: onTaskRemoved()
+04-20 06:33:06.220  4871  4871 V MTPMonitorService: onTaskRemoved()
+04-20 06:33:06.220  4871  4871 V MTPMonitorService: onConfigurationChanged()
+04-20 06:33:06.220  4871  4871 V OnBotJavaService: onConfigurationChanged()
+04-20 06:33:06.220  4871  4871 W ResourcesManager: getTopLevelResources: /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:33:06.220  4871  4871 W ResourcesManager: getTopLevelResources: /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:33:06.230  4871  4871 V AppUtil : rootActivity=FtcRobotControllerActivity
+04-20 06:33:09.320  4871  4871 V RCActivity: onCreate()
+04-20 06:33:09.320  4871  4871 V RCActivity: rootActivity is of class FtcRobotControllerActivity
+04-20 06:33:09.320  4871  4871 V NetDiscover_name: doStart()...
+04-20 06:33:09.320  4871  4871 V NetDiscover_name: ...doStart()
+04-20 06:33:09.320  4871  4871 V NetDiscover_prefremrc: doStart()...
+04-20 06:33:09.320  4871  4871 V NetDiscover_prefremrc: ...doStart()
+04-20 06:33:09.320  4871  9040 V RobotCore: saving logcat to /storage/emulated/0/robotControllerLog.txt
+04-20 06:33:09.320  4871  9040 V RobotCore: logging command line: exec logcat -f /storage/emulated/0/robotControllerLog.txt -r4096 -n4 -v threadtime UsbRequestJNI:S UsbRequest:S art:W ThreadPool:W System:W ExtendedExtractor:W OMXClient:W MediaPlayer:W dalvikvm:W  *:V
+04-20 06:33:09.460  4871  4871 V OnBotJava: getCurrentOutputJarDir() unavailable
+04-20 06:33:09.460  4871  4871 V OnBotJava: getCurrentOutputJarDir() unavailable
+04-20 06:33:09.470  4871  4871 W ClassManager: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:09.470  4871  4871 E ClassManager: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:33:09.470  4871  4871 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:09.480  4871  4871 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:33:09.480  4871  4871 E ClassManager: 	... 18 more
+04-20 06:33:09.480  4871  4871 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:33:09.480  4871  4871 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:33:09.480  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:09.480  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:09.480  4871  4871 E ClassManager: 		... 20 more
+04-20 06:33:09.480  4871  4871 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:09.480  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:33:09.480  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:33:09.480  4871  4871 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:33:09.480  4871  4871 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:33:09.480  4871  4871 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:33:09.480  4871  4871 E ClassManager: 			... 22 more
+04-20 06:33:09.480  4871  4871 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:09.480  4871  4871 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:33:09.480  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:33:09.480  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:33:09.490  4871  4871 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:09.490  4871  4871 E ClassManager: 			... 21 more
+04-20 06:33:09.490  4871  4871 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:33:09.490  4871  4871 W ClassManager: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:09.490  4871  4871 E ClassManager: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:09.490  4871  4871 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:33:09.490  4871  4871 E ClassManager: 	... 18 more
+04-20 06:33:09.490  4871  4871 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:33:09.500  4871  4871 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:33:09.500  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:09.500  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:09.500  4871  4871 E ClassManager: 		... 20 more
+04-20 06:33:09.500  4871  4871 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			... 22 more
+04-20 06:33:09.500  4871  4871 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:09.500  4871  4871 E ClassManager: 			... 21 more
+04-20 06:33:09.500  4871  4871 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:33:09.510  4871  9040 I RobotCore: Done running ps
+04-20 06:33:09.560  4871  4871 W ClassManager: com.opencsv.bean.FieldMapByPosition$1$1 java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:09.560  4871  4871 E ClassManager: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:33:09.560  4871  4871 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:09.570  4871  4871 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:33:09.570  4871  4871 E ClassManager: 	... 18 more
+04-20 06:33:09.570  4871  4871 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.opencsv.bean.FieldMapByPosition$1$1" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:33:09.570  4871  4871 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:33:09.570  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:09.570  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:09.570  4871  4871 E ClassManager: 		... 20 more
+04-20 06:33:09.570  4871  4871 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:09.570  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:33:09.570  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:33:09.570  4871  4871 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:33:09.570  4871  4871 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:33:09.570  4871  4871 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:33:09.570  4871  4871 E ClassManager: 			... 22 more
+04-20 06:33:09.570  4871  4871 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:09.570  4871  4871 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:33:09.570  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:33:09.580  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:33:09.580  4871  4871 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:09.580  4871  4871 E ClassManager: 			... 21 more
+04-20 06:33:09.580  4871  4871 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:33:09.750  4871  4871 W ClassManager: kotlin.streams.jdk8.StreamsKt$asStream$1 java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:09.750  4871  4871 E ClassManager: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:09.750  4871  4871 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:33:09.750  4871  4871 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:33:09.750  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:33:09.750  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:33:09.750  4871  4871 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:09.760  4871  4871 E ClassManager: Caused by: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:33:09.760  4871  4871 E ClassManager: 	... 18 more
+04-20 06:33:09.760  4871  4871 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "kotlin.streams.jdk8.StreamsKt$asStream$1" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:33:09.760  4871  4871 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:33:09.760  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:09.760  4871  4871 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:09.760  4871  4871 E ClassManager: 		... 20 more
+04-20 06:33:09.760  4871  4871 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:09.760  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:33:09.760  4871  4871 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:33:09.760  4871  4871 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:33:09.760  4871  4871 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:33:09.760  4871  4871 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:33:09.760  4871  4871 E ClassManager: 			... 22 more
+04-20 06:33:09.760  4871  4871 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:09.760  4871  4871 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:33:09.770  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:33:09.770  4871  4871 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:33:09.770  4871  4871 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:09.770  4871  4871 E ClassManager: 			... 21 more
+04-20 06:33:09.770  4871  4871 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:33:21.030  4871  4871 V UpdateUI: Network: inactive, disconnected
+04-20 06:33:21.040  4871  4871 V ServiceStarter: attempting to start service FtcRobotControllerWatchdogService
+04-20 06:33:21.050  4871  4871 V ServiceStarter: started service FtcRobotControllerWatchdogService
+04-20 06:33:21.060  4871  4871 V RobotCore: BuildConfig: versionCode=31 versionName=4.3 module=com.qualcomm.ftcrobotcontroller
+04-20 06:33:21.060  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.robotcore
+04-20 06:33:21.060  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.hardware
+04-20 06:33:21.060  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.ftccommon
+04-20 06:33:21.060  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.google.blocks
+04-20 06:33:21.060  4871  4871 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=org.firstinspires.inspection
+04-20 06:33:21.060  4871  4871 I RCActivity: 410c serial number: 6f6bcdd8
+04-20 06:33:21.060  4871  4871 I RobotCore: Android Device: maker=samsung model=SAMSUNG-SM-G900A sdk=23
+04-20 06:33:21.060  4871  4871 V RCActivity: onStart()
+04-20 06:33:21.060  4871  4871 V RCActivity: onResume()
+04-20 06:33:21.060  4871  4871 D ViewRootImpl: #1 mView = com.android.internal.policy.PhoneWindow$DecorView{cd317bb I.E...... R.....ID 0,0-0,0}
+04-20 06:33:21.060  4871  4871 D SecWifiDisplayUtil: Metadata value : none
+04-20 06:33:21.070  4871  4871 V FTCService: onUnbind()
+04-20 06:33:21.070  4871  4871 V WifiDirect: There are 1 Wifi Direct Assistant Clients (-)
+04-20 06:33:21.070  4871  4871 V Robocol : EventLoopManager.close()
+04-20 06:33:21.070  4871  4871 I SetupRunnable: Shutting down setup and receive loop
+04-20 06:33:21.170  4871  8202 V RobotCore: thread: ...terminating 'RecvLoopRunnable.run()'
+04-20 06:33:21.170  4871  4871 V PeerDiscovery: Stopping peer discovery
+04-20 06:33:21.170  4871  4871 D Robocol : RobocolDatagramSocket is closed
+04-20 06:33:21.170  4871  4871 V FTCService: onDestroy()
+04-20 06:33:21.170  4871  4871 V WebServer: stopping port=8080
+04-20 06:33:21.170  4871  4871 V WifiDirect: There are 0 Wifi Direct Assistant Clients (-)
+04-20 06:33:21.170  4871  4871 V WifiDirect: Disabling Wifi Direct Assistant
+04-20 06:33:21.170  4871  4871 V WifiDirectInviteMonitor: stopMonitoring()
+04-20 06:33:21.180  4871  4871 V WebServer: stopped port=8080
+04-20 06:33:21.180  4871  4871 V FtcRobotControllerWatchdogService: onDestroy()
+04-20 06:33:21.180  4871  4871 I Choreographer: Skipped 929 frames!  The application may be doing too much work on its main thread.
+04-20 06:33:21.230  4871  4871 V FtcRobotControllerWatchdogService: onCreate()
+04-20 06:33:21.230  4871  4871 V FtcRobotControllerWatchdogService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.ftccommon.internal.FtcRobotControllerWatchdogService } flags=0x0 startId=1
+04-20 06:33:21.230  4871  4871 V FtcRobotControllerWatchdogService: shouldAutoLauchRobotController() result=false
+04-20 06:33:21.230  4871  4871 V FTCService: onCreate()
+04-20 06:33:21.230  4871  4871 V FTCService: onBind()
+04-20 06:33:21.230  4871  4871 V WebServer: creating NanoHTTPD(8080)
+04-20 06:33:21.230  4871  4871 V RobotCore: Getting network assistant of type: WIFIDIRECT
+04-20 06:33:21.230  4871  4871 V WifiDirect: There are 1 Wifi Direct Assistant Clients (+)
+04-20 06:33:21.230  4871  4871 V WifiDirect: Enabling Wifi Direct Assistant
+04-20 06:33:21.240  4871  4871 V WifiDirectInviteMonitor: startMonitoring()
+04-20 06:33:21.240  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifiP2pEnabled=true
+04-20 06:33:21.250  4871  7774 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=CONNECTED
+04-20 06:33:21.250  4871  7774 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: CONNECTED/CONNECTED, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:33:21.250  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: true isGroupOwner: true groupOwnerAddress: /192.168.49.1
+04-20 06:33:21.250  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: DIRECT-41-11212-C-RC, isGO: true, GO: Device: [Phone] 11212-C-RC, deviceAddress: fe:db:b3:75:a8:79, primary type: 10-0050F204-5, secondary type: null, wps: 0, grpcapab: 0, devcapab: 0, status: 3, wfdInfo: null, groupownerAddress: null, GOdeviceName: null, interfaceAddress: , SConnectInfo : null, contactInfoHash : null, ssDevInfo : 0, iconIdx : 0, interface: p2p-wlan0-0, frequency: 2437, networkId: -1
+04-20 06:33:21.250  4871  7774 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=0 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:33:21.250  4871  7774 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:33:21.250  4871  7774 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:33:21.250  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifi direct remembered groups cleared
+04-20 06:33:21.250  4871  7774 V NetDiscover_wifiDirectAgent_bcast: wifiState=ENABLED
+04-20 06:33:21.250  4871  4871 E ActivityThread: Service com.qualcomm.ftccommon.FtcRobotControllerService has leaked IntentReceiver com.qualcomm.robotcore.wifi.WifiDirectAssistant$WifiP2pBroadcastReceiver@9fad0c that was originally registered here. Are you missing a call to unregisterReceiver()?
+04-20 06:33:21.250  4871  4871 E ActivityThread: android.app.IntentReceiverLeaked: Service com.qualcomm.ftccommon.FtcRobotControllerService has leaked IntentReceiver com.qualcomm.robotcore.wifi.WifiDirectAssistant$WifiP2pBroadcastReceiver@9fad0c that was originally registered here. Are you missing a call to unregisterReceiver()?
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.LoadedApk$ReceiverDispatcher.<init>(LoadedApk.java:1030)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.LoadedApk.getReceiverDispatcher(LoadedApk.java:817)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ContextImpl.registerReceiverInternal(ContextImpl.java:1260)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ContextImpl.registerReceiver(ContextImpl.java:1240)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ContextImpl.registerReceiver(ContextImpl.java:1234)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at com.qualcomm.robotcore.wifi.WifiDirectAssistant.enable(WifiDirectAssistant.java:295)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at com.qualcomm.ftccommon.FtcRobotControllerService.onBind(FtcRobotControllerService.java:372)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ActivityThread.handleBindService(ActivityThread.java:3834)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ActivityThread.access$2200(ActivityThread.java:221)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1887)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:21.250  4871  4871 E ActivityThread: Service com.qualcomm.ftccommon.FtcRobotControllerService has leaked IntentReceiver org.firstinspires.ftc.robotcore.internal.network.WifiDirectInviteDialogMonitor@dfe8655 that was originally registered here. Are you missing a call to unregisterReceiver()?
+04-20 06:33:21.250  4871  4871 E ActivityThread: android.app.IntentReceiverLeaked: Service com.qualcomm.ftccommon.FtcRobotControllerService has leaked IntentReceiver org.firstinspires.ftc.robotcore.internal.network.WifiDirectInviteDialogMonitor@dfe8655 that was originally registered here. Are you missing a call to unregisterReceiver()?
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.LoadedApk$ReceiverDispatcher.<init>(LoadedApk.java:1030)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.LoadedApk.getReceiverDispatcher(LoadedApk.java:817)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ContextImpl.registerReceiverInternal(ContextImpl.java:1260)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ContextImpl.registerReceiver(ContextImpl.java:1240)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ContextImpl.registerReceiver(ContextImpl.java:1234)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at org.firstinspires.ftc.robotcore.internal.network.WifiDirectInviteDialogMonitor.startMonitoring(WifiDirectInviteDialogMonitor.java:129)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at com.qualcomm.robotcore.wifi.WifiDirectAssistant.enable(WifiDirectAssistant.java:296)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at com.qualcomm.ftccommon.FtcRobotControllerService.onBind(FtcRobotControllerService.java:372)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ActivityThread.handleBindService(ActivityThread.java:3834)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ActivityThread.access$2200(ActivityThread.java:221)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1887)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:21.250  4871  4871 E ActivityThread: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:21.260  4871  4871 D ViewRootImpl: MSG_RESIZED_REPORT: ci=Rect(0, 0 - 0, 0) vi=Rect(0, 0 - 0, 0) or=2
+04-20 06:33:21.270  4871  4871 D WifiDirect: broadcast: state - enabled: true
+04-20 06:33:21.270  4871  4871 D WifiDirect: broadcast: connection changed: connectStatus=NOT_CONNECTED networkInfo.state=CONNECTED
+04-20 06:33:21.270  4871  4871 D WifiDirect: broadcast: this device changed
+04-20 06:33:21.270  4871  4871 V WifiDirect: device information: [Phone] 11212-C-RC fe:db:b3:75:a8:79
+04-20 06:33:21.270  4871  4871 V FTCService: RCActivity.controllerService=bound
+04-20 06:33:21.270  4871  4871 V UpdateUI: Network: unknown, disconnected
+04-20 06:33:21.270  4871  4871 V RobotCore: Robot Status: stopped
+04-20 06:33:21.290  4871  9072 V RobotCore: thread: 'RobotSetupRunnable.run()' starting...
+04-20 06:33:21.290  4871  9072 V FTCService: Processing robot setup
+04-20 06:33:21.290  4871  9072 V RobotCore: Robot Status: stopped, scanning for USB devices
+04-20 06:33:21.300  4871  4871 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@2abac4a time:259409
+04-20 06:33:21.400  4871  7774 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=3 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:33:21.400  4871  7774 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:33:21.400  4871  7774 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:33:21.410  4871  7774 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=DISCONNECTED
+04-20 06:33:21.410  4871  7774 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: DISCONNECTED/DISCONNECTED, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:33:21.410  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: false isGroupOwner: false groupOwnerAddress: null
+04-20 06:33:21.410  4871  7774 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: null, isGO: false, GO: null, interface: null, frequency: 0, networkId: 0
+04-20 06:33:21.550  4871  4871 I FTCService: onNetworkConnectionEvent: GROUP_CREATED
+04-20 06:33:21.550  4871  4871 D WifiDirect: created group
+04-20 06:33:21.550  4871  4871 D AndroidRuntime: Shutting down VM
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: FATAL EXCEPTION: main
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: Process: com.qualcomm.ftcrobotcontroller, PID: 4871
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String java.net.InetAddress.toString()' on a null object reference
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: 	at com.qualcomm.robotcore.wifi.WifiDirectAssistant$WifiDirectConnectionInfoListener.onConnectionInfoAvailable(WifiDirectAssistant.java:139)
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: 	at android.net.wifi.p2p.WifiP2pManager$Channel$P2pHandler.handleMessage(WifiP2pManager.java:1029)
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:21.550  4871  4871 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:25.150  4871  4871 I Process : Sending signal. PID: 4871 SIG: 9
+04-20 06:33:25.790  9171  9171 W SELinux : SELinux: seapp_context_lookup: seinfo=default, level=s0:c512,c768, pkgname=com.qualcomm.ftcrobotcontroller 
+04-20 06:33:25.830  9171  9171 D TimaKeyStoreProvider: TimaSignature is unavailable
+04-20 06:33:25.830  9171  9171 D ActivityThread: Added TimaKeyStore provider
+04-20 06:33:25.930  9171  9171 W ResourcesManager: getTopLevelResources: /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:33:26.010  9171  9171 W linker  : /data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm/libsupportjni.so: is missing DT_SONAME will use basename as a replacement: "libsupportjni.so"
+04-20 06:33:26.130  9171  9196 E StudioProfiler: Studio Profilers encountered an unexpected error. Consider reporting a bug, including logcat output below.
+04-20 06:33:26.130  9171  9196 E StudioProfiler: See also: https://developer.android.com/studio/report-bugs.html#studio-bugs
+04-20 06:33:26.130  9171  9196 E StudioProfiler: 
+04-20 06:33:26.130  9171  9196 E StudioProfiler: Failed to capture application
+04-20 06:33:26.140  9171  9196 V StudioProfiler: Acquiring Application for Events
+04-20 06:33:26.140  9171  9171 V AppUtil : initializing: getExternalStorageDirectory()=/storage/emulated/0
+04-20 06:33:26.150  9171  9171 I AppUtil : found usbFileSystemRoot: /dev/bus/usb
+04-20 06:33:26.150  9171  9200 V RobotCore: saving logcat to /storage/emulated/0/robotControllerLog.txt
+04-20 06:33:26.150  9171  9200 V RobotCore: logging command line: exec logcat -f /storage/emulated/0/robotControllerLog.txt -r4096 -n4 -v threadtime UsbRequestJNI:S UsbRequest:S art:W ThreadPool:W System:W ExtendedExtractor:W OMXClient:W MediaPlayer:W dalvikvm:W  *:V
+04-20 06:33:26.160  9171  9171 V ServiceStarter: attempting to start service MediaTransferProtocolMonitorService
+04-20 06:33:26.170  9171  9171 V ServiceStarter: started service MediaTransferProtocolMonitorService
+04-20 06:33:26.170  9171  9171 V ServiceStarter: attempting to start service OnBotJavaService
+04-20 06:33:26.170  9171  9171 V ServiceStarter: started service OnBotJavaService
+04-20 06:33:26.170  9171  9171 W ResourcesManager: getTopLevelResources: /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:33:26.180  9171  9171 W ResourcesManager: getTopLevelResources: /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:33:26.190  9171  9171 V AppUtil : rootActivity=FtcRobotControllerActivity
+04-20 06:33:26.270  9171  9200 I RobotCore: Done running ps
+04-20 06:33:29.730  9171  9171 V RCActivity: onCreate()
+04-20 06:33:29.740  9171  9171 V RCActivity: rootActivity is of class FtcRobotControllerActivity
+04-20 06:33:29.740  9171  9215 V CallbackLooper: thread=1073
+04-20 06:33:29.750  9171  9171 V NetDiscover_wifiDirectAgent: doStart()...
+04-20 06:33:29.750  9171  9171 V NetDiscover_wifiDirectAgent: ...doStart()
+04-20 06:33:29.750  9171  9171 V NetDiscover_name: doStart()...
+04-20 06:33:29.760  9171  9171 V NetDiscover_name: ...doStart()
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: ----- all preferences -----
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_app_version' value=unavailable
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_wifip2p_groupowner_connectedto' value=[Phone] 11212-C-RC
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_has_speaker' value=true
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_network_protocol_version' value=unavailable
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_pairing_kind' value=WIFIDIRECT
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_has_independent_phone_battery' value=true
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_app_theme' value=red
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_wifip2p_remote_channel_change_works' value=true
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_device_name' value=[Phone] 11212-C-RC
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_hardware_config_filename' value={"isDirty":false,"location":"LOCAL_STORAGE","name":"rover_ruckus","resourceId":0}
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_network_connection_info' value=unavailable
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_device_name_old' value=[Phone] 11212-C-RC
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_build_time' value=unavailable
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_device_name_tracking' value=WIFIDIRECT
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_sound_on_off' value=true
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_rc_connected' value=true
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: name='pref_lib_version' value=unavailable
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: doStart()...
+04-20 06:33:29.760  9171  9171 V NetDiscover_prefremrc: ...doStart()
+04-20 06:33:29.760  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifiP2pEnabled=true
+04-20 06:33:29.770  9171  9215 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=CONNECTED
+04-20 06:33:29.770  9171  9215 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: CONNECTED/CONNECTED, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:33:29.770  9171  9215 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: true isGroupOwner: true groupOwnerAddress: /192.168.49.1
+04-20 06:33:29.770  9171  9215 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: DIRECT-Xi-11212-C-RC, isGO: true, GO: Device: [Phone] 11212-C-RC, deviceAddress: fe:db:b3:75:a8:79, primary type: 10-0050F204-5, secondary type: null, wps: 0, grpcapab: 0, devcapab: 0, status: 3, wfdInfo: null, groupownerAddress: null, GOdeviceName: null, interfaceAddress: , SConnectInfo : null, contactInfoHash : null, ssDevInfo : 0, iconIdx : 0, interface: p2p-wlan0-0, frequency: 2437, networkId: -1
+04-20 06:33:29.780  9171  9215 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=0 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:33:29.780  9171  9215 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:33:29.780  9171  9215 V NetDiscover_name: wifiDirectName=[Phone] 11212-C-RC
+04-20 06:33:29.780  9171  9215 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:33:29.780  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifi direct remembered groups cleared
+04-20 06:33:29.780  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifiState=ENABLED
+04-20 06:33:29.790  9171  9171 I WebViewFactory: Loading com.google.android.webview version 71.0.3578.99 (code 357809900)
+04-20 06:33:29.840  9171  9171 W ResourcesManager: getTopLevelResources: /data/app/com.google.android.webview-1/base.apk / 1.0 running in com.qualcomm.ftcrobotcontroller rsrc of package null
+04-20 06:33:29.860  9171  9171 I cr_LibraryLoader: Time to load native libraries: 2 ms (timestamps 7958-7960)
+04-20 06:33:29.890  9171  9171 I chromium: [INFO:library_loader_hooks.cc(36)] Chromium logging enabled: level = 0, default verbosity = 0
+04-20 06:33:29.890  9171  9171 I cr_LibraryLoader: Expected native library version number "71.0.3578.99", actual native library version number "71.0.3578.99"
+04-20 06:33:29.910  9171  9171 I cr_BrowserStartup: Initializing chromium process, singleProcess=true
+04-20 06:33:29.960  9171  9171 D SecWifiDisplayUtil: Metadata value : none
+04-20 06:33:30.030  9171  9171 D ConnectivityManager: requestNetwork; getAppId(CallingUid) : 10198, CallingPid : 9171
+04-20 06:33:30.090  9171  9171 V OnBotJava: OnBotJavaManager::static
+04-20 06:33:30.090  9171  9171 W System.err: stat failed: ENOENT (No such file or directory) : java/android.jar
+04-20 06:33:30.170  9171  9171 W System.err: stat failed: ENOENT (No such file or directory) : java/onbotjava-classes.jar
+04-20 06:33:30.340  9171  9171 V OnBotJava: getCurrentOutputJarDir() unavailable
+04-20 06:33:30.340  9171  9171 V OnBotJava: getCurrentOutputJarDir() unavailable
+04-20 06:33:30.350  9171  9171 W ClassManager: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:30.360  9171  9171 E ClassManager: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:30.360  9171  9171 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:33:30.360  9171  9171 E ClassManager: 	... 18 more
+04-20 06:33:30.360  9171  9171 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:33:30.360  9171  9171 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:33:30.360  9171  9171 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:30.360  9171  9171 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:30.360  9171  9171 E ClassManager: 		... 20 more
+04-20 06:33:30.360  9171  9171 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:30.360  9171  9171 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			... 22 more
+04-20 06:33:30.370  9171  9171 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp2Interceptor
+04-20 06:33:30.370  9171  9171 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:30.370  9171  9171 E ClassManager: 			... 21 more
+04-20 06:33:30.370  9171  9171 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:33:30.370  9171  9171 W ClassManager: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:30.370  9171  9171 E ClassManager: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:30.370  9171  9171 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:33:30.370  9171  9171 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:33:30.380  9171  9171 E ClassManager: 	... 18 more
+04-20 06:33:30.380  9171  9171 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:33:30.380  9171  9171 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:33:30.380  9171  9171 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:30.380  9171  9171 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:30.380  9171  9171 E ClassManager: 		... 20 more
+04-20 06:33:30.380  9171  9171 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			... 22 more
+04-20 06:33:30.380  9171  9171 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:30.380  9171  9171 E ClassManager: 			... 21 more
+04-20 06:33:30.380  9171  9171 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:33:30.430  9171  9171 W ClassManager: com.opencsv.bean.FieldMapByPosition$1$1 java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:30.430  9171  9171 E ClassManager: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:30.430  9171  9171 E ClassManager: Caused by: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:33:30.430  9171  9171 E ClassManager: 	... 18 more
+04-20 06:33:30.440  9171  9171 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "com.opencsv.bean.FieldMapByPosition$1$1" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:33:30.440  9171  9171 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:33:30.440  9171  9171 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:30.440  9171  9171 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:30.440  9171  9171 E ClassManager: 		... 20 more
+04-20 06:33:30.440  9171  9171 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			... 22 more
+04-20 06:33:30.440  9171  9171 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: com.opencsv.bean.FieldMapByPosition$1$1
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:30.440  9171  9171 E ClassManager: 			... 21 more
+04-20 06:33:30.440  9171  9171 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:33:30.810  9171  9171 W ClassManager: kotlin.streams.jdk8.StreamsKt$asStream$1 java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:30.810  9171  9171 E ClassManager: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at java.lang.Class.classForName(Native Method)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at java.lang.Class.forName(Class.java:324)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.classNamesToClasses(ClassManager.java:187)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.ClassManager.processAllClasses(ClassManager.java:253)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at com.qualcomm.ftccommon.ClassManagerFactory.processAllClasses(ClassManagerFactory.java:90)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity.onCreate(FtcRobotControllerActivity.java:299)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.app.Activity.performCreate(Activity.java:6876)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1135)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3206)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3349)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.app.ActivityThread.access$1100(ActivityThread.java:221)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1794)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.os.Looper.loop(Looper.java:158)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at android.app.ActivityThread.main(ActivityThread.java:7224)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at java.lang.reflect.Method.invoke(Native Method)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1230)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1120)
+04-20 06:33:30.810  9171  9171 E ClassManager: Caused by: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.findClass(OnBotJavaClassLoader.java:211)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaClassLoader.loadClass(OnBotJavaClassLoader.java:201)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+04-20 06:33:30.810  9171  9171 E ClassManager: 	... 18 more
+04-20 06:33:30.810  9171  9171 E ClassManager: 	Suppressed: java.lang.ClassNotFoundException: Didn't find class "kotlin.streams.jdk8.StreamsKt$asStream$1" on path: DexPathList[[zip file "/data/app/com.qualcomm.ftcrobotcontroller-1/base.apk"],nativeLibraryDirectories=[/data/app/com.qualcomm.ftcrobotcontroller-1/lib/arm, /data/app/com.qualcomm.ftcrobotcontroller-1/base.apk!/lib/armeabi-v7a, /vendor/lib, /system/lib]]
+04-20 06:33:30.810  9171  9171 E ClassManager: 		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+04-20 06:33:30.810  9171  9171 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+04-20 06:33:30.810  9171  9171 E ClassManager: 		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:30.820  9171  9171 E ClassManager: 		... 20 more
+04-20 06:33:30.820  9171  9171 E ClassManager: 		Suppressed: java.lang.NoClassDefFoundError: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at dalvik.system.DexFile.defineClassNative(Native Method)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at dalvik.system.DexFile.defineClass(DexFile.java:226)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			... 22 more
+04-20 06:33:30.820  9171  9171 E ClassManager: 		Suppressed: java.lang.ClassNotFoundException: kotlin.streams.jdk8.StreamsKt$asStream$1
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at java.lang.Class.classForName(Native Method)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+04-20 06:33:30.820  9171  9171 E ClassManager: 			... 21 more
+04-20 06:33:30.820  9171  9171 E ClassManager: 		Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+04-20 06:33:37.040  9171  9171 V UpdateUI: Network: inactive, disconnected
+04-20 06:33:37.040  9171  9171 V ServiceStarter: attempting to start service FtcRobotControllerWatchdogService
+04-20 06:33:37.040  9171  9171 V ServiceStarter: started service FtcRobotControllerWatchdogService
+04-20 06:33:37.050  9171  9171 V RobotCore: BuildConfig: versionCode=31 versionName=4.3 module=com.qualcomm.ftcrobotcontroller
+04-20 06:33:37.050  9171  9171 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.robotcore
+04-20 06:33:37.050  9171  9171 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.hardware
+04-20 06:33:37.050  9171  9171 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.qualcomm.ftccommon
+04-20 06:33:37.050  9171  9171 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=com.google.blocks
+04-20 06:33:37.050  9171  9171 V RobotCore: BuildConfig: versionCode=55 versionName=8.9 module=org.firstinspires.inspection
+04-20 06:33:37.050  9171  9171 I RCActivity: 410c serial number: 6f6bcdd8
+04-20 06:33:37.050  9171  9171 I RobotCore: Android Device: maker=samsung model=SAMSUNG-SM-G900A sdk=23
+04-20 06:33:37.050  9171  9171 V RCActivity: onStart()
+04-20 06:33:37.050  9171  9171 V RCActivity: onResume()
+04-20 06:33:37.060  9171  9171 D ViewRootImpl: #1 mView = com.android.internal.policy.PhoneWindow$DecorView{2c59f17 I.E...... R.....ID 0,0-0,0}
+04-20 06:33:37.060  9171  9171 D SecWifiDisplayUtil: Metadata value : none
+04-20 06:33:37.070  9171  9277 D OpenGLRenderer: Use EGL_SWAP_BEHAVIOR_PRESERVED: true
+04-20 06:33:37.080  9171  9171 D ConnectivityManager: requestNetwork; getAppId(CallingUid) : 10198, CallingPid : 9171
+04-20 06:33:37.090  9171  9171 V MTPMonitorService: onCreate()
+04-20 06:33:37.090  9171  9171 V MTPMonitorService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.robotcore.internal.files.MediaTransferProtocolMonitorService } flags=0x0 startId=1
+04-20 06:33:37.100  9171  9171 V MTPMonitor: observing: /storage/emulated/0
+04-20 06:33:37.100  9171  9171 W FileObserverManager: upgrading mask: path=/storage/emulated/0/FIRST/java/status old=0x00000ffc new=0x00004ffc: might possibly miss event
+04-20 06:33:37.110  9171  9171 W FileObserverManager: upgrading mask: path=/storage/emulated/0/FIRST/blocks old=0x00000ffc new=0x00004ffc: might possibly miss event
+04-20 06:33:37.150  9171  9171 V OnBotJavaService: onCreate()
+04-20 06:33:37.150  9171  9171 V OnBotJavaService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.robotcore.internal.opmode.OnBotJavaService } flags=0x0 startId=1
+04-20 06:33:37.150  9171  9171 V OnBotJava: ctor()...
+04-20 06:33:37.150  9171  9171 V OnBotJava: ...ctor()
+04-20 06:33:37.160  9171  9171 V FtcRobotControllerWatchdogService: onCreate()
+04-20 06:33:37.160  9171  9171 V FtcRobotControllerWatchdogService: onStartCommand() intent=Intent { cmp=com.qualcomm.ftcrobotcontroller/org.firstinspires.ftc.ftccommon.internal.FtcRobotControllerWatchdogService } flags=0x0 startId=1
+04-20 06:33:37.160  9171  9171 V FtcRobotControllerWatchdogService: shouldAutoLauchRobotController() result=false
+04-20 06:33:37.160  9171  9171 V FTCService: onCreate()
+04-20 06:33:37.160  9171  9171 V FTCService: onBind()
+04-20 06:33:37.160  9171  9171 V WebServer: creating NanoHTTPD(8080)
+04-20 06:33:37.170  9171  9171 V RobotCore: Getting network assistant of type: WIFIDIRECT
+04-20 06:33:37.170  9171  9171 V NetDiscover_prefremrc: onSharedPreferenceChanged(name=pref_wifip2p_groupowner_connectedto, value=null)
+04-20 06:33:37.170  9171  9171 V WifiDirect: There are 1 Wifi Direct Assistant Clients (+)
+04-20 06:33:37.170  9171  9171 V WifiDirect: Enabling Wifi Direct Assistant
+04-20 06:33:37.180  9171  9171 V WifiDirectInviteMonitor: startMonitoring()
+04-20 06:33:37.180  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifiP2pEnabled=true
+04-20 06:33:37.190  9171  9215 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=CONNECTED
+04-20 06:33:37.190  9171  9215 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: CONNECTED/CONNECTED, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:33:37.190  9171  9215 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: true isGroupOwner: true groupOwnerAddress: /192.168.49.1
+04-20 06:33:37.190  9171  9215 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: DIRECT-Xi-11212-C-RC, isGO: true, GO: Device: [Phone] 11212-C-RC, deviceAddress: fe:db:b3:75:a8:79, primary type: 10-0050F204-5, secondary type: null, wps: 0, grpcapab: 0, devcapab: 0, status: 3, wfdInfo: null, groupownerAddress: null, GOdeviceName: null, interfaceAddress: , SConnectInfo : null, contactInfoHash : null, ssDevInfo : 0, iconIdx : 0, interface: p2p-wlan0-0, frequency: 2437, networkId: -1
+04-20 06:33:37.190  9171  9215 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=0 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:33:37.190  9171  9215 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:33:37.190  9171  9215 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:33:37.190  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifi direct remembered groups cleared
+04-20 06:33:37.190  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifiState=ENABLED
+04-20 06:33:37.220  9171  9277 I Adreno-EGL: <qeglDrvAPI_eglInitialize:379>: EGL 1.4 QUALCOMM build:  (Ia10634f51b)
+04-20 06:33:37.220  9171  9277 I Adreno-EGL: OpenGL ES Shader Compiler Version: E031.29.00.00
+04-20 06:33:37.220  9171  9277 I Adreno-EGL: Build Date: 01/28/16 Thu
+04-20 06:33:37.220  9171  9277 I Adreno-EGL: Local Branch: ss
+04-20 06:33:37.220  9171  9277 I Adreno-EGL: Remote Branch: 
+04-20 06:33:37.220  9171  9277 I Adreno-EGL: Local Patches: 
+04-20 06:33:37.220  9171  9277 I Adreno-EGL: Reconstruct Branch: 
+04-20 06:33:37.230  9171  9277 D libEGL  : eglInitialize EGLDisplay = 0x9a8967c4
+04-20 06:33:37.230  9171  9277 I OpenGLRenderer: Initialized EGL, version 1.4
+04-20 06:33:37.290  9171  9171 D WifiDirect: broadcast: state - enabled: true
+04-20 06:33:37.290  9171  9171 D WifiDirect: broadcast: connection changed: connectStatus=NOT_CONNECTED networkInfo.state=CONNECTED
+04-20 06:33:37.290  9171  9171 V WifiDirect: writing pref name=pref_wifip2p_groupowner_connectedto value=[Phone] 11212-C-RC
+04-20 06:33:37.290  9171  9171 V NetDiscover_prefremrc: onSharedPreferenceChanged(name=pref_wifip2p_groupowner_connectedto, value=[Phone] 11212-C-RC)
+04-20 06:33:37.290  9171  9171 D WifiDirect: broadcast: this device changed
+04-20 06:33:37.290  9171  9171 V WifiDirect: device information: [Phone] 11212-C-RC fe:db:b3:75:a8:79
+04-20 06:33:37.290  9171  9171 D WifiDirect: cannot create group, does group already exist?
+04-20 06:33:37.290  9171  9171 V FTCService: RCActivity.controllerService=bound
+04-20 06:33:37.290  9171  9171 V UpdateUI: Network: unknown, disconnected
+04-20 06:33:37.290  9171  9171 V RobotCore: Robot Status: stopped
+04-20 06:33:37.290  9171  9286 E File    : fail readDirectory() errno=2
+04-20 06:33:37.290  9171  9286 W cr_CrashFileManager: /data/user/0/com.qualcomm.ftcrobotcontroller/cache/WebView/Crash Reports does not exist or is not a directory
+04-20 06:33:37.290  9171  9287 V RobotCore: thread: 'RobotSetupRunnable.run()' starting...
+04-20 06:33:37.300  9171  9287 V FTCService: Processing robot setup
+04-20 06:33:37.300  9171  9287 V RobotCore: Robot Status: stopped, scanning for USB devices
+04-20 06:33:37.330  9171  9171 D ViewRootImpl: MSG_RESIZED_REPORT: ci=Rect(0, 0 - 0, 0) vi=Rect(0, 0 - 0, 0) or=2
+04-20 06:33:37.340  9171  9171 D WifiDirect: group owners address: /192.168.49.1
+04-20 06:33:37.340  9171  9171 D WifiDirect: group formed, this device is the group owner (GO)
+04-20 06:33:37.340  9171  9171 I FTCService: onNetworkConnectionEvent: CONNECTED_AS_GROUP_OWNER
+04-20 06:33:37.340  9171  9171 I FTCService: Wifi Direct - connected as group owner
+04-20 06:33:37.350  9171  9171 V UpdateUI: Network: enabled, disconnected
+04-20 06:33:37.370  9171  9171 V WifiDirect: connection information available
+04-20 06:33:37.370  9171  9171 V WifiDirect: connection information - groupOwnerName = [Phone] 11212-C-RC
+04-20 06:33:37.370  9171  9171 V WifiDirect: connection information - groupOwnerMacAddress = fe:db:b3:75:a8:79
+04-20 06:33:37.370  9171  9171 V WifiDirect: connection information - groupInterface = p2p-wlan0-0
+04-20 06:33:37.370  9171  9171 V WifiDirect: connection information - groupNetworkName = DIRECT-Xi-11212-C-RC
+04-20 06:33:37.370  9171  9171 I FTCService: onNetworkConnectionEvent: CONNECTION_INFO_AVAILABLE
+04-20 06:33:37.370  9171  9171 I FTCService: Network Connection Passphrase: dxEAoZmk
+04-20 06:33:37.370  9171  9171 V WebServer: starting port=8080
+04-20 06:33:37.380  9171  9171 V RobotCore: Getting network assistant of type: WIFIDIRECT
+04-20 06:33:37.380  9171  9171 V WifiDirect: There are 2 Wifi Direct Assistant Clients (+)
+04-20 06:33:37.390  9171  9171 V WebServer: started port=8080
+04-20 06:33:37.390  9171  9171 V UpdateUI: Network: active, disconnected
+04-20 06:33:37.390  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifiP2pEnabled=true
+04-20 06:33:37.390  9171  9215 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=CONNECTED
+04-20 06:33:37.390  9171  9215 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: CONNECTED/CONNECTED, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:33:37.390  9171  9215 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: true isGroupOwner: true groupOwnerAddress: /192.168.49.1
+04-20 06:33:37.390  9171  9215 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: DIRECT-Xi-11212-C-RC, isGO: true, GO: Device: [Phone] 11212-C-RC, deviceAddress: fe:db:b3:75:a8:79, primary type: 10-0050F204-5, secondary type: null, wps: 0, grpcapab: 0, devcapab: 0, status: 3, wfdInfo: null, groupownerAddress: null, GOdeviceName: null, interfaceAddress: , SConnectInfo : null, contactInfoHash : null, ssDevInfo : 0, iconIdx : 0, interface: p2p-wlan0-0, frequency: 2437, networkId: -1
+04-20 06:33:37.390  9171  9215 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=0 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:33:37.390  9171  9215 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:33:37.390  9171  9215 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:33:37.390  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifi direct remembered groups cleared
+04-20 06:33:37.390  9171  9215 V NetDiscover_wifiDirectAgent_bcast: wifiState=ENABLED
+04-20 06:33:37.400  9171  9171 E libEGL  : validate_display:255 error 3008 (EGL_BAD_DISPLAY)
+04-20 06:33:37.400  9171  9171 D libEGL  : eglInitialize EGLDisplay = 0xbeeca34c
+04-20 06:33:37.420  9171  9171 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@7188796 time:275529
+04-20 06:33:42.300  9171  9287 V RobotCore: EventLoopManager state is NOT_STARTED
+04-20 06:33:42.300  9171  9287 V RobotCore: Robot Status: stopped, waiting for Wifi to enable
+04-20 06:33:42.300  9171  9287 I RobotCore: state = 3
+04-20 06:33:42.300  9171  9287 V RobotCore: Robot Status: stopped, waiting for Wifi Direct to enable
+04-20 06:33:42.300  9171  9287 V FTCService: Waiting for a connection to a wifi service
+04-20 06:33:42.300  9171  9287 V RobotCore: Robot Status: stopped, waiting for network to become active
+04-20 06:33:42.300  9171  9287 V WebServer: Asked an already running WebServer to start
+04-20 06:33:42.300  9171  9287 V RobotCore: Robot Status: stopped, starting robot
+04-20 06:33:42.300  9171  9287 V Robocol : EventLoopManager.start()
+04-20 06:33:42.300  9171  9287 V RobotCore: Getting network assistant of type: WIFIDIRECT
+04-20 06:33:42.300  9171  9287 V Robocol : Spoofing a Network Connection event...
+04-20 06:33:42.300  9171  9287 I EventLoopManager: onNetworkConnectionEvent: CONNECTION_INFO_AVAILABLE
+04-20 06:33:42.300  9171  9287 I Robocol : Received network connection event
+04-20 06:33:42.300  9171  9287 I NetworkConnectionHandler: Handling new network connection infomation, connected: true setup needed: true
+04-20 06:33:42.300  9171  9287 V RobotCore: EventLoopManager state is STOPPED
+04-20 06:33:42.300  9171  9287 V Robocol : eventLoop=FtcEventLoop
+04-20 06:33:42.300  9171  9287 V RobotCore: EventLoopManager state is INIT
+04-20 06:33:42.300  9171  9287 V RobotCore: Robot Status: initializing, starting robot
+04-20 06:33:42.300  9171  9287 I FtcEventLoop: ======= INIT START =======
+04-20 06:33:42.300  9171  9287 V OpmodeRegistration: registered {DefaultOpMode} as {$Stop$Robot$}
+04-20 06:33:42.300  9171  9287 V FileBasedLock: locked /storage/emulated/0/FIRST/blocks/projectslock/lock.dat
+04-20 06:33:42.300  9171  9287 V FileBasedLock: unlocking /storage/emulated/0/FIRST/blocks/projectslock/lock.dat
+04-20 06:33:42.310  9171  9326 V RobotCore: thread: 'SetupRunnable.run()' starting...
+04-20 06:33:42.310  9171  9287 V OpmodeRegistration: registered {DistanceSensorTest} as {Distance Test?}
+04-20 06:33:42.310  9171  9287 V OpmodeRegistration: registered {JointControllerTest} as {Joint controller test}
+04-20 06:33:42.310  9171  9287 V OpmodeRegistration: registered {TrajectoryViewerOpMode} as {Trajectory Viewer}
+04-20 06:33:42.310  9171  9287 V OpmodeRegistration: registered {Vuforia_Test} as {Vuforia_Test}
+04-20 06:33:42.310  9171  9287 V OpmodeRegistration: registered {SelectParameters} as {Select Parameters}
+04-20 06:33:42.310  9171  9287 V OpmodeRegistration: registered {NewTrackWidthCalibrationOpMode} as {NewTrackWidthCalibrationOpMode}
+04-20 06:33:42.310  9171  9287 V OpmodeRegistration: registered {DriveVelocityPIDTuner} as {DriveVelocityPIDTuner}
+04-20 06:33:42.310  9171  9287 V OpmodeRegistration: registered {TurnTestOpMode} as {TurnTestOpMode}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {CoordinateTest} as {Corrdinate Testing}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {AutoScoreConcept} as {auto score test}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {DriveFFTuningOpMode} as {DriveFFTuningOpMode}
+04-20 06:33:42.320  9171  9171 D WifiDirect: cannot create group, does group already exist?
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {Autonomous} as {Main Autonomous}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {ArmTest} as {Arm Test}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {StraightTestOpMode} as {StraightTestOpMode}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {AutoCalibrateOpMode} as {AutoCalibrate}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {ResetArmEncoders} as {Reset arm encoders}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {FollowerPIDTuner} as {FollowerPIDTuner}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {TelemetryOpmode} as {TeleOp}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {ServoTestOpMode} as {Servo Tester}
+04-20 06:33:42.320  9171  9287 V OpmodeRegistration: registered {SplineTestOpMode} as {SplineTestOpMode}
+04-20 06:33:42.350  9171  9326 D Robocol : RobocolDatagramSocket listening addr=/192.168.49.1:20884 cbRec=65520 cbSend=163840 msRecTO=300
+04-20 06:33:42.350  9171  9326 V Robocol : RecvLoopRunnable created
+04-20 06:33:42.350  9171  9326 V PeerDiscovery: Starting peer discovery remote: /192.168.49.1 local: /192.168.49.1
+04-20 06:33:42.350  9171  9326 V PeerDiscovery: No need for peer discovery, we are the peer discovery device
+04-20 06:33:42.350  9171  9326 V RobotCore: Setup complete
+04-20 06:33:42.350  9171  9326 V RobotCore: thread: ...terminating 'SetupRunnable.run()'
+04-20 06:33:42.350  9171  9329 V RobotCore: thread: 'RecvLoopRunnable.run()' starting...
+04-20 06:33:42.380  9171  9287 V HardwareFactory: createHardwareMap()
+04-20 06:33:42.380  9171  9287 V WifiDirectInviteMonitor: clearUILynxModule()
+04-20 06:33:42.390  9171  9287 V RobotCore: Creating Webcam [3F2DF43F]
+04-20 06:33:42.390  9171  9287 V CameraManager: construct(hash=0x02349ab9|inst#=0)
+04-20 06:33:42.420  9171  9287 D Uvc     : [jni.cpp:72] JNI_OnLoad()...
+04-20 06:33:42.420  9171  9287 D Uvc     : [JniEnv.h:32] ScopedJniEnv::onJniLoad()...
+04-20 06:33:42.420  9171  9287 D Uvc     : [JniEnv.h:32] ...ScopedJniEnv::onJniLoad()
+04-20 06:33:42.420  9171  9287 D Uvc     : [jni.cpp:72] ...JNI_OnLoad()
+04-20 06:33:42.420  9171  9287 D libusb  : [ 0.000096] [00002447] libusb: debug [op_init] sysfs(/sys/bus/usb/devices) available
+04-20 06:33:42.420  9171  9287 D libusb  : [ 0.000129] [00002447] libusb: debug [op_init] sysfs can relate devices
+04-20 06:33:42.420  9171  9287 D libusb  : [ 0.000143] [00002447] libusb: debug [op_init] sysfs has complete descriptors
+04-20 06:33:42.420  9171  9287 D libusb  : [ 0.000156] [00002447] libusb: debug [op_init] sysfs has serial numbers
+04-20 06:33:42.420  9171  9287 V UvcContext: construct(pointer=0x9b1d4500|inst#=0)
+04-20 06:33:42.420  9171  9287 V RobotCore: Creating REV Robotics USB Expansion Hub Portal [DQ2FYPMN]
+04-20 06:33:42.420  9171  9287 V LynxUsb : creating new [DQ2FYPMN]: 0x0b94d65f
+04-20 06:33:42.430  9171  9287 V FtDevice: initialize(vid=0x0403 pid=0x6015 bcdDevice=0x1000)
+04-20 06:33:42.430  9171  9287 V MonitoredUsbDeviceConnection: closing UsbDeviceConnection(DQ2FYPMN)
+04-20 06:33:42.430  9171  9287 D UsbDeviceConnectionJNI: close
+04-20 06:33:42.430  9171  9287 V MonitoredUsbDeviceConnection: closing UsbDeviceConnection(DQ2FYPMN)
+04-20 06:33:42.430  9171  9287 D UsbDeviceConnectionJNI: close
+04-20 06:33:42.430  9171  9287 V FtDeviceManager: createDeviceInfoList(): 1 USB devices
+04-20 06:33:42.430  9171  9287 V FtDevice: vv********************DQ2FYPMN opening********************vv 0x01107d0a
+04-20 06:33:42.440  9171  9287 V FtDevice: ^^********************DQ2FYPMN opened ********************^^
+04-20 06:33:42.440  9171  9287 V FtDevice: resetting DQ2FYPMN
+04-20 06:33:42.440  9171  9287 V LynxUsb : armDevice() serial=DQ2FYPMN...
+04-20 06:33:42.440  9171  9287 V LynxModule: resetDevice() serial=DQ2FYPMN
+04-20 06:33:42.650  9171  9329 E Robocol : exception SocketTimeoutException(null): no packet received [libcore.io.IoBridge.maybeThrowAfterRecvfrom(IoBridge.java:594)]
+04-20 06:33:42.800  9171  9287 V LynxUsb : ...done armDevice()
+04-20 06:33:42.800  9171  9287 V LynxUsb : 0x00c15fd6 on 0x0b94d65f: new delegate to [DQ2FYPMN]
+04-20 06:33:42.800  9171  9287 V RobotCore: Creating Lynx Module - mod=1 parent=true
+04-20 06:33:42.800  9171  9338 V RobotCore: thread: 'lynx incoming datagrams' starting...
+04-20 06:33:42.800  9171  9287 V RobotCore: Creating Lynx Module - mod=2 parent=false
+04-20 06:33:42.810  9171  9287 V LynxUsb : addConfiguredModule() module#=1
+04-20 06:33:42.810  9171  9287 V LynxModule: pingAndQueryKnownInterfaces mod=1
+04-20 06:33:42.810  9171  9338 V LynxUsb : synchronization gained: serial=DQ2FYPMN
+04-20 06:33:42.830  9171  9287 V LynxModule: mod#=1 queryInterface(DEKA)=54 commands starting at 4096
+04-20 06:33:42.830  9171  9287 V LynxModule: sending LynxFtdiResetControlCommand(true) wasInterrupted=false
+04-20 06:33:42.840  9171  9339 V LynxModule: received status: LynxGetModuleStatusResponse(status=0x02 alerts=0x00: Reset)
+04-20 06:33:42.840  9171  9287 V LynxModule: sendLEDPatternSteps(): #steps=4
+04-20 06:33:42.850  9171  9287 V LynxUsb : addConfiguredModule() module#=2
+04-20 06:33:42.850  9171  9287 V LynxModule: pingAndQueryKnownInterfaces mod=2
+04-20 06:33:42.860  9171  9287 V LynxModule: mod#=2 queryInterface(DEKA)=49 commands starting at 4096
+04-20 06:33:42.870  9171  9287 V LynxModule: mod#=2 intf=DEKA: expected 54 commands; found 49
+04-20 06:33:42.870  9171  9287 V LynxModule: sendLEDPatternSteps(): #steps=6
+04-20 06:33:42.870  9171  9340 V LynxModule: received status: LynxGetModuleStatusResponse(status=0x05 alerts=0x00: KeepAliveTimeout|FailSafe)
+04-20 06:33:42.870  9171  9340 V LynxModule: resendCurrentPattern()
+04-20 06:33:42.870  9171  9340 V LynxModule: sendLEDPatternSteps(): #steps=6
+04-20 06:33:42.890  9171  9287 V LynxMotor: initializeHardware() mod#=1
+04-20 06:33:42.960  9171  9287 V RobotCore: DcMotorImpl(type=NeveRest60Gearmotor)
+04-20 06:33:42.960  9171  9287 V RobotCore: DcMotorImpl(type=NeveRest60Gearmotor)
+04-20 06:33:42.960  9171  9287 V RobotCore: DcMotorImpl(type=NeveRest60Gearmotor)
+04-20 06:33:42.960  9171  9287 V RobotCore: DcMotorImpl(type=NeveRest60Gearmotor)
+04-20 06:33:42.960  9171  9287 V LynxServoController: initializeHardware() mod#=1
+04-20 06:33:43.000  9171  9287 V LynxVoltageSensor: initializeHardware() mod#=1
+04-20 06:33:43.000  9171  9287 V LynxPwmOutputController: initializeHardware() mod#=1
+04-20 06:33:43.000  9171  9287 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.010  9171  9287 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.010  9171  9287 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.020  9171  9287 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.020  9171  9287 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.020  9171  9287 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.030  9171  9287 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.030  9171  9287 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.030  9171  9287 V LynxAnalogInputController: initializeHardware() mod#=1
+04-20 06:33:43.040  9171  9287 V LynxDigitalChannelController: initializeHardware() mod#=1
+04-20 06:33:43.070  9171  9287 V RobotCore: Creating user sensor Adafruit IMU - on Lynx module=1 bus=1
+04-20 06:33:43.070  9171  9287 V RobotCore: Creating I2cDeviceSynch (Lynx) - mod=1 bus=1
+04-20 06:33:43.070  9171  9287 I RobotCore: LynxFirmwareVersionManager: LynxI2cDeviceSynchV2
+04-20 06:33:43.070  9171  9287 V LynxI2cDeviceSynch: initializeHardware() mod#=1
+04-20 06:33:43.080  9171  9287 V RobotCore: Creating user sensor Adafruit IMU - on Lynx module=1 bus=0
+04-20 06:33:43.080  9171  9287 V RobotCore: Creating I2cDeviceSynch (Lynx) - mod=1 bus=0
+04-20 06:33:43.080  9171  9287 I RobotCore: LynxFirmwareVersionManager: LynxI2cDeviceSynchV2
+04-20 06:33:43.080  9171  9287 V LynxI2cDeviceSynch: initializeHardware() mod#=1
+04-20 06:33:43.080  9171  9287 V LynxMotor: initializeHardware() mod#=2
+04-20 06:33:43.170  9171  9287 V RobotCore: DcMotorImpl(type=NeveRest40Gearmotor)
+04-20 06:33:43.170  9171  9287 V RobotCore: DcMotorImpl(type=NeveRest40Gearmotor)
+04-20 06:33:43.170  9171  9287 V RobotCore: DcMotorImpl(type=NeveRest40Gearmotor)
+04-20 06:33:43.170  9171  9287 V RobotCore: DcMotorImpl(type=NeveRest40Gearmotor)
+04-20 06:33:43.170  9171  9287 V LynxServoController: initializeHardware() mod#=2
+04-20 06:33:43.220  9171  9287 V LynxVoltageSensor: initializeHardware() mod#=2
+04-20 06:33:43.220  9171  9287 V LynxPwmOutputController: initializeHardware() mod#=2
+04-20 06:33:43.230  9171  9287 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.230  9171  9287 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.240  9171  9287 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.240  9171  9287 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.250  9171  9287 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.260  9171  9287 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.260  9171  9287 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.270  9171  9287 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:43.270  9171  9287 V LynxAnalogInputController: initializeHardware() mod#=2
+04-20 06:33:43.270  9171  9287 V LynxDigitalChannelController: initializeHardware() mod#=2
+04-20 06:33:43.300  9171  9287 I RobotCore: ========= Device Information ===================================================
+04-20 06:33:43.300  9171  9287 I RobotCore: Type                                               Name                           Connection
+04-20 06:33:43.300  9171  9287 I RobotCore: Continuous Rotation Servo                          intake                         USB DQ2FYPMN; module 1; port 3
+04-20 06:33:43.300  9171  9287 I RobotCore: Motor                                              frontLeft                      USB DQ2FYPMN; module 2; port 2
+04-20 06:33:43.300  9171  9287 I RobotCore: Servo                                              pawServo                       USB DQ2FYPMN; module 2; port 1
+04-20 06:33:43.300  9171  9287 I RobotCore: Expansion Hub DC Motor Controller                  Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:33:43.310  9171  9287 I RobotCore: Expansion Hub Servo Controller                     Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:33:43.310  9171  9287 I RobotCore: Expansion Hub Voltage Sensor                       Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:33:43.310  9171  9287 I RobotCore: Expansion Hub Pwm Controller                       Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:33:43.310  9171  9287 I RobotCore: Expansion Hub Analog Input Controller              Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:33:43.310  9171  9287 I RobotCore: Expansion Hub Digital Channel Controller           Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:33:43.320  9171  9287 I RobotCore: Expansion Hub (HW: 20, Maj: 1, Min: 8, Eng: 2)     Expansion Hub 1                USB DQ2FYPMN; module 1
+04-20 06:33:43.320  9171  9287 I RobotCore: Motor                                              backLeft                       USB DQ2FYPMN; module 2; port 3
+04-20 06:33:43.320  9171  9287 I RobotCore: Servo                                              backServo                      USB DQ2FYPMN; module 2; port 0
+04-20 06:33:43.320  9171  9287 I RobotCore: Servo                                              doorServo                      USB DQ2FYPMN; module 1; port 2
+04-20 06:33:43.320  9171  9287 I RobotCore: Servo                                              sorterPivot                    USB DQ2FYPMN; module 2; port 3
+04-20 06:33:43.320  9171  9287 I RobotCore: Motor                                              backRight                      USB DQ2FYPMN; module 2; port 1
+04-20 06:33:43.320  9171  9287 I RobotCore: Expansion Hub DC Motor Controller                  Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:33:43.320  9171  9287 I RobotCore: Expansion Hub Servo Controller                     Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:33:43.320  9171  9287 I RobotCore: Expansion Hub Voltage Sensor                       Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:33:43.320  9171  9287 I RobotCore: Expansion Hub Pwm Controller                       Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:33:43.320  9171  9287 I RobotCore: Expansion Hub Analog Input Controller              Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:33:43.320  9171  9287 I RobotCore: Expansion Hub Digital Channel Controller           Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:33:43.330  9171  9287 I RobotCore: Expansion Hub (HW: 20, Maj: 1, Min: 7, Eng: 2)     Expansion Hub 2                USB DQ2FYPMN; module 2
+04-20 06:33:43.330  9171  9287 I RobotCore: Motor                                              intakeJoint                    USB DQ2FYPMN; module 1; port 1
+04-20 06:33:43.330  9171  9287 I RobotCore: Adafruit IMU                                       imu                            USB DQ2FYPMN; module 1; bus 0; addr7=0x00
+04-20 06:33:43.340  9171  9287 I RobotCore: Logitech HD Pro Webcam C920                        Webcam 1                       USB (3F2DF43F)
+04-20 06:33:43.340  9171  9287 I RobotCore: Servo                                              samplingServo                  USB DQ2FYPMN; module 2; port 2
+04-20 06:33:43.340  9171  9287 I RobotCore: Motor                                              frontRight                     USB DQ2FYPMN; module 2; port 0
+04-20 06:33:43.340  9171  9287 I RobotCore: Motor                                              secondJoint                    USB DQ2FYPMN; module 1; port 3
+04-20 06:33:43.340  9171  9287 I RobotCore: Adafruit IMU                                       jointImu                       USB DQ2FYPMN; module 1; bus 1; addr7=0x00
+04-20 06:33:43.340  9171  9287 I RobotCore: Motor                                              linearSlider                   USB DQ2FYPMN; module 1; port 2
+04-20 06:33:43.340  9171  9287 I RobotCore: Motor                                              firstJoint                     USB DQ2FYPMN; module 1; port 0
+04-20 06:33:43.340  9171  9287 I RobotCore: REV Robotics USB Expansion Hub Portal              Expansion Hub Portal 1         USB DQ2FYPMN
+04-20 06:33:43.340  9171  9287 I FtcEventLoop: ======= INIT FINISH =======
+04-20 06:33:43.340  9171  9287 V RobotCore: EventLoopManager state is RUNNING
+04-20 06:33:43.350  9171  9287 V MediaPlayer-JNI: native_setup
+04-20 06:33:43.350  9171  9287 E ExtMediaPlayer-JNI: env->IsInstanceOf fails
+04-20 06:33:43.350  9171  9287 E MediaPlayer-JNI: JNIMediaPlayerFactory: bIsQCMediaPlayerPresent 0
+04-20 06:33:43.350  9171  9287 E ExtMediaPlayer-JNI: env->IsInstanceOf fails
+04-20 06:33:43.350  9171  9287 E MediaPlayer-JNI: JNIMediaPlayerFactory: bIsQCMediaPlayerPresent 0
+04-20 06:33:43.390  9171  9287 V MediaPlayer-JNI: setParameter: key 1400
+04-20 06:33:43.390  9171  9287 V MediaPlayer-JNI: setAudioStreamType: 3
+04-20 06:33:43.400  9171  9287 V MediaPlayer-JNI: set_session_id(): 45
+04-20 06:33:43.400  9171  9287 V RobotCore: Robot Status: running, starting robot
+04-20 06:33:43.400  9171  9343 V MediaPlayer-JNI: reset
+04-20 06:33:43.400  9171  9343 V MediaPlayer-JNI: setDataSourceFD: fd 91
+04-20 06:33:43.400  9171  9287 V RobotCore: Robot Status: running
+04-20 06:33:43.410  9171  9287 V RobotCore: thread: ...terminating 'RobotSetupRunnable.run()'
+04-20 06:33:43.420  9171  9344 V RobotCore: thread: 'opmode loop()' starting...
+04-20 06:33:43.430  9171  9344 D RobotCore: system telemetry: key=$System$None$ msg=""
+04-20 06:33:43.460  9171  9204 W MediaPlayer: info/warning (10973, 0)
+04-20 06:33:43.460  9171  9343 V MediaPlayer-JNI: getDuration: 1019 (msec)
+04-20 06:33:43.470  9171  9343 V SoundInfo: construct(0x0edb0556)
+04-20 06:33:43.500  9171  9215 D SoundPlayer: onLoadComplete(samp=1|ms=1019, samp=1)=0
+04-20 06:33:43.510  9171  9343 W AudioTrack: AUDIO_OUTPUT_FLAG_FAST denied by client; transfer 4, track 8000 Hz, output 48000 Hz
+04-20 06:33:43.520  9171  9343 D SoundPlayer: playing volume=1.000000 samp=1|ms=1019
+04-20 06:33:43.940  9171  9344 I RobotCore: Attempting to switch to op mode $Stop$Robot$
+04-20 06:33:46.240  9171  9215 V NetDiscover_wifiDirectAgent_bcast: peers found: count=1
+04-20 06:33:46.240  9171  9215 V NetDiscover_wifiDirectAgent_bcast:     peer: d2:5b:a8:31:5e:25 11212-A-DS
+04-20 06:33:46.240  9171  9171 D WifiDirect: broadcast: peers changed
+04-20 06:33:46.330  9171  9171 V WifiDirect: peers found: 1
+04-20 06:33:46.330  9171  9171 V WifiDirect:     peer: d2:5b:a8:31:5e:25 11212-A-DS
+04-20 06:33:46.330  9171  9171 I EventLoopManager: onNetworkConnectionEvent: PEERS_AVAILABLE
+04-20 06:33:51.610  9171  9215 V NetDiscover_wifiDirectAgent_bcast: this device changed: Device=[Phone] 11212-C-RC deviceAddress=fe:db:b3:75:a8:79 primary type=10-0050F204-5 secondary type=null wps=0 grpcapab=0 devcapab=0 status=0 wfdInfo=null groupownerAddress=null GOdeviceName=null interfaceAddress= SConnectInfo =null contactInfoHash =null ssDevInfo =0 iconIdx =0
+04-20 06:33:51.610  9171  9215 V NetDiscover_name: remembering wifiDirectName: [Phone] 11212-C-RC...
+04-20 06:33:51.610  9171  9215 V NetDiscover_name: ...remembering wifiDirectName
+04-20 06:33:51.610  9171  9171 D WifiDirect: broadcast: this device changed
+04-20 06:33:51.610  9171  9171 V WifiDirect: device information: [Phone] 11212-C-RC fe:db:b3:75:a8:79
+04-20 06:33:51.640  9171  9171 D WifiDirect: broadcast: peers changed
+04-20 06:33:51.640  9171  9215 V NetDiscover_wifiDirectAgent_bcast: peers found: count=1
+04-20 06:33:51.640  9171  9215 V NetDiscover_wifiDirectAgent_bcast:     peer: d2:5b:a8:31:5e:25 11212-A-DS
+04-20 06:33:51.650  9171  9215 D NetDiscover_wifiDirectAgent_bcast: connection changed: networkInfo.state=CONNECTED
+04-20 06:33:51.650  9171  9215 V NetDiscover_wifiDirectAgent_bcast: NetworkInfo: [type: WIFI_P2P[] - WIFI_P2P, state: CONNECTED/CONNECTED, reason: (unspecified), extra: (none), roaming: false, failover: false, isAvailable: true]
+04-20 06:33:51.650  9171  9215 V NetDiscover_wifiDirectAgent_bcast: WifiP2pInfo: groupFormed: true isGroupOwner: true groupOwnerAddress: /192.168.49.1
+04-20 06:33:51.650  9171  9215 V NetDiscover_wifiDirectAgent_bcast: WifiP2pGroup: network: DIRECT-Xi-11212-C-RC, isGO: true, GO: Device: [Phone] 11212-C-RC, deviceAddress: fe:db:b3:75:a8:79, primary type: 10-0050F204-5, secondary type: null, wps: 0, grpcapab: 0, devcapab: 0, status: 3, wfdInfo: null, groupownerAddress: null, GOdeviceName: null, interfaceAddress: , SConnectInfo : null, contactInfoHash : null, ssDevInfo : 0, iconIdx : 0, Client: Device: 11212-A-DS, deviceAddress: d2:5b:a8:31:5e:25, primary type: 10-0050F204-5, secondary type: null, wps: 392, grpcapab: 0, devcapab: 37, status: 0, wfdInfo: null, groupownerAddress: null, GOdeviceName: null, interfaceAddress: , SConnectInfo : null, contactInfoHash : null, ssDevInfo : 0, iconIdx : 0, interface: p2p-wlan0-0, frequency: 2437, networkId: -1
+04-20 06:33:51.660  9171  9171 D WifiDirect: broadcast: connection changed: connectStatus=GROUP_OWNER networkInfo.state=CONNECTED
+04-20 06:33:51.680  9171  9171 V WifiDirect: peers found: 1
+04-20 06:33:51.680  9171  9171 V WifiDirect:     peer: d2:5b:a8:31:5e:25 11212-A-DS
+04-20 06:33:51.680  9171  9171 I EventLoopManager: onNetworkConnectionEvent: PEERS_AVAILABLE
+04-20 06:33:56.930  9171  9329 V PeerDiscovery: new remote peer discovered: 192.168.49.181
+04-20 06:33:56.930  9171  9329 D Robocol : RobocolDatagramSocket connected to /192.168.49.181:20884
+04-20 06:33:56.930  9171  9329 V NetworkConnectionHandler: starting sending loop
+04-20 06:33:56.930  9171  9329 V Robocol : SendOnceRunnable created
+04-20 06:33:56.960  9171  9329 V NetDiscover_prefremrc: sendAllPreferences()
+04-20 06:33:56.960  9171  9329 V NetDiscover_prefremrc: sending RC pref name=pref_wifip2p_remote_channel_change_works value=true
+04-20 06:33:56.970  9171  9329 V NetDiscover_prefremrc: sending RC pref name=pref_device_name value=[Phone] 11212-C-RC
+04-20 06:33:56.970  9171  9329 V NetDiscover_prefremrc: sending RC pref name=pref_has_independent_phone_battery value=true
+04-20 06:33:56.970  9171  9329 V NetDiscover_prefremrc: sending RC pref name=pref_has_speaker value=true
+04-20 06:33:56.970  9171  9329 V NetDiscover_prefremrc: sending RC pref name=pref_app_theme value=red
+04-20 06:33:56.970  9171  9329 V NetDiscover_prefremrc: sending RC pref name=pref_sound_on_off value=true
+04-20 06:33:56.970  9171  9343 V MediaPlayer-JNI: reset
+04-20 06:33:56.970  9171  9329 V UpdateUI: Network: active, connected
+04-20 06:33:56.970  9171  9465 V Robocol : sending CMD_NOTIFY_USER_DEVICE_LIST(50), attempt: 0
+04-20 06:33:56.980  9171  9343 V MediaPlayer-JNI: setDataSourceFD: fd 79
+04-20 06:33:56.980  9171  9465 V Robocol : sending CMD_ROBOT_CONTROLLER_PREFERENCE(51), attempt: 0
+04-20 06:33:56.980  9171  9465 V Robocol : sending CMD_ROBOT_CONTROLLER_PREFERENCE(52), attempt: 0
+04-20 06:33:56.980  9171  9465 V Robocol : sending CMD_ROBOT_CONTROLLER_PREFERENCE(53), attempt: 0
+04-20 06:33:56.980  9171  9465 V Robocol : sending CMD_ROBOT_CONTROLLER_PREFERENCE(54), attempt: 0
+04-20 06:33:56.980  9171  9465 V Robocol : sending CMD_ROBOT_CONTROLLER_PREFERENCE(55), attempt: 0
+04-20 06:33:56.980  9171  9465 V Robocol : sending CMD_ROBOT_CONTROLLER_PREFERENCE(56), attempt: 0
+04-20 06:33:57.020  9171  9329 V Robocol : received command: CMD_REQUEST_UI_STATE(10007) 
+04-20 06:33:57.030  9171  9182 W MediaPlayer: info/warning (10973, 0)
+04-20 06:33:57.040  9171  9343 V MediaPlayer-JNI: getDuration: 485 (msec)
+04-20 06:33:57.040  9171  9343 V SoundInfo: construct(0x0f6de65c)
+04-20 06:33:57.050  9171  9465 V Robocol : sending CMD_NOTIFY_ACTIVE_CONFIGURATION(66), attempt: 0
+04-20 06:33:57.060  9171  9465 V Robocol : sending CMD_NOTIFY_USER_DEVICE_LIST(70), attempt: 0
+04-20 06:33:57.060  9171  9465 V Robocol : sending CMD_NOTIFY_OP_MODE_LIST(71), attempt: 0
+04-20 06:33:57.080  9171  9215 D SoundPlayer: onLoadComplete(samp=2|ms=485, samp=2)=0
+04-20 06:33:57.080  9171  9343 W AudioTrack: AUDIO_OUTPUT_FLAG_FAST denied by client; transfer 4, track 44100 Hz, output 48000 Hz
+04-20 06:33:57.090  9171  9343 D SoundPlayer: playing volume=1.000000 samp=2|ms=485
+04-20 06:33:57.090  9171  9465 V Robocol : sending CMD_PLAY_SOUND(73), attempt: 0
+04-20 06:33:57.280  9171  9329 V Robocol : received command: CMD_ROBOT_CONTROLLER_PREFERENCE(10026) {"prefName":"pref_device_name","stringValue":"[Phone] 11212-C-RC"}
+04-20 06:33:57.290  9171  9329 V Robocol : received command: CMD_ROBOT_CONTROLLER_PREFERENCE(10027) {"booleanValue":true,"prefName":"pref_sound_on_off"}
+04-20 06:33:57.710  9171  9329 V Robocol : received command: CMD_INIT_OP_MODE(10039) $Stop$Robot$
+04-20 06:33:57.720  9171  9344 I RobotCore: Attempting to switch to op mode $Stop$Robot$
+04-20 06:33:57.810  9171  9465 V Robocol : sending CMD_NOTIFY_INIT_OP_MODE(97), attempt: 0
+04-20 06:33:59.280  9171  9329 V Robocol : received command: CMD_SET_MATCH_NUMBER(10062) 0
+04-20 06:33:59.280  9171  9329 V Robocol : received command: CMD_INIT_OP_MODE(10063) TeleOp
+04-20 06:33:59.310  9171  9328 I RobotCore: ******************** START - OPMODE TeleOp ********************
+04-20 06:33:59.310  9171  9344 I RobotCore: Attempting to switch to op mode TeleOp
+04-20 06:33:59.410  9171  9344 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.410  9171  9344 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.420  9171  9344 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.430  9171  9344 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.430  9171  9344 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.440  9171  9344 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.440  9171  9344 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.440  9171  9344 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.640  9171  9344 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.650  9171  9344 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.650  9171  9344 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.660  9171  9344 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.660  9171  9344 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.660  9171  9344 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.670  9171  9344 W LynxPwmOutputController: LynxSetPWMEnableCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.670  9171  9344 W LynxPwmOutputController: LynxSetPWMConfigurationCommand not implemented by lynx hw; ignoring
+04-20 06:33:59.680  9171  9480 V RobotCore: thread: 'LinearOpMode main' starting...
+04-20 06:33:59.690  9171  9465 V Robocol : sending CMD_NOTIFY_INIT_OP_MODE(132), attempt: 0
+04-20 06:34:00.670  9171  9329 V Robocol : received command: CMD_RUN_OP_MODE(10085) TeleOp
+04-20 06:34:00.700  9171  9465 V Robocol : sending CMD_NOTIFY_RUN_OP_MODE(146), attempt: 0
+04-20 06:34:11.830  9171  9171 D ViewRootImpl: ViewPostImeInputStage processPointer 0
+04-20 06:34:13.560  9171  9171 D ViewRootImpl: ViewPostImeInputStage processPointer 1
+04-20 06:34:14.070  9171  9171 D ViewRootImpl: ViewPostImeInputStage processPointer 0
+04-20 06:34:14.170  9171  9171 D ViewRootImpl: ViewPostImeInputStage processPointer 1
+04-20 06:35:07.480  9171  9171 D ViewRootImpl: ViewPostImeInputStage processPointer 0
+04-20 06:35:08.820  9171  9331 E BulkPacketInWorker: DQ2FYPMN: bulkTransfer() error: -1
+04-20 06:35:08.840  9171  9215 D CameraManager: ---------------------------------------------- ACTION_USB_DEVICE_DETACHED
+04-20 06:35:08.840  9171  9171 V FtDeviceManager: ACTION_USB_DEVICE_DETACHED: /dev/bus/usb/001/003
+04-20 06:35:08.840  9171  9171 V FtDevice: vv********************DQ2FYPMN closing********************vv 0x01107d0a
+04-20 06:35:08.840  9171  9171 V FtDevice: DQ2FYPMN stopping thread readBufferManager
+04-20 06:35:08.840  9171  9332 V FtDevice: DQ2FYPMN thread readBufferManager is stopped
+04-20 06:35:08.840  9171  9171 V FtDevice: DQ2FYPMN stopping thread bulkPacketInWorker
+04-20 06:35:08.840  9171  9331 V FtDevice: DQ2FYPMN thread bulkPacketInWorker is stopped
+04-20 06:35:08.840  9171  9171 V MonitoredUsbDeviceConnection: closing UsbDeviceConnection(DQ2FYPMN)
+04-20 06:35:08.840  9171  9171 D UsbDeviceConnectionJNI: close
+04-20 06:35:08.840  9171  9171 V FtDevice: ^^********************DQ2FYPMN closed ********************^^
+04-20 06:35:08.850  9171  9344 V RobotCore: event loop: device has shutdown abnormally: ABNORMAL
+04-20 06:35:08.850  9171  9344 V EventLoopManager: event loop: detaching device DQ2FYPMN
+04-20 06:35:08.850  9171  9344 I FtcEventLoop: vv===== MODULE DETACH RECOVERY: disarm REV Robotics USB Expansion Hub Portal [DQ2FYPMN]=====vv
+04-20 06:35:08.850  9171  9338 V LynxUsb : device closed in incoming datagram loop
+04-20 06:35:08.850  9171  9338 V RobotUsbDeviceFtdi: closing DQ2FYPMN
+04-20 06:35:08.860  9171  9338 V RobotCore: thread: ...terminating 'lynx incoming datagrams'
+04-20 06:35:08.860  9171  9344 V LynxUsb : disarmDevice() serial=DQ2FYPMN...
+04-20 06:35:08.860  9171  9344 V LynxUsb : shutting down incoming datagrams
+04-20 06:35:08.860  9171  9344 V RobotUsbDeviceFtdi: closing DQ2FYPMN
+04-20 06:35:08.860  9171  9344 V LynxUsb : ...done disarmDevice()
+04-20 06:35:08.860  9171  9480 E RobotCore: lynx xmit lock: #### releasing ownerless message keyed lock: ignored: LynxGetMotorEncoderPositionCommand
+04-20 06:35:08.860  9171  9344 I FtcEventLoop: ======= MODULE DETACH RECOVERY: pretend REV Robotics USB Expansion Hub Portal [DQ2FYPMN]=======
+04-20 06:35:08.860  9171  9329 D RobotCore: system telemetry: key=$System$Warning$ msg="REV Robotics USB Expansion Hub Portal [DQ2FYPMN] detached"
+04-20 06:35:08.870  9171  9343 V MediaPlayer-JNI: reset
+04-20 06:35:08.880  9171  9343 V MediaPlayer-JNI: setDataSourceFD: fd 90
+04-20 06:35:08.890  9171  9171 V FtDeviceManager: ACTION_USB_DEVICE_DETACHED: /dev/bus/usb/001/005
+04-20 06:35:08.890  9171  9215 D CameraManager: ---------------------------------------------- ACTION_USB_DEVICE_DETACHED
+04-20 06:35:08.900  9171  9329 D RobotCore: system telemetry: key=$System$Warning$ msg="unable to find webcam "Webcam 1" with serial number 3F2DF43F; REV Robotics USB Expansion Hub Portal [DQ2FYPMN] detached"
+04-20 06:35:08.930  9171  9204 W MediaPlayer: info/warning (10973, 0)
+04-20 06:35:08.930  9171  9343 V MediaPlayer-JNI: getDuration: 1044 (msec)
+04-20 06:35:08.930  9171  9343 V SoundInfo: construct(0x028eb6c7)
+04-20 06:35:09.000  9171  9215 D SoundPlayer: onLoadComplete(samp=3|ms=1044, samp=3)=0
+04-20 06:35:09.000  9171  9343 W AudioTrack: AUDIO_OUTPUT_FLAG_FAST denied by client; transfer 4, track 44100 Hz, output 48000 Hz
+04-20 06:35:09.010  9171  9343 D SoundPlayer: playing volume=1.000000 samp=3|ms=1044
+04-20 06:35:09.010  9171  9465 V Robocol : sending CMD_PLAY_SOUND(1781), attempt: 0
+04-20 06:35:09.110  9171  9480 V RobotCore: timeout: abandoning waiting 250ms for response: cmd=LynxGetMotorEncoderPositionCommand mod=2 msg#=0
+04-20 06:35:09.110  9171  9480 V RobotCore: nack rec'd mod=2 msg#=0 ref#=0 reason=ABANDONED_WAITING_FOR_RESPONSE:256
+04-20 06:35:09.110  9171  9480 W LynxMotor: LynxGetMotorEncoderPositionCommand was abandoned waiting for response
+04-20 06:35:09.360  9171  9480 V RobotCore: timeout: abandoning waiting 250ms for response: cmd=LynxGetMotorEncoderPositionCommand mod=2 msg#=0
+04-20 06:35:09.360  9171  9480 V RobotCore: nack rec'd mod=2 msg#=0 ref#=0 reason=ABANDONED_WAITING_FOR_RESPONSE:256
+04-20 06:35:09.360  9171  9480 W LynxMotor: LynxGetMotorEncoderPositionCommand was abandoned waiting for response
+04-20 06:35:09.360  9171  9344 V LynxUsb : doPretend() serial=DQ2FYPMN
+04-20 06:35:09.510  9171  9329 V Robocol : received command: CMD_INIT_OP_MODE(11682) $Stop$Robot$
+04-20 06:35:09.610  9171  9480 V RobotCore: timeout: abandoning waiting 250ms for response: cmd=LynxGetMotorEncoderPositionCommand mod=2 msg#=0
+04-20 06:35:09.620  9171  9480 V RobotCore: nack rec'd mod=2 msg#=0 ref#=0 reason=ABANDONED_WAITING_FOR_RESPONSE:256
+04-20 06:35:09.620  9171  9480 W LynxMotor: LynxGetMotorEncoderPositionCommand was abandoned waiting for response
+04-20 06:35:09.620  9171  9344 I FtcEventLoop: ^^===== MODULE DETACH RECOVERY: complete REV Robotics USB Expansion Hub Portal [DQ2FYPMN]=====^^
+04-20 06:35:09.620  9171  9344 V RobotCore: event loop: device has shutdown abnormally: ABNORMAL
+04-20 06:35:09.620  9171  9344 V EventLoopManager: event loop: detaching device 3F2DF43F
+04-20 06:35:09.620  9171  9344 I FtcEventLoop: vv===== MODULE DETACH RECOVERY: disarm Webcam [3F2DF43F]=====vv
+04-20 06:35:09.620  9171  9344 I FtcEventLoop: ======= MODULE DETACH RECOVERY: pretend Webcam [3F2DF43F]=======
+04-20 06:35:09.620  9171  9344 I FtcEventLoop: ^^===== MODULE DETACH RECOVERY: complete Webcam [3F2DF43F]=====^^
+04-20 06:35:09.670  9171  9328 I RobotCore: ******************** STOP - OPMODE /storage/emulated/0/FIRST/matchlogs/Match-0-TeleOp.txt ********************
+04-20 06:35:09.670  9171  9788 I RobotCore: saving match logcat to /storage/emulated/0/FIRST/matchlogs/Match-0-TeleOp.txt
+04-20 06:35:09.670  9171  9788 I RobotCore: logging command line: exec logcat -d -T '4-20 6:33:59.000' -f /storage/emulated/0/FIRST/matchlogs/Match-0-TeleOp.txt -n4 -v threadtime UsbRequestJNI:S UsbRequest:S art:W ThreadPool:W System:W ExtendedExtractor:W OMXClient:W MediaPlayer:W dalvikvm:W  *:V
+04-20 06:35:09.710  9171  9480 V RobotCore: thread: ...terminating 'LinearOpMode main'
+04-20 06:35:09.710  9171  9344 I RobotCore: Attempting to switch to op mode $Stop$Robot$
+04-20 06:35:09.730  9171  9465 V Robocol : sending CMD_NOTIFY_INIT_OP_MODE(1798), attempt: 0
+04-20 06:35:09.780  9171  9329 V Robocol : received command: CMD_RUN_OP_MODE(11692) $Stop$Robot$
+04-20 06:35:09.810  9171  9465 V Robocol : sending CMD_NOTIFY_RUN_OP_MODE(1803), attempt: 0

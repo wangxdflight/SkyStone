@@ -63,7 +63,7 @@ public class CalibratingPipeline extends OpenCvPipeline {
                 }
             }
 
-            Imgproc.drawContours(rgba, contours,largestContourIndex, new Scalar(0, 255, 0));
+            Imgproc.drawContours(rgba, contours, largestContourIndex, new Scalar(0, 255, 0));
         }
         return rgba;
     }
