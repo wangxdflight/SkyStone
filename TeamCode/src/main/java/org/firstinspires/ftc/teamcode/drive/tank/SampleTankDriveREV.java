@@ -14,7 +14,10 @@ import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMotorVelocityF;
 
 /*
  * Simple tank drive hardware implementation for REV hardware. If your hardware configuration
@@ -50,17 +53,17 @@ public class SampleTankDriveREV extends SampleTankDriveBase {
         rightMotors = Arrays.asList(rightFront, rightRear);
 
         for (DcMotorEx motor : motors) {
-            // TODO: decide whether or not to use the built-in velocity PID
-            // if you keep it, then don't tune kStatic or kA
-            // otherwise, comment out the following line
-            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            if (RUN_USING_ENCODER) {
+                motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            }
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
-        // TODO: reverse any motors using DcMotor.setDirection()
+        if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
+            setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
+        }
 
-        // TODO: set the tuned coefficients from DriveVelocityPIDTuner if using RUN_USING_ENCODER
-        // setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, ...);
+        // TODO: reverse any motors using DcMotor.setDirection()
 
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -76,7 +79,7 @@ public class SampleTankDriveREV extends SampleTankDriveBase {
     public void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients) {
         for (DcMotorEx motor : motors) {
             motor.setPIDFCoefficients(runMode, new PIDFCoefficients(
-                    coefficients.kP, coefficients.kI, coefficients.kD, 1
+                    coefficients.kP, coefficients.kI, coefficients.kD, getMotorVelocityF()
             ));
         }
     }
@@ -90,6 +93,18 @@ public class SampleTankDriveREV extends SampleTankDriveBase {
         }
         for (DcMotorEx rightMotor : rightMotors) {
             rightSum += encoderTicksToInches(rightMotor.getCurrentPosition());
+        }
+        return Arrays.asList(leftSum / leftMotors.size(), rightSum / rightMotors.size());
+    }
+
+    @Override
+    public List<Double> getWheelVelocities() {
+        double leftSum = 0, rightSum = 0;
+        for (DcMotorEx leftMotor : leftMotors) {
+            leftSum += encoderTicksToInches(leftMotor.getVelocity());
+        }
+        for (DcMotorEx rightMotor : rightMotors) {
+            rightSum += encoderTicksToInches(rightMotor.getVelocity());
         }
         return Arrays.asList(leftSum / leftMotors.size(), rightSum / rightMotors.size());
     }

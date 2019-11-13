@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.drive.mecanum;
 
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMotorVelocityF;
 
 import android.support.annotation.NonNull;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
@@ -53,17 +56,17 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
         for (ExpansionHubMotor motor : motors) {
-            // TODO: decide whether or not to use the built-in velocity PID
-            // if you keep it, then don't tune kStatic or kA
-            // otherwise, comment out the following line
-            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            if (RUN_USING_ENCODER) {
+                motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            }
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
-        // TODO: reverse any motors using DcMotor.setDirection()
+        if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
+            setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
+        }
 
-        // TODO: set the tuned coefficients from DriveVelocityPIDTuner if using RUN_USING_ENCODER
-        // setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, ...);
+        // TODO: reverse any motors using DcMotor.setDirection()
 
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -79,7 +82,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
     public void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients) {
         for (ExpansionHubMotor motor : motors) {
             motor.setPIDFCoefficients(runMode, new PIDFCoefficients(
-                    coefficients.kP, coefficients.kI, coefficients.kD, 1
+                    coefficients.kP, coefficients.kI, coefficients.kD, getMotorVelocityF()
             ));
         }
     }
@@ -98,6 +101,21 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
             wheelPositions.add(encoderTicksToInches(bulkData.getMotorCurrentPosition(motor)));
         }
         return wheelPositions;
+    }
+
+    @Override
+    public List<Double> getWheelVelocities() {
+        RevBulkData bulkData = hub.getBulkInputData();
+
+        if (bulkData == null) {
+            return Arrays.asList(0.0, 0.0, 0.0, 0.0);
+        }
+
+        List<Double> wheelVelocities = new ArrayList<>();
+        for (ExpansionHubMotor motor : motors) {
+            wheelVelocities.add(encoderTicksToInches(bulkData.getMotorVelocity(motor)));
+        }
+        return wheelVelocities;
     }
 
     @Override
