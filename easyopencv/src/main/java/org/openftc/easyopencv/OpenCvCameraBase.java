@@ -22,6 +22,7 @@
 package org.openftc.easyopencv;
 
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -98,6 +99,12 @@ public abstract class OpenCvCameraBase implements OpenCvCamera, CameraStreamSour
 
             isOpen = true;
         }
+    }
+    @Override
+    public synchronized final float getFocalLength()
+    {
+        return camera_param_focal_length_specific();
+
     }
 
     @Override
@@ -553,6 +560,7 @@ public abstract class OpenCvCameraBase implements OpenCvCamera, CameraStreamSour
     }
 
     protected abstract void openCameraDeviceImplSpecific();
+    protected abstract float camera_param_focal_length_specific();
     protected abstract void closeCameraDeviceImplSpecific();
     protected abstract void startStreamingImplSpecific(int width, int height);
     protected abstract OpenCvCameraRotation getDefaultRotation();

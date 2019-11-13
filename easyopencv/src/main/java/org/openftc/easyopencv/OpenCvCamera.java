@@ -35,6 +35,7 @@ public interface OpenCvCamera
      * See {@link #closeCameraDevice()}
      */
     void openCameraDevice();
+    float getFocalLength ();
 
     /***
      * Close the connection to the camera device. If the camera is

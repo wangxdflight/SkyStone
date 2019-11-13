@@ -59,8 +59,6 @@ public class ConceptDogeCv extends LinearOpMode {
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
 
 
-        Camera.Parameters parameters = phoneCam.camera.getParameters();
-        RobotLog.i("camera focal length:  "+parameters.getFocalLength());
         // OR...  Do Not Activate the Camera Monitor View
         //phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK);
 

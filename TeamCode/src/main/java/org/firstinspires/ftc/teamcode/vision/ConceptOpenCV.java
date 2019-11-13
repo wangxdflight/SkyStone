@@ -41,7 +41,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.acmerobotics.dashboard.config.Config;
-
+import android.hardware.Camera;
 
 //import org.firstinspires.ftc.teamcode.CSVWriter;
 import org.opencv.core.Core;
@@ -80,6 +80,8 @@ public class ConceptOpenCV extends LinearOpMode
          */
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+
+        RobotLog.i("camera focal length:  "+ phoneCam.getFocalLength());
 
         // OR...  Do Not Activate the Camera Monitor View
         //phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK);

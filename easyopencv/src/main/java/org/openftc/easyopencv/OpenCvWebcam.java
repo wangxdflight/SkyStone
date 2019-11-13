@@ -169,7 +169,12 @@ public class OpenCvWebcam extends OpenCvCameraBase implements CameraCaptureSessi
             camera = null;
         }
     }
-
+    @Override
+    protected synchronized float camera_param_focal_length_specific()
+    {
+        RobotLog.i("focal length is not supported by web camera");
+        return 0;
+    }
     public synchronized void startStreamingImplSpecific(final int width, final int height)
     {
         final CountDownLatch captureStartResult = new CountDownLatch(1);

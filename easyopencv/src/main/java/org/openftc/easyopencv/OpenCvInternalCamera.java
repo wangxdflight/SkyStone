@@ -28,6 +28,8 @@ import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 
+import com.qualcomm.robotcore.util.RobotLog;
+
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -134,7 +136,19 @@ public class OpenCvInternalCamera extends OpenCvCameraBase implements Camera.Pre
             camera = Camera.open(direction.id);
         }
     }
-
+    @Override
+    protected synchronized float camera_param_focal_length_specific()
+    {
+        if(camera != null)
+        {
+            Camera.Parameters parameters = camera.getParameters();
+            float len = parameters.getFocalLength();
+            RobotLog.i("camera focal length:  " + len);
+            return len;
+        }
+        else
+            return 0;
+    }
     @Override
     public synchronized void closeCameraDeviceImplSpecific()
     {
@@ -156,6 +170,7 @@ public class OpenCvInternalCamera extends OpenCvCameraBase implements Camera.Pre
         if(camera != null)
         {
             Camera.Parameters parameters = camera.getParameters();
+            RobotLog.i("camera focal length:  " + parameters.getFocalLength());
             parameters.setPreviewFormat(ImageFormat.NV21);
             parameters.setPreviewSize(width, height);
 
