@@ -1,0 +1,6 @@
+[submodule "modules/EasyOpenCV"]
+	path = modules/EasyOpenCV
+	url = https://github.com/OpenFTC/EasyOpenCV.git
+[submodule "modules/DogeCV"]
+	path = modules/DogeCV
+	url = https://github.com/dogecv/DogeCV.git
