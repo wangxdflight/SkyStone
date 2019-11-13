@@ -12,11 +12,17 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.9'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.9'
 
+    // road-runner
     implementation 'com.acmerobotics.roadrunner:core:0.4.6'
+    // dashboard
     implementation 'com.acmerobotics.dashboard:dashboard:0.3.4'
+    // commented out to use submodule as library;
     //implementation 'com.github.dogecv:dogecv:2020.4-alpha'
     implementation 'org.openftc:rev-extensions-2:1.2'
     // for CV example in 2018
     // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+
+
+
 }
