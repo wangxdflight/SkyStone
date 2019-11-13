@@ -1,0 +1,11 @@
+dependencies {
+    //implementation project(':easyopencv')
+    implementation (name: 'RobotCore-release', ext: 'aar')
+    implementation (name: 'Hardware-release', ext: 'aar')
+    implementation (name: 'FtcCommon-release', ext: 'aar')
+
+    //implementation 'com.github.dogecv:dogecv:2020.4-alpha'
+    implementation 'org.openftc:rev-extensions-2:1.2'
+    // for CV example in 2018
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+}

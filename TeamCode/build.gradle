@@ -15,10 +15,8 @@
 apply from: '../build.common.gradle'
 
 dependencies {
-    implementation 'org.openftc:easyopencv:1.2'
-}
-dependencies {
     //NOTE: this is the correct version, the below screenshot is outdated
     implementation 'org.openftc:rev-extensions-2:1.2'
-    api 'org.openftc:easyopencv:1.2'
+    implementation project(path: ':easyopencv')
+    implementation project(path: ':DogeCV')
 }
