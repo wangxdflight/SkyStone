@@ -1,6 +1,6 @@
 [submodule "modules/EasyOpenCV"]
 	path = modules/EasyOpenCV
-	url = https://github.com/OpenFTC/EasyOpenCV.git
+	url = https://github.com/wangxdflight/EasyOpenCV.git
 [submodule "modules/DogeCV"]
 	path = modules/DogeCV
-	url = https://github.com/dogecv/DogeCV.git
+	url = https://github.com/wangxdflight/DogeCV.git
