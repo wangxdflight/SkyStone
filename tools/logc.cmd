@@ -1,5 +1,6 @@
 @echo off
 @echo cmd logfilename ps_name
+adb logcat -c
 IF "%2"==""  (
 	adb shell ps |grep com.qualcomm.ftcrobotcontroller>ps.txt
 ) ELSE (
@@ -19,6 +20,7 @@ for /F "tokens=1,2 delims=: " %%a in ("%ftcrobot%") do (
 )
 IF "%1"==""  (
 	adb logcat -b all -v color --pid %var% 
+	rem adb logcat |grep %var%
 ) ELSE (
 	adb logcat -b all  --pid %var% |wtee %1.log
 )
