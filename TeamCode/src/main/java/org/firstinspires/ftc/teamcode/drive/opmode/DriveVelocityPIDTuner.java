@@ -47,7 +47,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     private FtcDashboard dashboard = FtcDashboard.getInstance();
     private String catName;
     private CustomVariable catVar;
-
+    private String TAG = "DriveFeedforwardTuner";
     private SampleMecanumDriveBase drive;
 
     private static MotionProfile generateProfile(boolean movingForward) {
@@ -67,7 +67,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
             catVar = new CustomVariable();
             dashboard.getConfigRoot().putVariable(catName, catVar);
 
-            RobotLog.w("Unable to find top-level category %s", catName);
+            RobotLog.dd(TAG, "Unable to find top-level category %s", catName);
         }
 
         CustomVariable pidVar = new CustomVariable();
@@ -171,12 +171,12 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
 
             // update telemetry
             telemetry.addData("targetVelocity", motionState.getV());
-            RobotLog.d("DriveVelocityPIDTuner\ntargetVelocity" + Double.toString(motionState.getV()));
+            RobotLog.dd(TAG, "targetVelocity" + Double.toString(motionState.getV()));
             for (int i = 0; i < velocities.size(); i++) {
                 telemetry.addData("velocity" + i, velocities.get(i));
                 telemetry.addData("error" + i, motionState.getV() - velocities.get(i));
-                RobotLog.d("velocity " + i + " " + Double.toString(velocities.get(i)));
-                RobotLog.d("error " + i + " " + Double.toString(motionState.getV() - velocities.get(i)));
+                RobotLog.dd(TAG, "velocity " + i + " " + Double.toString(velocities.get(i)));
+                RobotLog.dd(TAG, "error " + i + " " + Double.toString(motionState.getV() - velocities.get(i)));
             }
             telemetry.update();
         }

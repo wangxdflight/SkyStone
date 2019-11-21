@@ -18,6 +18,7 @@ import com.qualcomm.robotcore.util.RobotLog;
  */
 @TeleOp(group = "drive")
 public class LocalizationTest extends LinearOpMode {
+    private String TAG = "LocalizationTest";
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -40,9 +41,9 @@ public class LocalizationTest extends LinearOpMode {
             telemetry.addData("y", poseEstimate.getY());
             telemetry.addData("heading", poseEstimate.getHeading());
             telemetry.update();
-            RobotLog.d("x: " + Double.toString(poseEstimate.getX()));
-            RobotLog.d("y: " + Double.toString(poseEstimate.getX()));
-            RobotLog.d("heading: " + Double.toString(poseEstimate.getHeading()));
+            RobotLog.dd(TAG, "x: " + Double.toString(poseEstimate.getX()));
+            RobotLog.dd(TAG, "y: " + Double.toString(poseEstimate.getX()));
+            RobotLog.dd(TAG, "heading: " + Double.toString(poseEstimate.getHeading()));
         }
     }
 }

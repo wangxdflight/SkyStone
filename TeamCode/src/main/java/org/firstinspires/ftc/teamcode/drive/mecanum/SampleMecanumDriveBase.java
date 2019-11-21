@@ -39,7 +39,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 public abstract class SampleMecanumDriveBase extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
-
+    private String TAG = "SampleMecanumDriveBase";
 
     public enum Mode {
         IDLE,
@@ -142,13 +142,13 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
         packet.put("yError", lastError.getY());
         packet.put("headingError", lastError.getHeading());
 
-        RobotLog.d("SampleMecanumDriveBase update:\nx " + currentPose.getX());
-        RobotLog.d("y " + currentPose.getY());
-        RobotLog.d("heading " + Double.toString(currentPose.getHeading()));
+        RobotLog.dd(TAG, "update: x " + currentPose.getX());
+        RobotLog.dd(TAG, "y " + currentPose.getY());
+        RobotLog.dd(TAG, "heading " + Double.toString(currentPose.getHeading()));
 
-        RobotLog.d("xError " + lastError.getX());
-        RobotLog.d("yError " + lastError.getY());
-        RobotLog.d("headingError "  + lastError.getHeading());
+        RobotLog.dd(TAG, "xError " + lastError.getX());
+        RobotLog.dd(TAG, "yError " + lastError.getY());
+        RobotLog.dd(TAG, "headingError "  + lastError.getHeading());
 
         switch (mode) {
             case IDLE:
@@ -231,6 +231,24 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
                 velocities.add(0.0);
             }
         }
+        String t="";
+        for (int i = 0; i < lastWheelPositions.size(); i ++)
+        {
+            t=t+Double.toString(lastWheelPositions.get(i)) + "\t";
+        }
+        RobotLog.dd(TAG,"last ts: "+Double.toString(lastTimestamp)+" last wheel position: "+t);
+        t="";
+        for (int i = 0; i < positions.size(); i ++)
+        {
+            t=t+Double.toString(positions.get(i)) + "\t";
+        }
+        RobotLog.dd(TAG,"current ts: "+Double.toString(currentTimestamp)+" current wheel position: "+t);
+        t="";
+        for (int i = 0; i < velocities.size(); i ++)
+        {
+            t=t+Double.toString(velocities.get(i)) + "\t";
+        }
+        RobotLog.dd(TAG, "velocity: "+t);
 
         lastTimestamp = currentTimestamp;
         lastWheelPositions = positions;

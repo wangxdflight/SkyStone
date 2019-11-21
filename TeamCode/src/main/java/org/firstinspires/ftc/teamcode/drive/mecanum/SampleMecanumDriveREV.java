@@ -55,7 +55,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
-        RobotLog.d("SampleMecanumDriveREV created");
+        RobotLog.dd(TAG, "SampleMecanumDriveREV created");
 
         for (DcMotorEx motor : motors) {
             if (RUN_USING_ENCODER) {
@@ -65,6 +65,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
         }
 
         if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
+            RobotLog.dd(TAG,"MOTOR_VELO_PID!=0, to setPIDCoefficients");
             setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
         }
 
@@ -73,13 +74,17 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
-        if (RUN_USING_ODOMETRY_WHEEL)
+        if (RUN_USING_ODOMETRY_WHEEL) {
+            RobotLog.dd(TAG, "to setLocalizer");
             setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
+        }
     }
 
     @Override
     public PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode) {
         PIDFCoefficients coefficients = leftFront.getPIDFCoefficients(runMode);
+        RobotLog.dd(TAG, "getPIDCoefficients:\np: " + Double.toString(coefficients.p) + " i: " + coefficients.i
+                + " d: " + coefficients.d);
         return new PIDCoefficients(coefficients.p, coefficients.i, coefficients.d);
     }
 

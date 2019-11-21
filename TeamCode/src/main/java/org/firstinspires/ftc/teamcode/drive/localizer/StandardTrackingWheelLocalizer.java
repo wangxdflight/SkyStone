@@ -34,6 +34,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
 
     public static double LATERAL_DISTANCE = 14.0; // in; distance between the left and right wheels
     public static double FORWARD_OFFSET = 6.5; // in; offset of the lateral wheel
+    private String TAG = "StandardTrackingWheelLocalizer";
 
     private DcMotor leftEncoder, rightEncoder, frontEncoder;
 
@@ -47,7 +48,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         leftEncoder = hardwareMap.dcMotor.get("leftEncoder");
         rightEncoder = hardwareMap.dcMotor.get("rightEncoder");
         frontEncoder = hardwareMap.dcMotor.get("frontEncoder");
-        RobotLog.d("StandardTrackingWheelLocalizer created");
+        RobotLog.dd(TAG, "StandardTrackingWheelLocalizer created");
         /*
         (double) hwMap.leftIntake.getCurrentPosition(),
         (double) hwMap.liftTwo.getCurrentPosition(),  //@TODO: Switch to "hwMap.backRight.getCurrentPosition()" later
@@ -56,17 +57,17 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
 
     public static double encoderTicksToInches(int ticks) {
         double t = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
-        RobotLog.d("encoderTicksToInches: " + " ticks: " + Double.toString(ticks) + " inches: " + Double.toString(t));
+        RobotLog.dd("StandardTrackingWheelLocalizer", "encoderTicksToInches: " + " ticks: " + Double.toString(ticks) + " inches: " + Double.toString(t));
         return t;
     }
 
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        RobotLog.d("StandardTrackingWheelLocalizer getWheelPositions");
-        RobotLog.d("leftEncoder: " + leftEncoder.getCurrentPosition());
-        RobotLog.d("rightEncoder: " + rightEncoder.getCurrentPosition());
-        RobotLog.d("frontEncoder: " + frontEncoder.getCurrentPosition());
+        RobotLog.dd(TAG, "getWheelPositions");
+        RobotLog.dd(TAG, "leftEncoder: " + leftEncoder.getCurrentPosition());
+        RobotLog.dd(TAG, "rightEncoder: " + rightEncoder.getCurrentPosition());
+        RobotLog.dd(TAG, "frontEncoder: " + frontEncoder.getCurrentPosition());
 
         return Arrays.asList(
                 encoderTicksToInches(leftEncoder.getCurrentPosition()),
