@@ -2,6 +2,9 @@ from __future__ import print_function
 import sys
 PY3 = sys.version_info[0] == 3
 
+import sys
+print(sys.path)
+
 if PY3:
     xrange = range
 
@@ -25,7 +28,7 @@ def test1():
 
 def make_image():
     #img = cv.imread('ftc_base.jpg', 1)
-    img = cv.imread('skystones_2.jpg', 1)
+    img = cv.imread('ftc_base.jpg', 1)
     print(type(img))
     h, w, c = img.shape
     print(h, w, c)

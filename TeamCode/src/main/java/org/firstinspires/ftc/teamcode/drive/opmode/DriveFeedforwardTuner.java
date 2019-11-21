@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.util.LoggingUtil;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMaxRpm;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.rpmToVelocity;
-
+import com.qualcomm.robotcore.util.RobotLog;
 /*
  * Op mode for computing kV, kStatic, and kA from various drive routines. For the curious, here's an
  * outline of the procedure:
@@ -111,7 +111,7 @@ public class DriveFeedforwardTuner extends LinearOpMode {
             }
             double vel = accel * elapsedTime;
             double power = vel / maxVel;
-
+            RobotLog.d(Double.toString(elapsedTime), Double.toString(drive.getPoseEstimate().getX()), Double.toString(power));
             rampRegression.add(elapsedTime, drive.getPoseEstimate().getX(), power);
 
             drive.setDrivePower(new Pose2d(power, 0.0, 0.0));

@@ -2,8 +2,8 @@
 <Robot type="FirstInspires-FTC">
     <LynxUsbDevice name="Expansion Hub Portal 1" serialNumber="DQ167WIO" parentModuleAddress="3">
         <LynxModule name="Expansion Hub 2" port="2">
-            <Matrix12vMotor name="frontLeft" port="0" />
-            <Matrix12vMotor name="backLeft" port="1" />
+            <Matrix12vMotor name="leftFront" port="0" />
+            <Matrix12vMotor name="leftRear" port="1" />
             <Matrix12vMotor name="leftEncoder" port="2" />
             <Matrix12vMotor name="liftOne" port="3" />
             <Servo name="liftOdometer" port="1" />
@@ -15,8 +15,8 @@
             <LynxEmbeddedIMU name="imu" port="0" bus="0" />
         </LynxModule>
         <LynxModule name="Expansion Hub 3" port="3">
-            <Matrix12vMotor name="frontRight" port="0" />
-            <Matrix12vMotor name="backRight" port="1" />
+            <Matrix12vMotor name="rightFront" port="0" />
+            <Matrix12vMotor name="rightRear" port="1" />
             <Matrix12vMotor name="frontEncoder" port="2" />
             <Matrix12vMotor name="rightEncoder" port="3" />
             <Servo name="leftTransfer" port="0" />
