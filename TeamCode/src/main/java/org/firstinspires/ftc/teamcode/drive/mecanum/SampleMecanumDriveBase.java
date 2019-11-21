@@ -30,7 +30,7 @@ import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.qualcomm.robotcore.util.RobotLog;
 /*
  * Base class with shared functionality for sample mecanum drives. All hardware-specific details are
  * handled in subclasses.
@@ -141,6 +141,14 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
         packet.put("xError", lastError.getX());
         packet.put("yError", lastError.getY());
         packet.put("headingError", lastError.getHeading());
+
+        RobotLog.d("SampleMecanumDriveBase update:\nx " + currentPose.getX());
+        RobotLog.d("y " + currentPose.getY());
+        RobotLog.d("heading " + Double.toString(currentPose.getHeading()));
+
+        RobotLog.d("xError " + lastError.getX());
+        RobotLog.d("yError " + lastError.getY());
+        RobotLog.d("headingError "  + lastError.getHeading());
 
         switch (mode) {
             case IDLE:

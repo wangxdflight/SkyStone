@@ -18,10 +18,12 @@ import java.util.List;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ODOMETRY_WHEEL;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMotorVelocityF;
-
+import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import com.qualcomm.robotcore.util.RobotLog;
+
 /*
  * Simple mecanum drive hardware implementation for REV hardware. If your hardware configuration
  * satisfies the requirements, SampleMecanumDriveREVOptimized is highly recommended.
@@ -52,6 +54,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        RobotLog.d("SampleMecanumDriveREV created");
 
         for (DcMotorEx motor : motors) {
             if (RUN_USING_ENCODER) {
@@ -68,6 +71,8 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
 
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
+        if (RUN_USING_ODOMETRY_WHEEL)
+            setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
     }
 
     @Override

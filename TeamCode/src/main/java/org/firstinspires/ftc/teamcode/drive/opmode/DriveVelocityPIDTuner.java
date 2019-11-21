@@ -171,9 +171,12 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
 
             // update telemetry
             telemetry.addData("targetVelocity", motionState.getV());
+            RobotLog.d("DriveVelocityPIDTuner\ntargetVelocity" + Double.toString(motionState.getV()));
             for (int i = 0; i < velocities.size(); i++) {
                 telemetry.addData("velocity" + i, velocities.get(i));
                 telemetry.addData("error" + i, motionState.getV() - velocities.get(i));
+                RobotLog.d("velocity " + i + " " + Double.toString(velocities.get(i)));
+                RobotLog.d("error " + i + " " + Double.toString(motionState.getV() - velocities.get(i)));
             }
             telemetry.update();
         }

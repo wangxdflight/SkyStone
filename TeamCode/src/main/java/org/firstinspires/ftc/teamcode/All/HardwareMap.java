@@ -11,8 +11,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import java.util.ArrayList;
 
 public class HardwareMap {
-    public DcMotorEx backLeft, backRight, frontLeft, frontRight, firstJoint, secondJoint, intakeJoint, leftIntake, rightIntake,
-    liftOne, liftTwo;
+    public DcMotorEx leftRear, rightRear, leftFront, rightFront, firstJoint, secondJoint, intakeJoint, liftOne;
+    public DcMotorEx leftEncoder, rightEncoder, frontEncoder;
     public Servo servo1, servo2, servo3;
     public BNO055IMU gyro;
     public IntegratingGyroscope imu;
@@ -22,17 +22,20 @@ public class HardwareMap {
     public com.qualcomm.robotcore.hardware.HardwareMap hardwareMap;
 
     public HardwareMap(com.qualcomm.robotcore.hardware.HardwareMap hwMap) {
-        backLeft = (DcMotorEx) hwMap.get(DcMotor.class, "backLeft");
-        backRight = (DcMotorEx) hwMap.get(DcMotor.class, "backRight");
-        frontLeft = (DcMotorEx) hwMap.get(DcMotor.class, "frontLeft");
-        frontRight = (DcMotorEx) hwMap.get(DcMotor.class, "frontRight");
+        leftRear = (DcMotorEx) hwMap.get(DcMotor.class, "leftRear");
+        rightRear = (DcMotorEx) hwMap.get(DcMotor.class, "rightRear");
+        leftFront = (DcMotorEx) hwMap.get(DcMotor.class, "leftFront");
+        rightFront = (DcMotorEx) hwMap.get(DcMotor.class, "rightFront");
 
+        leftEncoder = (DcMotorEx)hardwareMap.dcMotor.get("leftEncoder");
+        rightEncoder = (DcMotorEx)hardwareMap.dcMotor.get("rightEncoder");
+        frontEncoder = (DcMotorEx)hardwareMap.dcMotor.get("frontEncoder");
         //------------------------===Intake & Lift Motors===------------------------
 
-        leftIntake = (DcMotorEx) hwMap.get(DcMotor.class, "leftIntake");
-        rightIntake = (DcMotorEx) hwMap.get(DcMotor.class, "rightIntake");
+        //leftIntake = (DcMotorEx) hwMap.get(DcMotor.class, "leftIntake");
+        //rightIntake = (DcMotorEx) hwMap.get(DcMotor.class, "rightIntake");
         liftOne = (DcMotorEx) hwMap.get(DcMotor.class, "liftOne");
-        liftTwo = (DcMotorEx) hwMap.get(DcMotor.class, "liftTwo");
+        //liftTwo = (DcMotorEx) hwMap.get(DcMotor.class, "liftTwo");
 
         //---------------------------------------------------------------------------
 

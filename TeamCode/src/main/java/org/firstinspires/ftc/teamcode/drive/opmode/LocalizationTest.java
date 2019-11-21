@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-
+import com.qualcomm.robotcore.util.RobotLog;
 /**
  * This is a simple teleop routine for testing localization. Drive the robot around like a normal
  * teleop routine and make sure the robot's estimated pose matches the robot's actual pose (slight
@@ -40,6 +40,9 @@ public class LocalizationTest extends LinearOpMode {
             telemetry.addData("y", poseEstimate.getY());
             telemetry.addData("heading", poseEstimate.getHeading());
             telemetry.update();
+            RobotLog.d("x" + Double.toString(poseEstimate.getX()));
+            RobotLog.d("y" + Double.toString(poseEstimate.getX()));
+            RobotLog.d("heading" + Double.toString(poseEstimate.getHeading()));
         }
     }
 }
