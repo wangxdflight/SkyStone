@@ -75,7 +75,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
         if (RUN_USING_ODOMETRY_WHEEL) {
-            RobotLog.dd(TAG, "to setLocalizer");
+            RobotLog.dd(TAG, "to setLocalizer to StandardTrackingWheelLocalizer");
             setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
         }
     }

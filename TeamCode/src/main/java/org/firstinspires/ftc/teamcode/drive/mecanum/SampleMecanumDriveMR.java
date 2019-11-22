@@ -16,6 +16,7 @@ import java.util.List;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
+import com.qualcomm.robotcore.util.RobotLog;
 
 /*
  * Simple mecanum drive hardware implementation for Modern Robotics hardware.
@@ -30,7 +31,7 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
      * to decrease this number and increase your control loop frequency, do so at your own risk.
      */
     private static final int MOTOR_WRITE_DELAY = 20;
-
+    private String TAG = "SampleMecanumDriveMRs";
     private DcMotor leftFront, leftRear, rightRear, rightFront;
     private List<DcMotor> motors;
     private BNO055IMU imu;

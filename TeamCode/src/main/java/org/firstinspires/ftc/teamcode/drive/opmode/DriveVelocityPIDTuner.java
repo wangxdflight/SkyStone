@@ -38,16 +38,16 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
  * ctor.
  */
 @Config
-@Autonomous(group = "drive")
+@Autonomous(name = "DriveVelocityPIDTuner", group = "drive")
 public class DriveVelocityPIDTuner extends LinearOpMode {
-    public static double DISTANCE = 72;
+    public static double DISTANCE = 96;
 
     private static final String PID_VAR_NAME = "VELO_PID";
 
     private FtcDashboard dashboard = FtcDashboard.getInstance();
     private String catName;
     private CustomVariable catVar;
-    private String TAG = "DriveFeedforwardTuner";
+    private String TAG = "DriveVelocityPIDTuner";
     private SampleMecanumDriveBase drive;
 
     private static MotionProfile generateProfile(boolean movingForward) {
@@ -127,7 +127,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     @Override
     public void runOpMode() {
         if (!RUN_USING_ENCODER) {
-            RobotLog.setGlobalErrorMsg("%s does not need to be run if the built-in motor velocity" +
+            RobotLog.dd(TAG, "%s does not need to be run if the built-in motor velocity" +
                     "PID is not in use", getClass().getSimpleName());
         }
 
@@ -171,10 +171,10 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
 
             // update telemetry
             telemetry.addData("targetVelocity", motionState.getV());
-            RobotLog.dd(TAG, "targetVelocity" + Double.toString(motionState.getV()));
+            RobotLog.dd(TAG, "targetVelocity " + Double.toString(motionState.getV()));
             for (int i = 0; i < velocities.size(); i++) {
-                telemetry.addData("velocity" + i, velocities.get(i));
-                telemetry.addData("error" + i, motionState.getV() - velocities.get(i));
+                telemetry.addData("velocity " + i, velocities.get(i));
+                telemetry.addData("error " + i, motionState.getV() - velocities.get(i));
                 RobotLog.dd(TAG, "velocity " + i + " " + Double.toString(velocities.get(i)));
                 RobotLog.dd(TAG, "error " + i + " " + Double.toString(motionState.getV() - velocities.get(i)));
             }

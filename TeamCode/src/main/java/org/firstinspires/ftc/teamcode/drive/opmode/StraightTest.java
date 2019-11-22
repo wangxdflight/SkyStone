@@ -12,14 +12,14 @@ import com.qualcomm.robotcore.util.RobotLog;
  * This is a simple routine to test translational drive capabilities.
  */
 @Config
-@Autonomous(group = "drive")
+@Autonomous(name = "StraightTest", group = "drive")
 public class StraightTest extends LinearOpMode {
-    public static double DISTANCE = 10;
-
+    public static double DISTANCE = 24;
+	private String TAG = "StraightTest";
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
-        RobotLog.i("trajectoryBuilder forward");
+        RobotLog.dd(TAG, "trajectoryBuilder forward");
         Trajectory trajectory = drive.trajectoryBuilder()
                 .forward(DISTANCE)
                 .build();

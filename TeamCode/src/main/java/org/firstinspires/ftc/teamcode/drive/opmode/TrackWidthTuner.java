@@ -16,6 +16,8 @@ import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ODOMETRY_WHEEL;
+import com.qualcomm.robotcore.util.RobotLog;
+
 /*
  * This routine determines the effective track width. The procedure works by executing a point turn
  * with a given angle and measuring the difference between that angle and the actual angle (as
@@ -31,7 +33,7 @@ public class TrackWidthTuner extends LinearOpMode {
     public static double ANGLE = 180; // deg
     public static int NUM_TRIALS = 5;
     public static int DELAY = 1000; // ms
-
+    private String TAG = "TrackWidthTuner";
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -66,13 +68,13 @@ public class TrackWidthTuner extends LinearOpMode {
                 double heading = drive.getPoseEstimate().getHeading();
                 headingAccumulator += Angle.norm(heading - lastHeading);
                 lastHeading = heading;
-
+                RobotLog.dd(TAG, "heading:" + Double.toString(heading));
                 drive.update();
             }
 
             double trackWidth = DriveConstants.TRACK_WIDTH * Math.toRadians(ANGLE) / headingAccumulator;
             trackWidthStats.add(trackWidth);
-
+            RobotLog.dd(TAG, "trackWidth:" + Double.toString(trackWidth));
             sleep(DELAY);
         }
 
@@ -82,6 +84,9 @@ public class TrackWidthTuner extends LinearOpMode {
                 trackWidthStats.getMean(),
                 trackWidthStats.getStandardDeviation() / Math.sqrt(NUM_TRIALS)));
         telemetry.update();
+
+        RobotLog.dd(TAG, "Effective track width: " + Double.toString(trackWidthStats.getMean()) + " SE: " +
+                Double.toString(trackWidthStats.getStandardDeviation() / Math.sqrt(NUM_TRIALS)));
 
         while (!isStopRequested()) {
             idle();

@@ -31,7 +31,7 @@ import com.qualcomm.robotcore.util.RobotLog;
  *      regression.
  */
 @Config
-@Autonomous(group = "drive")
+@Autonomous(name = "DriveFeedForwardTunner", group = "drive")
 public class DriveFeedforwardTuner extends LinearOpMode {
     public static final double MAX_POWER = 0.7;
     public static final double DISTANCE = 100;
@@ -39,7 +39,7 @@ public class DriveFeedforwardTuner extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         if (RUN_USING_ENCODER) {
-            RobotLog.setGlobalErrorMsg("Feedforward constants usually don't need to be tuned " +
+            RobotLog.dd(TAG, "Feedforward constants usually don't need to be tuned " +
                     "when using the built-in drive motor velocity PID.");
         }
 
@@ -115,12 +115,17 @@ public class DriveFeedforwardTuner extends LinearOpMode {
             }
             double vel = accel * elapsedTime;
             double power = vel / maxVel;
-            RobotLog.dd(TAG, "elapsedTime: "+Double.toString(elapsedTime));
-            RobotLog.dd(TAG, "X: " + Double.toString(drive.getPoseEstimate().getX()));
-            RobotLog.dd(TAG, "Y: " + Double.toString(drive.getPoseEstimate().getY()));
-            RobotLog.dd(TAG, "Power: " + Double.toString(power));
 
-            rampRegression.add(elapsedTime, drive.getPoseEstimate().getX(), power);
+            Pose2d t = drive.getPoseEstimate();
+            RobotLog.dd(TAG, "rampRegression\nelapsedTime: "+Double.toString(elapsedTime));
+            RobotLog.dd(TAG, "X: " + Double.toString(t.getX()));
+            RobotLog.dd(TAG, "Y: " + Double.toString(t.getY()));
+            RobotLog.dd(TAG, "heading: " + Double.toString(t.getHeading()));
+            RobotLog.dd(TAG, "accel: "+Double.toString(accel));
+            RobotLog.dd(TAG, "vel(accel*elapsedTime): "+Double.toString(vel));
+            RobotLog.dd(TAG, "Power(vel/maxVel): " + Double.toString(power));
+
+            rampRegression.add(elapsedTime, t.getX(), power);
 
             drive.setDrivePower(new Pose2d(power, 0.0, 0.0));
             drive.updatePoseEstimate();
@@ -136,11 +141,14 @@ public class DriveFeedforwardTuner extends LinearOpMode {
         telemetry.addLine("Quasi-static ramp up test complete");
         if (fitIntercept) {
             RobotLog.dd(TAG, "kV: " + Double.toString(rampResult.kV) +
-                    " kS: " + Double.toString(rampResult.kStatic)+ " rS: "+Double.toString(rampResult.rSquare));
+                    " kStatic: " + Double.toString(rampResult.kStatic)+ " rSquare: "+Double.toString(rampResult.rSquare));
+
             telemetry.addLine(Misc.formatInvariant("kV = %.5f, kStatic = %.5f (R^2 = %.2f)",
                     rampResult.kV, rampResult.kStatic, rampResult.rSquare));
         } else {
-            RobotLog.dd(TAG, " kS: " + Double.toString(rampResult.kStatic)+ " rS: "+Double.toString(rampResult.rSquare));
+            RobotLog.dd(TAG, " kS: " + Double.toString(rampResult.kStatic)+
+                    " rSquare: "+Double.toString(rampResult.rSquare));
+
             telemetry.addLine(Misc.formatInvariant("kV = %.5f (R^2 = %.2f)",
                     rampResult.kStatic, rampResult.rSquare));
         }
@@ -152,6 +160,7 @@ public class DriveFeedforwardTuner extends LinearOpMode {
         while (!isStopRequested()) {
             if (gamepad1.a) {
                 fitAccelFF = true;
+                RobotLog.dd(TAG,"fitAccelFF is true");
                 while (!isStopRequested() && gamepad1.a) {
                     idle();
                 }
@@ -194,8 +203,15 @@ public class DriveFeedforwardTuner extends LinearOpMode {
                 if (elapsedTime > maxPowerTime) {
                     break;
                 }
+                Pose2d t = drive.getPoseEstimate();
+                accelRegression.add(elapsedTime, t.getX(), MAX_POWER);
 
-                accelRegression.add(elapsedTime, drive.getPoseEstimate().getX(), MAX_POWER);
+
+                RobotLog.dd(TAG, "accelRegression\nelapsedTime: "+Double.toString(elapsedTime));
+                RobotLog.dd(TAG, "X: " + Double.toString(t.getX()));
+                RobotLog.dd(TAG, "Y: " + Double.toString(t.getY()));
+                RobotLog.dd(TAG, "heading: " + Double.toString(t.getHeading()));
+                RobotLog.dd(TAG, "MAX_POWER: "+Double.toString(MAX_POWER));
 
                 drive.updatePoseEstimate();
             }
@@ -203,14 +219,17 @@ public class DriveFeedforwardTuner extends LinearOpMode {
 
             AccelRegression.AccelResult accelResult = accelRegression.fit(
                     rampResult.kV, rampResult.kStatic);
-            RobotLog.dd(TAG, " kV: " + Double.toString(rampResult.kV)+ " kS: "+Double.toString(rampResult.kStatic));
+
+            RobotLog.dd(TAG, " kV: " + Double.toString(rampResult.kV)+ " kStatic: "+Double.toString(rampResult.kStatic));
 
             accelRegression.save(LoggingUtil.getLogFile(Misc.formatInvariant(
                     "DriveAccelRegression-%d.csv", System.currentTimeMillis())));
 
             telemetry.clearAll();
             telemetry.addLine("Constant power test complete");
-            RobotLog.dd(TAG, " kA: " + Double.toString(accelResult.kA)+ " rS: "+Double.toString(accelResult.rSquare));
+
+            RobotLog.dd(TAG, " kA: " + Double.toString(accelResult.kA)+ " rSquare: "+Double.toString(accelResult.rSquare));
+
             telemetry.addLine(Misc.formatInvariant("kA = %.5f (R^2 = %.2f)",
                     accelResult.kA, accelResult.rSquare));
             telemetry.update();

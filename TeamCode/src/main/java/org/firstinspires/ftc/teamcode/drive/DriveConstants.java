@@ -19,7 +19,6 @@ import com.qualcomm.robotcore.util.RobotLog;
  */
 @Config
 public class DriveConstants {
-
     /*
      * The type of motor used on the drivetrain. While the SDK has definitions for many common
      * motors, there may be slight gear ratio inaccuracies for planetary gearboxes and other
@@ -74,33 +73,37 @@ public class DriveConstants {
 
 
     public static double encoderTicksToInches(double ticks) {
-        RobotLog.d("MOTOR_CONFIG.getTicksPerRev(vs. 383.6): " + Double.toString(MOTOR_CONFIG.getTicksPerRev()));
+        RobotLog.dd("DriveConstants", "MOTOR_CONFIG.getTicksPerRev(vs. 383.6): " + Double.toString(MOTOR_CONFIG.getTicksPerRev()));
 
-        double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / MOTOR_CONFIG.getTicksPerRev();
-        RobotLog.d("encoderTicksToInches: " + "ticks: " + Double.toString(ticks) + " inches: " + Double.toString(s));
+        double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / 383.6; //MOTOR_CONFIG.getTicksPerRev();
+        RobotLog.dd("DriveConstants", "encoderTicksToInches: " + "ticks: " + Double.toString(ticks) + " inches: " + Double.toString(s));
         return s;
     }
 
     public static double rpmToVelocity(double rpm) {
         double s = rpm * GEAR_RATIO * 2 * Math.PI * WHEEL_RADIUS / 60.0;
-        RobotLog.d("rpmToVelocity: " + "rpm " + Double.toString(rpm) + " v " + Double.toString(s));
+        RobotLog.dd("DriveConstants", "rpmToVelocity: " + "rpm " + Double.toString(rpm) + " v " + Double.toString(s));
         return s;
     }
 
     public static double getMaxRpm() {
-        RobotLog.d("MOTOR_CONFIG.getAchieveableMaxRPMFraction(): " + Double.toString(MOTOR_CONFIG.getAchieveableMaxRPMFraction()));
-        RobotLog.d("MOTOR_CONFIG.getMaxRPM(): " + Double.toString(MOTOR_CONFIG.getMaxRPM()));
+        RobotLog.dd("DriveConstants", "MOTOR_CONFIG.getAchieveableMaxRPMFraction(): " + Double.toString(MOTOR_CONFIG.getAchieveableMaxRPMFraction()));
+        RobotLog.dd("DriveConstants", "MOTOR_CONFIG.getMaxRPM(): " + Double.toString(MOTOR_CONFIG.getMaxRPM()));
         return MOTOR_CONFIG.getMaxRPM() *
                 (RUN_USING_ENCODER ? MOTOR_CONFIG.getAchieveableMaxRPMFraction() : 1.0);
     }
 
     public static double getTicksPerSec() {
         // note: MotorConfigurationType#getAchieveableMaxTicksPerSecond() isn't quite what we want
-        return (MOTOR_CONFIG.getMaxRPM() * MOTOR_CONFIG.getTicksPerRev() / 60.0);
+        double t = MOTOR_CONFIG.getMaxRPM() * MOTOR_CONFIG.getTicksPerRev() / 60.0;
+        RobotLog.dd("DriveConstants", "getTicksPerSec "+Double.toString(t));
+        return t;
     }
 
     public static double getMotorVelocityF() {
         // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
+        double t = getTicksPerSec();
+        RobotLog.dd("DriveConstants", "getTicksPerSec "+Double.toString(t));
         return 32767 / getTicksPerSec();
     }
 }

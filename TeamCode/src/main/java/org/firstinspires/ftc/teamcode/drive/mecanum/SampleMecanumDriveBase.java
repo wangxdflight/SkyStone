@@ -64,6 +64,8 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
 
     public SampleMecanumDriveBase() {
         super(kV, kA, kStatic, TRACK_WIDTH);
+        RobotLog.dd(TAG, "kV "+Double.toString(kV)+" kA "+Double.toString(kA)+" kStatic "+Double.toString(kStatic));
+        RobotLog.dd(TAG, "TRACK_WIDTH "+Double.toString(TRACK_WIDTH));
 
         dashboard = FtcDashboard.getInstance();
         dashboard.setTelemetryTransmissionInterval(25);
@@ -85,6 +87,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
 
     public void turn(double angle) {
         double heading = getPoseEstimate().getHeading();
+        RobotLog.dd(TAG, "turn: current heading "+Double.toString(heading)+" angle "+Double.toString(angle));
         turnProfile = MotionProfileGenerator.generateSimpleMotionProfile(
                 new MotionState(heading, 0, 0, 0),
                 new MotionState(heading + angle, 0, 0, 0),
@@ -164,7 +167,8 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
                 double targetOmega = targetState.getV();
                 double targetAlpha = targetState.getA();
                 double correction = turnController.update(currentPose.getHeading(), targetOmega);
-
+                RobotLog.dd(TAG, "TURN: targetOmega "+Double.toString(targetOmega)+" targetAlpha "+Double.toString(targetAlpha));
+                RobotLog.dd(TAG, "correction "+Double.toString(correction));
                 setDriveSignal(new DriveSignal(new Pose2d(
                         0, 0, targetOmega + correction
                 ), new Pose2d(
