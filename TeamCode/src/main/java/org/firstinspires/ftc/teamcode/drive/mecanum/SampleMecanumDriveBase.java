@@ -212,7 +212,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
         dashboard.sendTelemetryPacket(packet);
     }
     /// new function added;
-    public abstract List<Double> getWheelPowers(List<DcMotorEx> motors);
+    public abstract List<Double> getMotorPowers(List<DcMotorEx> motors);
 
     public void waitForIdle() {
         while (!Thread.currentThread().isInterrupted() && isBusy()) {

@@ -39,15 +39,15 @@ public class ManualParamTest extends LinearOpMode {
         while (opModeIsActive()) {
             List<Double> velocities = drive.getWheelVelocities();
             RobotLog.dd(TAG, "velocities");
-            print_list_double(velocities);
+            drive.print_list_double(velocities);
 
             List<Double> positions = drive.getWheelPositions();
             RobotLog.dd(TAG, "wheel positions");
-            print_list_double(positions);
+            drive.print_list_double(positions);
 
-            List<Double> w_powers = drive.getWheelPowers(motors);
+            List<Double> w_powers = drive.getMotorPowers(motors);
             RobotLog.dd(TAG, "wheel powers");
-            print_list_double(w_powers);
+            drive.print_list_double(w_powers);
 
             double heading = drive.getExternalHeading();
             RobotLog.dd(TAG, "getExternalHeading: x " + heading);

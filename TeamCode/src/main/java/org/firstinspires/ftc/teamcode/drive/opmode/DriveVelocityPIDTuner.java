@@ -15,12 +15,14 @@ import com.acmerobotics.roadrunner.util.NanoClock;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
@@ -40,6 +42,9 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
 @Config
 @Autonomous(name = "DriveVelocityPIDTuner", group = "drive")
 public class DriveVelocityPIDTuner extends LinearOpMode {
+    private DcMotorEx leftFront, leftRear, rightRear, rightFront;
+    private List<DcMotorEx> motors;
+
     public static double DISTANCE = 96;
 
     private static final String PID_VAR_NAME = "VELO_PID";
@@ -131,6 +136,13 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
                     "PID is not in use", getClass().getSimpleName());
         }
 
+        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
+        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
+        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
+        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+
+        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
         drive = new SampleMecanumDriveREV(hardwareMap);
@@ -168,6 +180,11 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
             drive.setDrivePower(new Pose2d(targetPower, 0, 0));
 
             List<Double> velocities = drive.getWheelVelocities();
+            List<Double> powers = drive.getMotorPowers(motors);
+            RobotLog.dd(TAG, "getWheelVelocities");
+            drive.print_list_double(velocities);
+            RobotLog.dd(TAG, "getMotorPowers");
+            drive.print_list_double(powers);
 
             // update telemetry
             telemetry.addData("targetVelocity", motionState.getV());
