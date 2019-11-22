@@ -19,7 +19,7 @@ import java.lang.String;
  */
 @Config
 @Autonomous(group = "drive")
-public class ManualParamTEst extends LinearOpMode {
+public class ManualParamTest extends LinearOpMode {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
     private final int polling_interval = 1000;
@@ -62,25 +62,6 @@ public class ManualParamTEst extends LinearOpMode {
             RobotLog.dd(TAG, "yError " + error.getY());
             RobotLog.dd(TAG, "headingError "  + error.getHeading());
             Thread.sleep(polling_interval);
-        }
-    }
-    private void print_list_double(List<Double> list){
-        //motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
-        for (int i = 0; i < list.size(); i ++)
-        {
-            String wheel_name="";
-            if (i==0)
-                wheel_name = "leftFront";
-            else if (i==1)
-                wheel_name = "leftRear";
-            else if (i==2)
-                wheel_name = "rightRear";
-            else if (i==3)
-                wheel_name = "rightFront";
-            else
-                wheel_name = "unexpected wheel name";
-
-            RobotLog.dd(TAG, wheel_name+"  " +Double.toString(list.get(i)));
         }
     }
 }

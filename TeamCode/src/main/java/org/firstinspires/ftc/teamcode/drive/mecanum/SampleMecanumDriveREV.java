@@ -58,6 +58,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
         RobotLog.dd(TAG, "SampleMecanumDriveREV created");
 
         for (DcMotorEx motor : motors) {
+            motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             if (RUN_USING_ENCODER) {
                 motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }

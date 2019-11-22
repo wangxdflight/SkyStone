@@ -3,7 +3,10 @@ package org.firstinspires.ftc.teamcode.drive;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
+import com.qualcomm.hardware.motors.GoBILDA5201Series;
+import com.qualcomm.hardware.motors.GoBILDA5202Series;
 import com.qualcomm.hardware.motors.Matrix12vMotor;
+import com.qualcomm.hardware.motors.MatrixLegacyMotor;
 import com.qualcomm.hardware.motors.NeveRest20Gearmotor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 import com.qualcomm.robotcore.util.RobotLog;
@@ -27,8 +30,8 @@ public class DriveConstants {
      * @DeviceProperties and @MotorType annotations.
      */
     private static final MotorConfigurationType MOTOR_CONFIG =
-            MotorConfigurationType.getMotorType(Matrix12vMotor.class);// NeveRest20Gearmotor
-
+            MotorConfigurationType.getMotorType(MatrixLegacyMotor.class);// NeveRest20Gearmotor
+            // Matrix12vMotor  GoBILDA5202Series MatrixLegacyMotor (757.12)
     /*
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
@@ -46,8 +49,9 @@ public class DriveConstants {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 2;
-    public static double GEAR_RATIO = 1/2; // output (wheel) speed / input (motor) speed
+    public static double GEAR_RATIO = 2/1; // ???  output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 12.0;
+    public static double HARDCODED_TICKS_PER_REV = 383.6;
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -55,7 +59,7 @@ public class DriveConstants {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 1.0 / rpmToVelocity(getMaxRpm());
+    public static double kV = 1.0 / rpmToVelocity(getMaxRpm()); // 195
     public static double kA = 0;
     public static double kStatic = 0;
 
@@ -76,7 +80,7 @@ public class DriveConstants {
     public static double encoderTicksToInches(double ticks) {
         RobotLog.dd("DriveConstants", "MOTOR_CONFIG.getTicksPerRev(vs. 383.6): " + Double.toString(MOTOR_CONFIG.getTicksPerRev()));
 
-        double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / 383.6; //MOTOR_CONFIG.getTicksPerRev();
+        double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / MOTOR_CONFIG.getTicksPerRev();
         RobotLog.dd("DriveConstants", "encoderTicksToInches: " + "ticks: " + Double.toString(ticks) + " inches: " + Double.toString(s));
         return s;
     }
@@ -97,6 +101,7 @@ public class DriveConstants {
     public static double getTicksPerSec() {
         // note: MotorConfigurationType#getAchieveableMaxTicksPerSecond() isn't quite what we want
         double t = MOTOR_CONFIG.getMaxRPM() * MOTOR_CONFIG.getTicksPerRev() / 60.0;
+        //double t = MOTOR_CONFIG.getMaxRPM() * HARDCODED_TICKS_PER_REV / 60.0;
         RobotLog.dd("DriveConstants", "getTicksPerSec "+Double.toString(t));
         return t;
     }

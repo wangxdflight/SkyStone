@@ -267,4 +267,25 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
     public abstract PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode);
 
     public abstract void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients);
+
+    public void print_list_double(List<Double> list){
+        //motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        for (int i = 0; i < list.size(); i ++)
+        {
+            String wheel_name="";
+            if (i==0)
+                wheel_name = "leftFront";
+            else if (i==1)
+                wheel_name = "leftRear";
+            else if (i==2)
+                wheel_name = "rightRear";
+            else if (i==3)
+                wheel_name = "rightFront";
+            else
+                wheel_name = "unexpected wheel name";
+
+            RobotLog.dd(TAG, wheel_name+"  " +Double.toString(list.get(i)));
+        }
+    }
+
 }
