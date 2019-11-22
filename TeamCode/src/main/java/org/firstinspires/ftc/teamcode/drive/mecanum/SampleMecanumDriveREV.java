@@ -127,11 +127,22 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
     }
 
     @Override
+    public List<Double> getWheelPowers(List<DcMotorEx> motors) {
+        List<Double> wheelPowers = new ArrayList<>();
+        for (DcMotorEx motor : motors) {
+            double t = motor.getPower();
+            RobotLog.dd(TAG, "getWheelPowers: " + "power: " + Double.toString(t));
+
+            wheelPowers.add(t);
+        }
+        return wheelPowers;
+    }
+    @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        RobotLog.dd(TAG, "setMotorPowers:\n"+"leftFront: " + Double.toString(v));
-        RobotLog.dd(TAG, "leftRear: "+Double.toString(v1));
-        RobotLog.dd(TAG, "rightRear: "+Double.toString(v2));
-        RobotLog.dd(TAG, "rightFront: "+Double.toString(v3));
+        RobotLog.dd(TAG, "setMotorPowers "+"leftFront: " + Double.toString(v));
+        RobotLog.dd(TAG, "setMotorPowers "+"leftRear: "+Double.toString(v1));
+        RobotLog.dd(TAG, "setMotorPowers "+"rightRear: "+Double.toString(v2));
+        RobotLog.dd(TAG, "setMotorPowers"+"rightFront: "+Double.toString(v3));
         leftFront.setPower(v);
         leftRear.setPower(v1);
         rightRear.setPower(v2);

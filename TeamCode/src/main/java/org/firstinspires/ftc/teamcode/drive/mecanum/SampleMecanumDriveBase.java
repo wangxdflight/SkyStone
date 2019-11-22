@@ -30,6 +30,8 @@ import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.RobotLog;
 /*
  * Base class with shared functionality for sample mecanum drives. All hardware-specific details are
@@ -209,6 +211,8 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
 
         dashboard.sendTelemetryPacket(packet);
     }
+    /// new function added;
+    public abstract List<Double> getWheelPowers(List<DcMotorEx> motors);
 
     public void waitForIdle() {
         while (!Thread.currentThread().isInterrupted() && isBusy()) {

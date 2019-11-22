@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsUsbDcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.DifferentialControlLoopCoefficients;
 
@@ -99,7 +100,18 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
         }
         return wheelPositions;
     }
+    @Override
+    public List<Double> getWheelPowers(List<DcMotorEx> motors) {
+        List<Double> wheelPowers = new ArrayList<>();
+        for (DcMotorEx motor : motors) {
+            double t = motor.getPower();
 
+            RobotLog.dd(TAG, "getWheelPowers: " + "power: " + Double.toString(t));
+
+            wheelPowers.add(t);
+        }
+        return wheelPowers;
+    }
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
         leftFront.setPower(v);

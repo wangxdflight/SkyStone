@@ -54,6 +54,7 @@ public class SampleTankDriveREV extends SampleTankDriveBase {
 
         for (DcMotorEx motor : motors) {
             if (RUN_USING_ENCODER) {
+                motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //???
                 motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

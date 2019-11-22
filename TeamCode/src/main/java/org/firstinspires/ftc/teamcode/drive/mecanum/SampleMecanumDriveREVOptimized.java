@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
@@ -143,7 +144,18 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         }
         return wheelVelocities;
     }
+    @Override
+    public List<Double> getWheelPowers(List<DcMotorEx> motors) {
+        List<Double> wheelPowers = new ArrayList<>();
+        for (DcMotorEx motor : motors) {
+            double t = motor.getPower();
 
+            RobotLog.dd(TAG, "getWheelPowers: " + "power: " + Double.toString(t));
+
+            wheelPowers.add(t);
+        }
+        return wheelPowers;
+    }
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
         RobotLog.dd(TAG, "setMotorPowers:\n"+"leftFront: " + Double.toString(v));
