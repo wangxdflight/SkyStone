@@ -40,7 +40,7 @@ public class DriveConstants {
     public static final PIDCoefficients MOTOR_VELO_PID = null;
 
     public static final boolean RUN_USING_ODOMETRY_WHEEL = false;
-    private static String TAG = "DriveConstraints005";
+    private static String TAG = "DriveConstraints008";
     /*
      * These are physical constants that can be determined from your robot (including the track
      * width; it will be tune empirically later although a rough estimate is important). Users are
@@ -52,7 +52,7 @@ public class DriveConstants {
     public static double WHEEL_RADIUS = 2;
     public static double GEAR_RATIO = 2.0;  //MOTOR_CONFIG.getGearing(); // ???  output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 12.0;
-    public static double HARDCODED_TICKS_PER_REV = 383.6; //MOTOR_CONFIG.getTicksPerRev();
+    public static double HARDCODED_TICKS_PER_REV = 383.6*1.25; //MOTOR_CONFIG.getTicksPerRev();
     public static double HARDCODED_MAX_RPM = 435.0; //MOTOR_CONFIG.getMaxRPM();
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -60,7 +60,7 @@ public class DriveConstants {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 3*1.0 / rpmToVelocity(getMaxRpm()); // 0.0038463
+    public static double kV = 1.92*1.0 / rpmToVelocity(getMaxRpm()); // 0.0038463
     public static double kA = 0;
     public static double kStatic = 0;
 
