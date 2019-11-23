@@ -1,20 +1,34 @@
 import string
 
 
-filepath = "../2.log"
+filepath = "../velocity_power_test.log"
 with open(filepath) as fp:
     line = fp.readline()
     cnt = 1
+    data=[];
     while line:
         #print("Line {}: {}".format(cnt, line.strip()))
         line = fp.readline()
 
-        if "setMotorPowers" in line:
-            powers=[];
+        if "DriveVelocityPIDTuner: getWheelVelocities" in line:
             count=0;
             while count<4:
                 line1=fp.readline();
+                #print(line1)
                 t1=line1.split(' ')
-                powers.append(t1[9].strip('\n'));
+                data.append(t1[10].strip('\n'));
                 count=count+1;
-            print(powers)
+
+        if "DriveVelocityPIDTuner: getMotorPowers" in line:
+            count=0;
+            while count<4:
+                line1=fp.readline();
+                #print(line1)
+                t1=line1.split(' ')
+                data.append(t1[10].strip('\n'));
+                count=count+1;
+
+            for i in range(len(data)):
+                print(data[i], end=' ')
+            print ("")
+            data=[];
