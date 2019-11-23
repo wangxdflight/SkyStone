@@ -45,7 +45,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
 
-    public static double DISTANCE = 96;
+    public static double DISTANCE = 24; // make it smaller for safty, can increase later; 96;
 
     private static final String PID_VAR_NAME = "VELO_PID";
 
@@ -135,7 +135,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
             RobotLog.dd(TAG, "%s does not need to be run if the built-in motor velocity" +
                     "PID is not in use", getClass().getSimpleName());
         }
-
+        // we add this just for reading data from motors;
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
         rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");

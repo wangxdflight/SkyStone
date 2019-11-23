@@ -1,5 +1,12 @@
+max_rpm=435;
+WHEEL_RADIUS=2;
+GEAR_RATIO=0.5
+Kv=max_rpm * GEAR_RATIO * 2 * pi * WHEEL_RADIUS / 60.0;
 
-a=load('curve.txt');
+Kv=1/Kv
+return;
+
+a=load('..\curve.txt');
 
 plot(a(:, 1));
 hold on;
@@ -45,3 +52,5 @@ ylim([-200, 2000])
 ylabel('velocity/power');
 xlabel('time');
 title("velocity/power");
+c=1./b;
+mean(c(100:300))
