@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <Robot type="FirstInspires-FTC">
+    <Webcam name="WebcamFront" serialNumber="3F2DF43F" />
     <LynxUsbDevice name="Expansion Hub Portal 1" serialNumber="DQ167WIO" parentModuleAddress="3">
         <LynxModule name="Expansion Hub 2" port="2">
-            <GoBILDA5202Series name="leftFront" port="0" />
-            <GoBILDA5202Series name="leftRear" port="1" />
-            <GoBILDA5202Series name="leftEncoder" port="2" />
-            <GoBILDA5202Series name="liftOne" port="3" />
+            <goBILDA5202SeriesMotor name="leftFront" port="0" />
+            <goBILDA5202SeriesMotor name="leftRear" port="1" />
+            <Matrix12vMotor name="leftEncoder" port="2" />
+            <Matrix12vMotor name="liftOne" port="3" />
             <Servo name="liftOdometer" port="1" />
             <Servo name="transferLock" port="2" />
             <Servo name="rightTransfer" port="3" />
@@ -15,15 +16,14 @@
             <LynxEmbeddedIMU name="imu" port="0" bus="0" />
         </LynxModule>
         <LynxModule name="Expansion Hub 3" port="3">
-            <GoBILDA5202Series name="rightFront" port="0" />
-            <GoBILDA5202Series name="rightRear" port="1" />
-            <GoBILDA5202Series name="frontEncoder" port="2" />
-            <GoBILDA5202Series name="rightEncoder" port="3" />
+            <goBILDA5202SeriesMotor name="rightFront" port="0" />
+            <goBILDA5202SeriesMotor name="rightRear" port="1" />
+            <Matrix12vMotor name="frontEncoder" port="2" />
+            <Matrix12vMotor name="rightEncoder" port="3" />
             <Servo name="leftTransfer" port="0" />
             <Servo name="clawServo1" port="3" />
             <Servo name="clawServo2" port="4" />
             <LynxEmbeddedIMU name="imu 1" port="0" bus="0" />
         </LynxModule>
     </LynxUsbDevice>
-    <Webcam name="WebcamFront" serialNumber="3F2DF43F" />
 </Robot>

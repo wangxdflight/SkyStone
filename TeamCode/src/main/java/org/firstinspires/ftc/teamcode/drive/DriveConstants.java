@@ -49,9 +49,9 @@ public class DriveConstants {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 2;
-    public static double GEAR_RATIO = 2.0; // ???  output (wheel) speed / input (motor) speed
+    public static double GEAR_RATIO = 2*MOTOR_CONFIG.getGearing(); // ???  output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 12.0;
-    public static double HARDCODED_TICKS_PER_REV = 383.6;
+    public static double HARDCODED_TICKS_PER_REV = MOTOR_CONFIG.getTicksPerRev();
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using

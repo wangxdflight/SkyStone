@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 @Config
 @Autonomous(name = "StraightTest", group = "drive")
 public class StraightTest extends LinearOpMode {
-    public static double DISTANCE = 5;
+    public static double DISTANCE =48;
 	private String TAG = "StraightTest";
     @Override
     public void runOpMode() throws InterruptedException {
