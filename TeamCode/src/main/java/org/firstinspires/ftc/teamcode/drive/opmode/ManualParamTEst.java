@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 
@@ -24,6 +25,9 @@ public class ManualParamTest extends LinearOpMode {
     private List<DcMotorEx> motors;
     private final int polling_interval = 1000;
     private String TAG = "ManualParamTest";
+    // use odometry wheel
+    private StandardTrackingWheelLocalizer localizer = new StandardTrackingWheelLocalizer(hardwareMap);
+
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
@@ -37,6 +41,10 @@ public class ManualParamTest extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            List<Double>  odo_positions = localizer.getWheelPositions();
+            RobotLog.dd(TAG, "odometry positions");
+            drive.print_list_double(odo_positions);
+
             List<Double> velocities = drive.getWheelVelocities();
             RobotLog.dd(TAG, "velocities");
             drive.print_list_double(velocities);
