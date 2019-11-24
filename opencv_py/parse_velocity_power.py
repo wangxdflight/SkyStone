@@ -1,5 +1,5 @@
 import string
-
+num_wheels=4;
 
 filepath = "../velocity_power_test.log"
 with open(filepath) as fp:
@@ -12,7 +12,7 @@ with open(filepath) as fp:
 
         if "DriveVelocityPIDTuner: getWheelVelocities" in line:
             count=0;
-            while count<4:
+            while count<num_wheels:
                 line1=fp.readline();
                 #print(line1)
                 t1=line1.split(' ')
@@ -21,7 +21,7 @@ with open(filepath) as fp:
 
         if "DriveVelocityPIDTuner: getMotorPowers" in line:
             count=0;
-            while count<4:
+            while count<num_wheels:
                 line1=fp.readline();
                 #print(line1)
                 t1=line1.split(' ')
