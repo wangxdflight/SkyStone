@@ -1,7 +1,9 @@
+import sys
+
 import string
 num_wheels=4;
 
-filepath = "../v.log"
+filepath = sys.argv[1]
 with open(filepath) as fp:
     line = fp.readline()
     cnt = 1
@@ -10,8 +12,18 @@ with open(filepath) as fp:
     while line:
         #print("Line {}: {}".format(cnt, line.strip()))
         line = fp.readline()
-
-        if "DriveVelocityPIDTuner96.0: getWheelVelocities" in line:
+        if "SampleMecanumDriveREV: SampleMecanumDriveREV created" in line:
+            t=line.split(' ');
+            #print(t)
+            start_time=t[1];
+            #print(t[1])
+            print("start time "+start_time)
+        elif "RobotCore: thread: ...terminating 'LinearOpMode main'" in line:
+            t=line.split(' ');
+            #print(t)
+            end_time=t[1];
+            print("end time "+end_time)
+        elif "DriveVelocityPIDTuner96.0: getWheelVelocities" in line:
             count=0;
             while count<num_wheels:
                 line1=fp.readline();

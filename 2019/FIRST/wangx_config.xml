@@ -1,29 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <Robot type="FirstInspires-FTC">
+    <Webcam name="WebcamFront" serialNumber="3F2DF43F" />
     <LynxUsbDevice name="Expansion Hub Portal 1" serialNumber="DQ167WIO" parentModuleAddress="3">
         <LynxModule name="Expansion Hub 2" port="2">
-            <Matrix12vMotor name="leftFront" port="0" />
-            <Matrix12vMotor name="leftRear" port="1" />
+            <goBILDA5202SeriesMotor name="leftFront" port="0" />
+            <goBILDA5202SeriesMotor name="leftRear" port="1" />
             <Matrix12vMotor name="leftEncoder" port="2" />
             <Matrix12vMotor name="liftOne" port="3" />
+            <Servo name="plateLifter" port="0" />
             <Servo name="liftOdometer" port="1" />
-            <Servo name="transferLock" port="2" />
-            <Servo name="rightTransfer" port="3" />
+            <Servo name="innerTransfer" port="4" />
+            <Servo name="transferLock" port="5" />
             <DigitalDevice name="rightForward" port="0" />
             <DigitalDevice name="sideways" port="1" />
             <DigitalDevice name="leftForward" port="2" />
+            <DigitalDevice name="liftReset" port="3" />
             <LynxEmbeddedIMU name="imu" port="0" bus="0" />
         </LynxModule>
         <LynxModule name="Expansion Hub 3" port="3">
-            <Matrix12vMotor name="rightFront" port="0" />
-            <Matrix12vMotor name="rightRear" port="1" />
+            <goBILDA5202SeriesMotor name="rightFront" port="0" />
+            <goBILDA5202SeriesMotor name="rightRear" port="1" />
             <Matrix12vMotor name="frontEncoder" port="2" />
             <Matrix12vMotor name="rightEncoder" port="3" />
-            <Servo name="leftTransfer" port="0" />
+            <Servo name="clawInit" port="1" />
+            <Servo name="foundationLock" port="2" />
             <Servo name="clawServo1" port="3" />
             <Servo name="clawServo2" port="4" />
+            <Servo name="transferHorn" port="5" />
             <LynxEmbeddedIMU name="imu 1" port="0" bus="0" />
         </LynxModule>
     </LynxUsbDevice>
-    <Webcam name="WebcamFront" serialNumber="3F2DF43F" />
 </Robot>

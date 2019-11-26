@@ -29,7 +29,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 @Config
 public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {
     public static double TICKS_PER_REV = 1400; //  TBD: correct?
-    public static double WHEEL_RADIUS = 2.9; // in
+    public static double WHEEL_RADIUS = 1.14173; // 2.9cm; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
 
     public static double LATERAL_DISTANCE = 14.0; // in; distance between the left and right wheels

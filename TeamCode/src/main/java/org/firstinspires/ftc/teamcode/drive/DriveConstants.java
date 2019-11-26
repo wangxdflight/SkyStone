@@ -28,15 +28,19 @@ public class DriveConstants {
     private static final MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(GoBILDA5202Series.class);// NeveRest20Gearmotor
             // Matrix12vMotor  GoBILDA5202Series MatrixLegacyMotor (757.12)
+
+    public static double kP = 20.0;
+    public static double kI = 0.45;
+    public static double kD = 0.0;
     /*
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
     public static final boolean RUN_USING_ENCODER = true;
-    public static final PIDCoefficients MOTOR_VELO_PID = null;
+    public static final PIDCoefficients MOTOR_VELO_PID = null;//new PIDCoefficients(kP, kI, kD);
 
     public static final boolean RUN_USING_ODOMETRY_WHEEL = false;
-    private static String TAG = "DriveConstraints008";
+    private static String TAG = "DriveConstraints1124";
     /*
      * These are physical constants that can be determined from your robot (including the track
      * width; it will be tune empirically later although a rough estimate is important). Users are
