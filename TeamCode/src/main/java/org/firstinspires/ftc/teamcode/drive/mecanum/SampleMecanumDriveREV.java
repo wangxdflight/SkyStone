@@ -93,7 +93,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
     public void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients) {
         double t = getMotorVelocityF();
         RobotLog.dd(TAG, "setPIDCoefficients:\nkP: " + Double.toString(coefficients.kP) + " kI: " + coefficients.kI
-                + " kD: " + coefficients.kD + " vel: " + Double.toString(t));
+                + " kD: " + coefficients.kD + " MotorVelocityF: " + Double.toString(t));
         for (DcMotorEx motor : motors) {
             motor.setPIDFCoefficients(runMode, new PIDFCoefficients(
                     coefficients.kP, coefficients.kI, coefficients.kD, t

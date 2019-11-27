@@ -1,11 +1,11 @@
 
-
+import sys
 import string
 
 data=[];
 data_y=[];
 data_h=[]; #heading;
-filepath = "../25.log"
+filepath = sys.argv[1];
 with open(filepath) as fp:
     line = fp.readline()
     while line:

@@ -1,5 +1,5 @@
 ################ plot velocity/power ##################
-a=load('curve2.log');
+a=load('curve_log9.log');
 
 plot(a(:, 1));
 hold on;

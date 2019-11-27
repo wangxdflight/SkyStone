@@ -29,15 +29,15 @@ public class DriveConstants {
             MotorConfigurationType.getMotorType(GoBILDA5202Series.class);// NeveRest20Gearmotor
             // Matrix12vMotor  GoBILDA5202Series MatrixLegacyMotor (757.12)
 
-    public static double kP = 20.0;
-    public static double kI = 0.45;
-    public static double kD = 0.0;
+    public static double kP = 35;
+    public static double kI = 0.5;
+    public static double kD = 2.5;
     /*
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
     public static final boolean RUN_USING_ENCODER = true;
-    public static final PIDCoefficients MOTOR_VELO_PID = null;//new PIDCoefficients(kP, kI, kD);
+    public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
 
     public static final boolean RUN_USING_ODOMETRY_WHEEL = false;
     private static String TAG = "DriveConstraints1124";
@@ -51,7 +51,7 @@ public class DriveConstants {
      */
     public static double WHEEL_RADIUS = 2;
     public static double GEAR_RATIO = 2.0;  //MOTOR_CONFIG.getGearing(); // ???  output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 12.0;
+    public static double TRACK_WIDTH = 17.0;
     public static double HARDCODED_TICKS_PER_REV = 383.6*1.25; //MOTOR_CONFIG.getTicksPerRev();
     public static double HARDCODED_MAX_RPM = 435.0; //MOTOR_CONFIG.getMaxRPM();
     /*
@@ -72,13 +72,13 @@ public class DriveConstants {
      * acceleration values are required, and the jerk values are optional (setting a jerk of 0.0
      * forces acceleration-limited profiling).
      */
-    public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            24.0, 12.0, Math.PI / 2,
-            Math.toRadians(180.0), Math.toRadians(180.0), Math.PI / 4
+    public static DriveConstraints BASE_CONSTRAINTS = new (
+            30.0, 30.0, 0.0,
+            Math.toRadians(180.0), Math.toRadians(180.0), 0.0
     );
 
 
-    public static double encoderTicksToInches(double ticks) {
+    public static double encoderTicksToInches(double ticks) DriveConstraints{
         RobotLog.dd(TAG, "MOTOR_CONFIG.getTicksPerRev(vs. 383.6): " + Double.toString(MOTOR_CONFIG.getTicksPerRev())
         + " GEAR_RATIO "+Double.toString(GEAR_RATIO*1.0));
 

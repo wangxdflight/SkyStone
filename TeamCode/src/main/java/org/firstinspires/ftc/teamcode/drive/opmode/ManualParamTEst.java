@@ -26,7 +26,7 @@ public class ManualParamTest extends LinearOpMode {
     private final int polling_interval = 1000;
     private String TAG = "ManualParamTest";
     // use odometry wheel
-    private StandardTrackingWheelLocalizer localizer = new StandardTrackingWheelLocalizer(hardwareMap);
+    private StandardTrackingWheelLocalizer localizer = null;//new StandardTrackingWheelLocalizer(hardwareMap);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -41,9 +41,11 @@ public class ManualParamTest extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            List<Double>  odo_positions = localizer.getWheelPositions();
-            RobotLog.dd(TAG, "odometry positions");
-            drive.print_list_double(odo_positions);
+            if (localizer!=null) {
+                List<Double>  odo_positions = localizer.getWheelPositions();
+                RobotLog.dd(TAG, "odometry positions");
+                drive.print_list_double(odo_positions);
+            }
 
             List<Double> velocities = drive.getWheelVelocities();
             RobotLog.dd(TAG, "velocities");
