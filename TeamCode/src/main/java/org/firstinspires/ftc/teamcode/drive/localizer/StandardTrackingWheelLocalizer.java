@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
 import java.util.Arrays;
@@ -34,7 +35,8 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     public static double LATERAL_DISTANCE = 15.5; // in; distance between the left and right wheels
     public static double FORWARD_OFFSET = -5.49; // in; offset of the lateral wheel
     private String TAG = "StandardTrackingWheelLocalizer";
-    private DcMotor leftEncoder, rightEncoder, frontEncoder;
+    private DcMotorEx leftEncoder, rightEncoder, frontEncoder;
+    private List<DcMotorEx> motors;
 
     public StandardTrackingWheelLocalizer(HardwareMap hardwareMap) {
         super(Arrays.asList(
@@ -43,10 +45,17 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
                 new Pose2d(FORWARD_OFFSET, -1.56, Math.toRadians(90)) // front
         ));
 
-        leftEncoder = hardwareMap.dcMotor.get("leftEncoder");
-        rightEncoder = hardwareMap.dcMotor.get("rightEncoder");
-        frontEncoder = hardwareMap.dcMotor.get("frontEncoder");
+        leftEncoder = hardwareMap.get(DcMotorEx.class, "leftEncoder");
+        rightEncoder = hardwareMap.get(DcMotorEx.class, "rightEncoder");
+        frontEncoder = hardwareMap.get(DcMotorEx.class, "frontEncoder");
         RobotLog.dd(TAG, "StandardTrackingWheelLocalizer created");
+
+        motors = Arrays.asList(leftEncoder, rightEncoder, frontEncoder);
+
+        for (DcMotorEx motor : motors) {
+            motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
+
         /*
         (double) hwMap.leftIntake.getCurrentPosition(),
         (double) hwMap.liftTwo.getCurrentPosition(),  //@TODO: Switch to "hwMap.backRight.getCurrentPosition()" later
@@ -65,12 +74,12 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         RobotLog.dd(TAG, "getWheelPositions");
         RobotLog.dd(TAG, "leftEncoder: " + leftEncoder.getCurrentPosition());
         RobotLog.dd(TAG, "rightEncoder: " + rightEncoder.getCurrentPosition());
-        RobotLog.dd(TAG, "frontEncoder: " + frontEncoder.getCurrentPosition());
+        RobotLog.dd(TAG, "frontEncoder: " + (-1)*frontEncoder.getCurrentPosition());
 
         return Arrays.asList(
                 encoderTicksToInches(leftEncoder.getCurrentPosition()),
                 encoderTicksToInches(rightEncoder.getCurrentPosition()),
-                encoderTicksToInches(frontEncoder.getCurrentPosition())
+                encoderTicksToInches((-1)*frontEncoder.getCurrentPosition())
         );
     }
 }

@@ -1,19 +1,22 @@
 ################ plot velocity/power ##################
-a=load('t2.log');
-
-plot(a(:, 1));
+a=load('t.log');
+t=500
+b=a(:, 1);
+plot(1:t, b(1:t));
 hold on;
-plot(a(:, 2));
+b=a(:, 2);
+plot(1:t, b(1:t));
 hold on;
-plot(a(:, 3));
+#plot(a(:, 3));
 hold on;
-plot(a(:, 4));
+#plot(a(:, 4));
 hold on;
 xlabel('time')
 ylabel('inch/second');
 title("velocity");
-figure;
 
+return;
+figure;
 plot(a(:, 5));
 hold on;
 plot(a(:, 6));
