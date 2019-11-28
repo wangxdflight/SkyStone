@@ -4,7 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
+import com.acmerobotics.roadrunner.localization.Localizer;
 import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
@@ -26,11 +26,9 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ODOM
 public class ManualParamTest extends LinearOpMode {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
-    private final int polling_interval = 1000;
+    private final int polling_interval = 200;
     private String TAG = "ManualParamTest";
-    // use odometry wheel
-    private StandardTrackingWheelLocalizer localizer = null;
-
+    Localizer localizer = null;
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
@@ -40,15 +38,14 @@ public class ManualParamTest extends LinearOpMode {
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
-        if (RUN_USING_ODOMETRY_WHEEL) {
-            localizer = new StandardTrackingWheelLocalizer(hardwareMap);
-            RobotLog.dd(TAG, "StandardTrackingWheelLocalizer created");
-        }
+        localizer = drive.getLocalizer();
         waitForStart();
 
         while (opModeIsActive()) {
             if (localizer!=null) {
-                List<Double>  odo_positions = localizer.getWheelPositions();
+                StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
+                List<Double>  odo_positions = t.getWheelPositions();
+
                 RobotLog.dd(TAG, "odometry positions");
                 drive.print_list_double(odo_positions);
             }

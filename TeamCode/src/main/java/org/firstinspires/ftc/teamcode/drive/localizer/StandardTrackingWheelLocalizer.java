@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
 import java.util.Arrays;
 import java.util.List;
-import com.qualcomm.robotcore.util.RobotLog;
 
 /*
  * Sample tracking wheel localizer implementation assuming the standard configuration:
@@ -28,21 +27,20 @@ import com.qualcomm.robotcore.util.RobotLog;
  */
 @Config
 public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {
-    public static double TICKS_PER_REV = 1400; //  TBD: correct?
-    public static double WHEEL_RADIUS = 1.14173; // 2.9cm; // in
+    public static double TICKS_PER_REV = 1400.0; //  TBD: correct?
+    public static double WHEEL_RADIUS = 1.25;//1.14173; // 2.9cm; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
 
-    public static double LATERAL_DISTANCE = 14.0; // in; distance between the left and right wheels
-    public static double FORWARD_OFFSET = 6.5; // in; offset of the lateral wheel
+    public static double LATERAL_DISTANCE = 15.5; // in; distance between the left and right wheels
+    public static double FORWARD_OFFSET = -5.49; // in; offset of the lateral wheel
     private String TAG = "StandardTrackingWheelLocalizer";
-
     private DcMotor leftEncoder, rightEncoder, frontEncoder;
 
     public StandardTrackingWheelLocalizer(HardwareMap hardwareMap) {
         super(Arrays.asList(
                 new Pose2d(0, LATERAL_DISTANCE / 2, 0), // left
                 new Pose2d(0, -LATERAL_DISTANCE / 2, 0), // right
-                new Pose2d(FORWARD_OFFSET, 0, Math.toRadians(90)) // front
+                new Pose2d(FORWARD_OFFSET, -1.56, Math.toRadians(90)) // front
         ));
 
         leftEncoder = hardwareMap.dcMotor.get("leftEncoder");
