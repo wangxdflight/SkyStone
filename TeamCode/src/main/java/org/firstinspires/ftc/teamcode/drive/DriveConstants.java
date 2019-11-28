@@ -39,7 +39,7 @@ public class DriveConstants {
     public static final boolean RUN_USING_ENCODER = true;
     public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
 
-    public static final boolean RUN_USING_ODOMETRY_WHEEL = false;
+    public static final boolean RUN_USING_ODOMETRY_WHEEL = true;
     private static String TAG = "DriveConstraints1127";
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -54,14 +54,14 @@ public class DriveConstants {
     public static double TRACK_WIDTH = 17.0;
     public static double HARDCODED_TICKS_PER_REV = 383.6; //MOTOR_CONFIG.getTicksPerRev();
     public static double MAX_RPM_FROM_SPEC = 435.0;
-    public static double HARDCODED_MAX_RPM = 283.4; //MOTOR_CONFIG.getMaxRPM();
+    public static double HARDCODED_RPM_RATIO = 0.72215; // 0.666;///0.6514;//*MAX_RPM_FROM_SPEC; //283.4; //MOTOR_CONFIG.getMaxRPM();
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
      * the built-in velocity PID, *these values are fine as is*. However, if you do not have drive
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 1.0 / rpmToVelocity(getMaxRpm()); //0.010530;//0.0093;// 1.92*1.0 / rpmToVelocity(getMaxRpm()); // 0.0038463
+    public static double kV = 0.0093;//1.0 / rpmToVelocity(getMaxRpm()); //0.010530;//0.0093;// 1.92*1.0 / rpmToVelocity(getMaxRpm()); // 0.0038463
     public static double kA = 0;
     public static double kStatic = 0;
 
@@ -97,8 +97,8 @@ public class DriveConstants {
         RobotLog.dd(TAG, "MOTOR_CONFIG.getMaxRPM(): " + Double.toString(MOTOR_CONFIG.getMaxRPM()));
         double t = MOTOR_CONFIG.getMaxRPM() *
                 (RUN_USING_ENCODER ? MOTOR_CONFIG.getAchieveableMaxRPMFraction() : 1.0);
-        t = MAX_RPM_FROM_SPEC * (RUN_USING_ENCODER ? 0.65152 : 1.0);
-        RobotLog.dd(TAG, "getMaxRpm: hardcoded to 435 from: "+Double.toString((t)));
+        t = MAX_RPM_FROM_SPEC * (RUN_USING_ENCODER ? HARDCODED_RPM_RATIO : 1.0);
+        RobotLog.dd(TAG, "getMaxRpm: hardcoded to: "+Double.toString((t))+" from: "+Double.toString(MAX_RPM_FROM_SPEC));
         return t;
     }
 

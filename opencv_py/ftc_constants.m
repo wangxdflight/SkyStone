@@ -9,12 +9,12 @@ distance=75.84
 ticks_to_inch=WHEEL_RADIUS*2*pi*old_gear_ratio*ticks/ticks_per_rev
 new_gear_ratio=distance*ticks_per_rev/(WHEEL_RADIUS*2*pi*ticks)
 new_ticks_to_inch=WHEEL_RADIUS*2*pi*new_gear_ratio*ticks/ticks_per_rev
-t=(99.5 / 13.7) * (24.0 / 16)
+t=(99.5 / 13.7) * (32.0 / 16)
 # caculate kV; 
 max_rpm=435
 rpm_to_vel=max_rpm*old_gear_ratio*2*pi*WHEEL_RADIUS/60;
 kV=1.92*1.0/rpm_to_vel
-new_kV=0.01053#0.0093 #0.01053
+new_kV=0.0095#0.009;#0.0103;#0.009;#0.01053#0.0093 #0.01053
 # use actual RPM to get velocityF 
 new_rpm_to_vel=1.0/new_kV;
 new_rpm=new_rpm_to_vel*60/new_gear_ratio/(2*pi*WHEEL_RADIUS)

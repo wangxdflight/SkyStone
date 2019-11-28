@@ -28,7 +28,7 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ODOM
 public class TestMaxVelocity extends LinearOpMode {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
-    private final int polling_interval = 1000;
+    private final int polling_interval = 40;
     private String TAG = "TestMaxVelocity";
     private double maxVelocity = 0;
     public double MAX_POWER = 1.0;
@@ -47,7 +47,7 @@ public class TestMaxVelocity extends LinearOpMode {
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
         for (DcMotorEx motor : motors) {
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);  // cannot use encoder in this test!!!
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
