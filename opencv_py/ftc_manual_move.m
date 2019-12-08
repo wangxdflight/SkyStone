@@ -1,9 +1,7 @@
+# odometry 3 wheels, each has 2 column;
+# power readings for 4 wheels;
+# base 4 wheels, each has 2 columns;
 a=load('t.log');
-plot(a(:, 1));
-title('velocity');
-figure;
-plot(a(:, 9));
-title('position');
-figure;
-plot(a(:, 10));
-title('distances');
+plot(a(:, 2));
+hold on;
+plot(a(:, 12));

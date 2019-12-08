@@ -40,6 +40,7 @@ public class DriveConstants {
     public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
 
     public static final boolean RUN_USING_ODOMETRY_WHEEL = true;
+    public static final boolean RUN_USING_IMU_LOCALIZER = true;
     private static String TAG = "DriveConstraints1127";
     /*
      * These are physical constants that can be determined from your robot (including the track
