@@ -73,8 +73,10 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         imu.initialize(parameters);
-        BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
 
+        // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
+        // upward (normal to the floor) using a command like the following:
+        // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
     }
 
     public static double encoderTicksToInches(int ticks) {
@@ -107,7 +109,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     @Override
     public void setPoseEstimate(Pose2d pose2d) {
         super.setPoseEstimate(pose2d);
-        RobotLog.dd(TAG, "setPoseEstimate");
+        RobotLog.dd(TAG, "setPoseEstimate: X "+Double.toString(pose2d.getX())+ ", Y "+Double.toString(pose2d.getY()));
     }
 
     @Override
@@ -118,7 +120,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         if (RUN_USING_IMU_LOCALIZER == true) {
             poseEstimate_new = new Pose2d(s_poseEstimate.getX(), s_poseEstimate.getY(),
                     imu.getAngularOrientation().firstAngle);
-            RobotLog.dd(TAG, "using IMU: IMU heading " + Double.toString(poseEstimate_new.getHeading()) + " previous heading: "
+            RobotLog.dd(TAG, "using IMU: IMU heading " + Double.toString(poseEstimate_new.getHeading()) + " non-IMU heading: "
             + Double.toString(s_poseEstimate.getHeading()));
         }
         else {
