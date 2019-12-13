@@ -41,7 +41,7 @@ public class DriveConstants {
 
     public static final boolean RUN_USING_ODOMETRY_WHEEL = true;
     public static final boolean RUN_USING_IMU_LOCALIZER = true;
-    private static String TAG = "DriveConstraints1127";
+    private static String TAG = "DriveConstants";
     /*
      * These are physical constants that can be determined from your robot (including the track
      * width; it will be tune empirically later although a rough estimate is important). Users are

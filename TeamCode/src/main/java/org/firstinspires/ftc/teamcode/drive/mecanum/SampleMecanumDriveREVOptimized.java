@@ -64,6 +64,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         RobotLog.dd(TAG, "SampleMecanumDriveREVOptimized created");
 
         for (ExpansionHubMotor motor : motors) {
+			motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             if (RUN_USING_ENCODER) {
                 motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }
@@ -76,12 +77,12 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         }
 
         // TODO: reverse any motors using DcMotor.setDirection()
-        //leftFront.setDirection(DcMotorSimple.Direction.REVERSE); //???
-        //leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE); //???
+        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
         if (RUN_USING_ODOMETRY_WHEEL) {
-            RobotLog.dd(TAG, "to setLocalizer");
+            RobotLog.dd(TAG, "to setLocalizer to StandardTrackingWheelLocalizer");
             setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
         }
     }
@@ -98,7 +99,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
     public void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients) {
         double t = getMotorVelocityF();
         RobotLog.dd(TAG, "setPIDCoefficients:\nkP: " + Double.toString(coefficients.kP) + " kI: " + coefficients.kI
-                    + " kD: " + coefficients.kD + " vel: " + Double.toString(t));
+                    + " kD: " + coefficients.kD + " MotorVelocityF: " + Double.toString(t));
         for (ExpansionHubMotor motor : motors) {
             motor.setPIDFCoefficients(runMode, new PIDFCoefficients(
                     coefficients.kP, coefficients.kI, coefficients.kD, t
@@ -146,22 +147,21 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
     }
     @Override
     public List<Double> getMotorPowers(List<DcMotorEx> motors) {
-        List<Double> wheelPowers = new ArrayList<>();
+        List<Double> motorPowers = new ArrayList<>();
         for (DcMotorEx motor : motors) {
             double t = motor.getPower();
-
             RobotLog.dd(TAG, "getMotorPowers: " + "power: " + Double.toString(t));
 
-            wheelPowers.add(t);
+            motorPowers.add(t);
         }
-        return wheelPowers;
+        return motorPowers;
     }
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        RobotLog.dd(TAG, "setMotorPowers:\n"+"leftFront: " + Double.toString(v));
-        RobotLog.dd(TAG, "leftRear: "+Double.toString(v1));
-        RobotLog.dd(TAG, "rightRear: "+Double.toString(v2));
-        RobotLog.dd(TAG, "rightFront: "+Double.toString(v3));
+        RobotLog.dd(TAG, "setMotorPowers "+"leftFront: " + Double.toString(v));
+        RobotLog.dd(TAG, "setMotorPowers "+"leftRear: "+Double.toString(v1));
+        RobotLog.dd(TAG, "setMotorPowers "+"rightRear: "+Double.toString(v2));
+        RobotLog.dd(TAG, "setMotorPowers"+"rightFront: "+Double.toString(v3));
         leftFront.setPower(v);
         leftRear.setPower(v1);
         rightRear.setPower(v2);
