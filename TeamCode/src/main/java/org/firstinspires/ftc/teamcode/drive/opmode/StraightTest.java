@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 import com.qualcomm.robotcore.util.RobotLog;
@@ -14,7 +15,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 @Config
 @Autonomous(name = "StraightTest", group = "drive")
 public class StraightTest extends LinearOpMode {
-    public static double DISTANCE =24;
+    public static double DISTANCE = DriveConstants.getTestDistance();
 	private String TAG = "StraightTest";
     @Override
     public void runOpMode() throws InterruptedException {

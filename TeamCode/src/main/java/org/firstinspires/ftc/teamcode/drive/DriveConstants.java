@@ -6,6 +6,11 @@ import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.qualcomm.hardware.motors.GoBILDA5202Series;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 import com.qualcomm.robotcore.util.RobotLog;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /*
  * Constants shared between multiple drive types.
  *
@@ -65,6 +70,12 @@ public class DriveConstants {
     public static double kV = 0.0093;//1.0 / rpmToVelocity(getMaxRpm()); //0.010530;//0.0093;// 1.92*1.0 / rpmToVelocity(getMaxRpm()); // 0.0038463
     public static double kA = 0;
     public static double kStatic = 0;
+    public static double tP = 0;
+    public static double tI = 0;
+    public static double tD = 0;
+    public static double hP = 0; // heading co-efficiencies;
+    public static double hI = 0;
+    public static double hD = 0;
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -117,5 +128,43 @@ public class DriveConstants {
         double t = getTicksPerSec();
         RobotLog.dd(TAG, "getTicksPerSec "+Double.toString(t));
         return 32767 / getTicksPerSec();
+    }
+    private static double getTeamCodePropertyValue(String prop_str) {
+        double value = 0;
+        try {
+            Process proc = Runtime.getRuntime().exec(new String[]{"/system/bin/getprop", prop_str});
+            BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String t = reader.readLine();
+            RobotLog.dd(TAG, prop_str + " : "  + t);
+            value = Double.parseDouble(t);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
+    public static int getTestDistance() {
+        int distance = 48;
+        distance = (int) getTeamCodePropertyValue("debug.ftc.distance");
+        RobotLog.dd(TAG, "debug.ftc.distance = " + distance);
+
+        double t = getTeamCodePropertyValue("debug.ftc.kV");
+        if (t!=0) {
+            kV = t;
+            RobotLog.dd(TAG, "kV is updated to " + Double.toString(kV));
+        }
+        return distance;
+    }
+
+    public static int updateTransitionalPID() {
+        tP = getTeamCodePropertyValue("debug.ftc.tP");
+        tI = getTeamCodePropertyValue("debug.ftc.tI");
+        tD = getTeamCodePropertyValue("debug.ftc.tD");
+        hP = getTeamCodePropertyValue("debug.ftc.hP");
+        hI = getTeamCodePropertyValue("debug.ftc.hI");
+        hD = getTeamCodePropertyValue("debug.ftc.hD");
+        RobotLog.dd(TAG, "tP: "+Double.toString(tP) + " tI: "+Double.toString(tI) + " tD: " + Double.toString(tD));
+        RobotLog.dd(TAG, "hP: "+Double.toString(hP) + " hI: "+Double.toString(hI) + " hD: " + Double.toString(hD));
+        return 0;
     }
 }

@@ -53,7 +53,10 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -66,7 +69,7 @@ import java.util.stream.Collectors;
 public class ConceptOpenCV extends LinearOpMode
 {
     OpenCvCamera phoneCam;
-
+    private String TAG = "ConceptEasyOpenCV";
     @Override
     public void runOpMode()
     {
@@ -115,12 +118,14 @@ public class ConceptOpenCV extends LinearOpMode
          * Wait for the user to press start on the Driver Station
          */
         waitForStart();
-
+        //System.setProperty("debug.ftc.distance", "0");
         while (opModeIsActive())
         {
             /*
              * Send some stats to the telemetry
              */
+            //String distance_str = System.getProperty("debug.ftc.distance");
+
             telemetry.addData("Frame Count", phoneCam.getFrameCount());
             telemetry.addData("FPS", String.format("%.2f", phoneCam.getFps()));
             telemetry.addData("Total frame time ms", phoneCam.getTotalFrameTimeMs());

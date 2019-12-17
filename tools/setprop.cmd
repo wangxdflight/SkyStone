@@ -1,0 +1,9 @@
+adb shell setprop debug.ftc.distance 48
+adb shell setprop debug.ftc.kV 0
+adb shell setprop debug.ftc.tP 0
+adb shell setprop debug.ftc.tI 0
+adb shell setprop debug.ftc.tD 0
+adb shell setprop debug.ftc.hP 0
+adb shell setprop debug.ftc.hI 0
+adb shell setprop debug.ftc.hD 0
+adb shell getprop |grep debug.ftc
