@@ -44,8 +44,8 @@ public class DriveConstants {
     public static final boolean RUN_USING_ENCODER = true;
     public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
 
-    public static final boolean RUN_USING_ODOMETRY_WHEEL = true;
-    public static final boolean RUN_USING_IMU_LOCALIZER = true;
+    public static boolean RUN_USING_ODOMETRY_WHEEL = getUseOdometryWheelorNot();
+    public static boolean RUN_USING_IMU_LOCALIZER = getUseIMUorNot();
     private static String TAG = "DriveConstants";
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -142,7 +142,24 @@ public class DriveConstants {
         }
         return value;
     }
-
+    public static boolean getUseIMUorNot()
+    {
+        int flag = (int) getTeamCodePropertyValue("debug.ftc.imu");
+        RobotLog.dd(TAG, "using IMU? " + flag);
+        if (flag!=0)
+            return true;
+        else
+            return false;
+    }
+    public static boolean getUseOdometryWheelorNot()
+    {
+        int flag = (int) getTeamCodePropertyValue("debug.ftc.odom");
+        RobotLog.dd(TAG, "using Odometry? " + flag);
+        if (flag!=0)
+            return true;
+        else
+            return false;
+    }
     public static int getTestDistance() {
         int distance = 48;
         distance = (int) getTeamCodePropertyValue("debug.ftc.distance");

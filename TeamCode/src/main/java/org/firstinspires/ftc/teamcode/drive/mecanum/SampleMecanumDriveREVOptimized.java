@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.drive.mecanum;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ODOMETRY_WHEEL;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMotorVelocityF;
 
@@ -82,10 +81,12 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
-        if (RUN_USING_ODOMETRY_WHEEL) {
+        if (DriveConstants.getUseOdometryWheelorNot()) {
             RobotLog.dd(TAG, "to setLocalizer to StandardTrackingWheelLocalizer");
             setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
         }
+        else
+            RobotLog.dd(TAG, "not using Odometry wheel localizaer");
     }
 
     @Override

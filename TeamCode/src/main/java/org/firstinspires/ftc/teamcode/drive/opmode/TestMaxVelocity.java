@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
@@ -16,9 +17,6 @@ import com.qualcomm.robotcore.util.RobotLog;
 import java.util.Arrays;
 import java.util.List;
 import java.lang.String;
-
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ODOMETRY_WHEEL;
 
 /*
  * This is a simple routine to test turning capabilities.
@@ -51,10 +49,13 @@ public class TestMaxVelocity extends LinearOpMode {
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
-        if (RUN_USING_ODOMETRY_WHEEL) {
+        if (DriveConstants.getUseOdometryWheelorNot()) {
             localizer = new StandardTrackingWheelLocalizer(hardwareMap);
             RobotLog.dd(TAG, "StandardTrackingWheelLocalizer created");
         }
+        else
+            RobotLog.dd(TAG, "not using Odometry localizer");
+
         waitForStart();
         for (DcMotorEx motor : motors) {
             motor.setPower(MAX_POWER);  // set maximum power;

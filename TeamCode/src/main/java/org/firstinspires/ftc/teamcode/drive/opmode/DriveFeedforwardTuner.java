@@ -44,7 +44,7 @@ public class DriveFeedforwardTuner extends LinearOpMode {
             RobotLog.dd(TAG, "Feedforward constants usually don't need to be tuned " +
                     "when using the built-in drive motor velocity PID.");
         }
-
+        RobotLog.dd(TAG, "DISTANCE: "+Double.toString(DISTANCE));
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);

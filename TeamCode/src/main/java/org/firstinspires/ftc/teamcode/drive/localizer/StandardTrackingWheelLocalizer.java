@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.util.AxesSigns;
 import org.firstinspires.ftc.teamcode.util.BNO055IMUUtil;
 
@@ -45,6 +46,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     private DcMotorEx leftEncoder, rightEncoder, frontEncoder;
     private List<DcMotorEx> motors;
     private BNO055IMU imu;
+    private boolean use_imu = true;
     Pose2d poseEstimate_new = new Pose2d(0, 0, 0);
 
     public StandardTrackingWheelLocalizer(HardwareMap hardwareMap) {
@@ -64,7 +66,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         for (DcMotorEx motor : motors) {
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
-
+        use_imu = DriveConstants.getUseIMUorNot();
         /*
         (double) hwMap.leftIntake.getCurrentPosition(),
         (double) hwMap.liftTwo.getCurrentPosition(),  //@TODO: Switch to "hwMap.backRight.getCurrentPosition()" later
@@ -117,7 +119,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         super.update();
         Pose2d s_poseEstimate=super.getPoseEstimate();
 
-        if (RUN_USING_IMU_LOCALIZER == true) {
+        if (use_imu == true) {
             poseEstimate_new = new Pose2d(s_poseEstimate.getX(), s_poseEstimate.getY(),
                     imu.getAngularOrientation().firstAngle);
             RobotLog.dd(TAG, "using IMU: IMU heading " + Double.toString(poseEstimate_new.getHeading()) + " non-IMU heading: "

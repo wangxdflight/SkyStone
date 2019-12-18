@@ -23,6 +23,7 @@ public class FollowerPIDTuner extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateTransitionalPID();  // Transitional PID is used in base class;;
+        DISTANCE = DriveConstants.getTestDistance();
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
 
         drive.setPoseEstimate(new Pose2d(-DISTANCE / 2, -DISTANCE / 2, 0));

@@ -1,5 +1,5 @@
-adb kill-server
-adb wait-for-device
+rem adb kill-server
+rem adb wait-for-device
 adb root
 adb wait-for-device
 

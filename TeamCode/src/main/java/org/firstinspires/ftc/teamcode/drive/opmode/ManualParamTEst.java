@@ -16,8 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.lang.String;
 
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ODOMETRY_WHEEL;
-
 /*
  * This is a simple routine to test turning capabilities.
  */

@@ -52,10 +52,12 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     private FtcDashboard dashboard = FtcDashboard.getInstance();
     private String catName;
     private CustomVariable catVar;
-    private String TAG = "DriveVelocityPIDTuner";
+    private static String TAG = "DriveVelocityPIDTuner";
     private SampleMecanumDriveBase drive;
 
     private static MotionProfile generateProfile(boolean movingForward) {
+        DISTANCE = DriveConstants.getTestDistance();
+        RobotLog.dd(TAG, "DISTANCE: "+Double.toString(DISTANCE));
         MotionState start = new MotionState(movingForward ? 0 : DISTANCE, 0, 0, 0);
         MotionState goal = new MotionState(movingForward ? DISTANCE : 0, 0, 0, 0);
         return MotionProfileGenerator.generateSimpleMotionProfile(start, goal,

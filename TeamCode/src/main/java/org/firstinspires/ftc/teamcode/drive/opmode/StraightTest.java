@@ -19,6 +19,7 @@ public class StraightTest extends LinearOpMode {
 	private String TAG = "StraightTest";
     @Override
     public void runOpMode() throws InterruptedException {
+        DISTANCE = DriveConstants.getTestDistance();
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
         RobotLog.dd(TAG, "trajectoryBuilder forward, DISTANCE: "+Double.toString(DISTANCE));
         Trajectory trajectory = drive.trajectoryBuilder()
