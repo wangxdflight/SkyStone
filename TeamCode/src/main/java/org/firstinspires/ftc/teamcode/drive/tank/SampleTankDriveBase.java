@@ -26,6 +26,8 @@ import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.acmerobotics.roadrunner.trajectory.constraints.TankConstraints;
 import com.acmerobotics.roadrunner.util.NanoClock;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 
 import java.util.ArrayList;
@@ -64,7 +66,7 @@ public abstract class SampleTankDriveBase extends TankDrive {
     private double lastTimestamp;
 
     public SampleTankDriveBase() {
-        super(kV, kA, kStatic, TRACK_WIDTH);
+        super(kV, kA, kStatic, DriveConstants.getTrackWidth());
 
         dashboard = FtcDashboard.getInstance();
         dashboard.setTelemetryTransmissionInterval(25);
@@ -76,7 +78,7 @@ public abstract class SampleTankDriveBase extends TankDrive {
         turnController = new PIDFController(HEADING_PID);
         turnController.setInputBounds(0, 2 * Math.PI);
 
-        constraints = new TankConstraints(BASE_CONSTRAINTS, TRACK_WIDTH);
+        constraints = new TankConstraints(BASE_CONSTRAINTS, DriveConstants.getTrackWidth());
         follower = new TankPIDVAFollower(AXIAL_PID, CROSS_TRACK_PID);
     }
 

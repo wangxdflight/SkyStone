@@ -1,6 +1,7 @@
 ################ plot velocity/power ##################
-a=load('t.log');
-t=500
+clear all;
+a=load('t1.log');
+
 b=a(:, 1);
 plot(1:t, b(1:t));
 hold on;

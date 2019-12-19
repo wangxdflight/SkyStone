@@ -4,12 +4,17 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.localization.Localizer;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 import com.qualcomm.robotcore.util.RobotLog;
+
+import java.util.List;
+
 /**
  * This is a simple teleop routine for testing localization. Drive the robot around like a normal
  * teleop routine and make sure the robot's estimated pose matches the robot's actual pose (slight
@@ -68,6 +73,19 @@ public class LocalizationTest extends LinearOpMode {
             RobotLog.dd(TAG, "x: " + Double.toString(poseEstimate.getX()));
             RobotLog.dd(TAG, "y: " + Double.toString(poseEstimate.getX()));
             RobotLog.dd(TAG, "heading: " + Double.toString(poseEstimate.getHeading()));
+
+            Localizer localizer = drive.getLocalizer();
+            if (localizer!=null) {
+                StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
+                List<Double> odo_positions = t.getWheelPositions();
+
+                RobotLog.dd(TAG, "odometry positions");
+                drive.print_list_double(odo_positions);
+            }
+
+            List<Double> positions = drive.getWheelPositions();
+            RobotLog.dd(TAG, "wheel positions");
+            drive.print_list_double(positions);
         }
     }
 }

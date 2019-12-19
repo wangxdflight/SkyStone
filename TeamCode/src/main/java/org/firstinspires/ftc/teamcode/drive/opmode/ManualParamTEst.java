@@ -5,6 +5,8 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.acmerobotics.roadrunner.localization.Localizer;
+
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
@@ -40,7 +42,7 @@ public class ManualParamTest extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            if (localizer!=null) {
+            if (DriveConstants.getUseOdometryWheelorNot() && (localizer!=null)) {
                 StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
                 List<Double>  odo_positions = t.getWheelPositions();
 
