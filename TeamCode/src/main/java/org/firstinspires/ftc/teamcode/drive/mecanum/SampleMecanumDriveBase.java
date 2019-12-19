@@ -1,10 +1,6 @@
 package org.firstinspires.ftc.teamcode.drive.mecanum;
 
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAINTS;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kA;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kStatic;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
+
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.canvas.Canvas;
@@ -36,6 +32,9 @@ import java.util.List;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.RobotLog;
+
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAINTS;
+
 /*
  * Base class with shared functionality for sample mecanum drives. All hardware-specific details are
  * handled in subclasses.
@@ -69,8 +68,8 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
     private double lastTimestamp;
 
     public SampleMecanumDriveBase() {
-        super(kV, kA, kStatic, DriveConstants.TRACK_WIDTH);
-        RobotLog.dd(TAG, "kV "+Double.toString(kV)+" kA "+Double.toString(kA)+" kStatic "+Double.toString(kStatic));
+        super(DriveConstants.kV, DriveConstants.kA, DriveConstants.kStatic, DriveConstants.TRACK_WIDTH);
+        RobotLog.dd(TAG, "kV "+Double.toString(DriveConstants.kV)+" kA "+Double.toString(DriveConstants.kA)+" kStatic "+Double.toString(DriveConstants.kStatic));
         RobotLog.dd(TAG, "TRACK_WIDTH "+Double.toString(DriveConstants.TRACK_WIDTH));
         RobotLog.dd(TAG, "tP "+Double.toString(DriveConstants.tP)+" tI "+Double.toString(DriveConstants.tI)+" tD "+Double.toString(DriveConstants.tD));
         RobotLog.dd(TAG, "hP "+Double.toString(DriveConstants.hP)+" tI "+Double.toString(DriveConstants.hI)+" hD "+Double.toString(DriveConstants.hD));

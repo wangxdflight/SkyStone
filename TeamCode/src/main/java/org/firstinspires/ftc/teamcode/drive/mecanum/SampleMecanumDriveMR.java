@@ -32,7 +32,7 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
      * to decrease this number and increase your control loop frequency, do so at your own risk.
      */
     private static final int MOTOR_WRITE_DELAY = 20;
-    private String TAG = "SampleMecanumDriveMRs";
+    private String TAG = "SampleMecanumDriveMR";
     private DcMotor leftFront, leftRear, rightRear, rightFront;
     private List<DcMotor> motors;
     private BNO055IMU imu;

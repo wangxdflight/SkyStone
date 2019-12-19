@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.drive.localizer;
 
+import android.support.annotation.NonNull;
+
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
@@ -41,21 +43,21 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
 
     //public static double LATERAL_DISTANCE = 15.5; // in; distance between the left and right wheels
-    public static double FORWARD_OFFSET = -5.49; // in; offset of the lateral wheel
-    private String TAG = "StandardTrackingWheelLocalizer";
+    //public static double FORWARD_OFFSET = -5.49; // in; offset of the lateral wheel
+	private String TAG = "StandardTrackingWheelLocalizer";
     private DcMotorEx leftEncoder, rightEncoder, frontEncoder;
     private List<DcMotorEx> motors;
     private BNO055IMU imu;
 
     Pose2d poseEstimate_new = new Pose2d(0, 0, 0);
 
-    public StandardTrackingWheelLocalizer(HardwareMap hardwareMap, BNO055IMU imu) {
+    public StandardTrackingWheelLocalizer(HardwareMap hardwareMap, BNO055IMU imu_) {
         super(Arrays.asList(
                 new Pose2d(0, DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // left
                 new Pose2d(0, -1 * DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // right
-                new Pose2d(FORWARD_OFFSET, -1.56, Math.toRadians(90)) // front
+                new Pose2d(DriveConstantsPID.ODOMERY_FORWARD_OFFSET, -1.56, Math.toRadians(90)) // front
         ));
-        this.imu = imu;
+        this.imu = imu_;
         leftEncoder = hardwareMap.get(DcMotorEx.class, "leftEncoder");
         rightEncoder = hardwareMap.get(DcMotorEx.class, "rightEncoder");
         frontEncoder = hardwareMap.get(DcMotorEx.class, "frontEncoder");
@@ -84,17 +86,20 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         return t;
     }
 
+    @NonNull
     @Override
     public List<Double> getWheelPositions() {
+        int x = leftEncoder.getCurrentPosition();
+        int y = rightEncoder.getCurrentPosition();
+        int z = frontEncoder.getCurrentPosition();
         RobotLog.dd(TAG, "getWheelPositions");
-        RobotLog.dd(TAG, "leftEncoder: " + leftEncoder.getCurrentPosition());
-        RobotLog.dd(TAG, "rightEncoder: " + rightEncoder.getCurrentPosition());
-        RobotLog.dd(TAG, "frontEncoder: " + (-1)*frontEncoder.getCurrentPosition());
-
+        RobotLog.dd(TAG, "leftEncoder: " + x);
+        RobotLog.dd(TAG, "rightEncoder: " + y);
+        RobotLog.dd(TAG, "frontEncoder: " + (-1)*z);
         return Arrays.asList(
-                encoderTicksToInches(leftEncoder.getCurrentPosition()),
-                encoderTicksToInches(rightEncoder.getCurrentPosition()),
-                encoderTicksToInches((-1)*frontEncoder.getCurrentPosition())
+                encoderTicksToInches(x),
+                encoderTicksToInches(y),
+                encoderTicksToInches(-1*z)
         );
     }
 
