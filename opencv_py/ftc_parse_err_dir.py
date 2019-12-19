@@ -6,8 +6,9 @@ for subdir, dirs, files in os.walk("."):
         filepath = subdir + os.sep + file
 
         if filepath.endswith(".log"):
-            print(filepath)
+            #print(filepath)
             cmd_line = "cat " + filepath + " |grep 'Robocol : received command: CMD_INIT_OP_MODE'";
+            os.system("echo "+filepath)
             os.system(cmd_line);
 
             cmd_line = "cat " + filepath + " |grep debug.ftc";

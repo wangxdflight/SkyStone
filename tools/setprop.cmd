@@ -1,11 +1,11 @@
 adb shell setprop debug.ftc.distance 48
 adb shell setprop debug.ftc.kV 0
-adb shell setprop debug.ftc.tP 20
+adb shell setprop debug.ftc.tP 25
 adb shell setprop debug.ftc.tI 20
 adb shell setprop debug.ftc.tD 0
-adb shell setprop debug.ftc.hP 50
+adb shell setprop debug.ftc.hP 30
 adb shell setprop debug.ftc.hI -5
-adb shell setprop debug.ftc.hD 0
+adb shell setprop debug.ftc.hD 10
 adb shell setprop debug.ftc.imu 0
 adb shell setprop debug.ftc.odom 1
 adb shell setprop debug.ftc.trackwidth 16.15
