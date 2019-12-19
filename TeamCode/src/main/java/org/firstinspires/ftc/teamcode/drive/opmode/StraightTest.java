@@ -20,11 +20,12 @@ import java.util.List;
 @Config
 @Autonomous(name = "StraightTest", group = "drive")
 public class StraightTest extends LinearOpMode {
-    public static double DISTANCE = DriveConstants.getTestDistance();
+    public static double DISTANCE = DriveConstants.TEST_DISTANCE;
 	private String TAG = "StraightTest";
     @Override
     public void runOpMode() throws InterruptedException {
-        DISTANCE = DriveConstants.getTestDistance();
+        DriveConstants.updateConstantsFromProperties();
+        DISTANCE = DriveConstants.TEST_DISTANCE;
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
         RobotLog.dd(TAG, "trajectoryBuilder forward, DISTANCE: "+Double.toString(DISTANCE));
         Trajectory trajectory = drive.trajectoryBuilder()
@@ -37,7 +38,7 @@ public class StraightTest extends LinearOpMode {
 
         drive.followTrajectorySync(trajectory);
         Localizer localizer = drive.getLocalizer();
-        if (DriveConstants.getUseOdometryWheelorNot() && (localizer!=null)) {
+        if (DriveConstants.RUN_USING_ODOMETRY_WHEEL && (localizer!=null)) {
             StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
             List<Double> odo_positions = t.getWheelPositions();
 

@@ -51,6 +51,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         imu.initialize(parameters);
 
+
         // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
         // upward (normal to the floor) using a command like the following:
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
@@ -81,9 +82,9 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
-        if (DriveConstants.getUseOdometryWheelorNot()) {
+        if (DriveConstants.RUN_USING_ODOMETRY_WHEEL) {
             RobotLog.dd(TAG, "to setLocalizer to StandardTrackingWheelLocalizer");
-            setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
+            setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap, imu));
         }
         else
             RobotLog.dd(TAG, "not using Odometry wheel localizaer");

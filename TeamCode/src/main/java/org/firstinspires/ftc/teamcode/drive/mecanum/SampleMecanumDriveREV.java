@@ -42,6 +42,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
         LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
 
         // TODO: adjust the names of the following hardware devices to match your configuration
+
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
@@ -77,9 +78,9 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
-        if (DriveConstants.getUseOdometryWheelorNot()) {
+        if (DriveConstants.RUN_USING_ODOMETRY_WHEEL) {
             RobotLog.dd(TAG, "to setLocalizer to StandardTrackingWheelLocalizer");
-            setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
+            setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap, imu));
         }
         else
             RobotLog.dd(TAG, "not using Odometry localizer");

@@ -45,7 +45,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
 
-    public static double DISTANCE = DriveConstants.getTestDistance(); // make it smaller for safty, can increase later; 96;
+    public static double DISTANCE = DriveConstants.TEST_DISTANCE; // make it smaller for safty, can increase later; 96;
 
     private static final String PID_VAR_NAME = "VELO_PID";
 
@@ -56,7 +56,8 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     private SampleMecanumDriveBase drive;
 
     private static MotionProfile generateProfile(boolean movingForward) {
-        DISTANCE = DriveConstants.getTestDistance();
+        DriveConstants.updateConstantsFromProperties();
+        DISTANCE = DriveConstants.TEST_DISTANCE;
         RobotLog.dd(TAG, "DISTANCE: "+Double.toString(DISTANCE));
         MotionState start = new MotionState(movingForward ? 0 : DISTANCE, 0, 0, 0);
         MotionState goal = new MotionState(movingForward ? DISTANCE : 0, 0, 0, 0);

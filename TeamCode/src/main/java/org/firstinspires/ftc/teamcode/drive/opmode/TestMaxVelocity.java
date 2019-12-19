@@ -36,6 +36,7 @@ public class TestMaxVelocity extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         double currentVelocity;
+        DriveConstants.updateConstantsFromProperties();
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
@@ -49,9 +50,9 @@ public class TestMaxVelocity extends LinearOpMode {
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
-        if (DriveConstants.getUseOdometryWheelorNot()) {
-            localizer = new StandardTrackingWheelLocalizer(hardwareMap);
-            RobotLog.dd(TAG, "StandardTrackingWheelLocalizer created");
+        if (DriveConstants.RUN_USING_ODOMETRY_WHEEL) {
+            localizer = (StandardTrackingWheelLocalizer)drive.getLocalizer();
+            RobotLog.dd(TAG, "StandardTrackingWheelLocalizer fetched from Drive class");
         }
         else
             RobotLog.dd(TAG, "not using Odometry localizer");

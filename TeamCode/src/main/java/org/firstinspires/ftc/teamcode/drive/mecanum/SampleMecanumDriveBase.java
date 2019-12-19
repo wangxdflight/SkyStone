@@ -69,9 +69,11 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
     private double lastTimestamp;
 
     public SampleMecanumDriveBase() {
-        super(kV, kA, kStatic, DriveConstants.getTrackWidth());
+        super(kV, kA, kStatic, DriveConstants.TRACK_WIDTH);
         RobotLog.dd(TAG, "kV "+Double.toString(kV)+" kA "+Double.toString(kA)+" kStatic "+Double.toString(kStatic));
-        RobotLog.dd(TAG, "TRACK_WIDTH "+Double.toString(DriveConstants.getTrackWidth()));
+        RobotLog.dd(TAG, "TRACK_WIDTH "+Double.toString(DriveConstants.TRACK_WIDTH));
+        RobotLog.dd(TAG, "tP "+Double.toString(DriveConstants.tP)+" tI "+Double.toString(DriveConstants.tI)+" tD "+Double.toString(DriveConstants.tD));
+        RobotLog.dd(TAG, "hP "+Double.toString(DriveConstants.hP)+" tI "+Double.toString(DriveConstants.hI)+" hD "+Double.toString(DriveConstants.hD));
 
         dashboard = FtcDashboard.getInstance();
         dashboard.setTelemetryTransmissionInterval(25);
@@ -83,7 +85,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
         turnController = new PIDFController(HEADING_PID);
         turnController.setInputBounds(0, 2 * Math.PI);
 
-        constraints = new MecanumConstraints(BASE_CONSTRAINTS, DriveConstants.getTrackWidth());
+        constraints = new MecanumConstraints(BASE_CONSTRAINTS, DriveConstants.TRACK_WIDTH);
         follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID);
     }
 

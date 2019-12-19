@@ -31,6 +31,7 @@ public class ManualParamTest extends LinearOpMode {
     Localizer localizer = null;
     @Override
     public void runOpMode() throws InterruptedException {
+        DriveConstants.updateConstantsFromProperties();
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
@@ -42,7 +43,7 @@ public class ManualParamTest extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            if (DriveConstants.getUseOdometryWheelorNot() && (localizer!=null)) {
+            if (DriveConstants.RUN_USING_ODOMETRY_WHEEL && (localizer!=null)) {
                 StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
                 List<Double>  odo_positions = t.getWheelPositions();
 

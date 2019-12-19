@@ -20,6 +20,8 @@ import org.firstinspires.ftc.teamcode.util.LoggingUtil;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMaxRpm;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.rpmToVelocity;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.updateConstantsFromProperties;
+
 import com.qualcomm.robotcore.util.RobotLog;
 /*
  * Op mode for computing kV, kStatic, and kA from various drive routines. For the curious, here's an
@@ -36,10 +38,11 @@ import com.qualcomm.robotcore.util.RobotLog;
 public class DriveFeedforwardTuner extends LinearOpMode {
     public static final double MAX_POWER = 0.7;
     //public static final double DISTANCE = 100;
-    public static final double DISTANCE = DriveConstants.getTestDistance();
+    public static final double DISTANCE = DriveConstants.TEST_DISTANCE;
     private String TAG = "DriveFeedforwardTuner";
     @Override
     public void runOpMode() throws InterruptedException {
+        DriveConstants.updateConstantsFromProperties();
         if (RUN_USING_ENCODER) {
             RobotLog.dd(TAG, "Feedforward constants usually don't need to be tuned " +
                     "when using the built-in drive motor velocity PID.");

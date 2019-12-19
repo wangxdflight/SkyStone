@@ -17,13 +17,13 @@ import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 @Config
 @Autonomous(group = "drive")
 public class FollowerPIDTuner extends LinearOpMode {
-    public static double DISTANCE = DriveConstants.getTestDistance();
+    public static double DISTANCE = 0; // update later;
     private String TAG = "FollowerPIDTuner";
 
     @Override
     public void runOpMode() throws InterruptedException {
-        DriveConstants.updateTransitionalPID();  // Transitional PID is used in base class;;
-        DISTANCE = DriveConstants.getTestDistance();
+        DriveConstants.updateConstantsFromProperties();  // Transitional PID is used in base class;;
+        DISTANCE = DriveConstants.TEST_DISTANCE;
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
 
         drive.setPoseEstimate(new Pose2d(-DISTANCE / 2, -DISTANCE / 2, 0));

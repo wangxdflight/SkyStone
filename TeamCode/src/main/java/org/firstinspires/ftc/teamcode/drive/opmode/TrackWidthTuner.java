@@ -33,6 +33,7 @@ public class TrackWidthTuner extends LinearOpMode {
     private String TAG = "TrackWidthTuner";
     @Override
     public void runOpMode() throws InterruptedException {
+        DriveConstants.updateConstantsFromProperties();
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         //RUN_USING_ODOMETRY_WHEEL = true; //???
         SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
@@ -71,7 +72,7 @@ public class TrackWidthTuner extends LinearOpMode {
                 drive.update();
             }
 
-            double trackWidth = DriveConstants.getTrackWidth() * Math.toRadians(ANGLE) / headingAccumulator;
+            double trackWidth = DriveConstants.ODOMETRY_TRACK_WIDTH * Math.toRadians(ANGLE) / headingAccumulator;
             trackWidthStats.add(trackWidth);
             RobotLog.dd(TAG, "trackWidth:" + Double.toString(trackWidth));
             sleep(DELAY);

@@ -66,7 +66,7 @@ public abstract class SampleTankDriveBase extends TankDrive {
     private double lastTimestamp;
 
     public SampleTankDriveBase() {
-        super(kV, kA, kStatic, DriveConstants.getTrackWidth());
+        super(kV, kA, kStatic, DriveConstants.TRACK_WIDTH);
 
         dashboard = FtcDashboard.getInstance();
         dashboard.setTelemetryTransmissionInterval(25);
@@ -78,7 +78,7 @@ public abstract class SampleTankDriveBase extends TankDrive {
         turnController = new PIDFController(HEADING_PID);
         turnController.setInputBounds(0, 2 * Math.PI);
 
-        constraints = new TankConstraints(BASE_CONSTRAINTS, DriveConstants.getTrackWidth());
+        constraints = new TankConstraints(BASE_CONSTRAINTS, DriveConstants.TRACK_WIDTH);
         follower = new TankPIDVAFollower(AXIAL_PID, CROSS_TRACK_PID);
     }
 
