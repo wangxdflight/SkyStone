@@ -55,7 +55,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         super(Arrays.asList(
                 new Pose2d(0, DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // left
                 new Pose2d(0, -1 * DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // right
-                new Pose2d(DriveConstants.ODOMERY_FORWARD_OFFSET, -1.56, Math.toRadians(90)) // front
+                new Pose2d(DriveConstants.ODOMERY_FORWARD_OFFSET, 0, Math.toRadians(90)) // front
         ));
         this.imu = imu_;
         leftEncoder = hardwareMap.get(DcMotorEx.class, "leftEncoder");
