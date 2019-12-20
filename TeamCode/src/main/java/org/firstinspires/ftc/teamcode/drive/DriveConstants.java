@@ -59,7 +59,7 @@ public class DriveConstants {
     public static double WHEEL_RADIUS = 2;
     public static double GEAR_RATIO =  1.6; //(99.5 / 13.7) * (24.0 / 16);  //MOTOR_CONFIG.getGearing(); // ???  output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 17.0;
-    public static double ODOMETRY_TRACK_WIDTH = 14.8
+    public static double ODOMETRY_TRACK_WIDTH = 14.8;
     public static double ODOMERY_FORWARD_OFFSET = 5.5;
     public static double HARDCODED_TICKS_PER_REV = 383.6; //MOTOR_CONFIG.getTicksPerRev();
     public static double MAX_RPM_FROM_SPEC = 435.0;
