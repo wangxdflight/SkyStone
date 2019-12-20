@@ -41,7 +41,7 @@ public class DriveConstants {
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
-    public static final boolean RUN_USING_PARAMTER_FROM_PROPERTIES = true;
+    public static final boolean RUN_USING_PARAMTER_FROM_PROPERTIES = false;
     public static final boolean RUN_USING_ENCODER = true;
     public static PIDCoefficients MOTOR_VELO_PID = null;
 
@@ -59,8 +59,8 @@ public class DriveConstants {
     public static double WHEEL_RADIUS = 2;
     public static double GEAR_RATIO =  1.6; //(99.5 / 13.7) * (24.0 / 16);  //MOTOR_CONFIG.getGearing(); // ???  output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 17.0;
-    public static double ODOMETRY_TRACK_WIDTH = 15.5;
-    public static double ODOMERY_FORWARD_OFFSET = -5.49;
+    public static double ODOMETRY_TRACK_WIDTH = 14.8
+    public static double ODOMERY_FORWARD_OFFSET = 5.5;
     public static double HARDCODED_TICKS_PER_REV = 383.6; //MOTOR_CONFIG.getTicksPerRev();
     public static double MAX_RPM_FROM_SPEC = 435.0;
     public static double HARDCODED_RPM_RATIO = 0.72215; // 0.666;///0.6514;//*MAX_RPM_FROM_SPEC; //283.4; //MOTOR_CONFIG.getMaxRPM();
@@ -75,12 +75,12 @@ public class DriveConstants {
     public static double kA = 0;
     public static double kStatic = 0;
     // TRANSITIONAL PID and Heading PID values;
-    public static double tP = 0;
+    public static double tP = 5.0;
     public static double tI = 0;
     public static double tD = 0;
-    public static double hP = 0; // heading co-efficiencies;
-    public static double hI = 0;
-    public static double hD = 0;
+    public static double hP = 10; // heading co-efficiencies;
+    public static double hI = -2.0;
+    public static double hD = 25;
     public static double TEST_DISTANCE = 48;
 
     /*
