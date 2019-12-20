@@ -144,7 +144,8 @@ public class DriveConstants {
             if (t != null && !t.trim().isEmpty())
             {
                 RobotLog.dd(TAG, prop_str + " : "  + t);
-                value = Double.parseDouble(t.trim());
+                value = Double.parseDouble(t);
+                //RobotLog.dd(TAG, "returned "+Double.toString(value));
             }
             else
                 RobotLog.dd(TAG, "returned prop str is invalid");
@@ -211,8 +212,6 @@ public class DriveConstants {
         v_double = getTeamCodePropertyValue("debug.ftc.kD");
         if (v_double != Double.MAX_VALUE)
             kD = v_double;
-
-        MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
 
         v_double = getTeamCodePropertyValue("debug.ftc.odomTrackwidth");
         if (v_double != 0 && v_double != Double.MAX_VALUE)

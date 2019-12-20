@@ -22,6 +22,7 @@ adb wait-for-device
 adb tcpip 5555
 adb wait-for-device
 ping %var%
+start "wifi keepalive" ping 192.168.3.110 -t
 adb connect %var%:5555
 sleep 2
 adb devices

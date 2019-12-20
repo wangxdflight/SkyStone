@@ -55,7 +55,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         super(Arrays.asList(
                 new Pose2d(0, DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // left
                 new Pose2d(0, -1 * DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // right
-                new Pose2d(DriveConstantsPID.ODOMERY_FORWARD_OFFSET, -1.56, Math.toRadians(90)) // front
+                new Pose2d(DriveConstants.ODOMERY_FORWARD_OFFSET, -1.56, Math.toRadians(90)) // front
         ));
         this.imu = imu_;
         leftEncoder = hardwareMap.get(DcMotorEx.class, "leftEncoder");
@@ -129,7 +129,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         }
         else {
             poseEstimate_new = s_poseEstimate;
-            RobotLog.dd(TAG, "not using IMU");
+            RobotLog.dd(TAG, "not using IMU for heading");
         }
         RobotLog.dd(TAG, "poseEstimate: "+Double.toString(poseEstimate_new.getX()) + ", " + Double.toString(poseEstimate_new.getY()) + ", " +
                 Double.toString(poseEstimate_new.getHeading()));
