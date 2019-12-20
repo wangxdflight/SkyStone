@@ -141,8 +141,15 @@ public class DriveConstants {
             Process proc = Runtime.getRuntime().exec(new String[]{"/system/bin/getprop", prop_str});
             BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String t = reader.readLine();
-            RobotLog.dd(TAG, prop_str + " : "  + t);
-            value = Double.parseDouble(t);
+            if (t != null && !t.trim().isEmpty())
+            {
+                RobotLog.dd(TAG, prop_str + " : "  + t);
+                value = Double.parseDouble(t.trim());
+            }
+            else
+                RobotLog.dd(TAG, "returned prop str is invalid");
+
+
         } catch(IOException e) {
             RobotLog.dd(TAG, "getprop failed for " + prop_str);
             e.printStackTrace();
@@ -157,17 +164,17 @@ public class DriveConstants {
         }
         else
         {
-            RobotLog.dd(TAG, "kP: "  + Double.toString(MOTOR_VELO_PID.kP) + ", kI: "  + Double.toString(MOTOR_VELO_PID.kI) + ", kD: "  + Double.toString(MOTOR_VELO_PID.kD));
+            RobotLog.dd(TAG, "Velocity PID    kP: "  + Double.toString(MOTOR_VELO_PID.kP) + ", kI: "  + Double.toString(MOTOR_VELO_PID.kI) + ", kD: "  + Double.toString(MOTOR_VELO_PID.kD));
         }
 
-        RobotLog.dd(TAG, "Transitional PID:\ntP: "+Double.toString(tP) + " tI: "+Double.toString(tI) + " tD: " + Double.toString(tD));
-        RobotLog.dd(TAG, "Heading PID:\nhP: "+Double.toString(hP) + " hI: "+Double.toString(hI) + " hD: " + Double.toString(hD));
-        RobotLog.dd(TAG, "test distance: ", TEST_DISTANCE);
-        RobotLog.dd(TAG, "using IMU in localizer? : ", RUN_USING_IMU_LOCALIZER);
-        RobotLog.dd(TAG, "Driving wheel width? : ", TRACK_WIDTH);
-        RobotLog.dd(TAG, "using Odometry? : ", RUN_USING_ODOMETRY_WHEEL);
-        RobotLog.dd(TAG, "Odometry wheel width? : ", ODOMETRY_TRACK_WIDTH);
-        RobotLog.dd(TAG, "Odometry forward offset? ", ODOMERY_FORWARD_OFFSET);
+        RobotLog.dd(TAG, "Transitional PID   tP: "+Double.toString(tP) + " tI: "+Double.toString(tI) + " tD: " + Double.toString(tD));
+        RobotLog.dd(TAG, "Heading PID   hP: "+Double.toString(hP) + " hI: "+Double.toString(hI) + " hD: " + Double.toString(hD));
+        RobotLog.dd(TAG, "test distance: " + Double.toString(TEST_DISTANCE));
+        RobotLog.dd(TAG, "using IMU in localizer? : " + Integer.toString(RUN_USING_IMU_LOCALIZER?1:0));
+        RobotLog.dd(TAG, "Driving wheel width? : " + Double.toString(TRACK_WIDTH));
+        RobotLog.dd(TAG, "using Odometry? : " + Integer.toString(RUN_USING_ODOMETRY_WHEEL?1:0));
+        RobotLog.dd(TAG, "Odometry wheel width? : " + Double.toString(ODOMETRY_TRACK_WIDTH));
+        RobotLog.dd(TAG, "Odometry forward offset? " + Double.toString(ODOMERY_FORWARD_OFFSET));
     }
     public static void updateConstantsFromProperties()
     {
@@ -184,9 +191,16 @@ public class DriveConstants {
         if (v_double != Double.MAX_VALUE)
         {
             v_int = (int) v_double;
-            if (v_int != 0)
-                RUN_USING_IMU_LOCALIZER = true;
+            RUN_USING_IMU_LOCALIZER = (v_int==0)?false:true;
         }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.odom");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            RUN_USING_ODOMETRY_WHEEL = (v_int==0)?false:true;
+        }
+        v_double = getTeamCodePropertyValue("debug.ftc.kV");
+        if (v_double != 0 && v_double != Double.MAX_VALUE)
+            kV = v_double;
 
         v_double = getTeamCodePropertyValue("debug.ftc.kP");
         if (v_double != Double.MAX_VALUE)
@@ -200,20 +214,13 @@ public class DriveConstants {
 
         MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
 
-        v_double = (int) getTeamCodePropertyValue("debug.ftc.odom");
-        if (v_double != Double.MAX_VALUE) {
-            v_int = (int) v_double;
-            RobotLog.dd(TAG, "using Odometry? " + v_int);
-            if (v_int != 0)
-                RUN_USING_ODOMETRY_WHEEL = true;
-        }
         v_double = getTeamCodePropertyValue("debug.ftc.odomTrackwidth");
         if (v_double != 0 && v_double != Double.MAX_VALUE)
             ODOMETRY_TRACK_WIDTH = v_double;
 
         v_double = getTeamCodePropertyValue("debug.ftc.odomForwardOffset");
         if (v_double != 0 && v_double != Double.MAX_VALUE)
-            ODOMETRY_TRACK_WIDTH = v_double;
+            ODOMERY_FORWARD_OFFSET = v_double;
 
         v_double = getTeamCodePropertyValue("debug.ftc.trackwidth");
         if (v_double != 0 && v_double != Double.MAX_VALUE)
@@ -239,7 +246,7 @@ public class DriveConstants {
         if (v_double != Double.MAX_VALUE)
             hD = v_double;
 
-        v_double = (int) getTeamCodePropertyValue("debug.ftc.distance");
+        v_double = getTeamCodePropertyValue("debug.ftc.distance");
         if (v_double != 0 && v_double != Double.MAX_VALUE)
         {
             TEST_DISTANCE = v_double;

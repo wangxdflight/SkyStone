@@ -21,6 +21,7 @@ for /F "tokens=1,3 delims=: " %%a in ("%var2%") do (
 adb wait-for-device
 adb tcpip 5555
 adb wait-for-device
+ping %var%
 adb connect %var%:5555
 sleep 2
 adb devices
