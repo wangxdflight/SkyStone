@@ -41,7 +41,7 @@ public class DriveConstants {
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
-    public static final boolean RUN_USING_PARAMTER_FROM_PROPERTIES = false;
+    public static final boolean RUN_USING_PARAMTER_FROM_PROPERTIES = true;
     public static final boolean RUN_USING_ENCODER = true;
     public static PIDCoefficients MOTOR_VELO_PID = null;
 
@@ -179,7 +179,7 @@ public class DriveConstants {
     }
     public static void updateConstantsFromProperties()
     {
-        if (RUN_USING_PARAMTER_FROM_PROPERTIES != true) {
+        if (RUN_USING_PARAMTER_FROM_PROPERTIES == false) {
             RobotLog.dd(TAG, "configured to NOT using property values");
             if (MOTOR_VELO_PID == null)
                 MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
