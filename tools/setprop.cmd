@@ -15,8 +15,8 @@ adb shell setprop debug.ftc.txD 0.75
 adb shell setprop debug.ftc.tyP 0.3
 adb shell setprop debug.ftc.tyI 0.5
 adb shell setprop debug.ftc.tyD 1.1
-adb shell setprop debug.ftc.hP 2
-adb shell setprop debug.ftc.hI 1.5
+adb shell setprop debug.ftc.hP 6
+adb shell setprop debug.ftc.hI 3
 adb shell setprop debug.ftc.hD 0.2
 adb shell setprop debug.ftc.odoTicksPerRev 1550
 adb shell setprop debug.ftc.odomTrackwidth 14.8
