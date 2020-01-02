@@ -57,7 +57,7 @@ public class DriveConstants {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 2;
-    public static double GEAR_RATIO =  1.6; //(99.5 / 13.7) * (24.0 / 16);  //MOTOR_CONFIG.getGearing(); // ???  output (wheel) speed / input (motor) speed
+    public static double GEAR_RATIO =  1.0; //(99.5 / 13.7) * (24.0 / 16);  //MOTOR_CONFIG.getGearing(); // ???  output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 17.0;
     public static double ODOMETRY_TRACK_WIDTH = 14.8;
     public static double ODOMERY_FORWARD_OFFSET = 5.5;
@@ -92,7 +92,7 @@ public class DriveConstants {
      * forces acceleration-limited profiling).
      */
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            80.0, 30.0, 0.0,
+            30.0, 30.0, 0.0,
             Math.toRadians(180.0), Math.toRadians(180.0), 0.0
     );
 
