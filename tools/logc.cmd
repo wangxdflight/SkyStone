@@ -2,6 +2,7 @@
 @echo cmd logfilename ps_name
 mv %1.log %1_old.log
 adb logcat -c
+start setprop.cmd
 IF "%2"==""  (
 	adb shell ps |grep com.qualcomm.ftcrobotcontroller>ps.txt
 ) ELSE (
