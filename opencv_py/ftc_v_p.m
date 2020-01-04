@@ -1,3 +1,12 @@
+clear call;
+a = load('v_p.txt');
+title('velocity error');
+plot(a(:, 1));
+figure;
+title("velocity PID result");
+plot(1:length(a(:,1)), a(:, 2), a(:, 3));
+legend('target velocity', 'meausred velcoity');
+return;
 ################ plot velocity/power ##################
 clear all;
 a=load('t1.log');

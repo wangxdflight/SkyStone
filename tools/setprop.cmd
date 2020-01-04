@@ -6,7 +6,7 @@ adb shell setprop debug.ftc.kP 0.1
 adb shell setprop debug.ftc.kI 1.52
 adb shell setprop debug.ftc.kD 3.0
 adb shell setprop debug.ftc.imu 0
-adb shell setprop debug.ftc.odom 1
+adb shell setprop debug.ftc.odom 0
 adb shell setprop debug.ftc.brake 0
 adb shell setprop debug.ftc.trackwidth 14.2
 adb shell setprop debug.ftc.txP 8
@@ -18,6 +18,10 @@ adb shell setprop debug.ftc.tyD 1.1
 adb shell setprop debug.ftc.hP 6
 adb shell setprop debug.ftc.hI 2
 adb shell setprop debug.ftc.hD 0.4
+rem time in seconds needed per inch;
+adb shell setprop debug.ftc.strafeTimeDistanceRat 0.093
+adb shell setprop debug.ftc.strafeMotorPower 0.19
+adb shell setprop debug.ftc.rear_ratio 1.105
 adb shell setprop debug.ftc.odoTicksPerRev 1550
 adb shell setprop debug.ftc.odomTrackwidth 14.8
 adb shell setprop debug.ftc.odomForwardOffset -5.5
