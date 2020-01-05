@@ -4,12 +4,17 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.qualcomm.hardware.motors.GoBILDA5202Series;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
 
 /*
  * Constants shared between multiple drive types.
@@ -24,6 +29,32 @@ import java.io.InputStreamReader;
  */
 @Config
 public class DriveConstants {
+    public static final boolean RUN_USING_PARAMTER_FROM_PROPERTIES = true;
+
+    public static boolean RUN_USING_ODOMETRY_WHEEL = true;
+    public static boolean RUN_USING_IMU_LOCALIZER = false;
+    public static boolean BRAKE_ON_ZERO = false;
+    public static boolean USING_BULK_READ = false;
+    public static double odoEncoderTicksPerRev = 1550.0;
+    private static String TAG = "DriveConstants";
+    public static double txP = 8; //translational x/y co-efficients
+    public static double txI = 0.6;
+    public static double txD = 0.75;
+    public static double tyP = 10;
+    public static double tyI = 0.5;
+    public static double tyD = 1.1;
+    public static double hP = 6;    // heading co-efficients;
+    public static double hI = 2;
+    public static double hD = 0.4;
+    public static double strafeTimeDistanceRatio = 0.093; // duration for power to achieve strafe distance;
+    public static double strafeMotorPower = 0.19;
+    public static double rear_ratio = 1.105;
+
+    public static double ODOMETRY_TRACK_WIDTH = 14.8;
+    public static double ODOMERY_FORWARD_OFFSET = -5.5;
+    public static double HARDCODED_TICKS_PER_REV = 383.6; //MOTOR_CONFIG.getTicksPerRev();
+    public static double MAX_RPM_FROM_SPEC = 435.0;
+    public static double HARDCODED_RPM_RATIO = 0.683; //0.72215; // 0.666;///0.6514;//*MAX_RPM_FROM_SPEC; //283.4; //MOTOR_CONFIG.getMaxRPM();
     /*
      * The type of motor used on the drivetrain. While the SDK has definitions for many common
      * motors, there may be slight gear ratio inaccuracies for planetary gearboxes and other
@@ -34,20 +65,16 @@ public class DriveConstants {
             MotorConfigurationType.getMotorType(GoBILDA5202Series.class);// NeveRest20Gearmotor
             // Matrix12vMotor  GoBILDA5202Series MatrixLegacyMotor (757.12)
 
-    public static double kP = 35;
-    public static double kI = 0.5;
-    public static double kD = 2.5;
     /*
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
-    public static final boolean RUN_USING_PARAMTER_FROM_PROPERTIES = true;
-    public static final boolean RUN_USING_ENCODER = true;
-    public static PIDCoefficients MOTOR_VELO_PID = null;
+    public static boolean RUN_USING_ENCODER = true;
+    public static PIDCoefficients MOTOR_VELO_PID = null;   //35, 0.5, 2.5
+    public static double kP = 0.1;
+    public static double kI = 1.52;
+    public static double kD = 3.0;
 
-    public static boolean RUN_USING_ODOMETRY_WHEEL = true;
-    public static boolean RUN_USING_IMU_LOCALIZER = true;
-    private static String TAG = "DriveConstants";
     /*
      * These are physical constants that can be determined from your robot (including the track
      * width; it will be tune empirically later although a rough estimate is important). Users are
@@ -57,13 +84,8 @@ public class DriveConstants {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 2;
-    public static double GEAR_RATIO =  1.0; //(99.5 / 13.7) * (24.0 / 16);  //MOTOR_CONFIG.getGearing(); // ???  output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 17.0;
-    public static double ODOMETRY_TRACK_WIDTH = 14.8;
-    public static double ODOMERY_FORWARD_OFFSET = 5.5;
-    public static double HARDCODED_TICKS_PER_REV = 383.6; //MOTOR_CONFIG.getTicksPerRev();
-    public static double MAX_RPM_FROM_SPEC = 435.0;
-    public static double HARDCODED_RPM_RATIO = 0.72215; // 0.666;///0.6514;//*MAX_RPM_FROM_SPEC; //283.4; //MOTOR_CONFIG.getMaxRPM();
+    public static double GEAR_RATIO = 1.0;//(99.5 / 13.7) * (16 / 16); // output (wheel) speed / input (motor) speed
+    public static double TRACK_WIDTH = 14.2;   //17
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -71,17 +93,10 @@ public class DriveConstants {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 0.0093;//1.0 / rpmToVelocity(getMaxRpm()); //0.010530;//0.0093;// 1.92*1.0 / rpmToVelocity(getMaxRpm()); // 0.0038463
+    public static double kV = 0.0111;   //0.0115
     public static double kA = 0;
     public static double kStatic = 0;
-    // TRANSITIONAL PID and Heading PID values;
-    public static double tP = 5.0;
-    public static double tI = 0;
-    public static double tD = 0;
-    public static double hP = 10; // heading co-efficiencies;
-    public static double hI = -2.0;
-    public static double hD = 25;
-    public static double TEST_DISTANCE = 48;
+	public static double TEST_DISTANCE = 48;
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -92,7 +107,7 @@ public class DriveConstants {
      * forces acceleration-limited profiling).
      */
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            30.0, 30.0, 0.0,
+            45.0, 20.0, 0.0,
             Math.toRadians(180.0), Math.toRadians(180.0), 0.0
     );
 
@@ -135,6 +150,7 @@ public class DriveConstants {
         RobotLog.dd(TAG, "getTicksPerSec "+Double.toString(t));
         return 32767 / getTicksPerSec();
     }
+
     private static double getTeamCodePropertyValue(String prop_str) {
         double value = Double.MAX_VALUE;
         try {
@@ -157,6 +173,7 @@ public class DriveConstants {
         }
         return value;
     }
+
     private static void printConstants()
     {
         if (MOTOR_VELO_PID == null)
@@ -168,18 +185,24 @@ public class DriveConstants {
             RobotLog.dd(TAG, "Velocity PID    kP: "  + Double.toString(MOTOR_VELO_PID.kP) + ", kI: "  + Double.toString(MOTOR_VELO_PID.kI) + ", kD: "  + Double.toString(MOTOR_VELO_PID.kD));
         }
 
-        RobotLog.dd(TAG, "Transitional PID   tP: "+Double.toString(tP) + " tI: "+Double.toString(tI) + " tD: " + Double.toString(tD));
+        RobotLog.dd(TAG, "xTransitional PID   txP: "+Double.toString(txP) + " txI: "+Double.toString(txI) + " txD: " + Double.toString(txD));
+        RobotLog.dd(TAG, "yTransitional PID   tyP: "+Double.toString(tyP) + " tyI: "+Double.toString(tyI) + " tyD: " + Double.toString(tyD));
         RobotLog.dd(TAG, "Heading PID   hP: "+Double.toString(hP) + " hI: "+Double.toString(hI) + " hD: " + Double.toString(hD));
         RobotLog.dd(TAG, "test distance: " + Double.toString(TEST_DISTANCE));
         RobotLog.dd(TAG, "using IMU in localizer? : " + Integer.toString(RUN_USING_IMU_LOCALIZER?1:0));
         RobotLog.dd(TAG, "Driving wheel width? : " + Double.toString(TRACK_WIDTH));
         RobotLog.dd(TAG, "using Odometry? : " + Integer.toString(RUN_USING_ODOMETRY_WHEEL?1:0));
+        RobotLog.dd(TAG, "using Bulk read? : " + Integer.toString(USING_BULK_READ?1:0));
         RobotLog.dd(TAG, "Odometry wheel width? : " + Double.toString(ODOMETRY_TRACK_WIDTH));
         RobotLog.dd(TAG, "Odometry forward offset? " + Double.toString(ODOMERY_FORWARD_OFFSET));
+        RobotLog.dd(TAG, "Odometry EncoderTicksPerRev? " + Double.toString(odoEncoderTicksPerRev));
+        RobotLog.dd(TAG, "strafeTimeDistanceRat: " + Double.toString(strafeTimeDistanceRatio));
+        RobotLog.dd(TAG, "strafeMotorPower:  " + Double.toString(strafeMotorPower));
+        RobotLog.dd(TAG, "rear_ratio:  " + Double.toString(rear_ratio));
     }
     public static void updateConstantsFromProperties()
     {
-        if (RUN_USING_PARAMTER_FROM_PROPERTIES == false) {
+        if (RUN_USING_PARAMTER_FROM_PROPERTIES != true) {
             RobotLog.dd(TAG, "configured to NOT using property values");
             if (MOTOR_VELO_PID == null)
                 MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
@@ -199,6 +222,18 @@ public class DriveConstants {
             v_int = (int) v_double;
             RUN_USING_ODOMETRY_WHEEL = (v_int==0)?false:true;
         }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.bulk");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            USING_BULK_READ = (v_int==0)?false:true;
+        }
+        v_double = getTeamCodePropertyValue("debug.ftc.brake");
+        if (v_double != Double.MAX_VALUE)
+        {
+            v_int = (int) v_double;
+            BRAKE_ON_ZERO = (v_int==0)?false:true;
+        }
+
         v_double = getTeamCodePropertyValue("debug.ftc.kV");
         if (v_double != 0 && v_double != Double.MAX_VALUE)
             kV = v_double;
@@ -225,15 +260,24 @@ public class DriveConstants {
         if (v_double != 0 && v_double != Double.MAX_VALUE)
             TRACK_WIDTH = v_double;
 
-        v_double = getTeamCodePropertyValue("debug.ftc.tP");
+        v_double = getTeamCodePropertyValue("debug.ftc.txP");
         if (v_double != Double.MAX_VALUE)
-            tP = v_double;
-        v_double = getTeamCodePropertyValue("debug.ftc.tI");
+            txP = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.txI");
         if (v_double != Double.MAX_VALUE)
-            tI = v_double;
-        v_double = getTeamCodePropertyValue("debug.ftc.tD");
+            txI = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.txD");
         if (v_double != Double.MAX_VALUE)
-            tD = v_double;
+            txD = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.tyP");
+        if (v_double != Double.MAX_VALUE)
+            tyP = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.tyI");
+        if (v_double != Double.MAX_VALUE)
+            tyI = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.tyD");
+        if (v_double != Double.MAX_VALUE)
+            tyD = v_double;
 
         v_double = getTeamCodePropertyValue("debug.ftc.hP");
         if (v_double != Double.MAX_VALUE)
@@ -244,7 +288,18 @@ public class DriveConstants {
         v_double = getTeamCodePropertyValue("debug.ftc.hD");
         if (v_double != Double.MAX_VALUE)
             hD = v_double;
-
+        v_double = getTeamCodePropertyValue("debug.ftc.strafeMotorPower");
+        if (v_double != Double.MAX_VALUE)
+            strafeMotorPower = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.strafeTimeDistanceRat");
+        if (v_double != Double.MAX_VALUE)
+            strafeTimeDistanceRatio = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.rear_ratio");
+        if (v_double != Double.MAX_VALUE)
+            rear_ratio = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.odoTicksPerRev");
+        if (v_double != Double.MAX_VALUE)
+            odoEncoderTicksPerRev = v_double;
         v_double = getTeamCodePropertyValue("debug.ftc.distance");
         if (v_double != 0 && v_double != Double.MAX_VALUE)
         {
@@ -252,10 +307,87 @@ public class DriveConstants {
         }
 
         if (MOTOR_VELO_PID == null)
-            MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
-        else
-            RobotLog.dd(TAG, "kP, kI, kD has been set, not updated this time");
+        {
+        }
+        else {
+            MOTOR_VELO_PID = null;
+            RobotLog.dd(TAG, "kP, kI, kD has been set, updated this time");
+        }
 
+        v_double = getTeamCodePropertyValue("debug.ftc.useOld");
+        if (v_double == 1.0)
+        {
+            RUN_USING_ODOMETRY_WHEEL = true;
+            RUN_USING_IMU_LOCALIZER = false;
+            BRAKE_ON_ZERO = false;
+            odoEncoderTicksPerRev = 1540.0;
+            txP = 0.5; //translational x/y co-efficients
+            txI = 0;
+            txD = 0.11;
+            tyP = 1.2;
+            tyI = 0;
+            tyD = 1.0;
+            hP = 2;    // heading co-efficients;
+            hI = 0;
+            hD = 0.22;
+            ODOMETRY_TRACK_WIDTH = 14.6;
+            ODOMERY_FORWARD_OFFSET = -5.5;
+            HARDCODED_TICKS_PER_REV = 383.6; //MOTOR_CONFIG.getTicksPerRev();
+            MAX_RPM_FROM_SPEC = 435.0;
+            HARDCODED_RPM_RATIO = 0.683; //0.72215; // 0.666;///0.6514;//*MAX_RPM_FROM_SPEC; //283.4; //MOTOR_CONFIG.getMaxRPM();
+            RUN_USING_ENCODER = true;
+            kP = 23.0;
+            kI = 0.5;
+            kD = 3.0;
+            WHEEL_RADIUS = 2;
+            GEAR_RATIO = 1.0;//(99.5 / 13.7) * (16 / 16); // output (wheel) speed / input (motor) speed
+            TRACK_WIDTH = 14.2;   //17
+            kV = 0.0166;   //0.0115
+            kA = 0;
+            kStatic = 0;
+            TEST_DISTANCE = 72;
+        }
+        MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);
         printConstants();
+    }
+    // duration in milli-seconds;
+    public static void moveStrafeLeft(HardwareMap hardwareMap, double distance)
+    {
+        DcMotorEx leftFront, leftRear, rightRear, rightFront;
+        List<DcMotorEx> motors;
+        leftFront = hardwareMap.get(DcMotorEx.class, "frontLeft");
+        leftRear = hardwareMap.get(DcMotorEx.class, "backLeft");
+        rightRear = hardwareMap.get(DcMotorEx.class, "backRight");
+        rightFront = hardwareMap.get(DcMotorEx.class, "frontRight");
+
+        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        RobotLog.dd(TAG, "set power for strafe: " + Double.toString(strafeMotorPower) + " distance: " + Double.toString(distance));
+
+        long duration = (long) (1000 * distance * strafeTimeDistanceRatio);
+        RobotLog.dd(TAG, "set power for strafe: " + Double.toString(strafeMotorPower) + " duration: " + Double.toString(duration));
+
+        for (DcMotorEx motor : motors) {
+            motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
+        leftFront.setPower(-1 * strafeMotorPower);
+        leftRear.setPower(strafeMotorPower*rear_ratio);
+        rightRear.setPower(-1 * strafeMotorPower*rear_ratio);
+        rightFront.setPower(strafeMotorPower);
+        try {
+            Thread.sleep(duration);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Prints what exception has been thrown
+            System.out.println(e);
+        }
+        for (DcMotorEx motor : motors) {
+            motor.setPower(0);
+        }
+        for (DcMotorEx motor : motors) {
+            if (BRAKE_ON_ZERO == true)
+                motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            else
+                motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        }
     }
 }

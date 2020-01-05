@@ -38,11 +38,12 @@ import com.qualcomm.robotcore.util.RobotLog;
 public class DriveFeedforwardTuner extends LinearOpMode {
     public static final double MAX_POWER = 0.7;
     //public static final double DISTANCE = 100;
-    public static final double DISTANCE = DriveConstants.TEST_DISTANCE;
+    public static double DISTANCE = DriveConstants.TEST_DISTANCE;
     private String TAG = "DriveFeedforwardTuner";
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
+        DISTANCE = DriveConstants.TEST_DISTANCE;
         if (RUN_USING_ENCODER) {
             RobotLog.dd(TAG, "Feedforward constants usually don't need to be tuned " +
                     "when using the built-in drive motor velocity PID.");

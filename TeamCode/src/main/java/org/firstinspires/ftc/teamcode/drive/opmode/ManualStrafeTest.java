@@ -1,5 +1,5 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
 
+package org.firstinspires.ftc.teamcode.PID.calibration;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.localization.Localizer;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
@@ -10,8 +10,6 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
-
 import com.qualcomm.robotcore.util.RobotLog;
 
 import java.util.List;
@@ -20,30 +18,24 @@ import java.util.List;
  * This is a simple routine to test translational drive capabilities.
  */
 @Config
-@Autonomous(name = "StraightTest", group = "drive")
-public class StraightTest extends LinearOpMode {
+@Autonomous(name = "ManualStrafeTest", group = "drive")
+public class ManualStrafeTest extends LinearOpMode {
     public static double DISTANCE = DriveConstants.TEST_DISTANCE;
-	private String TAG = "StraightTest";
+    private String TAG = "ManualStrafeTest";
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
         DISTANCE = DriveConstants.TEST_DISTANCE;
-        SampleMecanumDriveBase drive = null;
-        if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap);
-        else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap);
-
+        SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
+        drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
         RobotLog.dd(TAG, "trajectoryBuilder forward, DISTANCE: "+Double.toString(DISTANCE));
-        Trajectory trajectory = drive.trajectoryBuilder()
-                .forward(DISTANCE)
-                .build();
 
         waitForStart();
 
         if (isStopRequested()) return;
 
-        drive.followTrajectorySync(trajectory);
+        DriveConstants.moveStrafeLeft(hardwareMap, DISTANCE);
+
         Localizer localizer = drive.getLocalizer();
         if (DriveConstants.RUN_USING_ODOMETRY_WHEEL && (localizer!=null)) {
             StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
@@ -56,6 +48,5 @@ public class StraightTest extends LinearOpMode {
         List<Double> positions = drive.getWheelPositions();
         RobotLog.dd(TAG, "wheel positions");
         drive.print_list_double(positions);
-
     }
 }

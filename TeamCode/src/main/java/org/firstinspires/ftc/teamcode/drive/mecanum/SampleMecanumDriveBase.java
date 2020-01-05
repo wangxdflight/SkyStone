@@ -41,8 +41,9 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAIN
  */
 @Config
 public abstract class SampleMecanumDriveBase extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.tP, DriveConstants.tI, DriveConstants.tD);;
-    public static PIDCoefficients HEADING_PID  = new PIDCoefficients(DriveConstants.hP, DriveConstants.hI, DriveConstants.hD);;
+    public static PIDCoefficients xTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.txP, DriveConstants.txI, DriveConstants.txD);
+    public static PIDCoefficients yTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.tyP, DriveConstants.tyI, DriveConstants.tyD);
+    public static PIDCoefficients HEADING_PID  = new PIDCoefficients(DriveConstants.hP, DriveConstants.hI, DriveConstants.hD);    //3, 0, 0
 
     private String TAG = "SampleMecanumDriveBase";
 
@@ -71,8 +72,9 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
         super(DriveConstants.kV, DriveConstants.kA, DriveConstants.kStatic, DriveConstants.TRACK_WIDTH);
         RobotLog.dd(TAG, "kV "+Double.toString(DriveConstants.kV)+" kA "+Double.toString(DriveConstants.kA)+" kStatic "+Double.toString(DriveConstants.kStatic));
         RobotLog.dd(TAG, "TRACK_WIDTH "+Double.toString(DriveConstants.TRACK_WIDTH));
-        RobotLog.dd(TAG, "tP "+Double.toString(DriveConstants.tP)+" tI "+Double.toString(DriveConstants.tI)+" tD "+Double.toString(DriveConstants.tD));
-        RobotLog.dd(TAG, "hP "+Double.toString(DriveConstants.hP)+" tI "+Double.toString(DriveConstants.hI)+" hD "+Double.toString(DriveConstants.hD));
+        RobotLog.dd(TAG, "txP "+Double.toString(DriveConstants.txP)+" txI "+Double.toString(DriveConstants.txI)+" txD "+Double.toString(DriveConstants.txD));
+        RobotLog.dd(TAG, "tyP "+Double.toString(DriveConstants.tyP)+" tyI "+Double.toString(DriveConstants.tyI)+" tyD "+Double.toString(DriveConstants.tyD));
+        RobotLog.dd(TAG, "hP "+Double.toString(DriveConstants.hP)+" hI "+Double.toString(DriveConstants.hI)+" hD "+Double.toString(DriveConstants.hD));
 
         dashboard = FtcDashboard.getInstance();
         dashboard.setTelemetryTransmissionInterval(25);
@@ -81,11 +83,15 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
 
         mode = Mode.IDLE;
 
+        xTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.txP, DriveConstants.txI, DriveConstants.txD);
+        yTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.tyP, DriveConstants.tyI, DriveConstants.tyD);
+        HEADING_PID = new PIDCoefficients(DriveConstants.hP, DriveConstants.hI, DriveConstants.hD);
+
         turnController = new PIDFController(HEADING_PID);
         turnController.setInputBounds(0, 2 * Math.PI);
 
         constraints = new MecanumConstraints(BASE_CONSTRAINTS, DriveConstants.TRACK_WIDTH);
-        follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID);
+        follower = new HolonomicPIDVAFollower(xTRANSLATIONAL_PID, yTRANSLATIONAL_PID, HEADING_PID);
     }
 
     public TrajectoryBuilder trajectoryBuilder() {
@@ -218,6 +224,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
     }
     /// new function added;
     public abstract List<Double> getMotorPowers(List<DcMotorEx> motors);
+    public abstract void setBrakeonZeroPower(boolean flag);
 
     public void waitForIdle() {
         while (!Thread.currentThread().isInterrupted() && isBusy()) {

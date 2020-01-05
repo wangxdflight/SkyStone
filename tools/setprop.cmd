@@ -6,8 +6,9 @@ adb shell setprop debug.ftc.kP 0.1
 adb shell setprop debug.ftc.kI 1.52
 adb shell setprop debug.ftc.kD 3.0
 adb shell setprop debug.ftc.imu 0
-adb shell setprop debug.ftc.odom 0
+adb shell setprop debug.ftc.odom 1
 adb shell setprop debug.ftc.brake 0
+adb shell setprop debug.ftc.bulk 0
 adb shell setprop debug.ftc.trackwidth 14.2
 adb shell setprop debug.ftc.txP 8
 adb shell setprop debug.ftc.txI 0.6

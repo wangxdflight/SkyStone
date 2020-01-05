@@ -69,7 +69,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
             if (RUN_USING_ENCODER) {
                 motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }
-            motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
 
         if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
@@ -89,7 +89,15 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         else
             RobotLog.dd(TAG, "not using Odometry wheel localizaer");
     }
-
+    @Override
+    public void setBrakeonZeroPower(boolean flag) {
+        for (ExpansionHubMotor motor : motors) {
+            if (flag == true)
+                motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            else
+                motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        }
+        RobotLog.dd(TAG, "setBrakeonZeroPower " + flag);    }
     @Override
     public PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode) {
         PIDFCoefficients coefficients = leftFront.getPIDFCoefficients(runMode);
