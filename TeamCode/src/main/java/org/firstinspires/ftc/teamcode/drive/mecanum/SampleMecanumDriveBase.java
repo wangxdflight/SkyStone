@@ -100,7 +100,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
 
     public void turn(double angle) {
         double heading = getPoseEstimate().getHeading();
-        RobotLog.dd(TAG, "turn: current heading "+Double.toString(heading)+" angle "+Double.toString(angle));
+        RobotLog.dd(TAG, "turn: current heading "+Double.toString(heading)+", to turn angle "+Double.toString(angle));
         turnProfile = MotionProfileGenerator.generateSimpleMotionProfile(
                 new MotionState(heading, 0, 0, 0),
                 new MotionState(heading + angle, 0, 0, 0),

@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
+import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
 
 /*
  * Op mode for tuning follower PID coefficients (located in the drive base classes). The robot
@@ -26,7 +27,12 @@ public class FollowerPIDTunerStraight extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();  // Transitional PID is used in base class;;
         DISTANCE = DriveConstants.TEST_DISTANCE;
-        SampleMecanumDriveBase drive = new SampleMecanumDriveREV(hardwareMap);
+        SampleMecanumDriveBase drive = null;
+        if (DriveConstants.USING_BULK_READ == false)
+            drive = new SampleMecanumDriveREV(hardwareMap);
+        else
+            drive = new SampleMecanumDriveREVOptimized((hardwareMap));
+
         drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
         drive.setPoseEstimate(new Pose2d(0, 0, 0));
 
