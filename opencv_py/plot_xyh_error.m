@@ -1,5 +1,5 @@
 clear;
-a=load('plot.txt');
+a=load('t.txt');
 subplot(3, 1, 1);
 plot(a(:, 1));
 title('xError');

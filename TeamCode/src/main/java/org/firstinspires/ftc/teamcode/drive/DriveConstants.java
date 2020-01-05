@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.openftc.revextensions2.ExpansionHubMotor;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -355,10 +357,10 @@ public class DriveConstants {
     {
         DcMotorEx leftFront, leftRear, rightRear, rightFront;
         List<DcMotorEx> motors;
-        leftFront = hardwareMap.get(DcMotorEx.class, "frontLeft");
-        leftRear = hardwareMap.get(DcMotorEx.class, "backLeft");
-        rightRear = hardwareMap.get(DcMotorEx.class, "backRight");
-        rightFront = hardwareMap.get(DcMotorEx.class, "frontRight");
+        leftFront = hardwareMap.get(ExpansionHubMotor.class, "leftFront");
+        leftRear = hardwareMap.get(ExpansionHubMotor.class, "leftRear");
+        rightRear = hardwareMap.get(ExpansionHubMotor.class, "rightRear");
+        rightFront = hardwareMap.get(ExpansionHubMotor.class, "rightFront");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
         RobotLog.dd(TAG, "set power for strafe: " + Double.toString(strafeMotorPower) + " distance: " + Double.toString(distance));

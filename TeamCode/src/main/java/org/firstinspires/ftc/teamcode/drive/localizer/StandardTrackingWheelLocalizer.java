@@ -81,7 +81,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     }
 
     public static double encoderTicksToInches(int ticks) {
-        double t = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
+        double t = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / DriveConstants.odoEncoderTicksPerRev;
         RobotLog.dd("StandardTrackingWheelLocalizer", "encoderTicksToInches: " + " ticks: " + Double.toString(ticks) + " inches: " + Double.toString(t));
         return t;
     }

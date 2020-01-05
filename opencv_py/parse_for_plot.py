@@ -13,7 +13,7 @@ with open(filepath) as fp:
     line = fp.readline()
     while line:
         line = fp.readline();
-        if ("BaseClass" in line) and ("Error" in line):
+        if (("SampleMecanumDriveBase" in line) or ("BaseClass" in line)) and ("Error" in line):
             #t = line.strip();
             t = line;
             if ("xError" in t):

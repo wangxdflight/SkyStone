@@ -31,9 +31,9 @@ import org.openftc.revextensions2.RevBulkData;
  * trajectory following performance with moderate additional complexity.
  */
 public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
-    private ExpansionHubEx hub;
+    private ExpansionHubEx hubLeft, hubRight;
     private ExpansionHubMotor leftFront, leftRear, rightRear, rightFront;
-    private List<ExpansionHubMotor> motors;
+    private List<ExpansionHubMotor> motors, motorsLeft, motorsRight;
     private BNO055IMU imu;
     private String TAG = "SampleMecanumDriveREVOptimized";
     public SampleMecanumDriveREVOptimized(HardwareMap hardwareMap) {
@@ -44,8 +44,8 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         // TODO: adjust the names of the following hardware devices to match your configuration
         // for simplicity, we assume that the desired IMU and drive motors are on the same hub
         // if your motors are split between hubs, **you will need to add another bulk read**
-        hub = hardwareMap.get(ExpansionHubEx.class, "hub");
-
+        hubLeft = hardwareMap.get(ExpansionHubEx.class, "Expansion Hub 2");
+        hubRight = hardwareMap.get(ExpansionHubEx.class, "Expansion Hub 3");
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
@@ -62,6 +62,8 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         rightFront = hardwareMap.get(ExpansionHubMotor.class, "rightFront");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        motorsLeft = Arrays.asList(leftFront, leftRear);
+        motorsRight = Arrays.asList(rightRear, rightFront);
         RobotLog.dd(TAG, "SampleMecanumDriveREVOptimized created");
 
         for (ExpansionHubMotor motor : motors) {
@@ -121,15 +123,23 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        RevBulkData bulkData = hub.getBulkInputData();
-
-        if (bulkData == null) {
+        RevBulkData bulkDataLeft = hubLeft.getBulkInputData();
+        RevBulkData bulkDataRight = hubRight.getBulkInputData();
+        if ((bulkDataLeft == null) || (bulkDataRight == null)) {
+            RobotLog.dd(TAG, "bulk data = null");
             return Arrays.asList(0.0, 0.0, 0.0, 0.0);
         }
 
         List<Double> wheelPositions = new ArrayList<>();
-        for (ExpansionHubMotor motor : motors) {
-            double t1 = bulkData.getMotorCurrentPosition(motor);
+        for (ExpansionHubMotor motor : motorsLeft) {
+            double t1 = bulkDataLeft.getMotorCurrentPosition(motor);
+            double t2 = encoderTicksToInches(t1);
+            RobotLog.dd(TAG, "getWheelPositions: " + "position: " + Double.toString(t1) + " inches: " + Double.toString(t2));
+
+            wheelPositions.add(t2);
+        }
+        for (ExpansionHubMotor motor : motorsRight) {
+            double t1 = bulkDataRight.getMotorCurrentPosition(motor);
             double t2 = encoderTicksToInches(t1);
             RobotLog.dd(TAG, "getWheelPositions: " + "position: " + Double.toString(t1) + " inches: " + Double.toString(t2));
 
@@ -140,18 +150,25 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
 
     @Override
     public List<Double> getWheelVelocities() {
-        RevBulkData bulkData = hub.getBulkInputData();
-
-        if (bulkData == null) {
+        RevBulkData bulkDataLeft = hubLeft.getBulkInputData();
+        RevBulkData bulkDataRight = hubRight.getBulkInputData();
+        if ((bulkDataLeft == null)||(bulkDataRight == null)) {
             return Arrays.asList(0.0, 0.0, 0.0, 0.0);
         }
 
         List<Double> wheelVelocities = new ArrayList<>();
-        for (ExpansionHubMotor motor : motors) {
-            double t1 = bulkData.getMotorVelocity(motor);
+        for (ExpansionHubMotor motor : motorsLeft) {
+            double t1 = bulkDataLeft.getMotorVelocity(motor);
             double t2 = encoderTicksToInches(t1);
             RobotLog.dd(TAG, "getWheelVelocities: " + "velocity: " + Double.toString(t1) + " inches: " + Double.toString(t2));
             
+            wheelVelocities.add(t2);
+        }
+        for (ExpansionHubMotor motor : motorsRight) {
+            double t1 = bulkDataRight.getMotorVelocity(motor);
+            double t2 = encoderTicksToInches(t1);
+            RobotLog.dd(TAG, "getWheelVelocities: " + "velocity: " + Double.toString(t1) + " inches: " + Double.toString(t2));
+
             wheelVelocities.add(t2);
         }
         return wheelVelocities;
