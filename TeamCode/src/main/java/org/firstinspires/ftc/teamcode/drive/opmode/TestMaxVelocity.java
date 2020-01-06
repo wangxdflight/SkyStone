@@ -87,7 +87,7 @@ public class TestMaxVelocity extends LinearOpMode {
             drive.print_list_double(w_powers);
 
             double heading = drive.getExternalHeading();
-            RobotLog.dd(TAG, "getExternalHeading: x " + heading);
+            RobotLog.dd(TAG, "getExternalHeading: " + heading);
 
             Pose2d pose = drive.getPoseEstimate();
             RobotLog.dd(TAG, "Pose: x " + pose.getX());

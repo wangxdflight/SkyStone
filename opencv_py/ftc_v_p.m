@@ -1,5 +1,5 @@
 clear call;
-a = load('v_p.txt');
+a = load('v_p_72.txt');
 title('velocity error');
 plot(a(:, 1));
 figure;

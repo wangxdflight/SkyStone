@@ -158,6 +158,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
         packet.put("yError", lastError.getY());
         packet.put("headingError", lastError.getHeading());
 
+        RobotLog.dd(TAG, "mode " + mode);
         RobotLog.dd(TAG, "update: x " + currentPose.getX());
         RobotLog.dd(TAG, "y " + currentPose.getY());
         RobotLog.dd(TAG, "heading " + Double.toString(currentPose.getHeading()));
