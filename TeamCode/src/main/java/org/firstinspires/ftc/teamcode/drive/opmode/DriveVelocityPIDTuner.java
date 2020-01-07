@@ -46,7 +46,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
 
-    public static double DISTANCE = DriveConstants.TEST_DISTANCE; // make it smaller for safty, can increase later; 96;
+    public static double DISTANCE = 0; // make it smaller for safty, can increase later; 96;
 
     private static final String PID_VAR_NAME = "VELO_PID";
 
@@ -151,9 +151,9 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap);
+            drive = new SampleMecanumDriveREV(hardwareMap, false);
         else
-            drive = new SampleMecanumDriveREVOptimized((hardwareMap));
+            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
 
         addPidVariable();
 

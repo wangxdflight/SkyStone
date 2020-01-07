@@ -36,8 +36,8 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
     private List<ExpansionHubMotor> motors, motorsLeft, motorsRight;
     private BNO055IMU imu;
     private String TAG = "SampleMecanumDriveREVOptimized";
-    public SampleMecanumDriveREVOptimized(HardwareMap hardwareMap) {
-        super();
+    public SampleMecanumDriveREVOptimized(HardwareMap hardwareMap, boolean strafe) {
+        super(strafe);
 
         LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
 
@@ -50,7 +50,6 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         imu.initialize(parameters);
-
 
         // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
         // upward (normal to the floor) using a command like the following:

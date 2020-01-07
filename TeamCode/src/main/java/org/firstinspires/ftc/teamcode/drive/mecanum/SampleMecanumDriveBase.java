@@ -34,6 +34,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAINTS;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.STRAFE_BASE_CONSTRAINTS;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
 
 /*
  * Base class with shared functionality for sample mecanum drives. All hardware-specific details are
@@ -41,9 +43,9 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAIN
  */
 @Config
 public abstract class SampleMecanumDriveBase extends MecanumDrive {
-    public static PIDCoefficients xTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.txP, DriveConstants.txI, DriveConstants.txD);
-    public static PIDCoefficients yTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.tyP, DriveConstants.tyI, DriveConstants.tyD);
-    public static PIDCoefficients HEADING_PID  = new PIDCoefficients(DriveConstants.hP, DriveConstants.hI, DriveConstants.hD);    //3, 0, 0
+    public static PIDCoefficients xTRANSLATIONAL_PID = null;
+    public static PIDCoefficients yTRANSLATIONAL_PID = null;
+    public static PIDCoefficients HEADING_PID  = null;
 
     private String TAG = "SampleMecanumDriveBase";
 
@@ -67,15 +69,20 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
 
     private List<Double> lastWheelPositions;
     private double lastTimestamp;
+    
+    private boolean strafe = false;
 
     public SampleMecanumDriveBase() {
-        super(DriveConstants.kV, DriveConstants.kA, DriveConstants.kStatic, DriveConstants.TRACK_WIDTH);
-        RobotLog.dd(TAG, "kV "+Double.toString(DriveConstants.kV)+" kA "+Double.toString(DriveConstants.kA)+" kStatic "+Double.toString(DriveConstants.kStatic));
-        RobotLog.dd(TAG, "TRACK_WIDTH "+Double.toString(DriveConstants.TRACK_WIDTH));
-        RobotLog.dd(TAG, "txP "+Double.toString(DriveConstants.txP)+" txI "+Double.toString(DriveConstants.txI)+" txD "+Double.toString(DriveConstants.txD));
-        RobotLog.dd(TAG, "tyP "+Double.toString(DriveConstants.tyP)+" tyI "+Double.toString(DriveConstants.tyI)+" tyD "+Double.toString(DriveConstants.tyD));
-        RobotLog.dd(TAG, "hP "+Double.toString(DriveConstants.hP)+" hI "+Double.toString(DriveConstants.hI)+" hD "+Double.toString(DriveConstants.hD));
-
+        super(DriveConstants.kV, DriveConstants.kA, DriveConstants.kStatic, TRACK_WIDTH);
+        createControllers();
+    }
+    public SampleMecanumDriveBase(boolean s){
+        super(DriveConstants.kV, DriveConstants.kA, DriveConstants.kStatic, TRACK_WIDTH);
+        strafe = s;
+        createControllers();
+    }
+    public void createControllers()
+    {
         dashboard = FtcDashboard.getInstance();
         dashboard.setTelemetryTransmissionInterval(25);
 
@@ -83,14 +90,27 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
 
         mode = Mode.IDLE;
 
-        xTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.txP, DriveConstants.txI, DriveConstants.txD);
-        yTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.tyP, DriveConstants.tyI, DriveConstants.tyD);
-        HEADING_PID = new PIDCoefficients(DriveConstants.hP, DriveConstants.hI, DriveConstants.hD);
+        if (strafe == false) {
+            RobotLog.dd(TAG, "using non-strafing PID");
+            xTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.txP, DriveConstants.txI, DriveConstants.txD);
+            yTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.tyP, DriveConstants.tyI, DriveConstants.tyD);
+            HEADING_PID = new PIDCoefficients(DriveConstants.hP, DriveConstants.hI, DriveConstants.hD);
 
+            constraints = new MecanumConstraints(BASE_CONSTRAINTS, TRACK_WIDTH);
+        }
+        else
+        {
+            RobotLog.dd(TAG, "using strafing PID");
+            xTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.stxP, DriveConstants.stxI, DriveConstants.stxD);
+            yTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.styP, DriveConstants.styI, DriveConstants.styD);
+            HEADING_PID = new PIDCoefficients(DriveConstants.shP, DriveConstants.shI, DriveConstants.shD);
+
+            constraints = new MecanumConstraints(STRAFE_BASE_CONSTRAINTS, TRACK_WIDTH);
+
+        }
         turnController = new PIDFController(HEADING_PID);
         turnController.setInputBounds(0, 2 * Math.PI);
 
-        constraints = new MecanumConstraints(BASE_CONSTRAINTS, DriveConstants.TRACK_WIDTH);
         follower = new HolonomicPIDVAFollower(xTRANSLATIONAL_PID, yTRANSLATIONAL_PID, HEADING_PID);
     }
 

@@ -27,9 +27,9 @@ public class FollowerPIDTuner extends LinearOpMode {
         DISTANCE = DriveConstants.TEST_DISTANCE;
         SampleMecanumDriveBase drive = null;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap);
+            drive = new SampleMecanumDriveREV(hardwareMap, false);
         else
-            drive = new SampleMecanumDriveREVOptimized((hardwareMap));
+            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
 
         drive.setPoseEstimate(new Pose2d(-DISTANCE / 2, -DISTANCE / 2, 0));
 

@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import java.util.List;
 
 /*
- * This is a simple routine to test translational drive capabilities.
+ * This is a simple routine to test strafe move by applying power to wheels for a duration (deprecated)
  */
 @Config
 @Autonomous(name = "ManualStrafeTest", group = "drive")
@@ -30,9 +30,9 @@ public class ManualStrafeTest extends LinearOpMode {
         DISTANCE = DriveConstants.TEST_DISTANCE;
         SampleMecanumDriveBase drive = null;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap);
+            drive = new SampleMecanumDriveREV(hardwareMap, false);
         else
-            drive = new SampleMecanumDriveREVOptimized((hardwareMap));
+            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
 
         drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
         RobotLog.dd(TAG, "trajectoryBuilder forward, DISTANCE: "+Double.toString(DISTANCE));

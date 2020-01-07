@@ -40,6 +40,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.hardware.SensorManager;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.net.wifi.WifiManager;
@@ -49,6 +50,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -141,6 +143,7 @@ public class FtcRobotControllerActivity extends Activity
 
   protected UpdateUI.Callback callback;
   protected Context context;
+  private static Context saveContext;
   protected Utility utility;
   protected StartResult prefRemoterStartResult = new StartResult();
   protected StartResult deviceNameStartResult = new StartResult();
@@ -172,6 +175,8 @@ public class FtcRobotControllerActivity extends Activity
   private static boolean permissionsValidated = false;
 
   private WifiDirectChannelChanger wifiDirectChannelChanger;
+
+  public static SensorManager sensors;
 
   protected class RobotRestarter implements Restarter {
 
@@ -259,9 +264,13 @@ public class FtcRobotControllerActivity extends Activity
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    sensors = (SensorManager) getSystemService(SENSOR_SERVICE);
+
     if (enforcePermissionValidator()) {
       return;
     }
+
+    saveContext = getApplicationContext();
 
     RobotLog.onApplicationStart();  // robustify against onCreate() following onDestroy() but using the same app instance, which apparently does happen
     RobotLog.vv(TAG, "onCreate()");
@@ -542,6 +551,8 @@ public class FtcRobotControllerActivity extends Activity
     FtcDashboard.populateMenu(menu);
     return true;
   }
+
+  public static Context getContext(){ return saveContext; }
 
   private boolean isRobotRunning() {
     if (controllerService == null) {

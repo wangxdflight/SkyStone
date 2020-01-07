@@ -36,8 +36,8 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
     private List<DcMotorEx> motors;
     private BNO055IMU imu;
     private String TAG = "SampleMecanumDriveREV";
-    public SampleMecanumDriveREV(HardwareMap hardwareMap) {
-        super();
+    public SampleMecanumDriveREV(HardwareMap hardwareMap, boolean strafe) {
+        super(strafe);
 
         LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
 

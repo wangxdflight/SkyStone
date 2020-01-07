@@ -40,9 +40,10 @@ public class TrackWidthTuner extends LinearOpMode {
         //RUN_USING_ODOMETRY_WHEEL = true; //???
         SampleMecanumDriveBase drive = null;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap);
+            drive = new SampleMecanumDriveREV(hardwareMap, false);
         else
-            drive = new SampleMecanumDriveREVOptimized((hardwareMap));
+            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
+
 
         // TODO: if you haven't already, set the localizer to something that doesn't depend on
         // drive encoders for computing the heading
