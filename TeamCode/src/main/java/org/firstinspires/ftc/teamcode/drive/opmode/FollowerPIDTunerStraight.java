@@ -28,29 +28,31 @@ public class FollowerPIDTunerStraight extends LinearOpMode {
         DriveConstants.updateConstantsFromProperties();  // Transitional PID is used in base class;;
         DISTANCE = DriveConstants.TEST_DISTANCE;
         SampleMecanumDriveBase drive = null;
-        if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
-        else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
-        drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
-        drive.setPoseEstimate(new Pose2d(0, 0, 0));
 
         waitForStart();
 
         if (isStopRequested()) return;
-        long run_count = 0;
+
         while (!isStopRequested()) {
-            RobotLog.dd(TAG, "move forward " + run_count + " : " + Double.toString(DISTANCE));
+            if (DriveConstants.USING_BULK_READ == false)
+                drive = new SampleMecanumDriveREV(hardwareMap, false);
+            else
+                drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
+            drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
+            drive.setPoseEstimate(new Pose2d(0, 0, 0));
+
+            RobotLog.dd(TAG, "current pose: " + drive.getPoseEstimate().toString());
+            RobotLog.dd(TAG, "move forward: "+Double.toString(DISTANCE));
             drive.followTrajectorySync(
                     drive.trajectoryBuilder()
                             .forward(DISTANCE)
                             .build()
             );
-            RobotLog.dd(TAG, "Current position: " + drive.getPoseEstimate().toString());
-            RobotLog.dd(TAG, "move back " + run_count + " : " + Double.toString(DISTANCE));
+            RobotLog.dd(TAG, "current pose: " + drive.getPoseEstimate().toString());
+            RobotLog.dd(TAG, "move back: "+Double.toString(DISTANCE));
             //drive.turnSync(Math.toRadians(90));
             try{
-                Thread.sleep(500);
+                Thread.sleep(5000);
             } catch(Exception e){}
 
             drive.followTrajectorySync(
@@ -58,8 +60,10 @@ public class FollowerPIDTunerStraight extends LinearOpMode {
                             .back(DISTANCE)
                             .build()
             );
-            RobotLog.dd(TAG, "Current position: " + drive.getPoseEstimate().toString());
-            run_count ++;
+            try{
+                Thread.sleep(5000);
+            } catch(Exception e){}
+
         }
     }
 }

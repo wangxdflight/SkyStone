@@ -1,9 +1,11 @@
-adb shell setprop debug.ftc.imu 0
+adb shell setprop debug.ftc.imu 1
 adb shell setprop debug.ftc.odom 1
 adb shell setprop debug.ftc.brake 0
 adb shell setprop debug.ftc.bulk 0
-adb shell setprop debug.ftc.distance 24
+adb shell setprop debug.ftc.distance 72
 adb shell setprop debug.ftc.trackwidth 14.2
+adb shell setprop debug.ftc.maxVel 45.0
+adb shell setprop debug.ftc.maxAccel 20.0
 rem smaller does make straight test go shorter distance;
 adb shell setprop debug.ftc.kV 0.0111
 rem 0.0111 for 4 wheel

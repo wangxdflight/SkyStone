@@ -91,7 +91,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
         mode = Mode.IDLE;
 
         if (strafe == false) {
-            RobotLog.dd(TAG, "using non-strafing PID");
+            RobotLog.dd(TAG, "using non-strafing PID, maxVel: %f, maxAccl: %f", BASE_CONSTRAINTS.maxVel, BASE_CONSTRAINTS.maxAccel);
             xTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.txP, DriveConstants.txI, DriveConstants.txD);
             yTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.tyP, DriveConstants.tyI, DriveConstants.tyD);
             HEADING_PID = new PIDCoefficients(DriveConstants.hP, DriveConstants.hI, DriveConstants.hD);
@@ -100,7 +100,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
         }
         else
         {
-            RobotLog.dd(TAG, "using strafing PID");
+            RobotLog.dd(TAG, "using strafing PID, maxVel: %f, maxAccl: %f", BASE_CONSTRAINTS.maxVel, BASE_CONSTRAINTS.maxAccel);
             xTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.stxP, DriveConstants.stxI, DriveConstants.stxD);
             yTRANSLATIONAL_PID = new PIDCoefficients(DriveConstants.styP, DriveConstants.styI, DriveConstants.styD);
             HEADING_PID = new PIDCoefficients(DriveConstants.shP, DriveConstants.shI, DriveConstants.shD);
