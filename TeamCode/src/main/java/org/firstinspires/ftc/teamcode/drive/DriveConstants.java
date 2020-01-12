@@ -112,6 +112,9 @@ public class DriveConstants {
 	public static double maxVel = 45.0;
 	public static double maxAccel = 20.0;
 
+	public static boolean keep_vuforia_running = true;
+	public static boolean USE_VUFORIA_LOCALIZER = false;
+
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
      * the constraints should never exceed ~80% of the robot's actual capabilities. While Road
