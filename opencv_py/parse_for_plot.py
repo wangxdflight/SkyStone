@@ -1,4 +1,5 @@
 import sys
+import os
 import string
 import math
 from matplotlib import pyplot as plt
@@ -32,6 +33,7 @@ data_v_err=[];
 data_v_target=[];
 data_v_actual=[];
 data_power=[];
+power_time=[];
 max_power=0;
 max_x_err=0;
 max_y_err=0;
@@ -41,8 +43,7 @@ p_name='noname';
 print_summary=0;
 filepath = sys.argv[1];
 arg_c = len(sys.argv);
-if arg_c>=3:
-    print_summary = 1;
+print_summary = 1;
 
 def get_time(t):
     t = t.split(' ')
@@ -138,11 +139,14 @@ with open(filepath) as fp:
             t1 = t[1].strip().split(' ');
             #print(t1)
             t2 = t1[1]
-            data_power.append(float(t2))
             t3 = float(t2)
+            data_power.append(t3)
+            t_time = get_time(t[0])
+            d = t_time - start_time;
+            power_time.append(d.total_seconds());
             if t3>max_power:
                 max_power=t3;
-                max_power_time = get_time(t[0])
+                max_power_time = t_time;
                 t = max_power_time-start_time
                 max_power_delta = t.total_seconds()
         ###########################################
@@ -194,6 +198,8 @@ with open(filepath) as fp:
     for i in range(len(data_v_err)):
         print(data_v_err[i].strip(), " ", data_v_target[i].strip(), " ", data_v_actual[i].strip());
 
+fp.close();
+
 if print_summary != 0:
     t = len(data_x);
     if (t!=len(data_y) or t!=len(data_h) or t!=len(data_h_raw)):
@@ -234,10 +240,15 @@ if print_summary != 0:
     plt.xlabel('time');
     plt.ylabel('degrees');
     plt.scatter(auto_time, auto_h, zorder=2)
-    plt.ylim([-30, 30])
+    plt.ylim([-90, 90])
     plt.legend();
     #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)
-
+    ##################
+    plt.figure();
+    plt.plot(power_time, data_power, label='power to wheel');
+    plt.scatter(auto_time, [0 for i in range(len(auto_time))], zorder=2)
+    plt.xlabel('time(seconds)');
+    plt.ylabel('power');
     #####################################################################################################
     plt.figure();
     #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)plt.plot(nm.add(data_x, data_x_raw), nm.add(data_y, data_y_raw), label="target path");
@@ -245,13 +256,27 @@ if print_summary != 0:
     plt.xlabel('X(inches)');
     plt.ylabel('Y(inches)');
     plt.scatter(auto_x, auto_y, zorder=2);
-    plt.xlim([-60, 96])
-    plt.ylim([-60, 60])
+    plt.xlim([-70, 70])
+    plt.ylim([-70, 70])
     plt.legend();
 
     #####################################################################################################
     plt.figure();
     im = plt.imread("skystone_field.png");
+    #plt.xlim([-100, 700])
+    #plt.ylim([-100, 700])
+    plt.xticks([])
+    plt.yticks([])
+    #plt.plot(data_x_raw, data_y_raw, label="actual path");
+    new_x = [];
+    new_y = [];
+    for i in range(len(data_x_raw)):
+        new_x.append(600 - (data_x_raw[i] + 60.0) * 5);
+        new_y.append(abs(data_y_raw[i] - 60.0) * 5);
+        #print(new_x[i], new_y[i]);
+        #plt.scatter(new_y[i], 600-new_x[i], zorder=2);
+        #plt.plot(new_y[i], 600-new_x[i])
+    plt.plot(new_y, new_x)
     implot = plt.imshow(im);
 
     print("===============summary==========================")
@@ -259,7 +284,10 @@ if print_summary != 0:
     print("data_x, data_y, data_h, data_x_raw, data_y_raw, data_heading_raw");
     print("data_v, data_v_target, data_v_actual");
     print("program : ", p_name)
+    t = max_power_time.strftime('%H:%M:%S.%f');
+    max_power_time = t[:-3];
     print("max power to wheel: ", max_power, " timestamp: ", max_power_time, " timeoffset: ", max_power_delta)
+
     print("max_x_err (inches): ", max_x_err)
     print("max_y_err (inches): ", max_y_err)
     print("max_heading_err (degrees) ", max_heading_err)
@@ -267,8 +295,11 @@ if print_summary != 0:
     duration = end_time - start_time;
     print("init time: ", init_time);
     print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
+    print("logging performance:")
+    os.system('cat ' + filepath + ' |grep ' + max_power_time + ' |wc -l')
 
     #print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
 
     plt.show();
-    plt.close()
+    #plt.waitforbuttonpress(1); input();
+    #plt.close('all')
