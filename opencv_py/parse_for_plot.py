@@ -38,6 +38,9 @@ max_power=0;
 max_x_err=0;
 max_y_err=0;
 max_heading_err=0;
+max_final_x_err=0;
+max_final_y_err=0;
+max_final_heading_err=0;
 max_v=0;
 p_name='noname';
 print_summary=0;
@@ -151,7 +154,7 @@ with open(filepath) as fp:
                 max_power_delta = t.total_seconds()
         ###########################################
         if ("AutonomousPath: start new step: step" in line):
-            print(line.rstrip())
+            #print(line.rstrip())
             t = line.split('currentPos (');
             t1 = get_time(t[0]);
             last_time = t1;
@@ -166,8 +169,23 @@ with open(filepath) as fp:
             t=t[2];
             t=t[:-3].strip();
             auto_h.append(float(t));
+
+            t = line.split("errorPos (");
+            t = (t[1][:-4]);
+            t = t.split(', ');
+            x = float(t[0]);
+            y = float(t[1]);
+            z = float(t[2]);
+            #print(x, y, z);
+            if (abs(x) > abs(max_final_x_err)):
+                max_final_x_err = x;
+            if (abs(y) > abs(max_final_y_err)):
+                max_final_y_err = y;
+            if (abs(z) > abs(max_final_heading_err)):
+                max_final_heading_err = z;
+
         if ("AutonomousPath: drive and builder created, initialized with pose" in line) or ("AutonomousPath: drive and builder reset, initialized with pose" in line):
-            print(line.rstrip())
+            #print(line.rstrip())
             t = line.split('AutonomousPath');
             t1 = get_time(t[0]);
             t_delta = t1-last_time
@@ -183,19 +201,27 @@ with open(filepath) as fp:
             #print(start_time)
         if ("received command: CMD_RUN_OP_MODE" in line):
             t = line.split('CMD_RUN_OP_MODE');
-
             start_time = get_time(t[0])
             # print(start_time)
         if ("RobotCore" in line) and ("STOP - OPMODE" in line):
             break;
-    print("xError, yError and headingError info")
+
     for i in range(len(data_x)):
+        if (i%10==0):
+            print("time\t\t\ttime offset\t xErr\t\t\t yErr\t\t headingErr\t\t X\t\t\t Y\t\t Heading(degree)\t headingErr(degree) \t heading(degree)");
         print(data_time_str[i], " ", data_time[i], " ", data_x[i], " ", data_x_raw[i], " ", data_y[i], " ", data_y_raw[i], " ",  data_h[i], " ", data_h_raw[i], " ",  data_h_rad[i], " ", data_h_raw_rad[i]);
-    print("moving steps in autonomous");
+
+    print("-----------------moving steps in autonomous------------------------");
     for i in range(len(auto_time)):
-        print(auto_time_raw[i], " ", auto_time[i], " ", auto_x[i], " ", auto_y[i], " ", auto_h[i], " ", create_time[i]);
+        if (i==0):
+            print("time\t\t\ttime offset  X\t\tY\theading reset_time  duration");
+            print(auto_time_raw[i], " ", auto_time[i], " ", auto_x[i], " ", auto_y[i], " ", auto_h[i], " ", create_time[i], "\t 0");
+        else:
+            print(auto_time_raw[i], " ", auto_time[i], " ", auto_x[i], " ", auto_y[i], " ", auto_h[i], " ", create_time[i], "\t", auto_time[i]-auto_time[i-1]);
 
     for i in range(len(data_v_err)):
+        if (i%10==0):
+            print("data_v, data_v_target, data_v_actual");
         print(data_v_err[i].strip(), " ", data_v_target[i].strip(), " ", data_v_actual[i].strip());
 
 fp.close();
@@ -206,6 +232,27 @@ if print_summary != 0:
         print("double check the parsing!!!", t, " ", len(data_h_raw), " ", len(data_h), " ", len(data_time));
     else:
         print("parsing looks good, len: ", t)
+
+
+    print("===============summary==========================")
+    print("program : ", p_name)
+    t = max_power_time.strftime('%H:%M:%S.%f');
+    max_power_time = t[:-3];
+    print("max power to wheel: ", max_power, " timestamp: ", max_power_time, " timeoffset: ", max_power_delta)
+
+    print("max_x_err (inches): ", max_x_err)
+    print("max_y_err (inches): ", max_y_err)
+    print("max_heading_err (degrees) ", max_heading_err)
+    print("max_velocity : ", max_v)
+    duration = end_time - start_time;
+    print("init time: ", init_time);
+    print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
+    print("logging performance:")
+    os.system('cat ' + filepath + ' |grep ' + max_power_time + ' |wc -l')
+    print("-----------------moving steps in autonomous------------------------");
+    os.system('cat ' + filepath + " |grep start " + " |grep new " + "|grep step");
+    print("max error: ", max_final_x_err, max_final_y_err, max_final_heading_err);
+    #print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
 
     plt.style.use('ggplot')
     #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=3, mode="expand", borderaxespad=0.);
@@ -278,27 +325,6 @@ if print_summary != 0:
         #plt.plot(new_y[i], 600-new_x[i])
     plt.plot(new_y, new_x)
     implot = plt.imshow(im);
-
-    print("===============summary==========================")
-
-    print("data_x, data_y, data_h, data_x_raw, data_y_raw, data_heading_raw");
-    print("data_v, data_v_target, data_v_actual");
-    print("program : ", p_name)
-    t = max_power_time.strftime('%H:%M:%S.%f');
-    max_power_time = t[:-3];
-    print("max power to wheel: ", max_power, " timestamp: ", max_power_time, " timeoffset: ", max_power_delta)
-
-    print("max_x_err (inches): ", max_x_err)
-    print("max_y_err (inches): ", max_y_err)
-    print("max_heading_err (degrees) ", max_heading_err)
-    print("max_velocity : ", max_v)
-    duration = end_time - start_time;
-    print("init time: ", init_time);
-    print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
-    print("logging performance:")
-    os.system('cat ' + filepath + ' |grep ' + max_power_time + ' |wc -l')
-
-    #print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
 
     plt.show();
     #plt.waitforbuttonpress(1); input();

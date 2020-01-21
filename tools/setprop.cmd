@@ -5,6 +5,8 @@ adb shell setprop debug.ftc.brake 1
 adb shell setprop debug.ftc.bulk 0
 adb shell setprop debug.ftc.recreateDrv 0
 adb shell setprop debug.ftc.distance 24
+adb shell setprop debug.ftc.distance0 24
+adb shell setprop debug.ftc.strafeDiag 1
 adb shell setprop debug.ftc.trackwidth 14.2
 adb shell setprop debug.ftc.maxVel 70.0
 adb shell setprop debug.ftc.maxAccel 35.0
