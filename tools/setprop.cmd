@@ -1,15 +1,16 @@
 adb shell setprop debug.ftc.imu 1
 adb shell setprop debug.ftc.odom 1
 adb shell setprop debug.ftc.vuforia 0
-adb shell setprop debug.ftc.brake 1
+adb shell setprop debug.ftc.brake 0
 adb shell setprop debug.ftc.bulk 0
 adb shell setprop debug.ftc.recreateDrv 0
-adb shell setprop debug.ftc.distance 24
+adb shell setprop debug.ftc.drvCorrect 1
+adb shell setprop debug.ftc.distance 72
 adb shell setprop debug.ftc.distance0 24
 adb shell setprop debug.ftc.strafeDiag 1
 adb shell setprop debug.ftc.trackwidth 14.2
-adb shell setprop debug.ftc.maxVel 70.0
-adb shell setprop debug.ftc.maxAccel 35.0
+adb shell setprop debug.ftc.maxVel 90.0
+adb shell setprop debug.ftc.maxAccel 45.0
 adb shell setprop debug.ftc.strafeMaxVel 30.0
 adb shell setprop debug.ftc.strafeMaxAccel 15.0
 rem smaller does make straight test go shorter distance;
