@@ -43,11 +43,13 @@ max_final_y_err=0;
 max_final_heading_err=0;
 max_v=0;
 p_name='noname';
+max_power_time = 0;
 print_summary=0;
 filepath = sys.argv[1];
 arg_c = len(sys.argv);
-print_summary = 1;
-max_power_time = 0;
+if (arg_c>=3):
+    print_summary = 1;
+
 def get_time(t):
     t = t.split(' ')
     #print(t)
@@ -227,35 +229,37 @@ with open(filepath) as fp:
 
 fp.close();
 
+
+t = len(data_x);
+if (t!=len(data_y) or t!=len(data_h) or t!=len(data_h_raw)) or (t==0):
+    print("double check the parsing!!!", t, " ", len(data_h_raw), " ", len(data_h), " ", len(data_time));
+    sys.exit()
+else:
+    print("parsing looks good, len: ", t);
+
+print("===============summary==========================")
+print("program : ", p_name)
+t = max_power_time.strftime('%H:%M:%S.%f');
+max_power_time = t[:-3];
+print("max power to wheel: ", max_power, " timestamp: ", max_power_time, " timeoffset: ", max_power_delta)
+
+print("max_x_err (inches): ", max_x_err)
+print("max_y_err (inches): ", max_y_err)
+print("max_heading_err (degrees) ", max_heading_err)
+print("max_velocity : ", max_v)
+duration = end_time - start_time;
+print("init time: ", init_time);
+print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
+print("logging performance:")
+os.system('cat ' + filepath + ' |grep ' + max_power_time + ' |wc -l')
+print("-----------------moving steps in autonomous------------------------");
+os.system('cat ' + filepath + " |grep start " + " |grep new " + "|grep step");
+os.system('cat ' + filepath + " |grep DriveConstants " + " |grep maxVel " + "|grep maxAccel");
+print("max error: ", max_final_x_err, max_final_y_err, max_final_heading_err);
+#print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
+print(filepath);
+
 if print_summary != 0:
-    t = len(data_x);
-    if (t!=len(data_y) or t!=len(data_h) or t!=len(data_h_raw)) or (t==0):
-        print("double check the parsing!!!", t, " ", len(data_h_raw), " ", len(data_h), " ", len(data_time));
-        sys.exit()
-    else:
-        print("parsing looks good, len: ", t);
-
-    print("===============summary==========================")
-    print("program : ", p_name)
-    t = max_power_time.strftime('%H:%M:%S.%f');
-    max_power_time = t[:-3];
-    print("max power to wheel: ", max_power, " timestamp: ", max_power_time, " timeoffset: ", max_power_delta)
-
-    print("max_x_err (inches): ", max_x_err)
-    print("max_y_err (inches): ", max_y_err)
-    print("max_heading_err (degrees) ", max_heading_err)
-    print("max_velocity : ", max_v)
-    duration = end_time - start_time;
-    print("init time: ", init_time);
-    print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
-    print("logging performance:")
-    os.system('cat ' + filepath + ' |grep ' + max_power_time + ' |wc -l')
-    print("-----------------moving steps in autonomous------------------------");
-    os.system('cat ' + filepath + " |grep start " + " |grep new " + "|grep step");
-    os.system('cat ' + filepath + " |grep DriveConstants " + " |grep maxVel " + "|grep maxAccel");
-    print("max error: ", max_final_x_err, max_final_y_err, max_final_heading_err);
-    #print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
-    print(filepath);
     plt.style.use('ggplot')
     #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=3, mode="expand", borderaxespad=0.);
     plt.plot(data_time, data_x, label="xError");
