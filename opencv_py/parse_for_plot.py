@@ -251,10 +251,17 @@ duration = end_time - start_time;
 print("init time: ", init_time);
 print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
 print("logging performance:")
-os.system('cat ' + filepath + ' |grep ' + max_power_time + ' |wc -l')
+os.system('cat ' + filepath + ' |grep SampleMecanumDriveBase | grep update |grep x');
 print("-----------------moving steps in autonomous------------------------");
-os.system('cat ' + filepath + " |grep start " + " |grep new " + "|grep step");
+with open(filepath) as fp:
+    line = fp.readline()
+    while line:
+        line = fp.readline();
+        if (("start new step: step" in line) or ("pose correction" in line)):
+            print(line.strip())
+fp.close();
 os.system('cat ' + filepath + " |grep DriveConstants " + " |grep maxVel " + "|grep maxAccel");
+
 print("max error: ", max_final_x_err, max_final_y_err, max_final_heading_err);
 #print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
 print(filepath);
