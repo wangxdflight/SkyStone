@@ -1,6 +1,7 @@
 adb shell setprop debug.ftc.logging 1
 adb shell setprop debug.ftc.bulk 1
 adb shell setprop debug.ftc.imu 0
+adb shell setprop debug.ftc.resetfollow 1
 adb shell setprop debug.ftc.imuInterval 10
 adb shell setprop debug.ftc.odom 1
 adb shell setprop debug.ftc.vuforia 0

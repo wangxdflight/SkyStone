@@ -2,6 +2,8 @@ import sys
 import os
 import string
 import math
+from math import pi
+
 from matplotlib import pyplot as plt
 import numpy as nm
 from datetime import datetime
@@ -20,13 +22,16 @@ start_time=datetime.now();
 end_time=start_time;
 init_time=start_time;
 last_time=start_time;
+heading_imu=[];
+heading_odom=[];
+imu_time=[];
 data=[];
 data_time=[];
 data_time_str=[]
 data_x=[];  # xError in follower;
 data_x_raw=[];  # current Pose
 data_y=[];
-data_y_raw=[];
+data_y_raw=[]
 data_h=[];   # headingError
 data_h_rad=[];
 data_h_raw=[];
@@ -47,6 +52,9 @@ max_v=0;
 p_name='noname';
 max_power_time = 0;
 print_summary=0;
+last_x_err=0;
+last_y_err=0;
+last_h_err=0;
 filepath = sys.argv[1];
 arg_c = len(sys.argv);
 if (arg_c>=3):
@@ -67,13 +75,32 @@ with open(filepath) as fp:
     while line:
         line = fp.readline();
         #print(line)
+        if ("StandardTrackingWheelLocalizer: using IMU:" in line):
+            t = line.split("StandardTrackingWheelLocalizer");
+            t = get_time(t[0]);
+            t_delta = t-start_time;
+            imu_time.append(t_delta.total_seconds());
+
+            t = line.strip().split('StandardTrackingWheelLocalizer');
+            t = t[1].split(' ');
+            #print(t)
+            #print(t[12], t[15]);
+            t1 = float(t[5]);
+            t2 = float(t[8]);
+            if (t2>pi):
+                t2 = (-1.0) * (2*pi - t2);
+            #if (t1 < 0):
+            #    t1 = t1 + 2 * pi;
+            heading_imu.append(math.degrees(t1));
+            heading_odom.append(math.degrees(t2));
+
         if (("SampleMecanumDriveBase" in line) or ("BaseClass" in line)) and ("update: x" in line):
             #print(line)
             t1 = line.split("update: x");
             t2 = t1[1].strip();
             t3 = t2.split(' ');
-            t = t3[0];
-            data_x_raw.append(float(t));
+            t = float(t3[0]);
+            data_x_raw.append(t);
 
             curr_time = get_time(t1[0])
             delta = curr_time - start_time;
@@ -106,6 +133,7 @@ with open(filepath) as fp:
                 t2 = t1[1]
                 t = float(t2)
                 data_x.append(t)
+                last_x_err = t;
                 if t > max_x_err:
                     max_x_err = t;
             if ("yError" in line):
@@ -113,6 +141,7 @@ with open(filepath) as fp:
                 t2 = t1[1]
                 t = float(t2)
                 data_y.append(t)
+                last_y_err = t;
                 if t > max_y_err:
                     max_y_err = t;
             if ("headingError" in line):
@@ -120,6 +149,7 @@ with open(filepath) as fp:
                 t2 = t1[1]
                 data_h_rad.append(float(t2))
                 t = math.degrees(float(t2));
+                last_h_err = t;
                 data_h.append(t)
                 if t > max_heading_err:
                     max_heading_err = t;
@@ -197,11 +227,10 @@ with open(filepath) as fp:
             #print("drive reset takes: ", t_delta.total_seconds());
             create_time.append(t_delta.total_seconds());
         ###########################################
-        if ("RobotCore" in line) and ("START - OPMODE" in line):
-            t = line.split('OPMODE');
-            t1 = t[1].strip().split(' ')
-            p_name=t1[0]
-
+        if ("Robocol : received command: CMD_RUN_OP_MODE" in line):
+            t = line.strip().split(' ');
+            p_name=t[-1]
+            t = line.strip().split('Robotcol')
             init_time = get_time(t[0])
             #print(start_time)
         if ("received command: CMD_RUN_OP_MODE" in line):
@@ -213,7 +242,7 @@ with open(filepath) as fp:
 
     for i in range(len(data_x)):
         if (i%10==0):
-            print("time\t\t\ttime offset\t xErr\t\t\t X  \t\t yErr\t\t    Y \t\t\t headingErr\tHeading(degree)\t headingErr(rad) \t heading(rad)");
+            print("time\t\t\ttime offset\t xErr\t\t\t X  \t\t   yErr\t\t   \t\tY \t\t headingErr\tHeading(degree)\t\t headingErr(rad) \t heading(rad)");
         print(data_time_str[i], " ", data_time[i], " ", data_x[i], " ", data_x_raw[i], " ", data_y[i], " ", data_y_raw[i], " ",  data_h[i], " ", data_h_raw[i], " ",  data_h_rad[i], " ", data_h_raw_rad[i]);
 
     print("-----------------moving steps in autonomous------------------------");
@@ -239,6 +268,25 @@ if (t!=len(data_y) or t!=len(data_h) or t!=len(data_h_raw)) or (t==0):
 else:
     print("parsing looks good, len: ", t);
 
+#os.system('cat ' + filepath + ' |grep SampleMecanumDriveBase | grep update |grep x');
+print("-----------------moving steps in autonomous------------------------");
+with open(filepath) as fp:
+    line = fp.readline()
+    while line:
+        line = fp.readline();
+        if (("start new step: step" in line) or ("pose correction" in line)):
+            print(line.strip())
+fp.close();
+############### better than grep
+
+with open(filepath) as fp:
+    line = fp.readline()
+    while line:
+        line = fp.readline();
+        if ("IMUBufferReader: IMU gyro time delta" in line):
+            print(line.strip())
+fp.close();
+
 print("===============summary==========================")
 t = max_power_time.strftime('%H:%M:%S.%f');
 max_power_time = t[:-3];
@@ -251,22 +299,31 @@ print("max_velocity : ", max_v)
 duration = end_time - start_time;
 print("init time: ", init_time);
 print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
-print("logging performance:")
-#os.system('cat ' + filepath + ' |grep SampleMecanumDriveBase | grep update |grep x');
-print("-----------------moving steps in autonomous------------------------");
+print("\nDrivetrain parameters:");
+print("program : ", p_name)
+
 with open(filepath) as fp:
     line = fp.readline()
     while line:
         line = fp.readline();
-        if (("start new step: step" in line) or ("pose correction" in line)):
+        if (("DriveConstants" in line) and ("maxVel" in line) and ("maxAccel" in line)):
             print(line.strip())
-fp.close();
-os.system('cat ' + filepath + " |grep DriveConstants " + " |grep maxVel " + "|grep maxAccel");
-os.system('cat ' + filepath + " |grep IMUBufferReader " + " |grep time " + "|grep delta");
+        if (("DriveConstants: Strafing paramters" in line)):
+            print(line.strip())
+        if (("DriveConstants: test distance" in line)):
+            print(line.strip())
+        if (("DriveConstants" in line) and ("PID" in line)):
+            print(line.strip())
+        if (("DriveConstants: using IMU in localizer?" in line)):
+            print(line.strip())
+        if (("DriveConstants: debug.ftc.brake" in line)):
+            print(line.strip())
+    fp.close();
 print("max error: ", max_final_x_err, max_final_y_err, max_final_heading_err);
+print("last error: ", last_x_err, last_y_err, last_h_err);
 #print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
 print(filepath);
-print("program : ", p_name)
+
 
 
 if print_summary != 0:
@@ -323,6 +380,16 @@ if print_summary != 0:
     plt.xlim([-70, 70])
     plt.ylim([-70, 70])
     plt.legend();
+    #############################
+    plt.figure();
+    plt.plot(imu_time, heading_imu, label="IMU");
+    plt.plot(imu_time, heading_odom, label='Odom"');
+    #for i in range(len(heading_odom)):
+        #print(imu_time[i], heading_imu[i], heading_odom[i]);
+    plt.legend();
+    plt.xlabel('time(seconds)');
+    plt.ylabel('heading(degrees)');
+    plt.ylim([-10, 10])
 
     #####################################################################################################
     plt.figure();
@@ -342,6 +409,8 @@ if print_summary != 0:
         #plt.plot(new_y[i], 600-new_x[i])
     plt.plot(new_y, new_x)
     implot = plt.imshow(im);
+
+
 
     plt.show();
     #plt.waitforbuttonpress(1); input();
