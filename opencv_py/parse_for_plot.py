@@ -304,7 +304,7 @@ if print_summary != 0:
     plt.xlabel('time');
     plt.ylabel('degrees');
     plt.scatter(auto_time, auto_h, zorder=2)
-    plt.ylim([-90, 90])
+    #plt.ylim([-30, 30])
     plt.legend();
     #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)
     ##################
