@@ -7,6 +7,8 @@ import numpy as nm
 from datetime import datetime
 import array
 
+script_dir=os.path.dirname(os.path.abspath(__file__));
+
 auto_time=[];
 auto_time_raw=[];  # offset time;
 create_time=[];
@@ -211,7 +213,7 @@ with open(filepath) as fp:
 
     for i in range(len(data_x)):
         if (i%10==0):
-            print("time\t\t\ttime offset\t xErr\t\t\t yErr\t\t headingErr\t\t X\t\t\t Y\t\t Heading(degree)\t headingErr(degree) \t heading(degree)");
+            print("time\t\t\ttime offset\t xErr\t\t\t X  \t\t yErr\t\t    Y \t\t\t headingErr\tHeading(degree)\t headingErr(rad) \t heading(rad)");
         print(data_time_str[i], " ", data_time[i], " ", data_x[i], " ", data_x_raw[i], " ", data_y[i], " ", data_y_raw[i], " ",  data_h[i], " ", data_h_raw[i], " ",  data_h_rad[i], " ", data_h_raw_rad[i]);
 
     print("-----------------moving steps in autonomous------------------------");
@@ -238,7 +240,6 @@ else:
     print("parsing looks good, len: ", t);
 
 print("===============summary==========================")
-print("program : ", p_name)
 t = max_power_time.strftime('%H:%M:%S.%f');
 max_power_time = t[:-3];
 print("max power to wheel: ", max_power, " timestamp: ", max_power_time, " timeoffset: ", max_power_delta)
@@ -251,7 +252,7 @@ duration = end_time - start_time;
 print("init time: ", init_time);
 print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
 print("logging performance:")
-os.system('cat ' + filepath + ' |grep SampleMecanumDriveBase | grep update |grep x');
+#os.system('cat ' + filepath + ' |grep SampleMecanumDriveBase | grep update |grep x');
 print("-----------------moving steps in autonomous------------------------");
 with open(filepath) as fp:
     line = fp.readline()
@@ -261,10 +262,12 @@ with open(filepath) as fp:
             print(line.strip())
 fp.close();
 os.system('cat ' + filepath + " |grep DriveConstants " + " |grep maxVel " + "|grep maxAccel");
-
+os.system('cat ' + filepath + " |grep IMUBufferReader " + " |grep time " + "|grep delta");
 print("max error: ", max_final_x_err, max_final_y_err, max_final_heading_err);
 #print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
 print(filepath);
+print("program : ", p_name)
+
 
 if print_summary != 0:
     plt.style.use('ggplot')
@@ -323,7 +326,7 @@ if print_summary != 0:
 
     #####################################################################################################
     plt.figure();
-    im = plt.imread("skystone_field.png");
+    im = plt.imread(script_dir+"\\skystone_field.png");
     #plt.xlim([-100, 700])
     #plt.ylim([-100, 700])
     plt.xticks([])
