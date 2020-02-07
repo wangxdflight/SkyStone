@@ -322,9 +322,11 @@ with open(filepath) as fp:
             print(line.strip())
         if (("DriveConstants: debug.ftc.resetfollow" in line)):
             print(line.strip())
-        if (("DriveConstants: debug.ftc.odom :" in line)):
+        if (("DriveConstants: using Odometry" in line)):
             print(line.strip())
         if (("currentPos" in line) and ("errorPos" in line)):
+            print(line.strip())
+        if (("AutonomousPath:" in line) and ("xml" in line)):
             print(line.strip())
     fp.close();
 print("max error: ", max_final_x_err, max_final_y_err, max_final_heading_err);
@@ -355,7 +357,7 @@ if print_summary != 0:
     plt.figure();
 
     plt.plot(data_time, nm.add(data_y, data_y_raw), label="target Y");
-    plt.plot(data_time, data_y_raw, label="actual Y")
+    plt.plot(data_time, data_y_raw, 'g-', label="actual Y")
     plt.scatter(auto_time, auto_y, zorder=2)
     plt.xlabel('time');
     plt.ylabel('inches');
@@ -398,28 +400,26 @@ if print_summary != 0:
         plt.legend();
         plt.xlabel('time(seconds)');
         plt.ylabel('heading(radius)');
-        #plt.ylim([-10, 10])
+        plt.ylim([0, 7.0])
 
     #####################################################################################################
     plt.figure();
     im = plt.imread(script_dir+"\\skystone_field.png");
     #plt.xlim([-100, 700])
     #plt.ylim([-100, 700])
-    plt.xticks([])
-    plt.yticks([])
+    #plt.xticks([])
+    #plt.yticks([])
     #plt.plot(data_x_raw, data_y_raw, label="actual path");
     new_x = [];
     new_y = [];
     for i in range(len(data_x_raw)):
-        new_x.append(600 - (data_x_raw[i] + 60.0) * 5);
-        new_y.append(abs(data_y_raw[i] - 60.0) * 5);
+        new_x.append(300 - data_x_raw[i] * 100/24);
+        new_y.append(300 - data_y_raw[i] * 100/24);
         #print(new_x[i], new_y[i]);
         #plt.scatter(new_y[i], 600-new_x[i], zorder=2);
         #plt.plot(new_y[i], 600-new_x[i])
     plt.plot(new_y, new_x)
     implot = plt.imshow(im);
-
-
 
     plt.show();
     #plt.waitforbuttonpress(1); input();
