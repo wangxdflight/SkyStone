@@ -32,6 +32,12 @@ for elem in root:
         i = i + 1;
 
 for i in range(len(x)):
+    if (i == 6):
+        x[i] = x[i - 1] + x[i];
+        y[i] = y[i - 1] + y[i];
+    if (i == 7):
+        x[i] = x[i - 1] - x[i];
+        y[i] = y[i - 1] - y[i];
     print("step[", i, "]", x[i], y[i], h[i])
 
 im = plt.imread(script_dir+"\\skystone_field.png");

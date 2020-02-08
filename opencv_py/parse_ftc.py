@@ -12,12 +12,17 @@ import array
 script_dir=os.path.dirname(os.path.abspath(__file__));
 
 auto_time=[];
+auto_time2=[];
 auto_time_raw=[];  # offset time;
 create_time=[];
 create_time.append(0);
 auto_x=[]; # X pose in each step;
 auto_y=[];
 auto_h=[];
+auto_x1=[]; # X pose in each step;
+auto_y1=[];
+auto_h1=[];
+last_time_offset = 0;
 start_time=datetime.now();
 end_time=start_time;
 init_time=start_time;
@@ -108,7 +113,7 @@ with open(filepath) as fp:
             delta = curr_time - start_time;
             data_time.append(delta.total_seconds());
             data_time_str.append(curr_time)
-
+            last_time_offset = delta.total_seconds();
             end_time = curr_time;
         if (("SampleMecanumDriveBase" in line) or ("BaseClass" in line)) and (" y " in line):
             t1 = line.split(" y ");
@@ -197,12 +202,19 @@ with open(filepath) as fp:
             last_time = t1;
             auto_time_raw.append(t1);
             t_delta = t1-start_time;
-            auto_time.append(t_delta.total_seconds());
-
+            auto_time2.append(t_delta.total_seconds());
+            auto_time.append(last_time_offset);
             t = t[1].split(', ');
             #print(t)
             auto_x.append(float(t[0].rstrip()));
             auto_y.append(float(t[1].rstrip()));
+
+            t2 = line.split('errorPos (');
+            t3 = t2[1].split(', ');
+            #print(t3);
+            auto_x1.append(float(t3[0].rstrip()));
+            auto_y1.append(float(t3[1].rstrip()));
+
             t=t[2];
             t=t[:-3].strip();
             auto_h.append(float(t));
@@ -334,23 +346,22 @@ print("last error: ", last_x_err, last_y_err, last_h_err);
 #print("start time(in miliseconds): ", start_time.timestamp() * 1000, " end time: ", end_time.timestamp() * 1000);
 print(filepath);
 
-
-
 if print_summary != 0:
     plt.style.use('ggplot')
     #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=3, mode="expand", borderaxespad=0.);
     plt.plot(data_time, data_x, label="xError");
     plt.plot(data_time, data_y, label="yError");
     plt.plot(data_time, data_h, label="headingError");
-    plt.scatter(auto_time, [10 for i in range(len(auto_time))], zorder=2); # mark the drive reset;
+    plt.scatter(auto_time, [0 for i in range(len(auto_time))], zorder=2); # mark the drive reset;
     plt.xlabel('time(seconds)');
     plt.ylabel('inches for x, y, degrees for heading');
     plt.legend();
 
     plt.figure();
     plt.plot(data_time, nm.add(data_x, data_x_raw), label="target X");
-    plt.plot(data_time, data_x_raw, label="actual X")
+    plt.plot(data_time, data_x_raw, 'g-', label="actual X")
     plt.scatter(auto_time, auto_x, zorder=2)
+    plt.scatter(auto_time, nm.add(auto_x, auto_x1),  zorder=2)
     plt.xlabel('time (seconds)');
     plt.ylabel('distance(inches)');
     plt.legend();
@@ -359,6 +370,7 @@ if print_summary != 0:
     plt.plot(data_time, nm.add(data_y, data_y_raw), label="target Y");
     plt.plot(data_time, data_y_raw, 'g-', label="actual Y")
     plt.scatter(auto_time, auto_y, zorder=2)
+    plt.scatter(auto_time, nm.add(auto_y, auto_y1), zorder=2)
     plt.xlabel('time');
     plt.ylabel('inches');
     #plt.ylim([-10, 10])
