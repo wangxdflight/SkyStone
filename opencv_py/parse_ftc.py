@@ -8,9 +8,10 @@ from matplotlib import pyplot as plt
 import numpy as nm
 from datetime import datetime
 import array
+import xml.etree.ElementTree as ET
 
 script_dir=os.path.dirname(os.path.abspath(__file__));
-
+xml_file_name='';
 auto_time=[];
 auto_time2=[];
 auto_time_raw=[];  # offset time;
@@ -65,6 +66,64 @@ arg_c = len(sys.argv);
 if (arg_c>=3):
     print_summary = 1;
 
+def plot_path_xml(filename):
+    script_dir = os.path.dirname(os.path.abspath(__file__));
+    filepath = script_dir + "..\\TeamCode\src\main\java\org\\firstinspires\\ftc\\teamcode\\All\\" + filename;
+    print(filepath)
+    tree = ET.parse(filepath)
+    root = tree.getroot()
+
+    # all items data
+    x = [];
+    y = [];
+    h = [];
+    for elem in root:
+        i = 0;
+        for subelem in elem:
+            if (i == 0):
+                x.append(float(subelem.text))
+            if (i == 1):
+                y.append(float(subelem.text))
+            if (i == 2):
+                h.append(float(subelem.text))
+            i = i + 1;
+
+    for i in range(len(x)):
+        if (i == 6):
+            x[i] = x[i - 1] + x[i];
+            y[i] = y[i - 1] + y[i];
+        if (i == 7):
+            x[i] = x[i - 1] - x[i];
+            y[i] = y[i - 1] - y[i];
+        print("step[", i, "]", x[i], y[i], h[i])
+
+    plt.figure();
+    im = plt.imread(script_dir + "\\skystone_field.png");
+
+    new_x = [];
+    new_y = [];
+    for i in range(len(x)):
+        new_x.append(300 - x[i] * 100 / 24);
+        new_y.append(300 - y[i] * 100 / 24);
+
+    plt.plot(new_y, new_x)
+    plt.scatter(new_y, new_x, zorder=2);
+
+#####################
+    new_x = [];
+    new_y = [];
+    for i in range(len(data_x_raw)):
+        new_x.append(300 - data_x_raw[i] * 100/24);
+        new_y.append(300 - data_y_raw[i] * 100/24);
+    plt.plot(new_y, new_x)
+    implot = plt.imshow(im);
+
+################
+    plt.show();
+    # plt.waitforbuttonpress(1); input();
+    # plt.close('all')
+
+    return;
 def get_time(t):
     t = t.split(' ')
     #print(t)
@@ -241,10 +300,10 @@ with open(filepath) as fp:
             #print("drive reset takes: ", t_delta.total_seconds());
             create_time.append(t_delta.total_seconds());
         ###########################################
-        if ("Robocol : received command: CMD_RUN_OP_MODE" in line):
+        if ("RobotCore: ******************** START - OPMODE" in line):
             t = line.strip().split(' ');
             p_name=t[-1]
-            t = line.strip().split('Robotcol')
+            t = line.strip().split('RobotCore')
             init_time = get_time(t[0])
             #print(start_time)
         if ("received command: CMD_RUN_OP_MODE" in line):
@@ -311,8 +370,8 @@ print("max_y_err (inches): ", max_y_err)
 print("max_heading_err (degrees) ", max_heading_err)
 print("max_velocity : ", max_v)
 duration = end_time - start_time;
-print("init time: ", init_time);
-print("start time: ", start_time, " end time: ", end_time, " run duration(seconds): ", duration.total_seconds());
+print("init time(START OP_MODE): ", init_time);
+print("start time(RUN): ", start_time, " end time(STOP): ", end_time, " run duration(seconds): ", duration.total_seconds());
 print("\nDrivetrain parameters:");
 print("program : ", p_name)
 
@@ -336,10 +395,17 @@ with open(filepath) as fp:
             print(line.strip())
         if (("DriveConstants: using Odometry" in line)):
             print(line.strip())
+        if (("DriveConstants: using Odom  in strafe move" in line)):
+            print(line.strip())
         if (("currentPos" in line) and ("errorPos" in line)):
             print(line.strip())
         if (("AutonomousPath:" in line) and ("xml" in line)):
             print(line.strip())
+            t = line.split(' ');
+            xml_file_name = t[-1];
+            xml_file_name = xml_file_name.strip();
+            #print(xml_file_name);
+
     fp.close();
 print("max error: ", max_final_x_err, max_final_y_err, max_final_heading_err);
 print("last error: ", last_x_err, last_y_err, last_h_err);
@@ -415,24 +481,6 @@ if print_summary != 0:
         plt.ylim([0, 7.0])
 
     #####################################################################################################
-    plt.figure();
-    im = plt.imread(script_dir+"\\skystone_field.png");
-    #plt.xlim([-100, 700])
-    #plt.ylim([-100, 700])
-    #plt.xticks([])
-    #plt.yticks([])
-    #plt.plot(data_x_raw, data_y_raw, label="actual path");
-    new_x = [];
-    new_y = [];
-    for i in range(len(data_x_raw)):
-        new_x.append(300 - data_x_raw[i] * 100/24);
-        new_y.append(300 - data_y_raw[i] * 100/24);
-        #print(new_x[i], new_y[i]);
-        #plt.scatter(new_y[i], 600-new_x[i], zorder=2);
-        #plt.plot(new_y[i], 600-new_x[i])
-    plt.plot(new_y, new_x)
-    implot = plt.imshow(im);
-
-    plt.show();
     #plt.waitforbuttonpress(1); input();
     #plt.close('all')
+    plot_path_xml(xml_file_name);
