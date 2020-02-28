@@ -68,7 +68,7 @@ if (arg_c>=3):
 
 def plot_path_xml(filename):
     script_dir = os.path.dirname(os.path.abspath(__file__));
-    filepath = script_dir + "..\\TeamCode\src\main\java\org\\firstinspires\\ftc\\teamcode\\All\\" + filename;
+    filepath = script_dir + "\\..\\TeamCode\src\main\java\org\\firstinspires\\ftc\\teamcode\\All\\" + filename;
     print(filepath)
     tree = ET.parse(filepath)
     root = tree.getroot()

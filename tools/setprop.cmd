@@ -16,6 +16,7 @@ adb shell setprop debug.ftc.resetfollow 1
 adb shell setprop debug.ftc.forceOdom 1
 adb shell setprop debug.ftc.diagsplit 1
 adb shell setprop debug.ftc.imuInterval 10
+adb shell setprop debug.ftc.grab 0
 rem ---------------- odometry parameters -----------------
 adb shell setprop debug.ftc.odom 0
 adb shell setprop debug.ftc.odoTicksPerRevLeft 1565
