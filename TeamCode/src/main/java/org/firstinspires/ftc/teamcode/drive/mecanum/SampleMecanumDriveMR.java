@@ -104,6 +104,7 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
         }
         return wheelPositions;
     }
+
     @Override
     public List<Double> getMotorPowers(List<DcMotorEx> motors) {
         List<Double> wheelPowers = new ArrayList<>();

@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.drive.calibration;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -11,37 +11,26 @@ import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
 
 /*
- * This is an example of a more complex path to really test the tuning.
+ * This is a simple routine to test turning capabilities.
  */
-@Autonomous(name = "SplineTest", group = "drive")
+@Config
+@Autonomous(group = "drive")
 @Disabled
-public class SplineTest extends LinearOpMode {
+public class TurnTest0 extends LinearOpMode {
+    public static double ANGLE = 90; // deg
+
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
-        SampleMecanumDriveBase drive = null;
+        SampleMecanumDriveBase drive;
         if (DriveConstants.USING_BULK_READ == false)
             drive = new SampleMecanumDriveREV(hardwareMap, false);
         else
             drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
-
         waitForStart();
 
         if (isStopRequested()) return;
 
-        drive.followTrajectorySync(
-                drive.trajectoryBuilder()
-                        .splineTo(new Pose2d(30, 30, 0))
-                        .build()
-        );
-
-        sleep(2000);
-
-        drive.followTrajectorySync(
-                drive.trajectoryBuilder()
-                        .reverse()
-                        .splineTo(new Pose2d(0, 0, 0))
-                        .build()
-        );
+        drive.turnSync(Math.toRadians(ANGLE));
     }
 }

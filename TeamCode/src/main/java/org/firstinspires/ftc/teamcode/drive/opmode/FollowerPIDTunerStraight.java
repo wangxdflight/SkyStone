@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.firstinspires.ftc.teamcode.Autonomous.Path;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
@@ -18,52 +19,60 @@ import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimiz
  */
 @Config
 @Autonomous(name = "FollowerPIDTunerStraight", group = "drive")
-//@Disabled
+@Disabled
 public class FollowerPIDTunerStraight extends LinearOpMode {
     public static double DISTANCE = 0; // update later;
-    private String TAG = "FollowerPIDTunerStraightsss";
+    private String TAG = "FollowerPIDTunerStraight";
+    SampleMecanumDriveBase drive = null;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        DriveConstants.updateConstantsFromProperties();  // Transitional PID is used in base class;;
-        DISTANCE = DriveConstants.TEST_DISTANCE;
-        SampleMecanumDriveBase drive = null;
+        if (drive == null) {
+            DriveConstants.updateConstantsFromProperties();  // Transitional PID is used in base class;;
+            DISTANCE = DriveConstants.TEST_DISTANCE;
 
-        waitForStart();
-
-        if (isStopRequested()) return;
-
-        while (!isStopRequested()) {
             if (DriveConstants.USING_BULK_READ == false)
                 drive = new SampleMecanumDriveREV(hardwareMap, false);
             else
                 drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
             drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
-            drive.setPoseEstimate(new Pose2d(0, 0, 0));
+            drive.setPoseEstimate(new Pose2d(0, 0, drive.getExternalHeading()));
 
-            RobotLog.dd(TAG, "current pose: " + drive.getPoseEstimate().toString());
-            RobotLog.dd(TAG, "move forward: "+Double.toString(DISTANCE));
+        }
+        waitForStart();
+
+        if (isStopRequested()) return;
+
+        while (!isStopRequested()) {
+
+            //drive.setPoseEstimate(drive.getPoseEstimate());
+
+            if (DriveConstants.RESET_FOLLOWER)
+                drive.resetFollowerWithParameters(false, false);
+
             drive.followTrajectorySync(
                     drive.trajectoryBuilder()
                             .forward(DISTANCE)
                             .build()
             );
-            RobotLog.dd(TAG, "current pose: " + drive.getPoseEstimate().toString());
-            RobotLog.dd(TAG, "move back: "+Double.toString(DISTANCE));
+            Pose2d currentPos = drive.getPoseEstimate();
+            Pose2d error_pose = drive.follower.getLastError();
+            RobotLog.dd(TAG, "currentPos %s, errorPos %s",currentPos.toString(), error_pose.toString());
             //drive.turnSync(Math.toRadians(90));
-            try{
-                Thread.sleep(5000);
-            } catch(Exception e){}
+            Path.sleep_millisec_opmode(2000, this);
+
+            if (DriveConstants.RESET_FOLLOWER)
+                drive.resetFollowerWithParameters(false, false);
 
             drive.followTrajectorySync(
                     drive.trajectoryBuilder()
                             .back(DISTANCE)
                             .build()
             );
-            try{
-                Thread.sleep(5000);
-            } catch(Exception e){}
-
+            currentPos = drive.getPoseEstimate();
+            error_pose = drive.follower.getLastError();
+            RobotLog.dd(TAG, "currentPos %s, errorPos %s",currentPos.toString(), error_pose.toString());
+            Path.sleep_millisec_opmode(2000, this);
         }
     }
 }

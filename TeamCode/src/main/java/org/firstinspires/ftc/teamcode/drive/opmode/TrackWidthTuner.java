@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
+package org.firstinspires.ftc.teamcode.drive.calibration;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.util.Angle;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.MovingStatistics;
 
@@ -15,7 +16,7 @@ import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
 
-import com.qualcomm.robotcore.util.RobotLog;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
 
 /*
  * This routine determines the effective track width. The procedure works by executing a point turn
@@ -27,15 +28,15 @@ import com.qualcomm.robotcore.util.RobotLog;
  * accurate track width estimate is important or else the angular constraints will be thrown off.
  */
 @Config
-@Autonomous(group = "drive")
+@Autonomous(name = "TrackWidthTuner", group = "drive")
+@Disabled
 public class TrackWidthTuner extends LinearOpMode {
     public static double ANGLE = 180; // deg
     public static int NUM_TRIALS = 5;
     public static int DELAY = 1000; // ms
-    private String TAG = "TrackWidthTuner";
+
     @Override
     public void runOpMode() throws InterruptedException {
-        DriveConstants.updateConstantsFromProperties();
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         //RUN_USING_ODOMETRY_WHEEL = true; //???
         SampleMecanumDriveBase drive = null;
@@ -47,8 +48,6 @@ public class TrackWidthTuner extends LinearOpMode {
 
         // TODO: if you haven't already, set the localizer to something that doesn't depend on
         // drive encoders for computing the heading
-
-        // localizer is set in class SampleMecanumDriveREV;
 
         telemetry.addLine("Press play to begin the track width tuner routine");
         telemetry.addLine("Make sure your robot has enough clearance to turn smoothly");
@@ -76,13 +75,13 @@ public class TrackWidthTuner extends LinearOpMode {
                 double heading = drive.getPoseEstimate().getHeading();
                 headingAccumulator += Angle.norm(heading - lastHeading);
                 lastHeading = heading;
-                RobotLog.dd(TAG, "heading:" + Double.toString(heading));
+
                 drive.update();
             }
 
-            double trackWidth = DriveConstants.ODOMETRY_TRACK_WIDTH * Math.toRadians(ANGLE) / headingAccumulator;
+            double trackWidth = TRACK_WIDTH * Math.toRadians(ANGLE) / headingAccumulator;
             trackWidthStats.add(trackWidth);
-            RobotLog.dd(TAG, "trackWidth:" + Double.toString(trackWidth));
+
             sleep(DELAY);
         }
 
@@ -92,9 +91,6 @@ public class TrackWidthTuner extends LinearOpMode {
                 trackWidthStats.getMean(),
                 trackWidthStats.getStandardDeviation() / Math.sqrt(NUM_TRIALS)));
         telemetry.update();
-
-        RobotLog.dd(TAG, "Effective track width: " + Double.toString(trackWidthStats.getMean()) + " SE: " +
-                Double.toString(trackWidthStats.getStandardDeviation() / Math.sqrt(NUM_TRIALS)));
 
         while (!isStopRequested()) {
             idle();

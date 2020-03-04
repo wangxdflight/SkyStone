@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.RobotLog;
 
@@ -22,16 +23,17 @@ import java.util.List;
  */
 @Config
 @Autonomous(group = "drive")
+@Disabled
 public class PhoneIMUTest extends LinearOpMode {
     private static String TAG = "PhoneIMUTest";
 
     private SensorUpdates sensorUpate;
     private SensorManager sensors = FtcRobotControllerActivity.sensors;
 
+
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
-
 
         List<Sensor> sensorList = sensors.getSensorList(Sensor.TYPE_ALL);
 
@@ -52,7 +54,6 @@ public class PhoneIMUTest extends LinearOpMode {
         if (magneticField != null) {
             sensors.registerListener(sensorUpate, magneticField, SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_FASTEST);
         }
-
         if (orientation != null) {
             sensors.registerListener(sensorUpate, orientation, SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_FASTEST);
         }
@@ -81,16 +82,14 @@ class SensorUpdates implements SensorEventListener {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             System.arraycopy(event.values, 0, accelerometerReading,
                     0, accelerometerReading.length);
-            RobotLog.dd("TYPE_ACCELEROMETER: ", "%f, %f, %f", accelerometerReading[0], accelerometerReading[1], accelerometerReading[2]);
         }
         else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
             System.arraycopy(event.values, 0, magnetometerReading,
                     0, magnetometerReading.length);
-            RobotLog.dd("TYPE_MAGNETIC_FIELD: ", "%f, %f, %f", magnetometerReading[0], magnetometerReading[1], magnetometerReading[2]);
         }
         else if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
             float azimuth = event.values[0];
-            RobotLog.dd("TYPE_ORIENTATION: ", Float.toString(azimuth));
+            RobotLog.dd("SensorUpdates", Float.toString(azimuth));
         }
         final float[] rotationMatrix = new float[9];
         SensorManager.getRotationMatrix(rotationMatrix, null,

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.drive;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.qualcomm.hardware.motors.GoBILDA5202Series;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -17,7 +18,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.io.File;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
 
+import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
 /*
  * Constants shared between multiple drive types.
  *
@@ -32,29 +41,41 @@ import java.util.List;
 @Config
 public class DriveConstants {
     public static final boolean RUN_USING_PARAMTER_FROM_PROPERTIES = true;
+    public static boolean RUN_USING_ODOMETRY_WHEEL = false;
+    public static boolean RUN_USING_IMU_LOCALIZER = true;
+    public static boolean BRAKE_ON_ZERO = true;
+    public static boolean USING_BULK_READ = true;
+    public static boolean USING_STRAFE_DIAGONAL = true;
+    public static boolean DIAGONAL_SPLIT = true;
+    public static boolean RESET_FOLLOWER = true;
+    public static double odoEncoderTicksPerRevLeft = 1565.0;
+    public static double odoEncoderTicksPerRevRight = 1565.0;
+    public static double odoEncoderTicksPerRevFront = 1565.0;
+    public static double imuPollingInterval = 10;
+    public static boolean forceOdomInStrafe = true;
+    public static boolean ENABLE_LOGGING = false;
+    public static double TEST_SKY_STONE_POSITION = 1;
+    public static boolean ENABLE_ARM_ACTIONS = true;
+    public static double TEST_PAUSE_TIME = 1;  // milli-seconds;
 
-    public static boolean RUN_USING_ODOMETRY_WHEEL = true;
-    public static boolean RUN_USING_IMU_LOCALIZER = false;
-    public static boolean BRAKE_ON_ZERO = false;
-    public static boolean USING_BULK_READ = false;
-    public static double odoEncoderTicksPerRev = 1550.0;
     private static String TAG = "DriveConstants";
-    public static double txP = 8; //translational x/y co-efficients
-    public static double txI = 0.6;
-    public static double txD = 0.75;
-    public static double tyP = 10;
-    public static double tyI = 0.5;
-    public static double tyD = 1.1;
-    public static double hP = 6;    // heading co-efficients;
-    public static double hI = 2;
-    public static double hD = 0.4;
 
-    public static double stxP = 8; //translational x/y co-efficients
-    public static double stxI = 0.6;
+    public static double txP = 5.0; //translational x/y co-efficients
+    public static double txI = 0.5;
+    public static double txD = 0.0;
+    public static double tyP = 5.0;
+    public static double tyI = 10.0;
+    public static double tyD = 0.00001;
+    public static double hP = 10;    // heading co-efficients;
+    public static double hI = 0.5;
+    public static double hD = 0.00001;
+
+    public static double stxP = 20; //translational x/y co-efficients
+    public static double stxI = 1;
     public static double stxD = 0.75;
-    public static double styP = 10;
+    public static double styP = 15;
     public static double styI = 0.5;
-    public static double styD = 1.1;
+    public static double styD = 1;
     public static double shP = 6;    // heading co-efficients;
     public static double shI = 2;
     public static double shD = 0.4;
@@ -82,10 +103,10 @@ public class DriveConstants {
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
     public static boolean RUN_USING_ENCODER = true;
-    public static PIDCoefficients MOTOR_VELO_PID = null;   //35, 0.5, 2.5
-    public static double kP = 0.1;
-    public static double kI = 1.52;
-    public static double kD = 3.0;
+    public static double kP = 1.72;
+    public static double kI = 0.172;
+    public static double kD = 0.0;
+    public static PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(kP, kI, kD);   //35, 0.5, 2.5
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -108,13 +129,18 @@ public class DriveConstants {
     public static double kV = 0.0111;   //0.0115
     public static double kA = 0;
     public static double kStatic = 0;
-	public static double TEST_DISTANCE = 96;
-	public static double maxVel = 45.0;
-	public static double maxAccel = 20.0;
-
-	public static boolean keep_vuforia_running = true;
+	public static double TEST_DISTANCE = 48;
+    public static double TEST_DISTANCE_0 = 24;
+	public static double maxVel = 75.0; //90.0
+	public static double maxAccel = 35.0;   //35.0
+    public static double strafeMaxVel = 25.0; //40.0
+    public static double strafeMaxAccel = 7.0;   //20.0
+    public static double maxAngVel = 135.0;
+    public static double maxAngAccel = 90.0;
+	public static boolean keep_vuforia_running = false;
 	public static boolean USE_VUFORIA_LOCALIZER = false;
-
+    public static boolean RECREATE_DRIVE_AND_BUILDER = false;
+    public static boolean drvCorrection = false;
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
      * the constraints should never exceed ~80% of the robot's actual capabilities. While Road
@@ -123,16 +149,25 @@ public class DriveConstants {
      * acceleration values are required, and the jerk values are optional (setting a jerk of 0.0
      * forces acceleration-limited profiling).
      */
-    public static DriveConstraints BASE_CONSTRAINTS = null;
+    public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
+            maxVel, maxAccel, 0.0,
+            Math.toRadians(maxAngVel), Math.toRadians(maxAngAccel), 0.0
+    );
+
     public static DriveConstraints STRAFE_BASE_CONSTRAINTS = new DriveConstraints(
-            20.0, 10.0, 0.0,
-            Math.toRadians(180.0), Math.toRadians(180.0), 0.0
+            strafeMaxVel, strafeMaxAccel, 0.0,    //20.0, 10.0, 0.0
+            Math.toRadians(maxAngVel), Math.toRadians(maxAngAccel), 0.0
+    );
+
+    public static DriveConstraints ROTATION_CONSTRAINTS = new DriveConstraints(
+            maxVel, maxAccel, 0.0,
+            Math.toRadians(270.0), Math.toRadians(180.0), 0.0
     );
 
     public static double encoderTicksToInches(double ticks) {
         //double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / MOTOR_CONFIG.getTicksPerRev();
         double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / HARDCODED_TICKS_PER_REV; //MOTOR_CONFIG.getTicksPerRev();
-        RobotLog.dd(TAG, "encoderTicksToInches: " + "ticks: " + Double.toString(ticks) + " inches: " + Double.toString(s));
+        //RobotLog.dd(TAG, "encoderTicksToInches: " + "ticks: " + Double.toString(ticks) + " inches: " + Double.toString(s));
         return s;
     }
 
@@ -163,12 +198,11 @@ public class DriveConstants {
 
     public static double getMotorVelocityF() {
         // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
-        double t = getTicksPerSec();
-        RobotLog.dd(TAG, "getTicksPerSec "+Double.toString(t));
+        RobotLog.dd(TAG, "getTicksPerSec "+Double.toString(getTicksPerSec()));
         return 32767 / getTicksPerSec();
     }
 
-    private static double getTeamCodePropertyValue(String prop_str) {
+    public static double getTeamCodePropertyValue(String prop_str) {
         double value = Double.MAX_VALUE;
         try {
             Process proc = Runtime.getRuntime().exec(new String[]{"/system/bin/getprop", prop_str});
@@ -181,7 +215,7 @@ public class DriveConstants {
                 //RobotLog.dd(TAG, "returned "+Double.toString(value));
             }
             else
-                RobotLog.dd(TAG, "returned prop str is invalid");
+                RobotLog.dd(TAG, "returned prop str is invalid: " + prop_str);
 
 
         } catch(IOException e) {
@@ -202,17 +236,31 @@ public class DriveConstants {
             RobotLog.dd(TAG, "Velocity PID    kP: "  + Double.toString(MOTOR_VELO_PID.kP) + ", kI: "  + Double.toString(MOTOR_VELO_PID.kI) + ", kD: "  + Double.toString(MOTOR_VELO_PID.kD));
         }
         RobotLog.dd(TAG, "(non-strafe) maxVel: %f, maxAccel: %f", maxVel, maxAccel);
+        RobotLog.dd(TAG, "(strafe) maxVel: %f, maxAccel: %f", strafeMaxVel, strafeMaxAccel);
         RobotLog.dd(TAG, "xTransitional PID   txP: "+Double.toString(txP) + " txI: "+Double.toString(txI) + " txD: " + Double.toString(txD));
         RobotLog.dd(TAG, "yTransitional PID   tyP: "+Double.toString(tyP) + " tyI: "+Double.toString(tyI) + " tyD: " + Double.toString(tyD));
         RobotLog.dd(TAG, "Heading PID   hP: "+Double.toString(hP) + " hI: "+Double.toString(hI) + " hD: " + Double.toString(hD));
-        RobotLog.dd(TAG, "test distance: " + Double.toString(TEST_DISTANCE));
+        RobotLog.dd(TAG, "test distance: " + Double.toString(TEST_DISTANCE) + "  " + Double.toString(TEST_DISTANCE_0));
+        RobotLog.dd(TAG, "test skystone position (no detection): " + Double.toString(TEST_SKY_STONE_POSITION));
+        RobotLog.dd(TAG, "pause time between move: " + Double.toString(TEST_PAUSE_TIME));
         RobotLog.dd(TAG, "using IMU in localizer? : " + Integer.toString(RUN_USING_IMU_LOCALIZER?1:0));
+        RobotLog.dd(TAG, "enable ARM actions (disable for path test)? : " + Integer.toString(ENABLE_ARM_ACTIONS?1:0));
+        RobotLog.dd(TAG, "IMU polling interval? : " + Double.toString(imuPollingInterval));
+        RobotLog.dd(TAG, "correcting drv in automonous? : " + Integer.toString(drvCorrection?1:0));
+        RobotLog.dd(TAG, "using STRAFE in diagonal move? : " + Integer.toString(USING_STRAFE_DIAGONAL?1:0));
+        RobotLog.dd(TAG, "using Odom  in strafe move? : " + Integer.toString(forceOdomInStrafe?1:0));
+        RobotLog.dd(TAG, "split in diagonal move? : " + Integer.toString(DIAGONAL_SPLIT?1:0));
+        RobotLog.dd(TAG, "reset follower? : " + Integer.toString(RESET_FOLLOWER?1:0));
+        RobotLog.dd(TAG, "using Vuforia in localizer (override IMU and odom)? : " + Integer.toString(USE_VUFORIA_LOCALIZER?1:0));
         RobotLog.dd(TAG, "Driving wheel width? : " + Double.toString(TRACK_WIDTH));
         RobotLog.dd(TAG, "using Odometry? : " + Integer.toString(RUN_USING_ODOMETRY_WHEEL?1:0));
         RobotLog.dd(TAG, "using Bulk read? : " + Integer.toString(USING_BULK_READ?1:0));
+        RobotLog.dd(TAG, "recreate drive? : " + Integer.toString(RECREATE_DRIVE_AND_BUILDER?1:0));
         RobotLog.dd(TAG, "Odometry wheel width? : " + Double.toString(ODOMETRY_TRACK_WIDTH));
         RobotLog.dd(TAG, "Odometry forward offset? " + Double.toString(ODOMERY_FORWARD_OFFSET));
-        RobotLog.dd(TAG, "Odometry EncoderTicksPerRev? " + Double.toString(odoEncoderTicksPerRev));
+        RobotLog.dd(TAG, "Odometry EncoderTicksPerRevLeft? " + Double.toString(odoEncoderTicksPerRevLeft));
+        RobotLog.dd(TAG, "Odometry EncoderTicksPerRevRight? " + Double.toString(odoEncoderTicksPerRevRight));
+        RobotLog.dd(TAG, "Odometry EncoderTicksPerRevFront? " + Double.toString(odoEncoderTicksPerRevFront));
         RobotLog.dd(TAG, "Strafing paramters: ");
         RobotLog.dd(TAG, "xTransitional PID   txP: "+Double.toString(stxP) + " txI: "+Double.toString(stxI) + " txD: " + Double.toString(stxD));
         RobotLog.dd(TAG, "yTransitional PID   tyP: "+Double.toString(styP) + " tyI: "+Double.toString(styI) + " tyD: " + Double.toString(styD));
@@ -220,6 +268,7 @@ public class DriveConstants {
         RobotLog.dd(TAG, "strafeTimeDistanceRat: " + Double.toString(strafeTimeDistanceRatio));
         RobotLog.dd(TAG, "strafeMotorPower:  " + Double.toString(strafeMotorPower));
         RobotLog.dd(TAG, "rear_ratio:  " + Double.toString(rear_ratio));
+        RobotLog.dd(TAG, "enabling Logging? : " + Integer.toString(ENABLE_LOGGING?1:0));
     }
     public static void updateConstantsFromProperties()
     {
@@ -230,7 +279,12 @@ public class DriveConstants {
             if (BASE_CONSTRAINTS == null)
                 BASE_CONSTRAINTS = new DriveConstraints(
                         maxVel, maxAccel, 0.0,
-                        Math.toRadians(180.0), Math.toRadians(180.0), 0.0
+                        Math.toRadians(maxAngVel), Math.toRadians(maxAngAccel), 0.0
+                );
+            if (STRAFE_BASE_CONSTRAINTS == null)
+                STRAFE_BASE_CONSTRAINTS = new DriveConstraints(
+                        strafeMaxVel, strafeMaxAccel, 0.0,
+                        Math.toRadians(maxAngVel), Math.toRadians(maxAngAccel), 0.0
                 );
             printConstants();
             return;
@@ -243,15 +297,61 @@ public class DriveConstants {
             v_int = (int) v_double;
             RUN_USING_IMU_LOCALIZER = (v_int==0)?false:true;
         }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.recreateDrv");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            RECREATE_DRIVE_AND_BUILDER = (v_int==0)?false:true;
+        }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.enable_arm");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            ENABLE_ARM_ACTIONS = (v_int==0)?false:true;
+        }
+        v_double = getTeamCodePropertyValue("debug.ftc.vuforia");
+        if (v_double != Double.MAX_VALUE)
+        {
+            v_int = (int) v_double;
+            USE_VUFORIA_LOCALIZER = (v_int==0)?false:true;
+        }
         v_double = (int) getTeamCodePropertyValue("debug.ftc.odom");
         if (v_double != Double.MAX_VALUE) {
             v_int = (int) v_double;
             RUN_USING_ODOMETRY_WHEEL = (v_int==0)?false:true;
         }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.forceOdom");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            forceOdomInStrafe = (v_int==0)?false:true;
+        }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.logging");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            ENABLE_LOGGING = (v_int==0)?false:true;
+        }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.strafeDiag");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            USING_STRAFE_DIAGONAL = (v_int==0)?false:true;
+        }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.diagsplit");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            DIAGONAL_SPLIT = (v_int==0)?false:true;
+        }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.resetfollow");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            RESET_FOLLOWER = (v_int==0)?false:true;
+        }
         v_double = (int) getTeamCodePropertyValue("debug.ftc.bulk");
         if (v_double != Double.MAX_VALUE) {
             v_int = (int) v_double;
             USING_BULK_READ = (v_int==0)?false:true;
+        }
+        v_double = (int) getTeamCodePropertyValue("debug.ftc.drvCorrect");
+        if (v_double != Double.MAX_VALUE) {
+            v_int = (int) v_double;
+            drvCorrection = (v_int==0)?false:true;
         }
         v_double = getTeamCodePropertyValue("debug.ftc.brake");
         if (v_double != Double.MAX_VALUE)
@@ -259,6 +359,18 @@ public class DriveConstants {
             v_int = (int) v_double;
             BRAKE_ON_ZERO = (v_int==0)?false:true;
         }
+        v_double = getTeamCodePropertyValue("debug.ftc.imuInterval");
+        if (v_double != 0 && v_double != Double.MAX_VALUE)
+            imuPollingInterval = v_double;
+
+        v_double = getTeamCodePropertyValue("debug.ftc.skystonePos");
+        if (v_double != 0 && v_double != Double.MAX_VALUE)
+            TEST_SKY_STONE_POSITION = v_double;
+
+        v_double = getTeamCodePropertyValue("debug.ftc.pause");
+        if (v_double != 0 && v_double != Double.MAX_VALUE)
+            TEST_PAUSE_TIME = v_double;
+
         v_double = getTeamCodePropertyValue("debug.ftc.maxVel");
         if (v_double != 0 && v_double != Double.MAX_VALUE)
             maxVel = v_double;
@@ -267,9 +379,22 @@ public class DriveConstants {
         if (v_double != 0 && v_double != Double.MAX_VALUE)
             maxAccel = v_double;
 
+        v_double = getTeamCodePropertyValue("debug.ftc.strafeMaxVel");
+        if (v_double != 0 && v_double != Double.MAX_VALUE)
+            strafeMaxVel = v_double;
+
+        v_double = getTeamCodePropertyValue("debug.ftc.strafeMaxAccel");
+        if (v_double != 0 && v_double != Double.MAX_VALUE)
+            strafeMaxAccel = v_double;
+
         BASE_CONSTRAINTS = new DriveConstraints(
                 maxVel, maxAccel, 0.0,
-                Math.toRadians(180.0), Math.toRadians(180.0), 0.0
+                Math.toRadians(maxAngVel), Math.toRadians(maxAngAccel), 0.0
+        );
+
+        STRAFE_BASE_CONSTRAINTS = new DriveConstraints(
+                strafeMaxVel, strafeMaxAccel, 0.0,
+                Math.toRadians(maxAngVel), Math.toRadians(maxAngAccel), 0.0
         );
 
         v_double = getTeamCodePropertyValue("debug.ftc.kV");
@@ -366,13 +491,25 @@ public class DriveConstants {
         v_double = getTeamCodePropertyValue("debug.ftc.rear_ratio");
         if (v_double != Double.MAX_VALUE)
             rear_ratio = v_double;
-        v_double = getTeamCodePropertyValue("debug.ftc.odoTicksPerRev");
+        v_double = getTeamCodePropertyValue("debug.ftc.odoTicksPerRevLeft");
         if (v_double != Double.MAX_VALUE)
-            odoEncoderTicksPerRev = v_double;
+            odoEncoderTicksPerRevLeft = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.odoTicksPerRevRight");
+        if (v_double != Double.MAX_VALUE)
+            odoEncoderTicksPerRevRight = v_double;
+        v_double = getTeamCodePropertyValue("debug.ftc.odoTicksPerRevFront");
+        if (v_double != Double.MAX_VALUE)
+            odoEncoderTicksPerRevFront = v_double;
+
         v_double = getTeamCodePropertyValue("debug.ftc.distance");
         if (v_double != 0 && v_double != Double.MAX_VALUE)
         {
             TEST_DISTANCE = v_double;
+        }
+        v_double = getTeamCodePropertyValue("debug.ftc.distance0");
+        if (v_double != 0 && v_double != Double.MAX_VALUE)
+        {
+            TEST_DISTANCE_0 = v_double;
         }
 
         if (MOTOR_VELO_PID == null)
@@ -389,7 +526,9 @@ public class DriveConstants {
             RUN_USING_ODOMETRY_WHEEL = true;
             RUN_USING_IMU_LOCALIZER = false;
             BRAKE_ON_ZERO = false;
-            odoEncoderTicksPerRev = 1540.0;
+            odoEncoderTicksPerRevLeft = 1540.0;
+            odoEncoderTicksPerRevRight = 1540.0;
+            odoEncoderTicksPerRevFront = 1540.0;
             txP = 0.5; //translational x/y co-efficients
             txI = 0;
             txD = 0.11;
@@ -420,8 +559,7 @@ public class DriveConstants {
         printConstants();
     }
     // duration in milli-seconds;
-    public static void moveStrafeLeft(HardwareMap hardwareMap, double distance)
-    {
+    public static void strafeDistance(HardwareMap hardwareMap, double distance, boolean left) {
         DcMotorEx leftFront, leftRear, rightRear, rightFront;
         List<DcMotorEx> motors;
         leftFront = hardwareMap.get(DcMotorEx.class, "frontLeft");
@@ -438,10 +576,19 @@ public class DriveConstants {
         for (DcMotorEx motor : motors) {
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
-        leftFront.setPower(-1 * strafeMotorPower);
-        leftRear.setPower(strafeMotorPower*rear_ratio);
-        rightRear.setPower(-1 * strafeMotorPower*rear_ratio);
-        rightFront.setPower(strafeMotorPower);
+
+        if (left) {
+            leftFront.setPower(-1 * strafeMotorPower);
+            leftRear.setPower(strafeMotorPower * rear_ratio);
+            rightRear.setPower(-1 * strafeMotorPower * rear_ratio);
+            rightFront.setPower(strafeMotorPower);
+        } else {
+            leftFront.setPower(strafeMotorPower);
+            leftRear.setPower(-1 * strafeMotorPower * rear_ratio);
+            rightRear.setPower(strafeMotorPower * rear_ratio);
+            rightFront.setPower(-1 * strafeMotorPower);
+        }
+
         try {
             Thread.sleep(duration);
         } catch (Exception e) {
@@ -459,4 +606,55 @@ public class DriveConstants {
                 motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
     }
+    public static Pose2d[] parsePathXY(String filename) {
+        String full_path = AppUtil.CONFIG_FILES_DIR + "/" + filename;
+        RobotLogger.dd(TAG, "path definition file: " + full_path);
+        Pose2d[] coordinates = null;
+
+        try {
+            File inputFile = new File(AppUtil.CONFIG_FILES_DIR+"/"+filename);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            RobotLogger.dd(TAG, "Root element :" + doc.getDocumentElement().getNodeName());
+            NodeList nList = doc.getElementsByTagName("movestep");
+            RobotLogger.dd(TAG,"----------------------------");
+            int step_num = nList.getLength();
+            RobotLogger.dd(TAG, "elements :" + Integer.toString(step_num));
+
+            coordinates = new Pose2d[step_num];
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+                //RobotLogger.dd(TAG, "Current Element :" + nNode.getNodeName());
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    double x, y, h;
+                    Element eElement = (Element) nNode;
+                    RobotLogger.dd(TAG, "step info : "
+                            + eElement.getAttribute("drive_type"));
+                    x = new Double(eElement
+                            .getElementsByTagName("x")
+                            .item(0)
+                            .getTextContent());
+                    y = new Double(eElement
+                            .getElementsByTagName("y")
+                            .item(0)
+                            .getTextContent());
+                    h = new Double(eElement
+                            .getElementsByTagName("h")
+                            .item(0)
+                            .getTextContent());
+                    RobotLogger.dd(TAG,"step %d: x: %f, y: %f, h: %f", temp, x, y , h);
+                    coordinates[temp] = new Pose2d(x, y, Math.toRadians(h));
+                }
+            }
+        } catch (Exception e) {
+            RobotLogger.dd(TAG, "cannot find path XY file: " + full_path);
+            e.printStackTrace();
+        }
+        return coordinates;
+    }
+
 }

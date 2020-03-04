@@ -1,22 +1,16 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
+package org.firstinspires.ftc.teamcode.drive.calibration;
 
 import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.localization.Localizer;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
-
-import com.qualcomm.robotcore.util.RobotLog;
-
-import java.util.List;
 
 /**
  * This is a simple teleop routine for testing localization. Drive the robot around like a normal
@@ -25,18 +19,11 @@ import java.util.List;
  * exercise is to ascertain whether the localizer has been configured properly (note: the pure
  * encoder localizer heading may be significantly off if the track width has not been tuned).
  */
-@Config
-@TeleOp(group = "drive")
+@TeleOp(name = "LocalizationTest", group = "drive")
+@Disabled
 public class LocalizationTest extends LinearOpMode {
-    private String TAG = "LocalizationTest";
-
-    public static double VX_WEIGHT = 1;
-    public static double VY_WEIGHT = 1;
-    public static double OMEGA_WEIGHT = 1;
-
     @Override
     public void runOpMode() throws InterruptedException {
-        DriveConstants.updateConstantsFromProperties();
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         SampleMecanumDriveBase drive = null;
@@ -48,28 +35,11 @@ public class LocalizationTest extends LinearOpMode {
         waitForStart();
 
         while (!isStopRequested()) {
-            Pose2d baseVel = new Pose2d(
+            drive.setDrivePower(new Pose2d(
                     -gamepad1.left_stick_y,
                     -gamepad1.left_stick_x,
                     -gamepad1.right_stick_x
-            );
-
-            Pose2d vel;
-            if (Math.abs(baseVel.getX()) + Math.abs(baseVel.getY()) + Math.abs(baseVel.getHeading()) > 1) {
-                // re-normalize the powers according to the weights
-                double denom = VX_WEIGHT * Math.abs(baseVel.getX())
-                    + VY_WEIGHT * Math.abs(baseVel.getY())
-                    + OMEGA_WEIGHT * Math.abs(baseVel.getHeading());
-                vel = new Pose2d(
-                    VX_WEIGHT * baseVel.getX(),
-                    VY_WEIGHT * baseVel.getY(),
-                    OMEGA_WEIGHT * baseVel.getHeading()
-                ).div(denom);
-            } else {
-                vel = baseVel;
-            }
-
-            drive.setDrivePower(vel);
+            ));
 
             drive.update();
 
@@ -78,22 +48,6 @@ public class LocalizationTest extends LinearOpMode {
             telemetry.addData("y", poseEstimate.getY());
             telemetry.addData("heading", poseEstimate.getHeading());
             telemetry.update();
-            RobotLog.dd(TAG, "x: " + Double.toString(poseEstimate.getX()));
-            RobotLog.dd(TAG, "y: " + Double.toString(poseEstimate.getX()));
-            RobotLog.dd(TAG, "heading: " + Double.toString(poseEstimate.getHeading()));
-
-            Localizer localizer = drive.getLocalizer();
-            if (localizer!=null) {
-                StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
-                List<Double> odo_positions = t.getWheelPositions();
-
-                RobotLog.dd(TAG, "odometry positions");
-                drive.print_list_double(odo_positions);
-            }
-
-            List<Double> positions = drive.getWheelPositions();
-            RobotLog.dd(TAG, "wheel positions");
-            drive.print_list_double(positions);
         }
     }
 }

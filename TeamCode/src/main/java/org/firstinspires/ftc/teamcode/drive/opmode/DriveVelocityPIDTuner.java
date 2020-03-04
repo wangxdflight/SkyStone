@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
+package org.firstinspires.ftc.teamcode.drive.calibration;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -12,20 +12,28 @@ import com.acmerobotics.roadrunner.profile.MotionProfile;
 import com.acmerobotics.roadrunner.profile.MotionProfileGenerator;
 import com.acmerobotics.roadrunner.profile.MotionState;
 import com.acmerobotics.roadrunner.util.NanoClock;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
+import org.firstinspires.ftc.teamcode.drive.RobotLogger;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+import org.firstinspires.ftc.teamcode.util.AllHardwareMap;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAINTS;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
 
@@ -42,11 +50,14 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
  */
 @Config
 @Autonomous(name = "DriveVelocityPIDTuner", group = "drive")
+@Disabled
 public class DriveVelocityPIDTuner extends LinearOpMode {
+    public static double DISTANCE = 72;
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
-
-    public static double DISTANCE = 0; // make it smaller for safty, can increase later; 96;
+    private BNO055IMU imu;
+    private PIDCoefficients coefficients;
+    private double kV;
 
     private static final String PID_VAR_NAME = "VELO_PID";
 
@@ -56,16 +67,28 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     private static String TAG = "DriveVelocityPIDTuner";
     private SampleMecanumDriveBase drive;
 
+    private ArrayList<String> savedData = new ArrayList<>();
+
+    private ArrayList<String> odometryLR = new ArrayList<>();
+    private ArrayList<String> wheelLR = new ArrayList<>();
+    private ArrayList<String> odometryCenter = new ArrayList<>();
+    private ArrayList<String> imuAngle = new ArrayList<>();
+    private ArrayList<String> targetAndError = new ArrayList<>();
+
+    private int index = 0;
+
+    private AllHardwareMap hwMap;
+
     private static MotionProfile generateProfile(boolean movingForward) {
         DriveConstants.updateConstantsFromProperties();
         DISTANCE = DriveConstants.TEST_DISTANCE;
-        RobotLog.dd(TAG, "DISTANCE: "+Double.toString(DISTANCE));
+        RobotLogger.dd(TAG, "DISTANCE: " + Double.toString(DISTANCE));
         MotionState start = new MotionState(movingForward ? 0 : DISTANCE, 0, 0, 0);
         MotionState goal = new MotionState(movingForward ? DISTANCE : 0, 0, 0, 0);
         return MotionProfileGenerator.generateSimpleMotionProfile(start, goal,
-                DriveConstants.BASE_CONSTRAINTS.maxVel,
-                DriveConstants.BASE_CONSTRAINTS.maxAccel,
-                DriveConstants.BASE_CONSTRAINTS.maxJerk);
+                BASE_CONSTRAINTS.maxVel,
+                BASE_CONSTRAINTS.maxAccel,
+                BASE_CONSTRAINTS.maxJerk);
     }
 
     private void addPidVariable() {
@@ -76,7 +99,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
             catVar = new CustomVariable();
             dashboard.getConfigRoot().putVariable(catName, catVar);
 
-            RobotLog.dd(TAG, "Unable to find top-level category %s", catName);
+            RobotLogger.dd("", "Unable to find top-level category %s", catName);
         }
 
         CustomVariable pidVar = new CustomVariable();
@@ -135,18 +158,40 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        hwMap = new AllHardwareMap(hardwareMap);
+
+        DriveConstants.updateConstantsFromProperties();
+
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        imu.initialize(parameters);
+
         if (!RUN_USING_ENCODER) {
-            RobotLog.dd(TAG, "%s does not need to be run if the built-in motor velocity" +
+            RobotLogger.dd("%s does not need to be run if the built-in motor velocity" +
                     "PID is not in use", getClass().getSimpleName());
         }
-        // we add this just for reading data from motors;
-        RobotLog.dd(TAG, "DISTANCE="+Double.toString(DISTANCE));
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+        leftFront = hardwareMap.get(DcMotorEx.class, "frontLeft");
+        leftRear = hardwareMap.get(DcMotorEx.class, "backLeft");
+        rightRear = hardwareMap.get(DcMotorEx.class, "backRight");
+        rightFront = hardwareMap.get(DcMotorEx.class, "frontRight");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+
+        PIDCoefficients oldPID = new PIDCoefficients(DriveConstants.MOTOR_VELO_PID.kP, DriveConstants.MOTOR_VELO_PID.kI,
+                DriveConstants.MOTOR_VELO_PID.kD);
+        double oldkV = DriveConstants.kV;
+        ;
+
+        coefficients = new PIDCoefficients(DriveConstants.MOTOR_VELO_PID.kP, DriveConstants.MOTOR_VELO_PID.kI,
+                DriveConstants.MOTOR_VELO_PID.kD);
+        kV = DriveConstants.kV;
+
+
+        int selected = 0;
+        boolean blocker1 = false;
+        boolean blocker2 = false;
+        boolean blocker3 = false;
 
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
@@ -188,24 +233,20 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
             drive.setDrivePower(new Pose2d(targetPower, 0, 0));
 
             List<Double> velocities = drive.getWheelVelocities();
-            List<Double> powers = drive.getMotorPowers(motors);
             List<Double> positions = drive.getWheelPositions();
-            RobotLog.dd(TAG, "getWheelVelocities");
+            RobotLogger.dd(TAG, "getWheelVelocities");
             drive.print_list_double(velocities);
-            RobotLog.dd(TAG, "getMotorPowers");
-            drive.print_list_double(powers);
-            RobotLog.dd(TAG, "getWheelPositions");
+            RobotLogger.dd(TAG, "getWheelPositions");
             drive.print_list_double(positions);
 
             // update telemetry
             telemetry.addData("targetVelocity", motionState.getV());
-            RobotLog.dd(TAG, "targetVelocity " + Double.toString(motionState.getV()));
+            RobotLogger.dd(TAG, "targetVelocity " + Double.toString(motionState.getV()));
             for (int i = 0; i < velocities.size(); i++) {
-                telemetry.addData("velocity " + i, velocities.get(i));
-                telemetry.addData("error " + i, motionState.getV() - velocities.get(i));
-
-                RobotLog.dd(TAG, "velocity " + i + " " + Double.toString(velocities.get(i)));
-                RobotLog.dd(TAG, "error " + i + " " + Double.toString(motionState.getV() - velocities.get(i)));
+                telemetry.addData("velocity" + i, velocities.get(i));
+                telemetry.addData("error" + i, motionState.getV() - velocities.get(i));
+                RobotLogger.dd(TAG, "velocity " + i + " " + Double.toString(velocities.get(i)));
+                RobotLogger.dd(TAG, "error " + i + " " + Double.toString(motionState.getV() - velocities.get(i)));
             }
             telemetry.update();
         }

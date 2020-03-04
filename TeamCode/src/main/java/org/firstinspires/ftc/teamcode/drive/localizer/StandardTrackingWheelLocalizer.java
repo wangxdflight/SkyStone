@@ -8,15 +8,17 @@ import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.RobotLog;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.util.AxesSigns;
-import org.firstinspires.ftc.teamcode.util.BNO055IMUUtil;
+import org.firstinspires.ftc.teamcode.drive.RobotLogger;
+import org.openftc.revextensions2.ExpansionHubEx;
+import org.openftc.revextensions2.ExpansionHubMotor;
+import org.openftc.revextensions2.RevBulkData;
 
-
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,83 +39,106 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_IMU_
  * Note: this could be optimized significantly with REV bulk reads
  */
 @Config
-public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {
-    public static double TICKS_PER_REV = 1400.0; //  TBD: correct?
-    public static double WHEEL_RADIUS = 1.25;//1.14173; // 2.9cm; // in
+public class  StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {
+    public static double WHEEL_RADIUS = 1.25; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
 
-    //public static double LATERAL_DISTANCE = 15.5; // in; distance between the left and right wheels
-    //public static double FORWARD_OFFSET = -5.49; // in; offset of the lateral wheel
-	private String TAG = "StandardTrackingWheelLocalizer";
-    private DcMotorEx leftEncoder, rightEncoder, frontEncoder;
-    private List<DcMotorEx> motors;
-    private BNO055IMU imu;
+    private String TAG = "StandardTrackingWheelLocalizer";
+    private ExpansionHubEx hubMotors;
+    //private ExpansionHubMotor leftEncoder, rightEncoder, frontEncoder;
+    private DcMotor leftEncoder, rightEncoder, frontEncoder;
+    //private List<ExpansionHubMotor> motors;
+
+    //private DcMotor leftEncoder0, rightEncoder0, frontEncoder0;
+    private List<DcMotor> motors;
+    private List<Double> odomTicksPerRev;
+
+    private IMUBufferReader imuReader;
 
     Pose2d poseEstimate_new = new Pose2d(0, 0, 0);
 
-    public StandardTrackingWheelLocalizer(HardwareMap hardwareMap, BNO055IMU imu_) {
+    public StandardTrackingWheelLocalizer(HardwareMap hardwareMap) {
         super(Arrays.asList(
-                new Pose2d(0, DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // left
-                new Pose2d(0, -1 * DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // right
-                new Pose2d(DriveConstants.ODOMERY_FORWARD_OFFSET, 0, Math.toRadians(90)) // front
+                new Pose2d(1.0, DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // left
+                new Pose2d(1.0, -DriveConstants.ODOMETRY_TRACK_WIDTH / 2, 0), // right
+                new Pose2d(DriveConstants.ODOMERY_FORWARD_OFFSET, -0.7, Math.toRadians(90)) // front
         ));
-        this.imu = imu_;
-        leftEncoder = hardwareMap.get(DcMotorEx.class, "leftEncoder");
-        rightEncoder = hardwareMap.get(DcMotorEx.class, "rightEncoder");
-        frontEncoder = hardwareMap.get(DcMotorEx.class, "frontEncoder");
-        RobotLog.dd(TAG, "StandardTrackingWheelLocalizer created");
+        if (DriveConstants.USING_BULK_READ) {
+            hubMotors = hardwareMap.get(ExpansionHubEx.class, "ExpansionHub3");
+            leftEncoder = hardwareMap.get(ExpansionHubMotor.class, "leftEncoder");
+            rightEncoder = hardwareMap.get(ExpansionHubMotor.class, "rightEncoder");
+            frontEncoder = hardwareMap.get(ExpansionHubMotor.class, "frontEncoder");
+        }
+        else {
+            leftEncoder = hardwareMap.get(DcMotorEx.class, "leftEncoder");
+            rightEncoder = hardwareMap.get(DcMotorEx.class, "rightEncoder");
+            frontEncoder = hardwareMap.get(DcMotorEx.class, "frontEncoder");
+        }
+        RobotLogger.dd(TAG, "StandardTrackingWheelLocalizer created");
 
         motors = Arrays.asList(leftEncoder, rightEncoder, frontEncoder);
 
-        for (DcMotorEx motor : motors) {
+        odomTicksPerRev = Arrays.asList(DriveConstants.odoEncoderTicksPerRevLeft,
+                DriveConstants.odoEncoderTicksPerRevRight, DriveConstants.odoEncoderTicksPerRevFront);
+
+        for (DcMotor motor : motors) {
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
-        /*
-        (double) hwMap.leftIntake.getCurrentPosition(),
-        (double) hwMap.liftTwo.getCurrentPosition(),  //@TODO: Switch to "hwMap.backRight.getCurrentPosition()" later
-        double) hwMap.rightIntake.getCurrentPosition() */
-        if (DriveConstants.RUN_USING_IMU_LOCALIZER==true) {
-            // imu is already initialized in Drive class;
-        }
-        // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
-        // upward (normal to the floor) using a command like the following:
-        // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
+        imuReader = IMUBufferReader.getSingle_instance(hardwareMap);
     }
 
-    public static double encoderTicksToInches(int ticks) {
-        double t = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / DriveConstants.odoEncoderTicksPerRev;
-        RobotLog.dd("StandardTrackingWheelLocalizer", "encoderTicksToInches: " + " ticks: " + Double.toString(ticks) + " inches: " + Double.toString(t));
-        return t;
+    public double encoderTicksToInches(int ticks, int index) {
+        RobotLogger.dd("StandardTrackingWheelLocalizer", "encoderTicksToInches: " + " ticks: " +
+                Double.toString(ticks) + " inches: " + Double.toString(WHEEL_RADIUS * 2 * Math.PI *
+                GEAR_RATIO * ticks / odomTicksPerRev.get(index)));
+        return WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / odomTicksPerRev.get(index);
     }
 
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        int x = leftEncoder.getCurrentPosition();
-        int y = rightEncoder.getCurrentPosition();
-        int z = frontEncoder.getCurrentPosition();
-        RobotLog.dd(TAG, "getWheelPositions");
-        RobotLog.dd(TAG, "leftEncoder: " + x);
-        RobotLog.dd(TAG, "rightEncoder: " + y);
-        RobotLog.dd(TAG, "frontEncoder: " + (-1)*z);
+        int x, y, z;
+        RobotLogger.dd(TAG, "to getOdomWheelPositions (bulk? %d)", (DriveConstants.USING_BULK_READ==true?1:0));
+
+        if (DriveConstants.USING_BULK_READ) {
+            RevBulkData bulkData = hubMotors.getBulkInputData();
+            if (bulkData == null) {
+                RobotLogger.dd(TAG, "bulk data = null");
+                return Arrays.asList(0.0, 0.0, 0.0, 0.0);
+            }
+
+            x = bulkData.getMotorCurrentPosition(leftEncoder) * (-1);
+            y = bulkData.getMotorCurrentPosition(rightEncoder);
+            z = bulkData.getMotorCurrentPosition(frontEncoder);
+        }
+        else
+        {
+            x = leftEncoder.getCurrentPosition() * (-1);
+            y = rightEncoder.getCurrentPosition() ;
+            z = frontEncoder.getCurrentPosition();
+        }
+        RobotLogger.dd(TAG, "getOdomWheelPositions");
+        //RobotLogger.dd(TAG, "leftEncoder: " + x);
+        //RobotLogger.dd(TAG, "rightEncoder: " + y);
+        //RobotLogger.dd(TAG, "frontEncoder: " + (-1)*z);
         return Arrays.asList(
-                encoderTicksToInches(x),
-                encoderTicksToInches(y),
-                encoderTicksToInches(-1*z)
+                encoderTicksToInches(x, 0),
+                encoderTicksToInches(y, 1),
+                encoderTicksToInches(-1*z, 2)
         );
     }
 
     @Override
     public Pose2d getPoseEstimate() {
-        RobotLog.dd(TAG, "getPoseEstimate: " + Double.toString(poseEstimate_new.getX()) + ", " + Double.toString(poseEstimate_new.getY()) + ", " +
-                Double.toString(poseEstimate_new.getHeading()));
+        //RobotLogger.dd(TAG, "getPoseEstimate: " + Double.toString(poseEstimate_new.getX()) + ", " + Double.toString(poseEstimate_new.getY()) + ", " +
+        //        Double.toString(poseEstimate_new.getHeading()));
         return poseEstimate_new;
     }
 
     @Override
     public void setPoseEstimate(Pose2d pose2d) {
         super.setPoseEstimate(pose2d);
-        RobotLog.dd(TAG, "setPoseEstimate: X "+Double.toString(pose2d.getX())+ ", Y "+Double.toString(pose2d.getY()));
+        RobotLogger.dd(TAG, "setPoseEstimate: X "+Double.toString(pose2d.getX())+ ", Y "+Double.toString(pose2d.getY()));
     }
 
     @Override
@@ -122,16 +147,20 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         Pose2d s_poseEstimate=super.getPoseEstimate();
 
         if (DriveConstants.RUN_USING_IMU_LOCALIZER == true) {
+            RobotLogger.dd(TAG, "to read IMU");
             poseEstimate_new = new Pose2d(s_poseEstimate.getX(), s_poseEstimate.getY(),
-                    imu.getAngularOrientation().firstAngle);
-            RobotLog.dd(TAG, "using IMU: IMU heading " + Double.toString(poseEstimate_new.getHeading()) + " non-IMU heading: "
+                    imuReader.getLatestIMUData());
+            RobotLogger.dd(TAG, "using IMU: IMU heading " + Double.toString(poseEstimate_new.getHeading()) + " non-IMU heading: "
             + Double.toString(s_poseEstimate.getHeading()));
         }
         else {
+            RobotLogger.dd(TAG, "not using IMU for heading");
             poseEstimate_new = s_poseEstimate;
-            RobotLog.dd(TAG, "not using IMU for heading");
         }
-        RobotLog.dd(TAG, "poseEstimate: "+Double.toString(poseEstimate_new.getX()) + ", " + Double.toString(poseEstimate_new.getY()) + ", " +
+        RobotLogger.dd(TAG, "poseEstimate: "+Double.toString(poseEstimate_new.getX()) + ", " + Double.toString(poseEstimate_new.getY()) + ", " +
                 Double.toString(poseEstimate_new.getHeading()));
+    }
+    public void finalize() throws Throwable {
+        imuReader.cleanUP();
     }
 }

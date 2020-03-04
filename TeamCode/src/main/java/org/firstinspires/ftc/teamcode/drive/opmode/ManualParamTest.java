@@ -1,49 +1,75 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
+package org.firstinspires.ftc.teamcode.drive.calibration;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.acmerobotics.roadrunner.localization.Localizer;
 
+import org.firstinspires.ftc.teamcode.Autonomous.FieldPosition;
+import org.firstinspires.ftc.teamcode.Autonomous.Path;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
+import org.firstinspires.ftc.teamcode.drive.RobotLogger;
+import org.firstinspires.ftc.teamcode.drive.localizer.IMUBufferReader;
 import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
+import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCamLocalizer;
+import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCameraChoice;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
 import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+import org.firstinspires.ftc.teamcode.TeleOp.TeleopConstants;
+import org.firstinspires.ftc.teamcode.util.AllHardwareMap;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.util.RobotLog;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.Arrays;
 import java.util.List;
 import java.lang.String;
 
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
+
 /*
  * This is a simple routine to test turning capabilities.
  */
 @Config
-@Autonomous(group = "drive")
+@Autonomous(name = "ManualParamTest", group = "drive")
+@Disabled
 public class ManualParamTest extends LinearOpMode {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
-    private final int polling_interval = 200;
+    private final int polling_interval = 1000;
     private String TAG = "ManualParamTest";
     Localizer localizer = null;
+    private AllHardwareMap hwMap;
+    private FieldPosition side = FieldPosition.RED_QUARY;
+
+    private void sleep_millisec(int c)
+    {
+        try {
+            Thread.sleep(c);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //IMUBufferReader imu = IMUBufferReader.getSingle_instance(hardwareMap);
+
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
+        hwMap = new AllHardwareMap(hardwareMap);
         SampleMecanumDriveBase drive = null;
         if (DriveConstants.USING_BULK_READ == false)
             drive = new SampleMecanumDriveREV(hardwareMap, false);
         else
             drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+        leftFront = hardwareMap.get(DcMotorEx.class, "frontLeft");
+        leftRear = hardwareMap.get(DcMotorEx.class, "backLeft");
+        rightRear = hardwareMap.get(DcMotorEx.class, "backRight");
+        rightFront = hardwareMap.get(DcMotorEx.class, "frontRight");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
         for (DcMotorEx motor : motors) {
@@ -52,40 +78,44 @@ public class ManualParamTest extends LinearOpMode {
         localizer = drive.getLocalizer();
         waitForStart();
 
-        while (opModeIsActive()) {
+        if (DriveConstants.ENABLE_ARM_ACTIONS) {
+            Path.initGrab(hwMap, side, this);
+        }
+
+        VuforiaCamLocalizer vu = VuforiaCamLocalizer.getSingle_instance(hardwareMap, VuforiaCameraChoice.PHONE_BACK, true);
+        while (!isStopRequested()) {
             if (DriveConstants.RUN_USING_ODOMETRY_WHEEL && (localizer!=null)) {
                 StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
                 List<Double>  odo_positions = t.getWheelPositions();
 
-                RobotLog.dd(TAG, "odometry positions");
+                RobotLogger.dd(TAG, "odometry positions");
                 drive.print_list_double(odo_positions);
             }
 
             List<Double> velocities = drive.getWheelVelocities();
-            RobotLog.dd(TAG, "velocities");
+            RobotLogger.dd(TAG, "velocities");
             drive.print_list_double(velocities);
 
             List<Double> positions = drive.getWheelPositions();
-            RobotLog.dd(TAG, "wheel positions");
+            RobotLogger.dd(TAG, "wheel positions");
             drive.print_list_double(positions);
 
-            List<Double> w_powers = drive.getMotorPowers(motors);
-            RobotLog.dd(TAG, "wheel powers");
-            drive.print_list_double(w_powers);
-
-            double heading = drive.getExternalHeading();
-            RobotLog.dd(TAG, "getExternalHeading: x " + heading);
-
             Pose2d pose = drive.getPoseEstimate();
-            RobotLog.dd(TAG, "Pose: x " + pose.getX());
-            RobotLog.dd(TAG, "Pose: y " + pose.getY());
-            RobotLog.dd(TAG, "Pose: heading " + Double.toString(pose.getHeading()));
+            RobotLogger.dd(TAG, "Pose: x " + pose.getX());
+            RobotLogger.dd(TAG, "Pose: y " + pose.getY());
+            RobotLogger.dd(TAG, "Pose: heading " + Double.toString(pose.getHeading()));
 
-            Pose2d error = drive.getLastError();
-            RobotLog.dd(TAG, "xError " + error.getX());
-            RobotLog.dd(TAG, "yError " + error.getY());
-            RobotLog.dd(TAG, "headingError "  + error.getHeading());
+            Pose2d vPose = vu.getPoseEstimate();
+            RobotLogger.dd(TAG, "vuforia loc: " + vPose.toString());
+            double v_double = DriveConstants.getTeamCodePropertyValue("debug.ftc.grab");
+            if (v_double != Double.MAX_VALUE) {
+                int v_int = (int) v_double;
+                if (v_int != 0) {
+                    Path.grabStone(hwMap, side, this);
+                }
+            }
             Thread.sleep(polling_interval);
-        }
+        };
+
     }
 }

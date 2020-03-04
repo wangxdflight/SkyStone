@@ -31,10 +31,8 @@ package org.firstinspires.ftc.teamcode.drive.localizer;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.Localizer;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.RobotLog;
-
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
@@ -43,7 +41,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.drive.DriveConstants;
+import org.firstinspires.ftc.teamcode.drive.RobotLogger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -54,6 +52,10 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.YZX;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
+import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.FRONT;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.vuforia.Vuforia;
 
 /**
  * This 2019-2020 OpMode illustrates the basics of using the Vuforia localizer to determine
@@ -88,7 +90,11 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
 
 //@TeleOp(name="SKYSTONE Vuforia Nav", group ="Linear Opmode")
 //@Disabled
-public class VuforiaCamLocalizer implements Runnable, Localizer {
+public class VuforiaCamLocalizer implements Localizer {
+    public static final int MAX_CAMERA_NUM = VuforiaCameraChoice.values().length;
+    private static VuforiaCamLocalizer[] single_instance_per_camera = new VuforiaCamLocalizer[MAX_CAMERA_NUM];
+    private VuforiaCameraChoice localCamera;
+    private boolean PHONE_IS_PORTRAIT = true;
 
     // IMPORTANT:  For Phone Camera, set 1) the camera source and 2) the orientation, based on how your phone is mounted:
     // 1) Camera Source.  Valid choices are:  BACK (behind screen) or FRONT (selfie side)
@@ -96,8 +102,6 @@ public class VuforiaCamLocalizer implements Runnable, Localizer {
     //
     // NOTE: If you are running on a CONTROL HUB, with only one USB WebCam, you must select CAMERA_CHOICE = BACK; and PHONE_IS_PORTRAIT = false;
     //
-    private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
-    private static final boolean PHONE_IS_PORTRAIT = false  ;
 
     /*
      * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
@@ -135,7 +139,7 @@ public class VuforiaCamLocalizer implements Runnable, Localizer {
 
     // Class Members
     private OpenGLMatrix lastLocation = null;
-    private VuforiaLocalizer vuforia = null;
+    private VuforiaLocalizerPlus vuforia = null;
     private boolean targetVisible = false;
     private float phoneXRotate    = 0;
     private float phoneYRotate    = 0;
@@ -143,52 +147,94 @@ public class VuforiaCamLocalizer implements Runnable, Localizer {
 
     Pose2d poseEstimate = new Pose2d(0, 0, 0);
 
-    double currentX, currentY, currentZ;
+    double currentX, currentY, currentZ, currentHeading;
     List<VuforiaTrackable> allTrackables;
     VuforiaTrackables targetsSkyStone;
-    Thread thread;
-    private static String TAG = "VuforiaCamLocalizer";
+    private String TAG = "VuforiaCamLocalizer";
+    private WebcamName webcamName = null;
+
+    private void updateParametersForWebCamera()
+    {
+
+    }
+
+    synchronized  public static VuforiaCamLocalizer getSingle_instance(HardwareMap hardwareMap, VuforiaCameraChoice camera_choice, boolean portrait)
+    {
+        VuforiaCamLocalizer obj = single_instance_per_camera[camera_choice.ordinal()];
+        if ( obj == null) {
+            RobotLogger.dd("VuforiaCamLocalizer", "created new localizer");
+            obj = new VuforiaCamLocalizer(hardwareMap, camera_choice, portrait);
+            single_instance_per_camera[camera_choice.ordinal()] = obj;
+        }
+        else
+            RobotLogger.dd("VuforiaCamLocalizer", "reuse previous instance");
+        return obj;
+    }
+
     @NotNull
     @Override
     public Pose2d getPoseEstimate() {
+        RobotLogger.dd(TAG, "getPoseEstimate");
         update();
         return poseEstimate;
     }
 
     @Override
     public void setPoseEstimate(@NotNull Pose2d pose2d) {
-        poseEstimate = pose2d;
+        RobotLogger.dd(TAG, "setPoseEstimate for vuforia localizer is not supported");
     }
 
     @Override
     public void update() {
-        RobotLog.dd(TAG, "Vuforia targetVisible? " + targetVisible + " vuforia X/Y: "
+        runVuforiaTracking();
+        RobotLogger.dd(TAG, "Vuforia targetVisible? " + targetVisible + " vuforia X/Y: "
                 + Double.toString(currentX) + " " + Double.toString(currentY));
         if (targetVisible)
             poseEstimate = new Pose2d(currentX, currentY,
-                0);
+                Math.toRadians(currentHeading));
         else
             poseEstimate = new Pose2d(0, 0, 0);
     }
 
-    public VuforiaCamLocalizer(HardwareMap hardwareMap) {
+    public VuforiaCamLocalizer(HardwareMap hardwareMap, VuforiaCameraChoice camera_choice, boolean portrait) {
+        localCamera = camera_choice;
+        PHONE_IS_PORTRAIT = portrait;
+        VuforiaLocalizer.CameraDirection CAMERA_CHOICE;
 
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          * We can pass Vuforia the handle to a camera preview resource (on the RC phone);
          * If no camera monitor is desired, use the parameter-less constructor instead (commented out below).
          */
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId",
+                "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
-        // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
-
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraDirection = CAMERA_CHOICE;
+        if (localCamera == VuforiaCameraChoice.PHONE_FRONT) {
+            parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
+            CAMERA_CHOICE = FRONT;
+            RobotLogger.dd(TAG, "using front camera");
+        }
+        else {
+            parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+            CAMERA_CHOICE = BACK;
+            if (localCamera == VuforiaCameraChoice.HUB_USB) {
+                parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+                PHONE_IS_PORTRAIT = false;
+                updateParametersForWebCamera();
+                webcamName = hardwareMap.get(WebcamName.class, "WebcamFront");
+                parameters.cameraName = webcamName;
+                RobotLogger.dd(TAG, "using USB camera");
+            }
+            else
+                RobotLogger.dd(TAG, "using back camera");
 
+        }
         //  Instantiate the Vuforia engine
-        vuforia = ClassFactory.getInstance().createVuforia(parameters);
-
+        //vuforia = ClassFactory.getInstance().createVuforia(parameters);
+        vuforia = VuforiaLocalizerPlus.get_single_instance(parameters);
         // Load the data sets for the trackable objects. These particular data
         // sets are stored in the 'assets' part of our application.
         targetsSkyStone = this.vuforia.loadTrackablesFromAsset("Skystone");
@@ -327,9 +373,9 @@ public class VuforiaCamLocalizer implements Runnable, Localizer {
 
         // Next, translate the camera lens to where it is on the robot.
         // In this example, it is centered (left to right), but forward of the middle of the robot, and above ground level.
-        final float CAMERA_FORWARD_DISPLACEMENT = 4.0f * mmPerInch;   // eg: Camera is 4 Inches in front of robot center
+        final float CAMERA_FORWARD_DISPLACEMENT = -2.5f * mmPerInch;   // eg: Camera is 4 Inches in front of robot center
         final float CAMERA_VERTICAL_DISPLACEMENT = 8.0f * mmPerInch;   // eg: Camera is 8 Inches above ground
-        final float CAMERA_LEFT_DISPLACEMENT = 0;     // eg: Camera is ON the robot's center line
+        final float CAMERA_LEFT_DISPLACEMENT = -6.5f * mmPerInch;     // eg: Camera is ON the robot's center line
 
         OpenGLMatrix robotFromCamera = OpenGLMatrix
                 .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
@@ -353,63 +399,78 @@ public class VuforiaCamLocalizer implements Runnable, Localizer {
         // Tap the preview window to receive a fresh image.
 
         targetsSkyStone.activate();
-        thread = new Thread(this);
-        thread.start();
+        //thread = new Thread(this);
+        //thread.start();
     }
-    public void run(){
-        int print_count = 0;
-        while (DriveConstants.keep_vuforia_running) {
-            print_count ++;
-            // check all the trackable targets to see which one (if any) is visible.
-            targetVisible = false;
-            for (VuforiaTrackable trackable : allTrackables) {
-                if (((VuforiaTrackableDefaultListener)trackable.getListener()).isVisible()) {
-                    //telemetry.addData("Visible Target", trackable.getName());
-                    if (print_count%10==0)
-                        RobotLog.dd(TAG, "Visible Target" + trackable.getName());
-                    targetVisible = true;
+    public void stop() {
+        RobotLogger.dd(TAG, "stop vuforia ...");
+        targetsSkyStone.deactivate();
+        //if (Vuforia.isInitialized())
+          // Vuforia.deinit();
+        vuforia.close();
+        vuforia = null;
+        single_instance_per_camera[localCamera.ordinal()] = null;
 
-                    // getUpdatedRobotLocation() will return null if no new information is available since
-                    // the last time that call was made, or if the trackable is not currently visible.
-                    OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener)trackable.getListener()).getUpdatedRobotLocation();
-                    if (robotLocationTransform != null) {
-                        lastLocation = robotLocationTransform;
-                    }
-                    break;
+        //vuforia.getCamera().close();
+        /*
+        vuforia.Deinit ();
+        GetComponent<VuforiaBehaviour> ().enabled = false;
+        GetComponent<DefaultInitializationErrorHandler> ().enabled = false;
+        For initializing
+        VuforiaRuntime.Instance.InitVuforia ();
+        GetComponent<VuforiaBehaviour> ().enabled = true;
+        GetComponent<DefaultInitializationErrorHandler> ().enabled = true;*/
+    }
+    public void finalize() throws Throwable{
+        // Disable Tracking when we are done;
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        single_instance_per_camera[localCamera.ordinal()] = null;
+    }
+    private void runVuforiaTracking() {
+        // check all the trackable targets to see which one (if any) is visible.
+        targetVisible = false;
+        for (VuforiaTrackable trackable : allTrackables) {
+            if (((VuforiaTrackableDefaultListener)trackable.getListener()).isVisible()) {
+                //telemetry.addData("Visible Target", trackable.getName());
+
+                RobotLogger.dd(TAG, "Visible Target" + trackable.getName());
+                targetVisible = true;
+
+                // getUpdatedRobotLocation() will return null if no new information is available since
+                // the last time that call was made, or if the trackable is not currently visible.
+                OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener)trackable.getListener()).getUpdatedRobotLocation();
+                if (robotLocationTransform != null) {
+                    lastLocation = robotLocationTransform;
                 }
+                break;
             }
-
-            // Provide feedback as to where the robot is located (if we know).
-            if (targetVisible) {
-                // express position (translation) of robot in inches.
-                VectorF translation = lastLocation.getTranslation();
-
-                //telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
-                  //      translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
-                if (print_count%10==0)
-                    RobotLog.dd(TAG, "Pos (in), {X, Y, Z} = %.1f, %.1f, %.1f",
-                        translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
-                currentX = translation.get(0) / mmPerInch;
-                currentY = translation.get(1) / mmPerInch;
-                currentZ = translation.get(2) / mmPerInch;
-                // express the rotation of the robot in degrees.
-                Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
-                //telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
-                if (print_count%10==0)
-                    RobotLog.dd(TAG, "Rot (deg), {Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
-            }
-            else {
-                //telemetry.addData("Visible Target", "none");
-                if (print_count%10==0)
-                    RobotLog.dd(TAG, "Visible Target none");
-            }
-            try{
-                Thread.sleep(100);
-            } catch(Exception e){}
-
         }
 
-        // Disable Tracking when we are done;
-        targetsSkyStone.deactivate();
-    }
+        // Provide feedback as to where the robot is located (if we know).
+        if (targetVisible) {
+            // express position (translation) of robot in inches.
+            VectorF translation = lastLocation.getTranslation();
+            currentX = translation.get(0) / mmPerInch;
+            currentY = translation.get(1) / mmPerInch;
+            currentZ = translation.get(2) / mmPerInch;
+
+            //telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
+              //      translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
+            RobotLogger.dd(TAG, "Pos (in), {X, Y, Z} = %.1f, %.1f, %.1f",currentX, currentY, currentZ);
+            // express the rotation of the robot in degrees.
+            Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
+            //telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
+            RobotLogger.dd(TAG, "Rot (deg), {Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
+            currentHeading = rotation.thirdAngle;
+        }
+        else {
+            //telemetry.addData("Visible Target", "none");
+            RobotLogger.dd(TAG, "Visible Target none");
+        }
+    };
 }
+

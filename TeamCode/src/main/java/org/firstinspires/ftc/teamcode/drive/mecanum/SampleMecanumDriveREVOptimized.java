@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
+import org.firstinspires.ftc.teamcode.drive.RobotLogger;
+import org.firstinspires.ftc.teamcode.drive.localizer.IMUBufferReader;
 import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 import org.openftc.revextensions2.ExpansionHubEx;
@@ -31,25 +33,29 @@ import org.openftc.revextensions2.RevBulkData;
  * trajectory following performance with moderate additional complexity.
  */
 public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
-    private ExpansionHubEx hubLeft, hubRight;
+    private ExpansionHubEx hubMotors, hubMotors0;
     private ExpansionHubMotor leftFront, leftRear, rightRear, rightFront;
-    private List<ExpansionHubMotor> motors, motorsLeft, motorsRight;
-    private BNO055IMU imu;
+    private List<ExpansionHubMotor> motors;
+    private IMUBufferReader imuReader;
+    private float lastIMU = 0;
+    private boolean isStrafe = false;
+
     private String TAG = "SampleMecanumDriveREVOptimized";
     public SampleMecanumDriveREVOptimized(HardwareMap hardwareMap, boolean strafe) {
         super(strafe);
+        isStrafe = strafe;
+        create_instance(hardwareMap);
+    }
 
+    private void create_instance(HardwareMap hardwareMap){
         LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
 
         // TODO: adjust the names of the following hardware devices to match your configuration
         // for simplicity, we assume that the desired IMU and drive motors are on the same hub
         // if your motors are split between hubs, **you will need to add another bulk read**
-        hubLeft = hardwareMap.get(ExpansionHubEx.class, "Expansion Hub 2");
-        hubRight = hardwareMap.get(ExpansionHubEx.class, "Expansion Hub 3");
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        imu.initialize(parameters);
+        //
+        hubMotors0 = hardwareMap.get(ExpansionHubEx.class, "ExpansionHub3");  //
+        hubMotors = hardwareMap.get(ExpansionHubEx.class, "ExpansionHub2");
 
         // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
         // upward (normal to the floor) using a command like the following:
@@ -61,20 +67,19 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         rightFront = hardwareMap.get(ExpansionHubMotor.class, "rightFront");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
-        motorsLeft = Arrays.asList(leftFront, leftRear);
-        motorsRight = Arrays.asList(rightRear, rightFront);
-        RobotLog.dd(TAG, "SampleMecanumDriveREVOptimized created");
+        RobotLogger.dd(TAG, "SampleMecanumDriveREVOptimized created");
 
         for (ExpansionHubMotor motor : motors) {
 			motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             if (RUN_USING_ENCODER) {
                 motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }
-            motor.setZeroPowerBehavior(DriveConstants.BRAKE_ON_ZERO?DcMotor.ZeroPowerBehavior.BRAKE:DcMotor.ZeroPowerBehavior.FLOAT);
+            //motor.setZeroPowerBehavior(DriveConstants.BRAKE_ON_ZERO?DcMotor.ZeroPowerBehavior.BRAKE:DcMotor.ZeroPowerBehavior.FLOAT);
         }
+        setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
 
         if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
-            RobotLog.dd(TAG,"MOTOR_VELO_PID!=0, to setPIDCoefficients");
+            RobotLogger.dd(TAG,"MOTOR_VELO_PID!=0, to setPIDCoefficients");
             setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
         }
 
@@ -83,12 +88,22 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
-        if (DriveConstants.RUN_USING_ODOMETRY_WHEEL) {
-            RobotLog.dd(TAG, "to setLocalizer to StandardTrackingWheelLocalizer");
-            setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap, imu));
+        //setLocalizer(new TrackingWheelLocalizerWithIMU(hardwareMap, imu));
+
+        imuReader = IMUBufferReader.getSingle_instance(hardwareMap);
+
+        if (((DriveConstants.RUN_USING_ODOMETRY_WHEEL) && (! isStrafe)) ||
+                ((DriveConstants.forceOdomInStrafe) && ( isStrafe)) ||  // new condition !!!
+                ((DriveConstants.RUN_USING_ODOMETRY_WHEEL) && ( isStrafe))
+            )
+        {
+            RobotLogger.dd(TAG, "to setLocalizer to StandardTrackingWheelLocalizer");
+            setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
         }
-        else
-            RobotLog.dd(TAG, "not using Odometry wheel localizaer");
+        else {
+            setLocalizer(new MecanumLocalizer(this, DriveConstants.RUN_USING_IMU_LOCALIZER));
+            RobotLogger.dd(TAG, "use default 4 wheel localizer");
+        }
     }
     @Override
     public void setBrakeonZeroPower(boolean flag) {
@@ -98,11 +113,11 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
             else
                 motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
-        RobotLog.dd(TAG, "setBrakeonZeroPower " + flag);    }
+        RobotLogger.dd(TAG, "setBrakeonZeroPower " + flag);    }
     @Override
     public PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode) {
         PIDFCoefficients coefficients = leftFront.getPIDFCoefficients(runMode);
-        RobotLog.dd(TAG, "getPIDCoefficients:\np: " + Double.toString(coefficients.p) + " i: " + coefficients.i
+        RobotLogger.dd(TAG, "getPIDCoefficients:\np: " + Double.toString(coefficients.p) + " i: " + coefficients.i
                 + " d: " + coefficients.d);
         return new PIDCoefficients(coefficients.p, coefficients.i, coefficients.d);
     }
@@ -110,7 +125,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
     @Override
     public void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients) {
         double t = getMotorVelocityF();
-        RobotLog.dd(TAG, "setPIDCoefficients:\nkP: " + Double.toString(coefficients.kP) + " kI: " + coefficients.kI
+        RobotLogger.dd(TAG, "setPIDCoefficients:\nkP: " + Double.toString(coefficients.kP) + " kI: " + coefficients.kI
                     + " kD: " + coefficients.kD + " MotorVelocityF: " + Double.toString(t));
         for (ExpansionHubMotor motor : motors) {
             motor.setPIDFCoefficients(runMode, new PIDFCoefficients(
@@ -122,51 +137,72 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        RevBulkData bulkDataLeft = hubLeft.getBulkInputData();
-        RevBulkData bulkDataRight = hubRight.getBulkInputData();
-        if ((bulkDataLeft == null) || (bulkDataRight == null)) {
-            RobotLog.dd(TAG, "bulk data = null");
+        // temporary hack for motors connecting to two seperate HUB;
+        RevBulkData bulkData0 = hubMotors0.getBulkInputData();
+        if (bulkData0 == null)
+        {
+            RobotLogger.dd(TAG, "bulk data = null");
+            return Arrays.asList(0.0, 0.0, 0.0, 0.0);
+        }
+        double t01 = bulkData0.getMotorCurrentPosition(motors.get(2));  // back right motor on a seperate hub!!!
+        double t02 = encoderTicksToInches(t01);
+
+        ////////////////////
+        RevBulkData bulkData = hubMotors.getBulkInputData();
+        if (bulkData == null) {
+            RobotLogger.dd(TAG, "bulk data = null");
             return Arrays.asList(0.0, 0.0, 0.0, 0.0);
         }
 
         List<Double> wheelPositions = new ArrayList<>();
-        for (ExpansionHubMotor motor : motorsLeft) {
-            double t1 = bulkDataLeft.getMotorCurrentPosition(motor);
-            double t2 = encoderTicksToInches(t1);
-            RobotLog.dd(TAG, "getWheelPositions: " + "position: " + Double.toString(t1) + " inches: " + Double.toString(t2));
-
+        double t1, t2;
+        for (ExpansionHubMotor motor : motors) {
+            if (motor == motors.get(2)) {
+                t1 = t01;
+                t2 = t02;
+            }
+            else {
+                t1 = bulkData.getMotorCurrentPosition(motor);
+                t2 = encoderTicksToInches(t1);
+            }
+            RobotLogger.dd(TAG, "getWheelPositions: " + "position: " + Double.toString(t1) + " inches: " + Double.toString(t2));
             wheelPositions.add(t2);
         }
-        for (ExpansionHubMotor motor : motorsRight) {
-            double t1 = bulkDataRight.getMotorCurrentPosition(motor);
-            double t2 = encoderTicksToInches(t1);
-            RobotLog.dd(TAG, "getWheelPositions: " + "position: " + Double.toString(t1) + " inches: " + Double.toString(t2));
 
-            wheelPositions.add(t2);
-        }
         return wheelPositions;
     }
-
+    // TODO
     @Override
     public List<Double> getWheelVelocities() {
-        RevBulkData bulkDataLeft = hubLeft.getBulkInputData();
-        RevBulkData bulkDataRight = hubRight.getBulkInputData();
-        if ((bulkDataLeft == null)||(bulkDataRight == null)) {
+        // temporary hack for motors connecting to two seperate HUB;
+        RevBulkData bulkData0 = hubMotors0.getBulkInputData();
+        if (bulkData0 == null)
+        {
+            RobotLogger.dd(TAG, "bulk data = null");
             return Arrays.asList(0.0, 0.0, 0.0, 0.0);
         }
+        double t01 = bulkData0.getMotorVelocity(motors.get(2));  // back right motor on a seperate hub!!!
+        double t02 = encoderTicksToInches(t01);
 
-        List<Double> wheelVelocities = new ArrayList<>();
-        for (ExpansionHubMotor motor : motorsLeft) {
-            double t1 = bulkDataLeft.getMotorVelocity(motor);
-            double t2 = encoderTicksToInches(t1);
-            RobotLog.dd(TAG, "getWheelVelocities: " + "velocity: " + Double.toString(t1) + " inches: " + Double.toString(t2));
-            
-            wheelVelocities.add(t2);
+        ////////////////////////////
+
+        RevBulkData bulkData = hubMotors.getBulkInputData();
+        if (bulkData == null){
+            RobotLogger.dd(TAG, "bulk data = null");
+            return Arrays.asList(0.0, 0.0, 0.0, 0.0);
         }
-        for (ExpansionHubMotor motor : motorsRight) {
-            double t1 = bulkDataRight.getMotorVelocity(motor);
-            double t2 = encoderTicksToInches(t1);
-            RobotLog.dd(TAG, "getWheelVelocities: " + "velocity: " + Double.toString(t1) + " inches: " + Double.toString(t2));
+        double t1, t2;
+        List<Double> wheelVelocities = new ArrayList<>();
+        for (ExpansionHubMotor motor : motors) {
+            if (motor == motors.get(2)) {
+                t1 = t01;
+                t2 = t02;
+            }
+            else {
+                t1 = bulkData.getMotorVelocity(motor);
+                t2 = encoderTicksToInches(t1);
+            }
+            RobotLogger.dd(TAG, "getWheelVelocities: " + "velocity: " + Double.toString(t1) + " inches: " + Double.toString(t2));
 
             wheelVelocities.add(t2);
         }
@@ -185,20 +221,32 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
     }
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        RobotLog.dd(TAG, "setMotorPowers "+"leftFront: " + Double.toString(v));
-        RobotLog.dd(TAG, "setMotorPowers "+"leftRear: "+Double.toString(v1));
-        RobotLog.dd(TAG, "setMotorPowers "+"rightRear: "+Double.toString(v2));
-        RobotLog.dd(TAG, "setMotorPowers"+"rightFront: "+Double.toString(v3));
+        RobotLogger.dd(TAG, "setMotorPowers "+"leftFront: " + Double.toString(v));
         leftFront.setPower(v);
+        RobotLogger.dd(TAG, "setMotorPowers "+"leftRear: "+Double.toString(v1));
         leftRear.setPower(v1);
+        RobotLogger.dd(TAG, "setMotorPowers "+"rightRear: "+Double.toString(v2));
         rightRear.setPower(v2);
+        RobotLogger.dd(TAG, "setMotorPowers"+"rightFront: "+Double.toString(v3));
         rightFront.setPower(v3);
+        RobotLogger.dd(TAG, "setMotorPowers"+" done: ");
     }
 
     @Override
     public double getRawExternalHeading() {
-        double t = imu.getAngularOrientation().firstAngle;
-        RobotLog.dd(TAG, "getRawExternalHeading: " + Double.toString(t));
+        float t = lastIMU;
+        try {
+            RobotLogger.dd(TAG, "to getRawExternalHeading");
+            t = imuReader.getLatestIMUData();
+            RobotLogger.dd(TAG, "getRawExternalHeading: " + Double.toString(t));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        lastIMU = t;
         return t;
+    }
+    public void finalize() throws Throwable {
+        imuReader.cleanUP();
     }
 }

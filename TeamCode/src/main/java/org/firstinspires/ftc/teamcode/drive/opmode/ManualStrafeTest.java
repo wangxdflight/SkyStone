@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.localization.Localizer;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
@@ -17,10 +18,11 @@ import com.qualcomm.robotcore.util.RobotLog;
 import java.util.List;
 
 /*
- * This is a simple routine to test strafe move by applying power to wheels for a duration (deprecated)
+ * This is a simple routine to test translational drive capabilities.
  */
 @Config
 @Autonomous(name = "ManualStrafeTest", group = "drive")
+@Disabled
 public class ManualStrafeTest extends LinearOpMode {
     public static double DISTANCE = DriveConstants.TEST_DISTANCE;
     private String TAG = "ManualStrafeTest";
@@ -30,9 +32,9 @@ public class ManualStrafeTest extends LinearOpMode {
         DISTANCE = DriveConstants.TEST_DISTANCE;
         SampleMecanumDriveBase drive = null;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
+            drive = new SampleMecanumDriveREV(hardwareMap, DriveConstants.USING_STRAFE_DIAGONAL);
         else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
+            drive = new SampleMecanumDriveREVOptimized(hardwareMap, DriveConstants.USING_STRAFE_DIAGONAL);
 
         drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
         RobotLog.dd(TAG, "trajectoryBuilder forward, DISTANCE: "+Double.toString(DISTANCE));
@@ -41,7 +43,7 @@ public class ManualStrafeTest extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        DriveConstants.moveStrafeLeft(hardwareMap, DISTANCE);
+        DriveConstants.strafeDistance(hardwareMap, DISTANCE, true);
 
         Localizer localizer = drive.getLocalizer();
         if (DriveConstants.RUN_USING_ODOMETRY_WHEEL && (localizer!=null)) {
