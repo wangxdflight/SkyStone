@@ -14,10 +14,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Autonomous.Path;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
-import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer;
 
 import java.util.List;
 
@@ -31,7 +29,7 @@ import java.util.List;
 public class DiagonalTest extends LinearOpMode {
     public static double DISTANCE = 0; // update later;
     private String TAG = "DiagonalTest";
-    SampleMecanumDriveBase _drive = null;
+    SampleMecanumDrive _drive = null;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -40,9 +38,9 @@ public class DiagonalTest extends LinearOpMode {
 
         if (_drive == null) {
             if (DriveConstants.USING_BULK_READ == false)
-                _drive = new SampleMecanumDriveREV(hardwareMap, DriveConstants.USING_STRAFE_DIAGONAL);
+                _drive = new SampleMecanumDrive(hardwareMap);
             else
-                _drive = new SampleMecanumDriveREVOptimized(hardwareMap, DriveConstants.USING_STRAFE_DIAGONAL);
+                _drive = new SampleMecanumDrive(hardwareMap);
 
             _drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
             _drive.setPoseEstimate(new Pose2d(0, 0, _drive.getExternalHeading()));

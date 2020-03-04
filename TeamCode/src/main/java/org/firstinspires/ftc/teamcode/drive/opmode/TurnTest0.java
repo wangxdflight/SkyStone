@@ -6,9 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 /*
  * This is a simple routine to test turning capabilities.
@@ -22,15 +20,15 @@ public class TurnTest0 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
-        SampleMecanumDriveBase drive;
+        SampleMecanumDrive drive;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
+            drive = new SampleMecanumDrive(hardwareMap);
         else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
+            drive = new SampleMecanumDrive(hardwareMap);
         waitForStart();
 
         if (isStopRequested()) return;
 
-        drive.turnSync(Math.toRadians(ANGLE));
+        drive.turn(Math.toRadians(ANGLE));
     }
 }

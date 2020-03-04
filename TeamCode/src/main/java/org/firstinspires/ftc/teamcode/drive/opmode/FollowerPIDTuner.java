@@ -2,16 +2,14 @@ package org.firstinspires.ftc.teamcode.drive.calibration;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
-
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 /*
  * Op mode for tuning follower PID coefficients (located in the drive base classes). The robot
  * drives in a DISTANCE-by-DISTANCE square indefinitely.
@@ -28,27 +26,28 @@ public class FollowerPIDTuner extends LinearOpMode {
         DriveConstants.updateConstantsFromProperties();  // Transitional PID is used in base class;;
         DISTANCE = DriveConstants.TEST_DISTANCE;
       
-        SampleMecanumDriveBase drive = null;
-        if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
-        else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
 
-        drive.setPoseEstimate(new Pose2d(DISTANCE / 2, DISTANCE / 2, 0));
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
+        Pose2d startPose = new Pose2d(-DISTANCE / 2, -DISTANCE / 2, 0);
+
+        drive.setPoseEstimate(startPose);
+
 
         waitForStart();
 
         if (isStopRequested()) return;
 
         while (!isStopRequested()) {
-            RobotLogger.dd(TAG, "move forward: "+Double.toString(DISTANCE));
-            drive.followTrajectorySync(
-                    drive.trajectoryBuilder()
-                            .forward(DISTANCE)
-                            .build()
-            );
-            RobotLogger.dd(TAG, "turn: 90");
-            drive.turnSync(Math.toRadians(90));
+            RobotLogger.dd(TAG, "turn: ");
+
+            Trajectory traj = drive.trajectoryBuilder(startPose)
+                    .forward(DISTANCE)
+                    .build();
+            drive.followTrajectory(traj);
+            drive.turn(Math.toRadians(90));
+
+            startPose = traj.end().plus(new Pose2d(0, 0, Math.toRadians(90)));
         }
     }
 }

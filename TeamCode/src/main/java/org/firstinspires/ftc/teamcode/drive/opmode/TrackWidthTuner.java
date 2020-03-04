@@ -12,12 +12,9 @@ import com.qualcomm.robotcore.util.MovingStatistics;
 
 import org.firstinspires.ftc.robotcore.internal.system.Misc;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
-
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 /*
  * This routine determines the effective track width. The procedure works by executing a point turn
  * with a given angle and measuring the difference between that angle and the actual angle (as
@@ -39,13 +36,8 @@ public class TrackWidthTuner extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         //RUN_USING_ODOMETRY_WHEEL = true; //???
-        SampleMecanumDriveBase drive = null;
-        if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
-        else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
 
-
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         // TODO: if you haven't already, set the localizer to something that doesn't depend on
         // drive encoders for computing the heading
 
@@ -69,7 +61,7 @@ public class TrackWidthTuner extends LinearOpMode {
             double headingAccumulator = 0;
             double lastHeading = 0;
 
-            drive.turn(Math.toRadians(ANGLE));
+            drive.turnAsync(Math.toRadians(ANGLE));
 
             while (!isStopRequested() && drive.isBusy()) {
                 double heading = drive.getPoseEstimate().getHeading();

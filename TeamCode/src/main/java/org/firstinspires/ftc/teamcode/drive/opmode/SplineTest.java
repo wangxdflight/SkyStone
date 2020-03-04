@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode.drive.calibration;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.acmerobotics.roadrunner.util.Angle;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 /*
  * This is an example of a more complex path to really test the tuning.
@@ -19,28 +19,25 @@ public class SplineTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
-        SampleMecanumDriveBase drive = null;
-        if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
-        else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
+
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
 
         waitForStart();
 
         if (isStopRequested()) return;
 
-        drive.followTrajectorySync(
-                drive.trajectoryBuilder()
-                        .splineTo(new Pose2d(30, 30, 0))
-                        .build()
-        );
+        Trajectory traj = drive.trajectoryBuilder(new Pose2d())
+                .splineTo(new Pose2d(30, 30, 0))
+                .build();
+
+        drive.followTrajectory(traj);
 
         sleep(2000);
 
-        drive.followTrajectorySync(
-                drive.trajectoryBuilder()
-                        .reverse()
-                        .splineTo(new Pose2d(0, 0, 0))
+        drive.followTrajectory(
+                drive.trajectoryBuilder(new Pose2d(30, 30, Math.toRadians(180)), true)
+                        .splineTo(new Pose2d(0, 0, Math.toRadians(180)))
                         .build()
         );
     }

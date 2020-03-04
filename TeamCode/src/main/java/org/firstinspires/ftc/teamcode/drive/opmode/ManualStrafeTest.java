@@ -8,10 +8,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer;
 
 import com.qualcomm.robotcore.util.RobotLog;
 
@@ -30,11 +28,11 @@ public class ManualStrafeTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
         DISTANCE = DriveConstants.TEST_DISTANCE;
-        SampleMecanumDriveBase drive = null;
+        SampleMecanumDrive drive = null;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, DriveConstants.USING_STRAFE_DIAGONAL);
+            drive = new SampleMecanumDrive(hardwareMap);
         else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, DriveConstants.USING_STRAFE_DIAGONAL);
+            drive = new SampleMecanumDrive(hardwareMap);
 
         drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
         RobotLog.dd(TAG, "trajectoryBuilder forward, DISTANCE: "+Double.toString(DISTANCE));

@@ -24,15 +24,15 @@ import com.qualcomm.robotcore.util.RobotLog;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
 import org.firstinspires.ftc.teamcode.util.AllHardwareMap;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAINTS;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAINTS;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.BASE_CONSTRAINTS;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
@@ -65,7 +65,10 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
     private String catName;
     private CustomVariable catVar;
     private static String TAG = "DriveVelocityPIDTuner";
-    private SampleMecanumDriveBase drive;
+
+
+    private SampleMecanumDrive drive;
+
 
     private ArrayList<String> savedData = new ArrayList<>();
 
@@ -194,11 +197,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
         boolean blocker3 = false;
 
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
-
-        if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
-        else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
+        drive = new SampleMecanumDrive(hardwareMap);
 
         addPidVariable();
 

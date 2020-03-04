@@ -20,9 +20,7 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCamLocalizer;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCameraChoice;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+
 import org.firstinspires.ftc.teamcode.TeleOp.TeleopConstants;
 import org.firstinspires.ftc.teamcode.util.AllHardwareMap;
 

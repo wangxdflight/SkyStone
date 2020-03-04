@@ -11,10 +11,8 @@ import com.qualcomm.robotcore.hardware.configuration.annotations.DigitalIoDevice
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
-import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.util.AllHardwareMap;
 
 
@@ -38,11 +36,11 @@ public class StrafeTest extends LinearOpMode {
         hwMap = new AllHardwareMap(hardwareMap);
         DriveConstants.updateConstantsFromProperties();
         DISTANCE = DriveConstants.TEST_DISTANCE;
-        SampleMecanumDriveBase drive = null;
+        SampleMecanumDrive drive = null;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, true);
+            drive = new SampleMecanumDrive(hardwareMap);
         else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, true);
+            drive = new SampleMecanumDrive(hardwareMap);
         drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
 
 /*
@@ -77,7 +75,7 @@ public class StrafeTest extends LinearOpMode {
 
         List<Double> positions = drive.getWheelPositions();
         RobotLogger.dd(TAG, "wheel positions");
-        drive.print_list_double(positions);
+        //drive.print_list_double(positions);
 
     }
 

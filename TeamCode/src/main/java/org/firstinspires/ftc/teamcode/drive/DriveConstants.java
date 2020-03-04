@@ -89,14 +89,13 @@ public class DriveConstants {
     public static double MAX_RPM_FROM_SPEC = 435.0;
     public static double HARDCODED_RPM_RATIO = 0.683; //0.72215; // 0.666;///0.6514;//*MAX_RPM_FROM_SPEC; //283.4; //MOTOR_CONFIG.getMaxRPM();
     /*
-     * The type of motor used on the drivetrain. While the SDK has definitions for many common
-     * motors, there may be slight gear ratio inaccuracies for planetary gearboxes and other
-     * discrepancies. Additional motor types can be defined via an interface with the
-     * @DeviceProperties and @MotorType annotations.
+     * These are motor constants that should be listed online for your motors.
      */
+
     private static final MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(GoBILDA5202Series.class);// NeveRest20Gearmotor
             // Matrix12vMotor  GoBILDA5202Series MatrixLegacyMotor (757.12)
+
 
     /*
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
@@ -127,6 +126,8 @@ public class DriveConstants {
      * empirically tuned.
      */
     public static double kV = 0.0111;   //0.0115
+    //public static double kV = 1.0 / rpmToVelocity(MAX_RPM);
+
     public static double kA = 0;
     public static double kStatic = 0;
 	public static double TEST_DISTANCE = 48;
@@ -165,6 +166,7 @@ public class DriveConstants {
     );
 
     public static double encoderTicksToInches(double ticks) {
+
         //double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / MOTOR_CONFIG.getTicksPerRev();
         double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / HARDCODED_TICKS_PER_REV; //MOTOR_CONFIG.getTicksPerRev();
         //RobotLog.dd(TAG, "encoderTicksToInches: " + "ticks: " + Double.toString(ticks) + " inches: " + Double.toString(s));

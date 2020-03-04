@@ -16,11 +16,10 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
-import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCamLocalizer;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREV;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveREVOptimized;
+
 import org.firstinspires.ftc.teamcode.TeleOp.TeleopConstants;
 import org.firstinspires.ftc.teamcode.util.AllHardwareMap;
 
@@ -32,8 +31,8 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.rear_ratio;
 
 public class Path {
     private Pose2d startingPos;
-    private SampleMecanumDriveBase straightDrive, strafeDrive;
-    private SampleMecanumDriveBase _drive; // default drive;
+    private SampleMecanumDrive straightDrive, strafeDrive;
+    private SampleMecanumDrive _drive; // default drive;
     private int step_count = 0;
     private BaseTrajectoryBuilder builder;
     private Trajectory trajectory;
@@ -48,7 +47,7 @@ public class Path {
     private String path_file;
     private int first_skystone_location = 0;
 
-    public Path(AllHardwareMap hwMap, LinearOpMode opMode, SampleMecanumDriveBase straightDrive, SampleMecanumDriveBase strafeDrive,
+    public Path(AllHardwareMap hwMap, LinearOpMode opMode, SampleMecanumDrive straightDrive, SampleMecanumDrive strafeDrive,
                 com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, BNO055IMU imu, Telemetry telemetry) {
         this.straightDrive = straightDrive;
         this.strafeDrive = strafeDrive;
@@ -63,7 +62,7 @@ public class Path {
         //vu = new VuforiaCamLocalizer(hardwareMap);
     }
 
-    public static void StrafeDiagonalHelper(SampleMecanumDriveBase _drive, Vector2d dest) {
+    public static void StrafeDiagonalHelper(SampleMecanumDrive _drive, Vector2d dest) {
         Trajectory trajectory;
         Pose2d currentPos = _drive.getPoseEstimate();
         TrajectoryBuilder builder = null;
@@ -123,7 +122,7 @@ public class Path {
     input: last pose from previous move;
     return: drive instance;
      */
-    private SampleMecanumDriveBase DriveBuilderReset(boolean isStrafe, boolean init_imu, String label) {
+    private SampleMecanumDrive DriveBuilderReset(boolean isStrafe, boolean init_imu, String label) {
         currentPos = _drive.getPoseEstimate();
         Pose2d newPos = currentPos;
         Pose2d error_pose = _drive.follower.getLastError();
