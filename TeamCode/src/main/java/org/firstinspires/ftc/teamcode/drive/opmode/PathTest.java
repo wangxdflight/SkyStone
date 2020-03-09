@@ -18,6 +18,7 @@ import org.firstinspires.ftc.teamcode.Autonomous.FieldPosition;
 import org.firstinspires.ftc.teamcode.Autonomous.Path;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCamLocalizer;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCameraChoice;
 
@@ -35,7 +36,7 @@ public class PathTest extends LinearOpMode {
     private BaseTrajectoryBuilder builder, strafe_builder;
     private Pose2d current_pose;
     private String TAG = "PathTest";
-    private SampleMecanumDriveBase _drive = null, _strafeDrive = null;
+    private SampleMecanumDrive _drive = null, _strafeDrive = null;
     private AllHardwareMap hwMap;
     private Path path;
     private FieldPosition fieldPosition = null;

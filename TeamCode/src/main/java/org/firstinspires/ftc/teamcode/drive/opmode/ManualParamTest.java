@@ -11,8 +11,7 @@ import org.firstinspires.ftc.teamcode.Autonomous.FieldPosition;
 import org.firstinspires.ftc.teamcode.Autonomous.Path;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
-import org.firstinspires.ftc.teamcode.drive.localizer.IMUBufferReader;
-import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCamLocalizer;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCameraChoice;
 
@@ -58,11 +57,11 @@ public class ManualParamTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
         hwMap = new AllHardwareMap(hardwareMap);
-        SampleMecanumDriveBase drive = null;
+        SampleMecanumDrive drive = null;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
+            drive = new SampleMecanumDrive(hardwareMap);
         else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
+            drive = new SampleMecanumDrive(hardwareMap);
 
         leftFront = hardwareMap.get(DcMotorEx.class, "frontLeft");
         leftRear = hardwareMap.get(DcMotorEx.class, "backLeft");

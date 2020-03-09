@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
-import org.firstinspires.ftc.teamcode.drive.localizer.StandardTrackingWheelLocalizer;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 
 import java.util.List;
@@ -27,11 +27,11 @@ public class StraightTestV0 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
         DISTANCE = DriveConstants.TEST_DISTANCE;
-        SampleMecanumDriveBase drive = null;
+        SampleMecanumDrive drive = null;
         if (DriveConstants.USING_BULK_READ == false)
-            drive = new SampleMecanumDriveREV(hardwareMap, false);
+            drive = new SampleMecanumDrive(hardwareMap);
         else
-            drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
+            drive = new SampleMecanumDrive(hardwareMap);
         drive.setBrakeonZeroPower(DriveConstants.BRAKE_ON_ZERO);
         RobotLogger.dd(TAG, "trajectoryBuilder forward, DISTANCE: "+Double.toString(DISTANCE));
         Trajectory trajectory = drive.trajectoryBuilder()

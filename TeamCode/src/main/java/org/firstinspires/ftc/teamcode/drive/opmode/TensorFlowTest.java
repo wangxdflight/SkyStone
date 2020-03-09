@@ -13,10 +13,10 @@ import org.firstinspires.ftc.teamcode.Autonomous.FieldPosition;
 import org.firstinspires.ftc.teamcode.Autonomous.Path;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.localizer.TensorflowDetector;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCamLocalizer;
 import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCameraChoice;
-import org.firstinspires.ftc.teamcode.drive.mecanum.SampleMecanumDriveBase;
 
 /*
  * This is a simple routine to test turning capabilities.
@@ -29,7 +29,7 @@ public class TensorFlowTest extends LinearOpMode {
     private BaseTrajectoryBuilder builder, strafe_builder;
     private Pose2d current_pose;
     private String TAG = "TensorFlowTest";
-    private SampleMecanumDriveBase _drive = null;
+    private SampleMecanumDrive _drive = null;
     private HardwareMap hwMap;
     private Path path;
     private FieldPosition fieldPosition = null;
