@@ -93,7 +93,7 @@ public class Path {
             firstStop = new Vector2d(new_x, current_y);
             RobotLogger.dd(TAG, "added one line to stop: " + firstStop.toString());
             boolean dir = (firstStop.getX() - current_x) < 0 ? true : false;
-            builder.setReversed(dir).lineTo(firstStop).strafeTo(dest);
+            builder.lineTo(firstStop).strafeTo(dest);
         } else if (Math.abs(delta_x) < Math.abs(delta_y)) {
             RobotLogger.dd(TAG, "x < y, strafe first and then line");
             double square_offset = Math.abs(delta_x);
@@ -105,13 +105,13 @@ public class Path {
 
             firstStop = new Vector2d(dest.getX(), new_y);
             RobotLogger.dd(TAG, "added one strafe stop: " + firstStop.toString());
-            builder.setReversed(false).strafeTo(firstStop).strafeTo(dest);
+            builder.strafeTo(firstStop).strafeTo(dest);
         } else {
             //double y_offset = delta_y - delta_x;
-            builder.setReversed(false).strafeTo(dest);
+            builder.strafeTo(dest);
         }
         trajectory = builder.build();   //x - 2.812, y + 7.984
-        _drive.followTrajectorySync(trajectory);
+        _drive.followTrajectory(trajectory);
 
         currentPos = _drive.getPoseEstimate();
         error_pose = _drive.follower.getLastError();
@@ -139,7 +139,7 @@ public class Path {
             _drive = straightDrive;
 
         if (DriveConstants.RESET_FOLLOWER)
-            _drive.resetFollowerWithParameters(isStrafe, false);
+            _drive.resetFollowerWithParameters(isStrafe);
 
         //_drive = new SampleMecanumDriveREV(hardwareMap, isStrafe, init_imu);
         _drive.getLocalizer().setPoseEstimate(currentPos);
@@ -200,10 +200,10 @@ public class Path {
                 "step" + Integer.toString(step_count) + coordinates[step_count].toString() + ", after prepare, start");
         if (first_skystone_location == -2) {
             builder = builder
-                    .setReversed(false).strafeTo(new Vector2d(coordinates[step_count].getX(), coordinates[step_count].getY()));
+                    .strafeTo(new Vector2d(coordinates[step_count].getX(), coordinates[step_count].getY()));
             trajectory = builder.build();   //x - 2.812, y + 7.984
             if (opMode.opModeIsActive())
-                _drive.followTrajectorySync(trajectory);
+                _drive.followTrajectory(trajectory);
             else
                 return -1;
         } else {
@@ -245,10 +245,10 @@ public class Path {
         }
 
         builder = builder
-                .setReversed(false).lineTo(new Vector2d(coordinates[step_count].getX(), coordinates[step_count].getY()));
+                .lineTo(new Vector2d(coordinates[step_count].getX(), coordinates[step_count].getY()));
         trajectory = builder.build();   //x - 2.812, y + 7.984
         if (opMode.opModeIsActive())
-            _drive.followTrajectorySync(trajectory);
+            _drive.followTrajectory(trajectory);
         else
             return -1;
         step_count++;
@@ -278,10 +278,10 @@ public class Path {
         }
 
         builder = builder
-                .setReversed(true).lineTo((new Vector2d(coordinates[step_count].getX(), coordinates[step_count].getY())));
+                .lineTo((new Vector2d(coordinates[step_count].getX(), coordinates[step_count].getY())));
         trajectory = builder.build();   //x - 2.812, y + 7.984
         if (opMode.opModeIsActive())
-            _drive.followTrajectorySync(trajectory);
+            _drive.followTrajectory(trajectory);
         step_count++;
         if (vLocal != null) {
             Pose2d t = vLocal.getPoseEstimate();
@@ -307,10 +307,10 @@ public class Path {
             RobotLogger.dd(TAG, "next step after correction: " + coordinates[step_count].toString());
         }
         builder = builder
-                .setReversed(false).lineTo(new Vector2d(coordinates[step_count].getX(), coordinates[step_count].getY()));
+                .lineTo(new Vector2d(coordinates[step_count].getX(), coordinates[step_count].getY()));
         trajectory = builder.build();   //x - 2.812, y + 7.984
         if (opMode.opModeIsActive())
-            _drive.followTrajectorySync(trajectory);
+            _drive.followTrajectory(trajectory);
         step_count++;
 
         if (vLocal != null) {
@@ -325,11 +325,11 @@ public class Path {
         DriveBuilderReset(true, false, "step" + Integer.toString(step_count) + coordinates[step_count].toString() +
                 ", after drop 2nd stone, to strafe");
         builder = builder
-                .setReversed(false).strafeTo(new Vector2d(coordinates[step_count].getX(),
+                .strafeTo(new Vector2d(coordinates[step_count].getX(),
                         coordinates[step_count].getY()));
         trajectory = builder.build();   //x - 2.812, y + 7.984
         if (opMode.opModeIsActive())
-            _drive.followTrajectorySync(trajectory);
+            _drive.followTrajectory(trajectory);
         step_count++;
 
         /*if (opMode.opModeIsActive()) {
@@ -364,31 +364,31 @@ public class Path {
                         _drive.getExternalHeading() + 2 * PI;
 
                 if (theta > PI)
-                    _drive.turnSync(2 * PI - (_drive.getExternalHeading() - PI / 2));
+                    _drive.turn(2 * PI - (_drive.getExternalHeading() - PI / 2));
                 else
-                    _drive.turnSync(-(_drive.getExternalHeading() - PI / 2));
+                    _drive.turn(-(_drive.getExternalHeading() - PI / 2));
             } else {
                 theta = _drive.getExternalHeading() >= 0 ? _drive.getExternalHeading() :
                         _drive.getExternalHeading() + 2 * PI;
 
                 if (theta > PI)
-                    _drive.turnSync(-(_drive.getExternalHeading() - 3 * PI / 2));
+                    _drive.turn(-(_drive.getExternalHeading() - 3 * PI / 2));
                 else
-                    _drive.turnSync(-(_drive.getExternalHeading() + 2 * PI - 3 * PI / 2));
+                    _drive.turn(-(_drive.getExternalHeading() + 2 * PI - 3 * PI / 2));
             }
         }
 
         // step 6
         DriveBuilderReset(false, false, "step" + Integer.toString(step_count) + coordinates[step_count].toString() +
                 ", after foundation unlock, to straight move closer to foundation");
-        builder = builder.setReversed(true).lineTo(new Vector2d(_drive.getPoseEstimate().getX(),
+        builder = builder.lineTo(new Vector2d(_drive.getPoseEstimate().getX(),
                 _drive.getPoseEstimate().getY() + coordinates[step_count].getY()));
 
         //builder = builder.setReversed(true).lineTo(new Vector2d(coordinates[step_count].getX(),
         //        coordinates[step_count].getY()));
         trajectory = builder.build();   //x - 2.812, y + 7.984
         if (opMode.opModeIsActive())
-            _drive.followTrajectorySync(trajectory);
+            _drive.followTrajectory(trajectory);
         step_count++;
 
         // step 7
@@ -400,8 +400,7 @@ public class Path {
         sleep_millisec_opmode(400, opMode);
         DriveBuilderReset(true, false, "step" + Integer.toString(step_count) + coordinates[step_count].toString() +
                 ", after drop fundation,, to spline ");
-        builder.setReversed(false)
-                .splineTo(new Pose2d(new Vector2d(_drive.getPoseEstimate().getX() - coordinates[step_count].getX(),
+        builder.splineTo(new Pose2d(new Vector2d(_drive.getPoseEstimate().getX() - coordinates[step_count].getX(),
                         _drive.getPoseEstimate().getY() - coordinates[step_count].getY()), coordinates[step_count].getHeading()));
         /*
         builder = builder.setReversed(false)
@@ -410,7 +409,7 @@ public class Path {
          */
         trajectory = builder.build();   //x - 2.812, y + 7.984
         if (opMode.opModeIsActive())
-            _drive.followTrajectorySync(trajectory);
+            _drive.followTrajectory(trajectory);
         else
             return -1;
         step_count++;
@@ -428,11 +427,11 @@ public class Path {
                 ", spline, back to parking");
         //builder = new TrajectoryBuilder(_drive.getPoseEstimate(), DriveConstants.BASE_CONSTRAINTS);
         builder = builder
-                .setReversed(false).splineTo(new Pose2d(new Vector2d(coordinates[step_count].getX(),
+                .splineTo(new Pose2d(new Vector2d(coordinates[step_count].getX(),
                         coordinates[step_count].getY()), coordinates[step_count].getHeading()));
         trajectory = builder.build();   //x - 2.812, y + 7.984
         if (opMode.opModeIsActive())
-            _drive.followTrajectorySync(trajectory);
+            _drive.followTrajectory(trajectory);
         else
             return -1;
         step_count++;
@@ -561,7 +560,7 @@ public class Path {
                 .strafeTo(new Vector2d(68.144, 48.936));
         trajectory = builder.build();
         if (opMode.opModeIsActive())
-            straightDrive.followTrajectorySync(trajectory);
+            straightDrive.followTrajectory(trajectory);
 
         intake(hwMap, 0);
         //align.setPower(0.13, 0.25);
@@ -572,19 +571,19 @@ public class Path {
         straightDrive.getLocalizer().update();
         builder = new TrajectoryBuilder(straightDrive.getPoseEstimate(), DriveConstants.BASE_CONSTRAINTS);
         builder = builder.splineTo(new Pose2d(new Vector2d(37.064, 58.72), Math.toRadians(140)))
-                .setReversed(true).lineTo(new Vector2d(70.0, 58.72)).setReversed(false);
+                .lineTo(new Vector2d(70.0, 58.72));
         trajectory = builder.build();
         if (opMode.opModeIsActive())
-            straightDrive.followTrajectorySync(trajectory);
+            straightDrive.followTrajectory(trajectory);
 
         straightDrive.getLocalizer().setPoseEstimate(new Pose2d(new Vector2d(60.0, 54.72), Math.toRadians(0)));
         straightDrive.getLocalizer().update();
         builder = new TrajectoryBuilder(straightDrive.getPoseEstimate(), DriveConstants.BASE_CONSTRAINTS);
-        builder = builder.setReversed(false).lineTo(new Vector2d(54.0, 54.72)).strafeTo(new Vector2d(54.0, 60.44))
+        builder = builder.lineTo(new Vector2d(54.0, 54.72)).strafeTo(new Vector2d(54.0, 60.44))
                 .lineTo(new Vector2d(17.552, 60.44));
         trajectory = builder.build();
         if (opMode.opModeIsActive())
-            straightDrive.followTrajectorySync(trajectory);
+            straightDrive.followTrajectory(trajectory);
     }
 
     public void updateTFODData(List<Recognition> tfod) {

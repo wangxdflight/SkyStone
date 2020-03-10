@@ -64,12 +64,12 @@ public class PathTest extends LinearOpMode {
 
 
         if (DriveConstants.USING_BULK_READ == false) {
-            _drive = new SampleMecanumDriveREV(hardwareMap, false);
-            _strafeDrive = new SampleMecanumDriveREV(hardwareMap, true);
+            _drive = new SampleMecanumDrive(hardwareMap);
+            _strafeDrive = new SampleMecanumDrive(hardwareMap);
         }
         else {
-            _drive = new SampleMecanumDriveREVOptimized(hardwareMap, false);
-            _strafeDrive = new SampleMecanumDriveREVOptimized(hardwareMap, true);
+            _drive = new SampleMecanumDrive(hardwareMap);
+            _strafeDrive = new SampleMecanumDrive(hardwareMap);
         }
 
         RobotLogger.dd(TAG, "unit test for path (BLUE QUARY), ARM actions?" + Integer.toString(DriveConstants.ENABLE_ARM_ACTIONS?1:0));

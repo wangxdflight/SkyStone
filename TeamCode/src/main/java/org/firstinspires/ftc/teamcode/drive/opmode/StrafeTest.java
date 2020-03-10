@@ -61,7 +61,7 @@ public class StrafeTest extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        drive.followTrajectorySync(trajectory);
+        drive.followTrajectory(trajectory);
         Localizer localizer = drive.getLocalizer();
         /*
         if (DriveConstants.RUN_USING_ODOMETRY_WHEEL && (localizer!=null)) {

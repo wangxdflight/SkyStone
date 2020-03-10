@@ -17,9 +17,8 @@ import org.firstinspires.ftc.teamcode.drive.RobotLogger;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.util.LoggingUtil;
 
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.rpmToVelocity;
 
 /*
  * Op mode for computing kV, kStatic, and kA from various drive routines. For the curious, here's an
@@ -42,7 +41,7 @@ public class DriveFeedforwardTuner extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
-        if (RUN_USING_ENCODER) {
+        if (DriveConstants.RUN_USING_ENCODER) {
             RobotLogger.dd(TAG, "Feedforward constants usually don't need to be tuned " +
                     "when using the built-in drive motor velocity PID.");
         }

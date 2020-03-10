@@ -57,7 +57,7 @@ public class DiagonalTest extends LinearOpMode {
                 Trajectory trajectory = _drive.trajectoryBuilder()
                         .strafeTo(new Vector2d(DriveConstants.TEST_DISTANCE, DriveConstants.TEST_DISTANCE_0))
                         .build();
-                _drive.followTrajectorySync(trajectory);
+                _drive.followTrajectory(trajectory);
             }
 
             Localizer localizer = _drive.getLocalizer();
@@ -80,7 +80,7 @@ public class DiagonalTest extends LinearOpMode {
             Path.sleep_millisec_opmode(2000, this);
 
             if (DriveConstants.RESET_FOLLOWER)
-                _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL, false);
+                _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL);
 
             if (DriveConstants.DIAGONAL_SPLIT)
                 Path.StrafeDiagonalHelper(_drive, new Vector2d(0, 0));
@@ -88,14 +88,14 @@ public class DiagonalTest extends LinearOpMode {
                 Trajectory trajectory = _drive.trajectoryBuilder()
                         .strafeTo(new Vector2d(0, 0))
                         .build();
-                _drive.followTrajectorySync(trajectory);
+                _drive.followTrajectory(trajectory);
             }
 
             currentPos = _drive.getPoseEstimate();
             error_pose = _drive.follower.getLastError();
             RobotLogger.dd(TAG, "currentPos %s, errorPos %s", currentPos.toString(), error_pose.toString());
             if (DriveConstants.RESET_FOLLOWER)
-                _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL, false);
+                _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL);
 
             Path.sleep_millisec_opmode(5000, this);
         }

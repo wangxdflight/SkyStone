@@ -48,7 +48,7 @@ public class FollowerPIDTunerStrafe extends LinearOpMode {
 
             if (DriveConstants.USING_STRAFE_DIAGONAL == true) {
                 if (DriveConstants.RESET_FOLLOWER)
-                    _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL, false);
+                    _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL);
 
                 _drive.followTrajectorySync(
                         _drive.trajectoryBuilder()
@@ -57,7 +57,7 @@ public class FollowerPIDTunerStrafe extends LinearOpMode {
             }
             else {
                 if (DriveConstants.RESET_FOLLOWER)
-                    _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL, false);
+                    _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL);
 
                 _drive.followTrajectorySync(
                         _drive.trajectoryBuilder()
@@ -74,14 +74,14 @@ public class FollowerPIDTunerStrafe extends LinearOpMode {
 
             if (DriveConstants.USING_STRAFE_DIAGONAL == true) {
                 //drive.resetFollowerWithParameters(true);
-                _drive.followTrajectorySync(
+                _drive.followTrajectory(
                         _drive.trajectoryBuilder()
                                 .strafeTo((new Vector2d(currentPos.getX() - DriveConstants.TEST_DISTANCE, currentPos.getY() - DriveConstants.TEST_DISTANCE_0)))
                                 .build());
             }
             else {
                 //drive.resetFollowerWithParameters(false);
-                _drive.followTrajectorySync(
+                _drive.followTrajectory(
                         _drive.trajectoryBuilder()
                                 .lineTo((new Vector2d(currentPos.getX() - DriveConstants.TEST_DISTANCE, currentPos.getY() - DriveConstants.TEST_DISTANCE_0)))
                                 .build());
