@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.calibration;
+package org.firstinspires.ftc.teamcode.drive.opmode;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -13,10 +13,20 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Autonomous.FieldPosition;
 import org.firstinspires.ftc.teamcode.Autonomous.Path;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.drive.RobotLogger;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCamLocalizer;
-import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCameraChoice;
+import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.BaseTrajectoryBuilder;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
+import org.firstinspires.ftc.teamcode.util.RobotLogger;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.vision.VuforiaCamLocalizer;
+import org.firstinspires.ftc.teamcode.vision.VuforiaCameraChoice;
 
 
 /*
@@ -24,7 +34,8 @@ import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCameraChoice;
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
+
+//@Disabled
 public class VuforiaTest extends LinearOpMode {
     private Trajectory trajectory;
     private BaseTrajectoryBuilder builder, strafe_builder;
@@ -32,6 +43,7 @@ public class VuforiaTest extends LinearOpMode {
     private String TAG = "VuforiaTest";
     private SampleMecanumDrive _drive = null;
     private HardwareMap hwMap;
+
     private Path path;
     private FieldPosition fieldPosition = null;
 
@@ -61,8 +73,9 @@ public class VuforiaTest extends LinearOpMode {
                     telemetry.update();
                     RobotLogger.dd(TAG, "vuforia localization: " + poseEstimate.toString());
                 }
-                if (opModeIsActive())
-                    Path.sleep_millisec_opmode(200, this);
+                if (opModeIsActive()) {
+                    //Path.sleep_millisec_opmode(200, this);
+                }
             }
             vLocalizer.stop();
 
@@ -80,8 +93,9 @@ public class VuforiaTest extends LinearOpMode {
                     telemetry.update();
                     RobotLogger.dd(TAG, "vuforia localization: " + poseEstimate.toString());
                 }
-                if (opModeIsActive())
-                    Path.sleep_millisec_opmode(200, this);
+                if (opModeIsActive()) {
+                    //Path.sleep_millisec_opmode(200, this);
+                }
             }
             vLocalizer.stop();
 

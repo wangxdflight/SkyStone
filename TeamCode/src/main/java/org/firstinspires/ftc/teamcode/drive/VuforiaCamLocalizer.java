@@ -178,7 +178,12 @@ public class VuforiaCamLocalizer implements Localizer {
         update();
         return poseEstimate;
     }
-
+    // Todo:
+    @Override
+    public Pose2d getPoseVelocity() {
+        RobotLogger.dd(TAG, "getPoseVelocity for vuforia localizer is not supported");
+        return (new Pose2d(0, 0, 0));
+    }
     @Override
     public void setPoseEstimate(@NotNull Pose2d pose2d) {
         RobotLogger.dd(TAG, "setPoseEstimate for vuforia localizer is not supported");

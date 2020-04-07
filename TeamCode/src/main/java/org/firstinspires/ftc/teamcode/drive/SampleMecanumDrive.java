@@ -31,6 +31,7 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
 
 import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
+import org.firstinspires.ftc.teamcode.util.RobotLogger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -144,46 +145,53 @@ public class SampleMecanumDrive extends MecanumDrive {
                 new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
 
         poseHistory = new ArrayList<>();
+        RobotLogger.dd(TAG, "Mecanum drive is created");
+        if (!DriveConstants.VirtualizeDrive) {
+            LynxModuleUtil.ensureMinimumFirmwareVersion(hwMap);
 
-        LynxModuleUtil.ensureMinimumFirmwareVersion(hwMap);
-
-        for (LynxModule module : hwMap.getAll(LynxModule.class)) {
+            for (LynxModule module : hwMap.getAll(LynxModule.class)) {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
+            }
+
+            // TODO: adjust the names of the following hardware devices to match your configuration
+            imu = hwMap.get(BNO055IMU.class, "imu");
+            BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+            parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+            imu.initialize(parameters);
+
+            // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
+            // upward (normal to the floor) using a command like the following:
+            // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
+
+            leftFront = hwMap.get(DcMotorEx.class, "leftFront");
+            leftRear = hwMap.get(DcMotorEx.class, "leftRear");
+            rightRear = hwMap.get(DcMotorEx.class, "rightRear");
+            rightFront = hwMap.get(DcMotorEx.class, "rightFront");
+            } else {
+            leftFront = null;  // Virtual motor
+            leftRear = null;
+            rightRear = null;
+            rightFront = null;
         }
-
-        // TODO: adjust the names of the following hardware devices to match your configuration
-        imu = hwMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        imu.initialize(parameters);
-
-        // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
-        // upward (normal to the floor) using a command like the following:
-        // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
-
-        leftFront = hwMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hwMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hwMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hwMap.get(DcMotorEx.class, "rightFront");
-
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
-        for (DcMotorEx motor : motors) {
-            MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
-            motorConfigurationType.setAchieveableMaxRPMFraction(1.0);
-            motor.setMotorType(motorConfigurationType);
+        if (!DriveConstants.VirtualizeDrive) {
+            for (DcMotorEx motor : motors) {
+                MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
+                motorConfigurationType.setAchieveableMaxRPMFraction(1.0);
+                motor.setMotorType(motorConfigurationType);
+            }
+
+            if (RUN_USING_ENCODER) {
+                setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            }
+
+            setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
+                setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
+            }
         }
-
-        if (RUN_USING_ENCODER) {
-            setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-
-        setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
-            setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
-        }
-
         // TODO: reverse any motors using DcMotor.setDirection()
 
         // TODO: if desired, use setLocalizer() to change the localization method
@@ -402,6 +410,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     @Override
     public List<Double> getWheelPositions() {
         List<Double> wheelPositions = new ArrayList<>();
+        if (!DriveConstants.VirtualizeDrive) {
         for (DcMotorEx motor : motors) {
             double t1 = motor.getCurrentPosition();
             double t2 = encoderTicksToInches(t1);
@@ -409,13 +418,31 @@ public class SampleMecanumDrive extends MecanumDrive {
             //      " inches: " + Double.toString(t2));
 
             wheelPositions.add(t2);
+            }
         }
+        else {
+            RobotLogger.callers(6, TAG, "getWheelPositions");
+            wheelPositions.add(0.0);
+            wheelPositions.add(0.0);
+            wheelPositions.add(0.0);
+            wheelPositions.add(0.0);
+        }
+
         return wheelPositions;
     }
     public List<Double> getWheelVelocities() {
         List<Double> wheelVelocities = new ArrayList<>();
-        for (DcMotorEx motor : motors) {
-            wheelVelocities.add(encoderTicksToInches(motor.getVelocity()));
+        if (!DriveConstants.VirtualizeDrive) {
+            for (DcMotorEx motor : motors) {
+                wheelVelocities.add(encoderTicksToInches(motor.getVelocity()));
+            }
+        } else {
+            RobotLogger.callers(6, TAG, "getWheelVelocities");
+            //Thread.dumpStack();
+            wheelVelocities.add(0.0);
+            wheelVelocities.add(0.0);
+            wheelVelocities.add(0.0);
+            wheelVelocities.add(0.0);
         }
         return wheelVelocities;
     }
@@ -431,15 +458,25 @@ public class SampleMecanumDrive extends MecanumDrive {
     }
     
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        leftFront.setPower(v);
-        leftRear.setPower(v1);
-        rightRear.setPower(v2);
-        rightFront.setPower(v3);
+        if (!DriveConstants.VirtualizeDrive) {
+
+            leftFront.setPower(v);
+            leftRear.setPower(v1);
+            rightRear.setPower(v2);
+            rightFront.setPower(v3);
+        } else {
+            RobotLogger.callers(6, TAG, "setMotorPowers");
+        }
     }
 
     @Override
     public double getRawExternalHeading() {
-        return imu.getAngularOrientation().firstAngle;
+        if (!DriveConstants.VirtualizeDrive) {
+            return imu.getAngularOrientation().firstAngle;
+        } else {
+            RobotLogger.callers(8, TAG, "getRawExternalHeading");
+            return 0;
+        }
     }
     
         public void print_list_double(List<Double> list){

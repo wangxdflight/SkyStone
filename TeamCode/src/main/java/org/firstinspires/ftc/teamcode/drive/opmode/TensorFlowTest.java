@@ -1,4 +1,5 @@
-package org.firstinspires.ftc.teamcode.drive.calibration;
+
+package org.firstinspires.ftc.teamcode.drive.opmode;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -12,18 +13,23 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Autonomous.FieldPosition;
 import org.firstinspires.ftc.teamcode.Autonomous.Path;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
-import org.firstinspires.ftc.teamcode.drive.RobotLogger;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
+import org.firstinspires.ftc.teamcode.util.RobotLogger;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.drive.localizer.TensorflowDetector;
-import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCamLocalizer;
-import org.firstinspires.ftc.teamcode.drive.localizer.VuforiaCameraChoice;
+import org.firstinspires.ftc.teamcode.vision.TensorflowDetector;
+import org.firstinspires.ftc.teamcode.vision.VuforiaCameraChoice;
+
 
 /*
  * This is a simple routine to test turning capabilities.
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
+
 public class TensorFlowTest extends LinearOpMode {
     private Trajectory trajectory;
     private BaseTrajectoryBuilder builder, strafe_builder;
@@ -37,6 +43,7 @@ public class TensorFlowTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         DriveConstants.updateConstantsFromProperties();
+
         RobotLogger.dd(TAG, "unit test for TensorFlow skystone detector");
 
         waitForStart();
@@ -54,8 +61,9 @@ public class TensorFlowTest extends LinearOpMode {
             for (int i = 0; i < 10; i ++ ) {
                 if (opModeIsActive())
                     vTester.detectSkystone();
-                if (opModeIsActive())
-                    Path.sleep_millisec_opmode(200, this);
+                if (opModeIsActive()) {
+                    //Path.sleep_millisec_opmode(200, this);
+                }
             }
             count ++;
             vTester.stop();
@@ -68,8 +76,9 @@ public class TensorFlowTest extends LinearOpMode {
             for (int i = 0; i < 10; i ++ ) {
                 if (opModeIsActive())
                     vTester.detectSkystone();
-                if (opModeIsActive())
-                    Path.sleep_millisec_opmode(200, this);
+                if (opModeIsActive()) {
+                    //Path.sleep_millisec_opmode(200, this);
+                }
             }
             count ++;
             vTester.stop();
