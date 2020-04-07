@@ -13,3 +13,6 @@
 
 // Include common definitions from above.
 apply from: '../build.common.gradle'
+dependencies {
+    //NOTE: this is the correct version, the below screenshot is outdated
+}
