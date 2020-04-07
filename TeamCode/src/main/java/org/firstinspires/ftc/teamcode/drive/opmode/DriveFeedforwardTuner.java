@@ -99,7 +99,7 @@ public class DriveFeedforwardTuner extends LinearOpMode {
         telemetry.addLine("Running...");
         telemetry.update();
 
-        double maxVel = rpmToVelocity(MAX_RPM);
+        double maxVel = DriveConstants.rpmToVelocity(DriveConstants.getMaxRpm());
         double finalVel = MAX_POWER * maxVel;
         double accel = (finalVel * finalVel) / (2.0 * DISTANCE);
         double rampTime = Math.sqrt(2.0 * DISTANCE / accel);

@@ -49,20 +49,18 @@ public class FollowerPIDTunerStrafe extends LinearOpMode {
             if (DriveConstants.USING_STRAFE_DIAGONAL == true) {
                 if (DriveConstants.RESET_FOLLOWER)
                     _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL);
-
-                _drive.followTrajectorySync(
-                        _drive.trajectoryBuilder()
-                                .strafeTo((new Vector2d(currentPos.getX() + DriveConstants.TEST_DISTANCE, currentPos.getY() + DriveConstants.TEST_DISTANCE_0)))
-                                .build());
+                Trajectory trajectory = _drive.trajectoryBuilder()
+                        .strafeTo((new Vector2d(currentPos.getX() + DriveConstants.TEST_DISTANCE, currentPos.getY() + DriveConstants.TEST_DISTANCE_0)))
+                        .build();
+                _drive.followTrajectory(trajectory);
             }
             else {
                 if (DriveConstants.RESET_FOLLOWER)
                     _drive.resetFollowerWithParameters(DriveConstants.USING_STRAFE_DIAGONAL);
-
-                _drive.followTrajectorySync(
-                        _drive.trajectoryBuilder()
-                                .lineTo(new Vector2d(currentPos.getX() + DriveConstants.TEST_DISTANCE, currentPos.getY() + DriveConstants.TEST_DISTANCE_0))
-                                .build());
+                Trajectory trajectory =  _drive.trajectoryBuilder()
+                        .lineTo(new Vector2d(currentPos.getX() + DriveConstants.TEST_DISTANCE, currentPos.getY() + DriveConstants.TEST_DISTANCE_0))
+                        .build();
+                _drive.followTrajectory(trajectory);
             }
 
             currentPos = _drive.getPoseEstimate();

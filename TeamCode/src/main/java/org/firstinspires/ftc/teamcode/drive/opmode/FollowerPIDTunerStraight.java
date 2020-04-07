@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.drive.calibration;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -61,12 +62,10 @@ public class FollowerPIDTunerStraight extends LinearOpMode {
 
             if (DriveConstants.RESET_FOLLOWER)
                 drive.resetFollowerWithParameters(false);
-
-            drive.followTrajectorySync(
-                    drive.trajectoryBuilder()
-                            .back(DISTANCE)
-                            .build()
-            );
+            Trajectory trajectory = drive.trajectoryBuilder()
+                    .back(DISTANCE)
+                    .build();
+            drive.followTrajectory(trajectory);
             currentPos = drive.getPoseEstimate();
             error_pose = drive.follower.getLastError();
             RobotLog.dd(TAG, "currentPos %s, errorPos %s",currentPos.toString(), error_pose.toString());
