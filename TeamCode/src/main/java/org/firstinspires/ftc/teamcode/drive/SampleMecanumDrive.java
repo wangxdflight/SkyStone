@@ -44,17 +44,23 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCO
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMotorVelocityF;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.hD;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.hI;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.hP;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kA;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kStatic;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.txD;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.txI;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.txP;
 
 /*
  * Simple mecanum drive hardware implementation for REV hardware.
  */
 @Config
 public class SampleMecanumDrive extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(txP, txI, txD);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(hP, hI, hD);
 
     private String TAG = "SampleMecanumDrive";
 
@@ -101,6 +107,8 @@ public class SampleMecanumDrive extends MecanumDrive {
 
         poseHistory = new ArrayList<>();
         RobotLogger.dd(TAG, "Mecanum drive is created");
+        RobotLogger.dd(TAG, "current transitional PID: %f, %f, %f", txP, txI, txD);
+        RobotLogger.dd(TAG, "current heading PID: %f, %f, %f", hP, hI, hD);
         if (!DriveConstants.VirtualizeDrive) {
             LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
 
@@ -165,6 +173,7 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     public void turnAsync(double angle) {
         double heading = getPoseEstimate().getHeading();
+        RobotLogger.dd(TAG, "turn: current heading "+Double.toString(heading)+" angle "+Double.toString(angle));
         turnProfile = MotionProfileGenerator.generateSimpleMotionProfile(
                 new MotionState(heading, 0, 0, 0),
                 new MotionState(heading + angle, 0, 0, 0),
@@ -204,6 +213,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     }
 
     public void update() {
+        RobotLogger.dd(TAG, "roadrunner control loop starts");
         updatePoseEstimate();
 
         Pose2d currentPose = getPoseEstimate();
@@ -224,6 +234,14 @@ public class SampleMecanumDrive extends MecanumDrive {
         packet.put("yError", lastError.getY());
         packet.put("headingError", lastError.getHeading());
 
+        RobotLogger.dd(TAG, "update: x " + currentPose.getX());
+        RobotLogger.dd(TAG, "y " + currentPose.getY());
+        RobotLogger.dd(TAG, "heading " + Double.toString(currentPose.getHeading()));
+
+        RobotLogger.dd(TAG, "xError " + lastError.getX());
+        RobotLogger.dd(TAG, "yError " + lastError.getY());
+        RobotLogger.dd(TAG, "headingError "  + lastError.getHeading());
+
         switch (mode) {
             case IDLE:
                 // do nothing
@@ -239,6 +257,9 @@ public class SampleMecanumDrive extends MecanumDrive {
 
                 double targetOmega = targetState.getV();
                 double targetAlpha = targetState.getA();
+                RobotLogger.dd(TAG, "TURN: targetOmega "+Double.toString(targetOmega)+" targetAlpha "+Double.toString(targetAlpha));
+                RobotLogger.dd(TAG, "correction "+Double.toString(correction));
+ 
                 setDriveSignal(new DriveSignal(new Pose2d(
                         0, 0, targetOmega + correction
                 ), new Pose2d(

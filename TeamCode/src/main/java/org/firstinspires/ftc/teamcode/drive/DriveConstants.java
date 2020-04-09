@@ -24,6 +24,12 @@ import org.firstinspires.ftc.teamcode.util.RobotLogger;
 public class DriveConstants {
     private static String TAG = "DriveConstants";
     public static double odoEncoderTicksPerRev = 1565.0;
+    public static double txP = 5.0; //translational x/y co-efficients
+    public static double txI = 0.5;
+    public static double txD = 0.0;
+    public static double tyP = 5.0;
+    public static double tyI = 10.0;
+    public static double tyD = 0.00001;
     public static double hP = 10;    // heading co-efficients;
     public static double hI = 0.5;
     public static double hD = 0.00001;

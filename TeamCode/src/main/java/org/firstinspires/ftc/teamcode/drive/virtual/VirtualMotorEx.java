@@ -22,7 +22,16 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.GEAR_RATIO;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.HARDCODED_TICKS_PER_REV;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TICKS_PER_REV;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.WHEEL_RADIUS;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.hD;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.hI;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.hP;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kD;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kI;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kP;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.txD;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.txI;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.txP;
 
 public class VirtualMotorEx implements DcMotorEx {
     private String TAG = "VirtualMotorEx";
@@ -56,7 +65,7 @@ public class VirtualMotorEx implements DcMotorEx {
         last_get_wheel_position_power = 0;
     }
     public void setPower(double power) {
-        RobotLogger.dd(TAG, "setPower %f", power);
+        RobotLogger.dd(TAG, "%s: setPower %f", motor_name, power);
         motor_power = power;
     }
 
@@ -478,6 +487,9 @@ public class VirtualMotorEx implements DcMotorEx {
         last_get_wheel_position_time = SystemClock.elapsedRealtime();
         last_get_wheel_position_power = motor_power;
         last_wheel_position = rp;
+        RobotLogger.dd(TAG, "current velocity PID: %f, %f, %f", kP, kI, kD);
+        RobotLogger.dd(TAG, "current transitional PID: %f, %f, %f", txP, txI, txD);
+        RobotLogger.dd(TAG, "current heading PID: %f, %f, %f", hP, hI, hD);
         return rp;
     };
 

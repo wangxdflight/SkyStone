@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.util.SafeSleep;
 
 /*
  * This is a simple routine to test translational drive capabilities.
@@ -20,14 +21,24 @@ public class StraightTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
-                .forward(DISTANCE)
-                .build();
+        while (! isStopRequested()) {
+            Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
+                    .forward(DISTANCE)
+                    .build();
 
-        waitForStart();
+            waitForStart();
 
-        if (isStopRequested()) return;
+            if (isStopRequested()) return;
 
-        drive.followTrajectory(trajectory);
+            SafeSleep.sleep_milliseconds(this, 500);
+
+            drive.followTrajectory(trajectory);
+
+            trajectory = drive.trajectoryBuilder(drive.getLocalizer().getPoseEstimate())
+                    .back(DISTANCE)
+                    .build();
+            drive.followTrajectory(trajectory);
+            SafeSleep.sleep_milliseconds(this,500);
+        }
     }
 }
