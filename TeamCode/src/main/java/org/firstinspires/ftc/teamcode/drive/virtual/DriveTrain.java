@@ -4,6 +4,12 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import org.firstinspires.ftc.teamcode.util.RobotLogger;
 import java.util.Arrays;
 
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.GEAR_RATIO;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MAX_RPM;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.WHEEL_RADIUS;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMaxRpm;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
+
 // motor to wheel
 public class DriveTrain extends BaseDriveTrain {
     private String TAG = "DriveTrain";
@@ -49,20 +55,8 @@ public class DriveTrain extends BaseDriveTrain {
             RobotLogger.dd(TAG, "4 wheels are ready");
         }
     }
-    public int GetWheelPosition(String name) {
-        DcMotorEx motor = drive_motors.get(getMotorIndexFromName(name));
-        double motor_power = motor.getPower();
-        RobotLogger.dd(TAG, "GetWheelPosition drive train to figure out based on motor power");
-        return 0;
 
-    }
-    public double GetWheelVelocity(String name) {
-        DcMotorEx motor = drive_motors.get(getMotorIndexFromName(name));
-        double motor_power = motor.getPower();
-        RobotLogger.dd(TAG, "GetWheelVelocity drive train to figure out based on motor power");
-        return 0;
 
-    }
     public void finalize() throws Throwable{
         RobotLogger.dd(TAG, "drive train is finalize");
         driveTrain_singleInstance = null;

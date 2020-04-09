@@ -17,6 +17,4 @@ public abstract class BaseDriveTrain {
     boolean usingOdom;
     boolean usingIMU;
     abstract void AddWheel(DcMotorEx motor, String name);
-    abstract int GetWheelPosition(String name);
-    abstract double GetWheelVelocity(String name);
 }

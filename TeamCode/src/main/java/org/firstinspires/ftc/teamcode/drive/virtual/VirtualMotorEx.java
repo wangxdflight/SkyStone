@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.drive.virtual;
 
+import android.os.SystemClock;
+
 import com.acmerobotics.roadrunner.drive.Drive;
 import com.qualcomm.hardware.motors.GoBILDA5202Series;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -16,6 +18,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.util.RobotLogger;
 
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.GEAR_RATIO;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.HARDCODED_TICKS_PER_REV;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TICKS_PER_REV;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.WHEEL_RADIUS;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
+
 public class VirtualMotorEx implements DcMotorEx {
     private String TAG = "VirtualMotorEx";
     private MotorConfigurationType motorType;
@@ -30,6 +38,9 @@ public class VirtualMotorEx implements DcMotorEx {
     private PIDFCoefficients PIDF_parameters;
     private PIDCoefficients PID_parameters;
     private DriveTrain driveTrain;
+    private long last_get_wheel_position_time = 0;
+    private double last_get_wheel_position_power = 0;
+    private int last_wheel_position = 0;
     /* hard code to be GoBILDA5202 type, need to be careful not to use the paramters from xml */
     private MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(GoBILDA5202Series.class);
@@ -40,6 +51,9 @@ public class VirtualMotorEx implements DcMotorEx {
         motor_name = name;
         driveTrain = DriveTrain.getSingle_instance();
         driveTrain.AddWheel(this, name);
+        last_get_wheel_position_time = SystemClock.elapsedRealtime();
+        last_wheel_position = 0;
+        last_get_wheel_position_power = 0;
     }
     public void setPower(double power) {
         RobotLogger.dd(TAG, "setPower %f", power);
@@ -93,13 +107,19 @@ public class VirtualMotorEx implements DcMotorEx {
         RobotLogger.callers(2, TAG, "not implemented yet");
     };
 
+    private int inchesToTicks(double t) {
+        int r = (int)(HARDCODED_TICKS_PER_REV * t / (WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO));
+        return r;
+    }
     /**
      * Returns the current velocity of the motor, in ticks per second
      * @return the current velocity of the motor
      */
     public double getVelocity() {
-        driveTrain.GetWheelVelocity(motor_name);
-        return 0;
+        double r = last_get_wheel_position_power / kV;
+        r = inchesToTicks(r);
+        RobotLogger.dd(TAG, motor_name + ", getVelocity: " + Double.toString(r));
+        return r;
     }
 
     /**
@@ -130,9 +150,9 @@ public class VirtualMotorEx implements DcMotorEx {
      */
     @Deprecated
     public void setPIDCoefficients(DcMotor.RunMode mode, PIDCoefficients pidCoefficients) {
-        RobotLogger.callers(2, TAG, "not implemented yet");
-
         PID_parameters = pidCoefficients;
+        RobotLogger.dd(TAG, "setPIDFCoefficients %f, %f, %f",
+                PID_parameters.p, PID_parameters.i, PID_parameters.d);
     };
 
     /**
@@ -158,9 +178,9 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #getPIDFCoefficients(RunMode)
      */
     public void setPIDFCoefficients(DcMotor.RunMode mode, PIDFCoefficients pidfCoefficients) throws UnsupportedOperationException {
-        RobotLogger.callers(2, TAG, "not implemented yet");
-
         PIDF_parameters = pidfCoefficients;
+        RobotLogger.dd(TAG, "PIDF: %f, %f, %f, %f",
+                PIDF_parameters.p, PIDF_parameters.i, PIDF_parameters.d, PIDF_parameters.f);
     };
 
     /**
@@ -416,7 +436,6 @@ public class VirtualMotorEx implements DcMotorEx {
      */
     public void setTargetPosition(int position) {
         RobotLogger.callers(2, TAG, "not implemented yet");
-
     };
 
     /**
@@ -446,8 +465,21 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see DcMotor.RunMode#STOP_AND_RESET_ENCODER
      */
     public int getCurrentPosition() {
-        driveTrain.GetWheelPosition(motor_name);
-        return 0;};
+        long time_duration = SystemClock.elapsedRealtime() - last_get_wheel_position_time;
+        double r = getVelocity() * ((double)time_duration) / 1000.0;
+        //RobotLogger.dd(TAG, Double.toString(r));
+
+        int rp =  (int) (r + last_wheel_position);
+        //RobotLogger.dd(TAG, Double.toString(rp) + Double.toString(last_wheel_position));
+        RobotLogger.dd(TAG, motor_name + ", time duration: "
+                + Double.toString(time_duration) + ", currPosition: "
+                + Double.toString(rp) + ", last power: " + Double.toString(last_get_wheel_position_power)
+                + ", current power: " + Double.toString(motor_power));
+        last_get_wheel_position_time = SystemClock.elapsedRealtime();
+        last_get_wheel_position_power = motor_power;
+        last_wheel_position = rp;
+        return rp;
+    };
 
     /**
      * The run mode of a motor {@link DcMotor.RunMode} controls how the motor interprets the
@@ -572,6 +604,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #setPower(double)
      */
     public double getPower() {
+        RobotLogger.dd(TAG, "getPower %f", motor_power);
         return motor_power;
         };
     /*  */
