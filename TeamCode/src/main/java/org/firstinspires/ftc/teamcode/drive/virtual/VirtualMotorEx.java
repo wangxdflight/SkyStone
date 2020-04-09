@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.drive.virtual;
 
+import com.acmerobotics.roadrunner.drive.Drive;
 import com.qualcomm.hardware.motors.GoBILDA5202Series;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -26,13 +27,16 @@ public class VirtualMotorEx implements DcMotorEx {
     private boolean motor_enabled = false;
     private String motor_name;
     private double motor_power = 0;
-
+    private DriveTrain driveTrain;
     /* hard code to be GoBILDA5202 type, need to be careful not to use the paramters from xml */
     private MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(GoBILDA5202Series.class);
 
-    public VirtualMotorEx(String name) {
+    public VirtualMotorEx(String name)
+    {
         motor_name = name;
+        driveTrain = DriveTrain.getSingle_instance();
+        driveTrain.AddWheel(this, name);
     }
     public void setPower(double power) {
         RobotLogger.dd(TAG, "setPower %f", power);
@@ -402,7 +406,9 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #getTargetPosition()
      * @see DcMotor.RunMode#STOP_AND_RESET_ENCODER
      */
-    public int getCurrentPosition() { return 0;};
+    public int getCurrentPosition() {
+        driveTrain.GetWheelPosition(motor_name);
+        return 0;};
 
     /**
      * The run mode of a motor {@link DcMotor.RunMode} controls how the motor interprets the
