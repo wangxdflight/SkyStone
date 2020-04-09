@@ -27,6 +27,8 @@ public class VirtualMotorEx implements DcMotorEx {
     private boolean motor_enabled = false;
     private String motor_name;
     private double motor_power = 0;
+    private PIDFCoefficients PIDF_parameters;
+    private PIDCoefficients PID_parameters;
     private DriveTrain driveTrain;
     /* hard code to be GoBILDA5202 type, need to be careful not to use the paramters from xml */
     private MotorConfigurationType MOTOR_CONFIG =
@@ -34,6 +36,7 @@ public class VirtualMotorEx implements DcMotorEx {
 
     public VirtualMotorEx(String name)
     {
+        RobotLogger.dd(TAG, "create VirtualMotorEx", name);
         motor_name = name;
         driveTrain = DriveTrain.getSingle_instance();
         driveTrain.AddWheel(this, name);
@@ -67,6 +70,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #setMotorDisable()
      */
     public boolean isMotorEnabled() {
+        RobotLogger.callers(2, TAG, "not implemented yet");
         return motor_enabled;
     };
 
@@ -75,7 +79,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * @param angularRate  the desired ticks per second
      */
     public void setVelocity(double angularRate) {
-
+        RobotLogger.callers(2, TAG, "not implemented yet");
     };
 
     /**
@@ -86,14 +90,17 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #getVelocity(AngleUnit)
      */
     public void setVelocity(double angularRate, AngleUnit unit) {
-
+        RobotLogger.callers(2, TAG, "not implemented yet");
     };
 
     /**
      * Returns the current velocity of the motor, in ticks per second
      * @return the current velocity of the motor
      */
-    public double getVelocity() { return 0; }
+    public double getVelocity() {
+        driveTrain.GetWheelVelocity(motor_name);
+        return 0;
+    }
 
     /**
      * Returns the current velocity of the motor, in angular units per second
@@ -103,6 +110,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #setVelocity(double, AngleUnit)
      */
     public double getVelocity(AngleUnit unit) {
+        RobotLogger.callers(2, TAG, "not implemented yet");
         return 0;
     };
 
@@ -122,7 +130,9 @@ public class VirtualMotorEx implements DcMotorEx {
      */
     @Deprecated
     public void setPIDCoefficients(DcMotor.RunMode mode, PIDCoefficients pidCoefficients) {
+        RobotLogger.callers(2, TAG, "not implemented yet");
 
+        PID_parameters = pidCoefficients;
     };
 
     /**
@@ -148,7 +158,9 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #getPIDFCoefficients(RunMode)
      */
     public void setPIDFCoefficients(DcMotor.RunMode mode, PIDFCoefficients pidfCoefficients) throws UnsupportedOperationException {
+        RobotLogger.callers(2, TAG, "not implemented yet");
 
+        PIDF_parameters = pidfCoefficients;
     };
 
     /**
@@ -157,7 +169,9 @@ public class VirtualMotorEx implements DcMotorEx {
      *
      * @see #setPIDFCoefficients(RunMode, PIDFCoefficients)
      */
-    public void setVelocityPIDFCoefficients(double p, double i, double d, double f) {};
+    public void setVelocityPIDFCoefficients(double p, double i, double d, double f) {
+        RobotLogger.callers(2, TAG, "not implemented yet");
+    };
 
     /**
      * A shorthand for setting the PIDF coefficients for the {@link DcMotor.RunMode#RUN_TO_POSITION}
@@ -173,7 +187,11 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #setVelocityPIDFCoefficients(double, double, double, double)
      * @see #setPIDFCoefficients(RunMode, PIDFCoefficients)
      */
-    public void setPositionPIDFCoefficients(double p) {};
+    public void setPositionPIDFCoefficients(double p) {
+
+        RobotLogger.callers(2, TAG, "not implemented yet");
+
+    };
 
 
     /**
@@ -186,7 +204,7 @@ public class VirtualMotorEx implements DcMotorEx {
      */
     @Deprecated
     public PIDCoefficients getPIDCoefficients(DcMotor.RunMode mode) {
-        return new PIDCoefficients();
+        return PID_parameters;
     };
 
     /**
@@ -198,7 +216,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #setPIDFCoefficients(DcMotor.RunMode, PIDFCoefficients)
      */
     public PIDFCoefficients getPIDFCoefficients(DcMotor.RunMode mode) {
-        return (new PIDFCoefficients());
+        return (PIDF_parameters);
     };
     /**
      * Sets the target positioning tolerance of this motor
@@ -206,6 +224,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see DcMotor#setTargetPosition(int)
      */
     public void setTargetPositionTolerance(int tolerance) {
+        RobotLogger.callers(2, TAG, "not implemented yet");
 
     };
 
@@ -214,6 +233,8 @@ public class VirtualMotorEx implements DcMotorEx {
      * @return the current target positioning tolerance of this motor
      */
     public int getTargetPositionTolerance() {
+
+        RobotLogger.callers(2, TAG, "not implemented yet");
         return 0;
     };
 
@@ -223,6 +244,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * @return the current consumed by this motor.
      */
     public double getCurrent(CurrentUnit unit) {
+        RobotLogger.callers(2, TAG, "not implemented yet");
         return 0;
     };
 
@@ -232,6 +254,8 @@ public class VirtualMotorEx implements DcMotorEx {
      * @return the current alert for this motor
      */
     public double getCurrentAlert(CurrentUnit unit) {
+
+        RobotLogger.callers(2, TAG, "not implemented yet");
         return 0;
     };
 
@@ -241,6 +265,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * @param unit current units
      */
     public void setCurrentAlert(double current, CurrentUnit unit) {
+        RobotLogger.callers(2, TAG, "not implemented yet");
 
     };
 
@@ -249,6 +274,8 @@ public class VirtualMotorEx implements DcMotorEx {
      * @return whether the current consumption of this motor exceeds the alert threshold.
      */
     public boolean isOverCurrent() {
+
+        RobotLogger.callers(2, TAG, "not implemented yet");
         return false;
     }
 
@@ -276,6 +303,8 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #getPortNumber()
      */
     public DcMotorController getController() {
+        RobotLogger.callers(2, TAG, "not implemented yet");
+
         return null;
     };
 
@@ -285,6 +314,8 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #getController()
      */
     public int getPortNumber() {
+
+        RobotLogger.callers(2, TAG, "not implemented yet");
         return 0;
     };
 
@@ -361,7 +392,8 @@ public class VirtualMotorEx implements DcMotorEx {
      * @return whether the motor is currently in a float power level.
      * @see #setPowerFloat()
      */
-    public boolean getPowerFloat() { return float_power;};
+    public boolean getPowerFloat() {
+        return float_power;};
 
     /**
      * Sets the desired encoder target position to which the motor should advance or retreat
@@ -382,21 +414,28 @@ public class VirtualMotorEx implements DcMotorEx {
      * @see #getTargetPosition()
      * @see #isBusy()
      */
-    public void setTargetPosition(int position) {};
+    public void setTargetPosition(int position) {
+        RobotLogger.callers(2, TAG, "not implemented yet");
+
+    };
 
     /**
      * Returns the current target encoder position for this motor.
      * @return the current target encoder position for this motor.
      * @see #setTargetPosition(int)
      */
-    public int getTargetPosition() { return 0;};
+    public int getTargetPosition() {
+        RobotLogger.callers(2, TAG, "not implemented yet");
+        return 0;};
 
     /**
      * Returns true if the motor is currently advancing or retreating to a target position.
      * @return true if the motor is currently advancing or retreating to a target position.
      * @see #setTargetPosition(int)
      */
-    public boolean isBusy() { return false;};
+    public boolean isBusy() {
+        RobotLogger.callers(2, TAG, "not implemented yet");
+        return false;};
 
     /**
      * Returns the current reading of the encoder for this motor. The units for this reading,
@@ -584,6 +623,7 @@ public class VirtualMotorEx implements DcMotorEx {
      * For example, motors will reset the their direction to 'forward'.
      */
     public void resetDeviceConfigurationForOpMode() {
+        RobotLogger.callers(2, TAG, "not implemented yet");
 
     };
 
