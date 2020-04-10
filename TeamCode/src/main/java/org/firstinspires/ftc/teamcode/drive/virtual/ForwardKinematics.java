@@ -16,23 +16,23 @@ import static java.lang.Math.sin;
 // wheel to Robot
 public class ForwardKinematics {
     public static Pose2d wheelToRobotVelocities(List<Double> wheelVelocities){
-        RobotLogger.dd("ForwardKinematics", "wheelToRobotVelocities");
         double lateralMultiplier = 1.0;
         double k = (DriveConstants.TRACK_WIDTH + DriveConstants.WHEEL_BASE) / 2.0;
         double frontLeft = wheelVelocities.get(0);
         double rearLeft = wheelVelocities.get(1);
         double rearRight = wheelVelocities.get(2);
         double frontRight = wheelVelocities.get(3);
-        return (new Pose2d(rearLeft + frontRight + frontLeft + rearRight,
+        Pose2d r = new Pose2d(rearLeft + frontRight + frontLeft + rearRight,
                 (rearLeft + frontRight - frontLeft - rearRight) / lateralMultiplier,
-                (rearRight + frontRight - frontLeft - rearLeft) / k * 0.25));
+                (rearRight + frontRight - frontLeft - rearLeft) / k * 0.25);
+        RobotLogger.dd("ForwardKinematics", "wheelToRobotVelocities " + r.toString());
+        return (r);
     }
 
 
     public static Pose2d relativeOdometryUpdate(Pose2d fieldPose, Pose2d robotPoseDelta) {
         double dtheta = robotPoseDelta.getHeading();
         double sinTerm, cosTerm;
-
         if (Angle.epsilonEquals(dtheta,  0.0)) {
             sinTerm = 1.0 - dtheta * dtheta / 6.0;
             cosTerm = dtheta / 2.0;
@@ -47,12 +47,14 @@ public class ForwardKinematics {
         );
 
         Pose2d fieldPoseDelta = new Pose2d(fieldPositionDelta.rotated(fieldPose.getHeading()), robotPoseDelta.getHeading());
-        RobotLogger.dd("ForwardKinematics", "Kinematics: relativeOdometryUpdate, fieldPoseDelta " + fieldPoseDelta.toString());
-
-        return (new Pose2d(
+        Pose2d r = new Pose2d(
                 fieldPose.getX() + fieldPoseDelta.getX(),
                 fieldPose.getY() + fieldPoseDelta.getY(),
-                Angle.norm(fieldPose.getHeading() + fieldPoseDelta.getHeading())));
+                Angle.norm(fieldPose.getHeading() + fieldPoseDelta.getHeading()));
+        RobotLogger.dd("ForwardKinematics", "Kinematics: relativeOdometryUpdate, fieldPoseDelta " + fieldPoseDelta.toString()
+                + " new pose: " + r.toString());
+
+        return (r);
 
     }
 

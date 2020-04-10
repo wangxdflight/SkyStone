@@ -128,7 +128,7 @@ public class VirtualMotorEx implements DcMotorEx {
     public double getVelocity() {
         double r = last_get_wheel_position_power / kV;
         r = inchesToTicks(r);
-        RobotLogger.dd(TAG, motor_name + ", getVelocity: " + Double.toString(r));
+        //RobotLogger.dd(TAG, motor_name + ", getVelocity: " + Double.toString(r));
         return r;
     }
 
@@ -476,21 +476,22 @@ public class VirtualMotorEx implements DcMotorEx {
      */
     public int getCurrentPosition() {
         long time_duration = SystemClock.elapsedRealtime() - last_get_wheel_position_time;
-        double r = getVelocity() * ((double)time_duration) / 1000.0;
+        double v = getVelocity();
+        double r = v * ((double)time_duration) / 1000.0;
         //RobotLogger.dd(TAG, Double.toString(r));
 
         int rp =  (int) (r + last_wheel_position);
         //RobotLogger.dd(TAG, Double.toString(rp) + Double.toString(last_wheel_position));
-        RobotLogger.dd(TAG, motor_name + ", time duration: "
-                + Double.toString(time_duration) + ", currPosition: "
+        RobotLogger.dd(TAG, motor_name + ", velocity: " + Double.toString(v)
+                + ", time duration: " + Double.toString(time_duration) + ", currPosition: "
                 + Double.toString(rp) + ", last power: " + Double.toString(last_get_wheel_position_power)
                 + ", current power: " + Double.toString(motor_power));
         last_get_wheel_position_time = SystemClock.elapsedRealtime();
         last_get_wheel_position_power = motor_power;
         last_wheel_position = rp;
-        RobotLogger.dd(TAG, "current velocity PID: %f, %f, %f", kP, kI, kD);
-        RobotLogger.dd(TAG, "current transitional PID: %f, %f, %f", txP, txI, txD);
-        RobotLogger.dd(TAG, "current heading PID: %f, %f, %f", hP, hI, hD);
+        //RobotLogger.dd(TAG, "current velocity PID: %f, %f, %f", kP, kI, kD);
+        //RobotLogger.dd(TAG, "current transitional PID: %f, %f, %f", txP, txI, txD);
+        //RobotLogger.dd(TAG, "current heading PID: %f, %f, %f", hP, hI, hD);
         return rp;
     };
 

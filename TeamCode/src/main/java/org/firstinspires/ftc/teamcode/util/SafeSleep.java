@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.teamcode.util;
 
+import android.os.SystemClock;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 public class SafeSleep
 {
     public static void sleep_milliseconds(LinearOpMode mode, int c) {
+        long start_time = SystemClock.elapsedRealtime();
         int r = c, t = 0;
         while (r > 0) {
             if (r > 200)
@@ -20,6 +23,8 @@ public class SafeSleep
             }
             r = r - t;
         }
+        long sleep_duraiton = SystemClock.elapsedRealtime() - start_time;
+        RobotLogger.dd("SafeSleep", "actually slept for " + sleep_duraiton + " when requested to sleep " + c);
 
     }
 }
