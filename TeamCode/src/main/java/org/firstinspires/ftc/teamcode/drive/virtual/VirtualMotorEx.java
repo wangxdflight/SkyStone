@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.drive.virtual;
 import android.os.SystemClock;
 
 import com.acmerobotics.roadrunner.drive.Drive;
+import com.acmerobotics.roadrunner.drive.MecanumDrive;
 import com.qualcomm.hardware.motors.GoBILDA5202Series;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -54,11 +55,11 @@ public class VirtualMotorEx implements DcMotorEx {
     private MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(GoBILDA5202Series.class);
 
-    public VirtualMotorEx(String name)
+    public VirtualMotorEx(String name, MecanumDrive drv)
     {
         RobotLogger.dd(TAG, "create VirtualMotorEx", name);
         motor_name = name;
-        driveTrain = DriveTrain.getSingle_instance();
+        driveTrain = DriveTrain.getSingle_instance(drv);
         driveTrain.AddWheel(this, name);
         last_get_wheel_position_time = SystemClock.elapsedRealtime();
         last_wheel_position = 0;

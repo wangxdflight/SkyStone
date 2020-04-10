@@ -1,8 +1,13 @@
 package org.firstinspires.ftc.teamcode.drive.virtual;
 
+import com.acmerobotics.roadrunner.drive.MecanumDrive;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.util.Angle;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import org.firstinspires.ftc.teamcode.util.RobotLogger;
-import java.util.Arrays;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.GEAR_RATIO;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MAX_RPM;
@@ -13,52 +18,54 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
 // motor to wheel
 public class DriveTrain extends BaseDriveTrain {
     private String TAG = "DriveTrain";
-    private boolean driveTrainReady = false;
-    private int wheel_count = 0;
-    static final int DRIVE_WHEEL_NUM = 4;
     private static DriveTrain driveTrain_singleInstance = null;
-
-    public DriveTrain() {
-        super();
-        drive_motors = Arrays.asList(new VirtualMotorEx[DRIVE_WHEEL_NUM]);
+    private ForwardKinematics kinematics;
+    private Pose2d poseEstimate = new Pose2d(0, 0, 0);
+    public DriveTrain(MecanumDrive _drv) {
+        super(_drv);
     }
-    synchronized  public static DriveTrain getSingle_instance() {
+    synchronized  public static DriveTrain getSingle_instance(MecanumDrive drv) {
         if (driveTrain_singleInstance == null) {
             RobotLogger.dd("DriveTrain", "drive train created");
-            driveTrain_singleInstance = new DriveTrain();
+            driveTrain_singleInstance = new DriveTrain(drv);
         }
         else
             RobotLogger.dd("DriveTrain", "drive train already exists");
         return driveTrain_singleInstance;
     }
-    private int getMotorIndexFromName(String name) {
-        int index = -1;
-        if (name.equalsIgnoreCase("leftFront"))
-            index = 0;
-        else if (name.equalsIgnoreCase("leftRear"))
-            index = 1;
-        else if (name.equalsIgnoreCase("rightRear"))
-            index = 2;
-        else if (name.equalsIgnoreCase("rightFront"))
-            index = 3;
-        else
-            RobotLogger.dd(TAG, "unexpected motor");
-        return index;
-    }
-    public void AddWheel(DcMotorEx motor, String name) {
-        RobotLogger.dd(TAG, "add wheel: " + name);
-        drive_motors.set(getMotorIndexFromName(name), motor);
-        wheel_count ++;
-        if (wheel_count == DRIVE_WHEEL_NUM)
-        {
-            driveTrainReady = true;
-            RobotLogger.dd(TAG, "4 wheels are ready");
-        }
-    }
 
+    public double getRobotHeading() {
+        RobotLogger.dd(TAG, "getRobotHeading, num of motors: " + drive_motors.size());
+        double extHeading = 0;
+        List<Double> wheelPositions = drive.getWheelPositions();
+        if (lastWheelPositions.size() != 0) {
+            List<Double> wheelDeltas = new ArrayList<>();
+            for (DcMotorEx motor : drive_motors) {
+                int index = drive_motors.indexOf(motor);
+                wheelDeltas.add(wheelPositions.get(index) - lastWheelPositions.get(index));
+            }
+            Pose2d robotPoseDelta = ForwardKinematics.wheelToRobotVelocities(wheelDeltas);
+            double finalHeadingDelta = robotPoseDelta.getHeading();
+            poseEstimate = ForwardKinematics.relativeOdometryUpdate(poseEstimate,
+                    new Pose2d(robotPoseDelta.vec(), finalHeadingDelta));
+        }
+
+        List<Double> wheelVelocities = drive.getWheelVelocities();
+        //double extHeadingVel = drive.getExternalHeadingVelocity()
+        if (wheelVelocities != null) {
+            Pose2d poseVelocity = ForwardKinematics.wheelToRobotVelocities(
+                    wheelVelocities);
+
+        }
+        lastWheelVelocities = wheelVelocities;
+        lastWheelPositions = wheelPositions;
+        lastExtHeading = extHeading;
+        return 0;
+    }
 
     public void finalize() throws Throwable{
-        RobotLogger.dd(TAG, "drive train is finalize");
+        RobotLogger.dd(TAG, "drive train finalize");
         driveTrain_singleInstance = null;
     }
+
 }

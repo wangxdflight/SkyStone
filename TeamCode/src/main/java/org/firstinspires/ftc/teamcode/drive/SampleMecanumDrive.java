@@ -29,6 +29,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
+import org.firstinspires.ftc.teamcode.drive.virtual.DriveTrain;
 import org.firstinspires.ftc.teamcode.drive.virtual.VirtualMotorEx;
 import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
@@ -131,10 +132,10 @@ public class SampleMecanumDrive extends MecanumDrive {
             rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
             rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
         } else {
-            leftFront = new VirtualMotorEx("leftFront");
-            leftRear = new VirtualMotorEx("leftRear");
-            rightRear = new VirtualMotorEx("rightRear");
-            rightFront = new VirtualMotorEx("rightFront");
+            leftFront = new VirtualMotorEx("leftFront", this);
+            leftRear = new VirtualMotorEx("leftRear", this);
+            rightRear = new VirtualMotorEx("rightRear", this);
+            rightFront = new VirtualMotorEx("rightFront", this);
         }
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
@@ -328,6 +329,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     }
 
     public void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients) {
+        RobotLogger.dd(TAG, "setPIDCoefficients");
         for (DcMotorEx motor : motors) {
             motor.setPIDFCoefficients(runMode, new PIDFCoefficients(
                     coefficients.kP, coefficients.kI, coefficients.kD, getMotorVelocityF()
@@ -338,7 +340,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        RobotLogger.callers(6, TAG, "getWheelPositions");
+        RobotLogger.dd(TAG, "getWheelPositions");
         List<Double> wheelPositions = new ArrayList<>();
         for (DcMotorEx motor : motors) {
                 wheelPositions.add(encoderTicksToInches(motor.getCurrentPosition()));
@@ -348,7 +350,7 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     public List<Double> getWheelVelocities() {
         List<Double> wheelVelocities = new ArrayList<>();
-        RobotLogger.callers(6, TAG, "getWheelVelocities");
+        RobotLogger.dd(TAG, "getWheelVelocities");
 
         for (DcMotorEx motor : motors) {
                 wheelVelocities.add(encoderTicksToInches(motor.getVelocity()));
@@ -358,7 +360,7 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        RobotLogger.callers(6, TAG, "setMotorPowers");
+        RobotLogger.dd(TAG,"setMotorPowers");
 
         leftFront.setPower(v);
         leftRear.setPower(v1);
@@ -368,11 +370,13 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     @Override
     public double getRawExternalHeading() {
+        RobotLogger.dd(TAG, "getRawExternalHeading");
         if (!DriveConstants.VirtualizeDrive) {
             return imu.getAngularOrientation().firstAngle;
         } else {
-            RobotLogger.callers(8, TAG, "getRawExternalHeading");
-            return 0;
+            DriveTrain driveTrain = DriveTrain.getSingle_instance(this);
+            double r = driveTrain.getRobotHeading();
+            return r;
         }
     }
 }
