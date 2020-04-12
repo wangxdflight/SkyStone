@@ -19,6 +19,7 @@ import org.firstinspires.ftc.teamcode.util.AllHardwareMap;
 
 import java.util.List;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.util.SafeSleep;
 
 
 /*
@@ -38,6 +39,7 @@ public class StraightTest extends LinearOpMode {
         DriveConstants.updateConstantsFromProperties();
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
+<<<<<<< HEAD
 
         Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
                 .forward(DISTANCE)
@@ -45,9 +47,18 @@ public class StraightTest extends LinearOpMode {
 
 
         waitForStart();
+=======
+        while (! isStopRequested()) {
+            Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
+                    .forward(DISTANCE)
+                    .build();
 
-        if (isStopRequested()) return;
+            waitForStart();
+>>>>>>> 1bfdaffe627ecff62eee34726c32027b6d53928d
 
+            if (isStopRequested()) return;
+
+<<<<<<< HEAD
         drive.followTrajectory(trajectory);
 
         Localizer localizer = drive.getLocalizer();
@@ -62,5 +73,17 @@ public class StraightTest extends LinearOpMode {
         List<Double> positions = drive.getWheelPositions();
         RobotLog.dd(TAG, "wheel positions");
         //drive.print_list_double(positions);
+=======
+            SafeSleep.sleep_milliseconds(this, 500);
+
+            drive.followTrajectory(trajectory);
+
+            trajectory = drive.trajectoryBuilder(drive.getLocalizer().getPoseEstimate())
+                    .back(DISTANCE)
+                    .build();
+            drive.followTrajectory(trajectory);
+            SafeSleep.sleep_milliseconds(this,500);
+        }
+>>>>>>> 1bfdaffe627ecff62eee34726c32027b6d53928d
     }
 }

@@ -5,12 +5,17 @@ import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.qualcomm.hardware.motors.GoBILDA5202Series;
+<<<<<<< HEAD
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+=======
+import com.qualcomm.hardware.motors.NeveRest20Gearmotor;
+>>>>>>> 1bfdaffe627ecff62eee34726c32027b6d53928d
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 import com.qualcomm.robotcore.util.RobotLog;
 
+<<<<<<< HEAD
 import org.openftc.revextensions2.ExpansionHubMotor;
 
 import java.io.BufferedReader;
@@ -27,6 +32,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+=======
+import org.firstinspires.ftc.teamcode.util.RobotLogger;
+
+>>>>>>> 1bfdaffe627ecff62eee34726c32027b6d53928d
 /*
  * Constants shared between multiple drive types.
  *
@@ -40,6 +49,7 @@ import org.w3c.dom.Element;
  */
 @Config
 public class DriveConstants {
+<<<<<<< HEAD
     public static final boolean RUN_USING_PARAMTER_FROM_PROPERTIES = true;
     public static boolean RUN_USING_ODOMETRY_WHEEL = false;
     public static boolean RUN_USING_IMU_LOCALIZER = true;
@@ -60,6 +70,10 @@ public class DriveConstants {
 
     private static String TAG = "DriveConstants";
 
+=======
+    private static String TAG = "DriveConstants";
+    public static double odoEncoderTicksPerRev = 1565.0;
+>>>>>>> 1bfdaffe627ecff62eee34726c32027b6d53928d
     public static double txP = 5.0; //translational x/y co-efficients
     public static double txI = 0.5;
     public static double txD = 0.0;
@@ -70,6 +84,7 @@ public class DriveConstants {
     public static double hI = 0.5;
     public static double hD = 0.00001;
 
+<<<<<<< HEAD
     public static double stxP = 20; //translational x/y co-efficients
     public static double stxI = 1;
     public static double stxD = 0.75;
@@ -83,6 +98,8 @@ public class DriveConstants {
     public static double strafeMotorPower = 0.19;
     public static double rear_ratio = 1.105;
 
+=======
+>>>>>>> 1bfdaffe627ecff62eee34726c32027b6d53928d
     public static double ODOMETRY_TRACK_WIDTH = 14.8;
     public static double ODOMERY_FORWARD_OFFSET = -5.5;
     public static double HARDCODED_TICKS_PER_REV = 383.6; //MOTOR_CONFIG.getTicksPerRev();
@@ -91,7 +108,12 @@ public class DriveConstants {
     /*
      * These are motor constants that should be listed online for your motors.
      */
+<<<<<<< HEAD
 
+=======
+    public static final double TICKS_PER_REV = 1;
+    public static final double MAX_RPM = 1;
+>>>>>>> 1bfdaffe627ecff62eee34726c32027b6d53928d
     private static final MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(GoBILDA5202Series.class);// NeveRest20Gearmotor
             // Matrix12vMotor  GoBILDA5202Series MatrixLegacyMotor (757.12)
@@ -101,7 +123,7 @@ public class DriveConstants {
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
-    public static boolean RUN_USING_ENCODER = true;
+    public static final boolean RUN_USING_ENCODER = true;
     public static double kP = 1.72;
     public static double kI = 0.172;
     public static double kD = 0.0;
@@ -118,6 +140,7 @@ public class DriveConstants {
     public static double WHEEL_RADIUS = 2;
     public static double GEAR_RATIO = 1.0;//(99.5 / 13.7) * (16 / 16); // output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 14.2;   //17
+    public static double WHEEL_BASE = 14.2;   //???
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -142,6 +165,11 @@ public class DriveConstants {
 	public static boolean USE_VUFORIA_LOCALIZER = false;
     public static boolean RECREATE_DRIVE_AND_BUILDER = false;
     public static boolean drvCorrection = false;
+
+	public static double maxVel = 75.0; //90.0
+	public static double maxAccel = 35.0;   //35.0
+    public static double maxAngVel = 135.0;
+    public static double maxAngAccel = 90.0;
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
      * the constraints should never exceed ~80% of the robot's actual capabilities. While Road
@@ -166,7 +194,6 @@ public class DriveConstants {
     );
 
     public static double encoderTicksToInches(double ticks) {
-
         //double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / MOTOR_CONFIG.getTicksPerRev();
         double s = WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / HARDCODED_TICKS_PER_REV; //MOTOR_CONFIG.getTicksPerRev();
         //RobotLog.dd(TAG, "encoderTicksToInches: " + "ticks: " + Double.toString(ticks) + " inches: " + Double.toString(s));
