@@ -2,7 +2,8 @@ package org.firstinspires.ftc.teamcode.drive.virtual;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.util.Log;
+import com.qualcomm.robotcore.robot.Robot;
+import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.util.Angle;
@@ -17,14 +18,16 @@ import static java.lang.Math.sin;
 public class ForwardKinematics {
     public static Pose2d wheelToRobotVelocities(List<Double> wheelVelocities){
         double lateralMultiplier = 1.0;
-        double k = (DriveConstants.TRACK_WIDTH + DriveConstants.WHEEL_BASE) / 2.0;
         double frontLeft = wheelVelocities.get(0);
         double rearLeft = wheelVelocities.get(1);
         double rearRight = wheelVelocities.get(2);
         double frontRight = wheelVelocities.get(3);
+
+        double k = (DriveConstants.TRACK_WIDTH + DriveConstants.WHEEL_BASE) / 2.0;
         Pose2d r = new Pose2d(rearLeft + frontRight + frontLeft + rearRight,
                 (rearLeft + frontRight - frontLeft - rearRight) / lateralMultiplier,
-                (rearRight + frontRight - frontLeft - rearLeft) / k * 0.25);
+                (rearRight + frontRight - frontLeft - rearLeft) / k);
+        r = r.times(0.25);
         RobotLogger.dd("ForwardKinematics", "wheelToRobotVelocities " + r.toString());
         return (r);
     }
@@ -55,7 +58,17 @@ public class ForwardKinematics {
                 + " new pose: " + r.toString());
 
         return (r);
-
     }
 
+    public double calculateMotorFeedforward(double vel, double accel) {
+        double basePower = vel * DriveConstants.kV + accel * DriveConstants.kA;
+        RobotLogger.dd("ForwardKinematics", "accel", "Kinematics: calculateMotorFeedforward: kV " +
+                Double.toString(DriveConstants.kV) + " kA: " + Double.toString(DriveConstants.kA));
+        RobotLogger.dd("ForwardKinematics", "vel: " + Double.toString(vel) + " accel: " + Double.toString(accel));
+        if (Angle.epsilonEquals(basePower, 0.0)) {
+            return 0.0;
+        } else {
+            return (basePower + Math.signum(basePower) * DriveConstants.kStatic);
+        }
+    }
 }

@@ -20,21 +20,23 @@ public class DriveTrain extends BaseDriveTrain {
     private String TAG = "DriveTrain";
     private static DriveTrain driveTrain_singleInstance = null;
     private ForwardKinematics kinematics;
-    private Pose2d poseEstimate = new Pose2d(0, 0, 0);
+
     public DriveTrain(MecanumDrive _drv) {
         super(_drv);
     }
-    synchronized  public static DriveTrain getSingle_instance(MecanumDrive drv) {
-        if (driveTrain_singleInstance == null) {
+
+    synchronized  public static DriveTrain getSingle_instance(MecanumDrive drv, String name) {
+        if ((driveTrain_singleInstance == null) || (name.equals("frontLeft"))) {
             RobotLogger.dd("DriveTrain", "drive train created");
             driveTrain_singleInstance = new DriveTrain(drv);
+            driveTrain_singleInstance.setPoseEstimate(new Pose2d(0, 0, 0));
         }
         else
             RobotLogger.dd("DriveTrain", "drive train already exists");
         return driveTrain_singleInstance;
     }
 
-    public double getRobotHeading() {
+    public Pose2d getRobotPose() {
         RobotLogger.dd(TAG, "getRobotHeading, num of motors: " + drive_motors.size());
         double extHeading = 0;
         List<Double> wheelPositions = drive.getWheelPositions();
@@ -60,7 +62,7 @@ public class DriveTrain extends BaseDriveTrain {
         lastWheelVelocities = wheelVelocities;
         lastWheelPositions = wheelPositions;
         lastExtHeading = extHeading;
-        return 0;
+        return poseEstimate;
     }
 
     public void finalize() throws Throwable{

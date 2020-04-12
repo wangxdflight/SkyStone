@@ -59,11 +59,11 @@ public class VirtualMotorEx implements DcMotorEx {
     {
         RobotLogger.dd(TAG, "create VirtualMotorEx", name);
         motor_name = name;
-        driveTrain = DriveTrain.getSingle_instance(drv);
+        driveTrain = DriveTrain.getSingle_instance(drv, name);
         driveTrain.AddWheel(this, name);
         last_get_wheel_position_time = SystemClock.elapsedRealtime();
-        last_wheel_position = 0;
         last_get_wheel_position_power = 0;
+        last_wheel_position = 0;
     }
     public void setPower(double power) {
         RobotLogger.dd(TAG, "%s: setPower %f", motor_name, power);
@@ -128,7 +128,7 @@ public class VirtualMotorEx implements DcMotorEx {
     public double getVelocity() {
         double r = last_get_wheel_position_power / kV;
         r = inchesToTicks(r);
-        //RobotLogger.dd(TAG, motor_name + ", getVelocity: " + Double.toString(r));
+        //RobotLogger.dd(TAG, motor_name + ", getVelocity: " + Double.toString(r) + " last_get_wheel_position_power: " + Double.toString(last_get_wheel_position_power));
         return r;
     }
 
@@ -478,10 +478,10 @@ public class VirtualMotorEx implements DcMotorEx {
         long time_duration = SystemClock.elapsedRealtime() - last_get_wheel_position_time;
         double v = getVelocity();
         double r = v * ((double)time_duration) / 1000.0;
-        //RobotLogger.dd(TAG, Double.toString(r));
+        RobotLogger.dd(TAG, "velocity: " + Double.toString(v) + " delta position: " + Double.toString(r));
 
         int rp =  (int) (r + last_wheel_position);
-        //RobotLogger.dd(TAG, Double.toString(rp) + Double.toString(last_wheel_position));
+
         RobotLogger.dd(TAG, motor_name + ", velocity: " + Double.toString(v)
                 + ", time duration: " + Double.toString(time_duration) + ", currPosition: "
                 + Double.toString(rp) + ", last power: " + Double.toString(last_get_wheel_position_power)

@@ -136,6 +136,8 @@ public class SampleMecanumDrive extends MecanumDrive {
             leftRear = new VirtualMotorEx("leftRear", this);
             rightRear = new VirtualMotorEx("rightRear", this);
             rightFront = new VirtualMotorEx("rightFront", this);
+            setLocalizer(new MecanumLocalizer(this, false));
+            RobotLogger.dd(TAG, "use default 4 wheel localizer");
         }
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
@@ -242,6 +244,8 @@ public class SampleMecanumDrive extends MecanumDrive {
         RobotLogger.dd(TAG, "xError " + lastError.getX());
         RobotLogger.dd(TAG, "yError " + lastError.getY());
         RobotLogger.dd(TAG, "headingError "  + lastError.getHeading());
+        double extHeading = getRawExternalHeading();  // print for reference;
+        RobotLogger.dd(TAG, "getRawExternalHeading (simulated IMU): "  + Double.toString(extHeading));
 
         switch (mode) {
             case IDLE:
@@ -370,13 +374,14 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     @Override
     public double getRawExternalHeading() {
-        RobotLogger.dd(TAG, "getRawExternalHeading");
+        RobotLogger.callers(4, TAG, "getRawExternalHeading");
         if (!DriveConstants.VirtualizeDrive) {
             return imu.getAngularOrientation().firstAngle;
         } else {
-            DriveTrain driveTrain = DriveTrain.getSingle_instance(this);
-            double r = driveTrain.getRobotHeading();
-            return r;
+            DriveTrain driveTrain = DriveTrain.getSingle_instance(this, "any");
+            Pose2d pose = driveTrain.getRobotPose();
+            RobotLogger.dd(TAG, "Simulated Pose (IMU ExternalHeading): " + pose.toString());
+            return pose.getHeading();
         }
     }
 }

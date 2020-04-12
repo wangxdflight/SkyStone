@@ -26,6 +26,7 @@ public abstract class BaseDriveTrain {
     boolean usingOdom;
     boolean usingIMU;
     private boolean driveTrainReady = false;
+    protected Pose2d poseEstimate;
 
     public BaseDriveTrain(MecanumDrive _drive)
     {
@@ -67,6 +68,9 @@ public abstract class BaseDriveTrain {
             RobotLogger.dd(TAG, "4 wheels are ready");
         }
     }
-
-    abstract public double getRobotHeading() ;
+    public void setPoseEstimate(Pose2d pose)
+    {
+        poseEstimate = pose;
+    }
+    abstract public Pose2d getRobotPose() ;
 }
