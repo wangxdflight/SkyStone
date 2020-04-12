@@ -438,8 +438,9 @@ public class SampleMecanumDrive extends MecanumDrive {
         else {
             RobotLogger.callers(6, TAG, "getWheelPositions");
             for (DcMotorEx motor : motors) {
-                    wheelPositions.add(encoderTicksToInches(motor.getCurrentPosition()));
+                wheelPositions.add(encoderTicksToInches(motor.getCurrentPosition()));
             }
+        }
         return wheelPositions;
     }
     public List<Double> getWheelVelocities() {
