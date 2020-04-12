@@ -30,7 +30,7 @@ import org.firstinspires.ftc.teamcode.util.AllHardwareMap;
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
+//@Disabled
 public class PathTest extends LinearOpMode {
     private Trajectory trajectory;
     private BaseTrajectoryBuilder builder, strafe_builder;

@@ -58,7 +58,7 @@ public class DriveConstants {
     public static boolean forceOdomInStrafe = true;
     public static boolean ENABLE_LOGGING = false;
     public static double TEST_SKY_STONE_POSITION = 1;
-    public static boolean ENABLE_ARM_ACTIONS = true;
+    public static boolean ENABLE_ARM_ACTIONS = false;
     public static double TEST_PAUSE_TIME = 1;  // milli-seconds;
 
     private static String TAG = "DriveConstants";
