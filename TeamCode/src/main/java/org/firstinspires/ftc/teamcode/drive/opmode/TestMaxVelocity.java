@@ -80,8 +80,8 @@ public class TestMaxVelocity extends LinearOpMode {
             RobotLog.dd(TAG, "wheel positions");
             drive.print_list_double(positions);
 
-            List<Double> w_powers = drive.getMotorPowers(motors);
-            RobotLog.dd(TAG, "wheel powers");
+            List<Double> w_powers = drive.getMotorPowers();
+            RobotLog.dd(TAG, "motor powers");
             drive.print_list_double(w_powers);
 
             double heading = drive.getExternalHeading();

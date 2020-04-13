@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.util.SafeSleep;
 
 /*
  * This is an example of a more complex path to really test the tuning.
@@ -33,7 +34,7 @@ public class SplineTest extends LinearOpMode {
 
         drive.followTrajectory(traj);
 
-        sleep(2000);
+        SafeSleep.sleep_milliseconds(this, 2000);
 
         drive.followTrajectory(
                 drive.trajectoryBuilder(new Pose2d(30, 30, Math.toRadians(180)), true)

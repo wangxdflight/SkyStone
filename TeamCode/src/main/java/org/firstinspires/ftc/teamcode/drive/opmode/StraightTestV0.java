@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.RobotLogger;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer;
 
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class StraightTestV0 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        drive.followTrajectorySync(trajectory);
+        drive.followTrajectory(trajectory);
         Localizer localizer = drive.getLocalizer();
         if (DriveConstants.RUN_USING_ODOMETRY_WHEEL && (localizer!=null)) {
             StandardTrackingWheelLocalizer t = (StandardTrackingWheelLocalizer)localizer; // @TODO
