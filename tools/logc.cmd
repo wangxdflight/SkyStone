@@ -1,12 +1,12 @@
 @echo off
 @echo cmd logfilename ps_name
-mv %1.log %1_old.log
+copy %1.log %1_old.log/Y
 adb logcat -c
-start setprop.cmd 1
+rem start setprop.cmd 1
 IF "%2"==""  (
-	adb shell ps |grep com.qualcomm.ftcrobotcontroller>ps.txt
+	adb shell ps |findstr com.qualcomm.ftcrobotcontroller>ps.txt
 ) ELSE (
-	adb shell ps |grep %2 >ps.txt
+	adb shell ps |findstr %2 >ps.txt
 )
 set /p ftcrobot=<ps.txt
 IF "%ftcrobot%"=="" (
@@ -22,10 +22,10 @@ for /F "tokens=1,2 delims=: " %%a in ("%ftcrobot%") do (
 )
 IF "%1"==""  (
 	adb logcat -b all -v color --pid %var% 
-	rem adb logcat -b all -v color |grep %var%
+	rem adb logcat -b all -v color |findstr %var%
 ) ELSE (
 	adb logcat -b all  --pid %var% |wtee %1.log
-	rem adb logcat -b all -v color |grep %var% |wtee %1.log
+	rem adb logcat -b all -v color |findstr %var% |wtee %1.log
 )
 
 :XX
