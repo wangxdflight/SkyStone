@@ -1,6 +1,6 @@
 @echo off
 IF "%1"==""  (
-pushd C:\Users\wangx\SkyStone-Clueless-2019-2020
+pushd C:\Users\wangx\road-runner-quickstart
 ) ELSE (
 pushd C:\Users\wangx\SkyStone
 )

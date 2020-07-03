@@ -1,6 +1,7 @@
 @echo off
 @echo cmd logfilename ps_name
 copy %1.log %1_old.log/Y
+del %1.log
 adb logcat -c
 rem start setprop.cmd 1
 IF "%2"==""  (
@@ -29,3 +30,5 @@ IF "%1"==""  (
 )
 
 :XX
+del ps.txt
+copy %1.log latest.log

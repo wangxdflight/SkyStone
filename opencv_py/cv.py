@@ -9,7 +9,8 @@ import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
 
-img = cv.imread('..\\test.png', 0)
+img = cv.imread('test.png', 0)
+print(img)
 h, w = img.shape
 
 edges = cv.Canny(img,100,200)

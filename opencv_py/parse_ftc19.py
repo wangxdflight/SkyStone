@@ -57,7 +57,7 @@ max_final_heading_err=0;
 max_v=0;
 p_name='unknown';
 max_power_time = 0;
-print_summary=1;
+print_summary=0;
 last_x_err=0;
 last_y_err=0;
 last_h_err=0;
@@ -236,12 +236,12 @@ with open(filepath) as fp:
             if t > max_v:
                 max_v = t;
         #############################################
-        if ("setPower" in line) and ("leftFront" in line):
+        if ("setMotorPowers" in line) and ("leftFront" in line):
             #print(line)
-            t = line.split('setPower');
+            t = line.split('setMotorPowers');
             t1 = t[1].strip().split(' ');
             #print(t1)
-            t2 = t1[0]
+            t2 = t1[1]
             t3 = float(t2)
             data_power.append(t3)
             t_time = get_time(t[0])
@@ -337,7 +337,7 @@ fp.close();
 t = len(data_x);
 if (t!=len(data_y) or t!=len(data_h) or t!=len(data_h_raw)) or (t==0):
     print("double check the parsing!!!", t, " ", len(data_h_raw), " ", len(data_h), " ", len(data_time));
-    #sys.exit()
+    sys.exit()
 else:
     print("parsing looks good, len: ", t);
 
@@ -454,11 +454,7 @@ if print_summary != 0:
     #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)
     ##################
     plt.figure();
-    print(power_time)
-    print(len(power_time))
-    print(data_power)
-    print(len(data_power))
-    plt.plot(data_power, label='power to wheel');
+    plt.plot(power_time, data_power, label='power to wheel');
     plt.scatter(auto_time, [0 for i in range(len(auto_time))], zorder=2)
     plt.xlabel('time(seconds)');
     plt.ylabel('power');
@@ -487,4 +483,4 @@ if print_summary != 0:
     #####################################################################################################
     #plt.waitforbuttonpress(1); input();
     #plt.close('all')
-    #plot_path_xml(xml_file_name);
+    plot_path_xml(xml_file_name);
