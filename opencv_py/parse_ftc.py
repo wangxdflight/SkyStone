@@ -291,7 +291,6 @@ with open(filepath) as fp:
                 max_final_y_err = y;
             if (abs(z) > abs(max_final_heading_err)):
                 max_final_heading_err = z;
-
         if ("AutonomousPath: drive and builder created, initialized with pose" in line) or ("AutonomousPath: drive and builder reset, initialized with pose" in line):
             #print(line.rstrip())
             t = line.split('AutonomousPath');
@@ -327,9 +326,10 @@ with open(filepath) as fp:
             print(auto_time_raw[i], " ", auto_time[i], " ", auto_x[i], " ", auto_y[i], " ", auto_h[i], " ", create_time[i], "\t", auto_time[i]-auto_time[i-1]);
 
     for i in range(len(data_v_err)):
+        #print(len(data_v_err))
         if (i%10==0):
             print("data_v, data_v_target, data_v_actual");
-        print(data_v_err[i].strip(), " ", data_v_target[i].strip(), " ", data_v_actual[i].strip());
+        print(data_v_err[i], " ", data_v_target[i], " ", data_v_actual[i]);
 
 fp.close();
 
@@ -361,9 +361,10 @@ with open(filepath) as fp:
 fp.close();
 
 print("===============summary==========================")
-t = max_power_time.strftime('%H:%M:%S.%f');
-max_power_time = t[:-3];
-print("max power to wheel: ", max_power, " timestamp: ", max_power_time, " timeoffset: ", max_power_delta)
+if (max_power_time != 0):
+    t = max_power_time.strftime('%H:%M:%S.%f');
+    max_power_time = t[:-3];
+    print("max power to wheel: ", max_power, " timestamp: ", max_power_time, " timeoffset: ", max_power_delta)
 
 print("max_x_err (inches): ", max_x_err)
 print("max_y_err (inches): ", max_y_err)
@@ -414,75 +415,90 @@ print(filepath);
 
 if print_summary != 0:
     plt.style.use('ggplot')
-    #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=3, mode="expand", borderaxespad=0.);
-    plt.plot(data_time, data_x, label="xError");
-    plt.plot(data_time, data_y, label="yError");
-    plt.plot(data_time, data_h, label="headingError");
-    plt.scatter(auto_time, [0 for i in range(len(auto_time))], zorder=2); # mark the drive reset;
-    plt.xlabel('time(seconds)');
-    plt.ylabel('inches for x, y, degrees for heading');
-    plt.legend();
+    if len(data_x) > 0:
+        #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=3, mode="expand", borderaxespad=0.);
+        plt.plot(data_time, data_x, label="xError");
+        plt.plot(data_time, data_y, label="yError");
+        plt.plot(data_time, data_h, label="headingError");
+        plt.scatter(auto_time, [0 for i in range(len(auto_time))], zorder=2); # mark the drive reset;
+        plt.xlabel('time(seconds)');
+        plt.ylabel('inches for x, y, degrees for heading');
+        plt.legend();
 
-    plt.figure();
-    plt.plot(data_time, nm.add(data_x, data_x_raw), label="target X");
-    plt.plot(data_time, data_x_raw, 'g-', label="actual X")
-    plt.scatter(auto_time, auto_x, zorder=2)
-    plt.scatter(auto_time, nm.add(auto_x, auto_x1),  zorder=2)
-    plt.xlabel('time (seconds)');
-    plt.ylabel('distance(inches)');
-    plt.legend();
-    plt.figure();
+    if (len(data_x) > 0):
+        plt.figure();
+        plt.plot(data_time, nm.add(data_x, data_x_raw), label="target X");
+        plt.plot(data_time, data_x_raw, 'g-', label="actual X")
+        #plt.plot(data_time, data_x, label="xError");
+        plt.scatter(auto_time, auto_x, zorder=2)
+        plt.scatter(auto_time, nm.add(auto_x, auto_x1),  zorder=2)
+        plt.xlabel('time (seconds)');
+        plt.ylabel('distance(inches)');
+        plt.legend();
+        plt.figure();
 
-    plt.plot(data_time, nm.add(data_y, data_y_raw), label="target Y");
-    plt.plot(data_time, data_y_raw, 'g-', label="actual Y")
-    plt.scatter(auto_time, auto_y, zorder=2)
-    plt.scatter(auto_time, nm.add(auto_y, auto_y1), zorder=2)
-    plt.xlabel('time');
-    plt.ylabel('inches');
-    #plt.ylim([-10, 10])
-    plt.legend();
-    #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)
+    if (len(data_y) != 0):
+        plt.plot(data_time, nm.add(data_y, data_y_raw), label="target Y");
+        plt.plot(data_time, data_y_raw, 'g-', label="actual Y")
+        plt.plot(data_time, data_y, label="yError");
+        plt.scatter(auto_time, auto_y, zorder=2)
+        plt.scatter(auto_time, nm.add(auto_y, auto_y1), zorder=2)
+        plt.xlabel('time');
+        plt.ylabel('inches');
+        #plt.ylim([-10, 10])
+        plt.legend();
+        #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)
 
-    plt.figure();
-    plt.plot(data_time, nm.add(data_h_rad, data_h_raw_rad), label="target heading");
-    plt.plot(data_time, data_h_raw_rad, label="actual heading")
-    plt.xlabel('time');
-    plt.ylabel('radius');
-    plt.scatter(auto_time, auto_h, zorder=2)
-    #plt.ylim([-30, 30])
-    plt.legend();
-    #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)
+    if (len(data_h_raw_rad) != 0):
+        plt.figure();
+        plt.plot(data_time, nm.add(data_h_rad, data_h_raw_rad), label="target heading");
+        plt.plot(data_time, data_h_raw_rad, label="actual heading")
+        plt.xlabel('time');
+        plt.ylabel('radius');
+        plt.scatter(auto_time, auto_h, zorder=2)
+        #plt.ylim([-30, 30])
+        plt.legend();
+        #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)
     ##################
-    plt.figure();
-    print(power_time)
-    print(len(power_time))
-    print(data_power)
-    print(len(data_power))
-    plt.plot(data_power, label='power to wheel');
-    plt.scatter(auto_time, [0 for i in range(len(auto_time))], zorder=2)
-    plt.xlabel('time(seconds)');
-    plt.ylabel('power');
+    if (len(data_power)!=0):
+        plt.figure();
+        print(power_time)
+        print(len(power_time))
+        print(data_power)
+        print(len(data_power))
+        plt.plot(data_power, label='power to wheel');
+        plt.scatter(auto_time, [0 for i in range(len(auto_time))], zorder=2)
+        plt.xlabel('time(seconds)');
+        plt.ylabel('power');
     #####################################################################################################
-    plt.figure();
-    #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)plt.plot(nm.add(data_x, data_x_raw), nm.add(data_y, data_y_raw), label="target path");
-    plt.plot(data_x_raw, data_y_raw, label="actual path");
-    plt.xlabel('X(inches)');
-    plt.ylabel('Y(inches)');
-    plt.scatter(auto_x, auto_y, zorder=2);
-    plt.xlim([-70, 70])
-    plt.ylim([-70, 70])
-    plt.legend();
+    if (len(data_x_raw)!=0):
+        plt.figure();
+        #plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncol=2, mode="expand", borderaxespad=0.)plt.plot(nm.add(data_x, data_x_raw), nm.add(data_y, data_y_raw), label="target path");
+        plt.plot(data_x_raw, data_y_raw, label="actual path");
+        plt.xlabel('X(inches)');
+        plt.ylabel('Y(inches)');
+        plt.scatter(auto_x, auto_y, zorder=2);
+        plt.xlim([-70, 70])
+        plt.ylim([-70, 70])
+        plt.legend();
     #############################
     if (len(heading_odom)>0):
         plt.figure();
         plt.plot(imu_time, heading_imu, label="IMU");
-        plt.plot(imu_time, heading_odom, label='Odom"');
+        plt.plot(imu_time, heading_odom, label='Odom');
         #for i in range(len(heading_odom)):
             #print(imu_time[i], heading_imu[i], heading_odom[i]);
         plt.legend();
         plt.xlabel('time(seconds)');
         plt.ylabel('heading(radius)');
         plt.ylim([0, 7.0])
+    if (len(data_v_err) != 0):
+        plt.figure()
+        plt.plot(data_v_err, label='velocity error')
+        plt.plot(data_v_actual, label='velocity actual')
+        plt.plot(data_v_target, label='velocity target')
+        plt.legend();
+    plt.show()
 
     #####################################################################################################
     #plt.waitforbuttonpress(1); input();
